@@ -26,7 +26,7 @@
 - [ ] *Ex: A senha precisa ter no mínimo 8 caracteres.*
 - [ ] *Ex: Uma mensagem de sucesso é exibida após o cadastro.*
 
-### 🛠️ Tarefas Técnicas (Opcional)
+### 🛠️ Tarefas Técnicas 
 *Selecione os passos necessários para concluir a tarefa.*
 - [ ] Criar o componente de interface.
 - [ ] Conectar o componente à API.
