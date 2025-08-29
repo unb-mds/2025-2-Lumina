@@ -1,3 +1,9 @@
+---
+name: '📝 Tarefa Padrão'
+about: 'Use este modelo para descrever uma nova tarefa ou bug.'
+title: "[TAREFA]: "
+---
+
 ### 📝 Título da Issue
 *(Ex: `Implementar a tela de cadastro de usuário` ou `Corrigir bug na exibição do perfil`)*
 
