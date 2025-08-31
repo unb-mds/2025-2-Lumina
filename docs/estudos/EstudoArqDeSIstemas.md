@@ -186,6 +186,58 @@ Adotar microsserviços exige resolver desafios de **comunicação, descoberta e 
 
 ---
 
+## 🏗️ Analise da Arquitetura de Sistemas da Netflix
+
+## 1. Problema Original
+- Início: monólito em datacenter próprio.  
+- Desafios: escalar, alta disponibilidade e baixa latência global.  
+- **Solução:** migração para **AWS** + **microsserviços**.  
+
+## 2. Microsserviços
+- Catálogo → lista de filmes/séries.  
+- Recomendações → sugestões personalizadas.  
+- Autenticação → login e segurança.  
+- Streaming → vídeo adaptativo.  
+- Billing → pagamentos.  
+📌 Cada serviço é **independente, escalável e atualizável**.  
+
+## 3. Comunicação entre Serviços
+- **API Gateway** → entrada única (apps e web).  
+- **REST/gRPC** → comunicação interna.  
+- **Kafka** → eventos assíncronos (histórico, estatísticas, recomendações).  
+
+## 4. Entrega de Vídeo (CDN – Open Connect)
+- CDN própria com servidores de cache nos ISPs.  
+- Conteúdo entregue do ponto mais próximo → **menos latência e menor custo de banda**.  
+
+## 5. Escalabilidade e Resiliência
+- **Elastic Load Balancing** → distribui requisições.  
+- **Auto-scaling (AWS)** → adapta a demanda (picos em estreias).  
+- **Chaos Engineering** (Simian Army/Chaos Monkey) → falhas simuladas para testar resiliência.  
+
+## 6. Observabilidade
+- Logs centralizados.  
+- Métricas em tempo real (ex: streams/segundo).  
+- Tracing distribuído (acompanha requisições entre microsserviços).  
+
+## 7. Experiência do Usuário
+- Recomendações personalizadas (histórico).  
+- Testes A/B (interface, imagens, algoritmos).  
+- **Machine Learning** → prever engajamento de conteúdo.  
+
+## 8. Resumo da Arquitetura
+- Microsserviços desacoplados.  
+- API Gateway unificada.  
+- Kafka para eventos assíncronos.  
+- Open Connect (CDN própria).  
+- Escalabilidade (AWS + load balancing + auto-scaling).  
+- Resiliência (Chaos Engineering).  
+- Observabilidade avançada.  
+- Personalização com dados e ML.  
+
+---
+
+
 ## Conclusão ✅
 Arquitetura de software é um **processo contínuo de tomada de decisão**.  
 Exige:  
