@@ -233,10 +233,22 @@ Adotar microsserviços exige resolver desafios de **comunicação, descoberta e 
 - Escalabilidade (AWS + load balancing + auto-scaling).  
 - Resiliência (Chaos Engineering).  
 - Observabilidade avançada.  
-- Personalização com dados e ML.  
+- Personalização com dados e ML.
 
+## 9. Prós e Contras da Decisão da Netflix: Monólito → Microsserviços
+
+## ✅ Prós
+- **Escalabilidade:** cada serviço pode crescer independentemente.  
+- **Resiliência:** falhas em um serviço não derrubam todo o sistema.  
+- **Agilidade:** times pequenos podem desenvolver e implantar autonomamente.  
+- **Personalização:** dados e ML aplicados de forma modular.  
+- **Infraestrutura global:** CDN própria reduz latência e custos.  
+
+## ❌ Contras
+- **Complexidade operacional:** muitos serviços distribuídos para gerenciar.  
+- **Maior overhead de comunicação:** APIs internas e mensageria aumentam a complexidade.  
+- **Dependência de cloud:** custos e configuração de auto-scaling e balanceamento.  
 ---
-
 
 ## Conclusão ✅
 Arquitetura de software é um **processo contínuo de tomada de decisão**.  
