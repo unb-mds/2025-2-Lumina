@@ -266,9 +266,7 @@ Aqui está um resumo prático do fluxo de trabalho para iniciar e concluir uma n
     git branch -d feature/nome-da-sua-tarefa
     ```
 
-## 11. Referências Confiáveis
-
-Para aprofundar seus conhecimentos, consulte sempre as fontes oficiais, que são a referência mais segura e atualizada:
+## 11. Referências:
 
 * [Documentação Oficial do Git](https://git-scm.com/doc)
 * [Guias do GitHub (GitHub Docs)](https://docs.github.com/pt)
