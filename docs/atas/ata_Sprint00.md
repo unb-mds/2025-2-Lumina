@@ -42,4 +42,4 @@ Revisar os estudos da Sprint 00, definir os papéis de cada integrante no squad 
 * `[Cecília]`: Realizar estudo sobre Figma.
 * `[Cecília]`: Realizar estudo sobre Docker.
 * `[João]`: Realizar estudo sobre Agente de IA.
-* `[Todos]`: Realizar a leitura de todos os estudos já concluídos na Sprint 00.
+* `[Todos]`: Realizar a leitura de todos os estudos já concluídos na Sprint 00.EStud
