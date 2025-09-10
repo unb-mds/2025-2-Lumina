@@ -1,4 +1,4 @@
-# Roteiro de Estudo: Figma para UI/UX do Projeto
+# Estudo: Figma para UI/UX do Projeto
 
 ## 1. Objetivo
 
