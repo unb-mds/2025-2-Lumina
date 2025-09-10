@@ -1,4 +1,4 @@
-# APIs e Web Crawlers
+# Estudo: APIs e Web Crawlers
 
 
 ## 1. Introdução
@@ -148,7 +148,7 @@ Adote sempre práticas responsáveis: prefira APIs, seja transparente, e respeit
 
 ---
 
-## 10. Fontes
+## 10. Referências
 
 * Cloudflare — *What is a web crawler?* — [https://www.cloudflare.com/learning/bots/what-is-a-web-crawler/](https://www.cloudflare.com/learning/bots/what-is-a-web-crawler/)
 * AWS — *What is RESTful API?* — [https://aws.amazon.com/what-is/restful-api/](https://aws.amazon.com/what-is/restful-api/)
