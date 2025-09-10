@@ -1,4 +1,4 @@
-# Roteiro de Estudo: Docker para Padronização de Ambientes
+# Estudo: Docker para Padronização de Ambientes
 
 ## 1. Objetivo
 
