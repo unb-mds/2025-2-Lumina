@@ -1,21 +1,32 @@
-﻿# Flutter e linguagem Dart 
+# Estudo: Flutter e Linguagem Dart
 
-## O que é Flutter? 
-Flutter é um framework que funciona na linguagem de programação Dart, e capaz de criar aplicações hibridas, que funcionam em plataformas diferentes com apenas um código, ou seja, a aplicação poderia, por exemplo, rodar em android, iOS ou até navegador, mantendo a performance nativa da aplicação nos dispositivos em que irão rodar. Além disso, o diferencial desse framework são os widgets, que serão aprofundados no próximo tópico.
-Um bom video **introdutório**  sobre Flutter é esse do [Código fonte TV](https://www.youtube.com/watch?v=XkEA4xT34jg), explicando bem sobre o que é o Flutter.
+## 1. O que é Flutter?
 
-## Widgets
+O Flutter é um framework que funciona com a linguagem de programação Dart e é capaz de criar aplicações híbridas, que funcionam em plataformas diferentes com apenas um código. Isso significa que uma aplicação poderia, por exemplo, rodar em Android, iOS ou até mesmo em um navegador, mantendo a performance nativa nos dispositivos. O grande diferencial desse framework são os widgets, que serão aprofundados no próximo tópico.
 
-Widgets são ferramentas usadas no Flutter como "blocos de montar" da UI de uma aplicação, servindo tanto pra controlar aspectos de outras widgets (alinhamento, linha/coluna, padding, etc.), e também para compor a parte visual e interativa (textos, botões, imagens, ícones, etc.)
+## 2. Widgets
 
-O flutter introduz duas classes maiores de widgets, são esses:
+Widgets são ferramentas usadas no Flutter como **"blocos de montar"** da interface do usuário (UI) de uma aplicação. Eles servem tanto para controlar aspectos de outros widgets (alinhamento, linha/coluna, padding, etc.), quanto para compor a parte visual e interativa (textos, botões, imagens, ícones, etc.).
 
-* ### Stateless Widget:
-São widgets que não possuem status mutáveis(não possuem uma propriedade de classe que muda com o tempo) , ou seja, eles permanecem o mesmo independente da interação com o usuário, como por exemplo um widget de texto ou ícone seriam stateless
+O Flutter introduz duas classes principais de widgets:
 
-* ### Stateful Widget:
-Esse por outro lado tem a característica única de mudar com base na interação de usuário ou outros fatores que façam com que ele mude, por exemplo, um widget que tem um contador incrementado toda vez que um botão é apertado, nesse caso, o valor do contador é o estado do widget, então como o valor a ser representado muda, o widget precisa ser reconstruído pra atualizar sua parte na UI
+### 2.1. Stateless Widget
 
-## Linguagem Dart
-É uma linguagem de programação orientada a objetos, assim como java e C++. Essa linguagem possui uma sintaxe bem semelhante a linguagens baseadas em C, então declarar e inicializar uma variável é feito como nessas linguagens, com uma pequena diferença que em Dart as variáveis não podem ser nulas a menos que você as declare assim, por conta de um sistema interno feito pra evitar Null Exceptions. Além disso é possível declarar variáveis sem especificar seu tipo explicitamente, devido ao Type-safe code do dart usando "var" antes da declaração, onde o tipo da variável vai ser determinado pelos seus valores iniciais.
-Segue um guia recomendado para [introdução à Dart](https://dart.dev/language#imports), explicando sobre as variáveis
+São widgets que não possuem estados mutáveis, ou seja, eles permanecem os mesmos independentemente da interação com o usuário. Um widget de texto ou um ícone, por exemplo, seriam **stateless**, pois suas propriedades não mudam com o tempo.
+
+### 2.2. Stateful Widget
+
+Estes, por outro lado, têm a característica de mudar com base na interação do usuário ou outros fatores. Por exemplo, um widget que exibe um contador que é incrementado toda vez que um botão é apertado. Nesse caso, o valor do contador é o "estado" do widget. Como o valor a ser exibido muda, o widget precisa ser reconstruído para atualizar sua parte na UI.
+
+## 3. Linguagem Dart
+
+Dart é uma linguagem de programação orientada a objetos, assim como Java e C++. Sua sintaxe é bem semelhante a linguagens baseadas em C, então a declaração e inicialização de variáveis são feitas de forma parecida.
+
+Uma pequena diferença é que, em Dart, as variáveis não podem ser nulas, a menos que você as declare explicitamente dessa forma, graças a um sistema interno feito para evitar *Null Exceptions*. Além disso, é possível declarar variáveis sem especificar seu tipo usando a palavra-chave `var`, onde o tipo da variável será determinado pelo seu valor inicial (*Type Inference*).
+
+## 4. Referências
+
+* Vídeo: O que é Flutter? - Código Fonte TV
+* Documentação: Uma introdução aos widgets - Flutter Docs
+* Documentação: Uma introdução ao Dart - Flutter Docs
+* Guia: Um tour pela linguagem Dart
