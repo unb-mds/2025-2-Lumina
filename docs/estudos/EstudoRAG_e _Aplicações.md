@@ -34,6 +34,99 @@ A RAG traz diversas vantagens sobre o uso de LLMs isoladamente:
 Em resumo, RAG combina o melhor de dois mundos: a fluência dos grandes modelos de linguagem com a precisão de bases de conhecimento específicas[\[1\]](https://aws.amazon.com/what-is/retrieval-augmented-generation/#:~:text=Retrieval,and%20useful%20in%20various%20contexts)[\[4\]](https://blogs.nvidia.com/blog/what-is-retrieval-augmented-generation/#:~:text=Retrieval,specific%20and%20relevant%20data%20sources).
 
 
+## Codigo de exemplo
+
+Para rodar o codigo voce precisará de um ambiente que atenda a estes requisitos:
+
+Python 3.7 ou superior.
+
+Variáveis de Ambiente: Um arquivo .env na raiz do projeto com as suas chaves de API para o Google Gemini. O código utiliza a função load_dotenv para carregar essas chaves.
+
+Bibliotecas Python
+
+```
+Bash
+
+pip install langchain langchain-google-genai langchain_chroma bs4 langgraph
+```
+
+O codigo funciona da seguinte maneire, ele puxa os dados de html de um blog, divide eles em chunks, usa o embedding para transformar esses textos em vetores numericos que mais bem compreendidos pelo computador, eles são salvos de maneire indexada com base em palavras chave
+Após o usuario mandar uma pergunta, o retriever olha a pergunta e procura contexto pertinente com base em palavras chave, retornando para uma llm o contexto e o prompt para assim o usuario receber uma resposta mais precisa do sistema.
+
+```
+from dotenv import load_dotenv
+from langchain_google_genai import GoogleGenerativeAIEmbeddings
+from langchain.chat_models import init_chat_model
+from langchain_chroma import Chroma
+import bs4
+from langchain_community.document_loaders import WebBaseLoader
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain import hub
+from langchain_core.documents import Document
+from typing_extensions import List, TypedDict
+from langgraph.graph import START, StateGraph
+from langchain_core.prompts import PromptTemplate
+
+
+load_dotenv()
+
+llm = init_chat_model("gemini-2.5-flash", model_provider="google_genai")
+embeddings = GoogleGenerativeAIEmbeddings(model="models/gemini-embedding-001")
+
+vector_store = Chroma(
+    collection_name="example_collection",
+    embedding_function=embeddings,
+    persist_directory="./chroma_langchain_db",  # Banco de dados para os vetores de informação
+)
+
+bs4_strainer = bs4.SoupStrainer(class_=("post-title", "post-header", "post-content")) # Retira apenas o necessario do site
+loader = WebBaseLoader(
+    web_paths=("https://lilianweng.github.io/posts/2023-06-23-agent/",),
+    bs_kwargs={"parse_only": bs4_strainer},
+)
+docs = loader.load()
+
+text_splitter = RecursiveCharacterTextSplitter(
+    chunk_size=1000,  # chunk size (characters)
+    chunk_overlap=200,  # chunk overlap (characters)
+    add_start_index=True,  # track index in original document
+)
+all_splits = text_splitter.split_documents(docs)
+
+document_ids = vector_store.add_documents(documents=all_splits)
+
+prompt = hub.pull("rlm/rag-prompt")
+
+example_messages = prompt.invoke(
+    {"context": "(context goes here)", "question": "(question goes here)"}
+).to_messages()
+
+class State(TypedDict):
+    question: str
+    context: List[Document]
+    answer: str
+
+def retrieve(state: State):
+    retrieved_docs = vector_store.similarity_search(state["question"])
+    return {"context": retrieved_docs}
+
+
+def generate(state: State):
+    docs_content = "\n\n".join(doc.page_content for doc in state["context"])
+    messages = prompt.invoke({"question": state["question"], "context": docs_content})
+    response = llm.invoke(messages)
+    return {"answer": response.content}
+
+graph_builder = StateGraph(State).add_sequence([retrieve, generate])
+graph_builder.add_edge(START, "retrieve")
+graph = graph_builder.compile()
+
+response = graph.invoke({"question": "What is Task Decomposition?"})
+print(response["answer"])
+
+```
+
+
 ## Considerações Finais
 
 A geração aumentada por recuperação (RAG) é uma técnica poderosa para criar aplicações de IA mais precisas e confiáveis. Ao integrar busca de informações e modelos de linguagem, ela permite que chatbots e sistemas de QA funcionem com dados atuais e específicos, sem exigirem modelos caros e estáticos. O uso de frameworks como LangChain simplifica essa implementação, fornecendo abstrações de loaders, vetores e _chains_ prontas. Em resumo, o RAG amplia significativamente as capacidades dos LLMs, tornando-os capazes de responder com base em conhecimentos reais e atualizados[\[1\]](https://aws.amazon.com/what-is/retrieval-augmented-generation/#:~:text=Retrieval,and%20useful%20in%20various%20contexts)[\[4\]](https://blogs.nvidia.com/blog/what-is-retrieval-augmented-generation/#:~:text=Retrieval,specific%20and%20relevant%20data%20sources).
