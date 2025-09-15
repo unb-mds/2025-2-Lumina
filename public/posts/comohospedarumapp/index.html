@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=49877&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>Estudo: Como Hospedar um App na Play Store | É Fake</title>
+<meta name="keywords" content="">
+<meta name="description" content="Este estudo tem como objetivo criar um guia e esclarecer as exigências para a publicação de um app na Play Store.
+1. Criar uma conta de desenvolvedor do Google Play
+Para publicar um aplicativo é necessário uma conta de desenvolvedor.
+
+Google Play Console: O Google Play Console é a plataforma web que o Google oferece para desenvolvedores publicarem, gerenciarem e acompanharem o desempenho de seus aplicativos. Para criar uma conta de desenvolvedor é necessário preencher os dados do desenvolvedor e de pagar uma taxa de registro.
+Taxa de registro: A Google cobra uma taxa única de US$ 25 para registrar uma conta de desenvolvedor. Após pagar essa taxa, é possível publicar um número ilimitado de apps sem nenhuma cobrança. A única outra cobrança que o Google aplica é a taxa de serviço (de 15% a 30%) sobre a receita gerada por vendas de produtos ou serviços digitais dentro do aplicativo, caso os tenha. Se o aplicativo for totalmente gratuito e não tiver compras internas, não haverá mais nenhuma cobrança por parte do Google.
+
+2. Preparação do aplicativo
+Antes de enviar o app, ele precisa estar pronto para o lançamento. Isto é a preparação de arquivos de compilação e da chave de assinatura.">
+<meta name="author" content="">
+<link rel="canonical" href="//localhost:49877/posts/comohospedarumapp/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.b8c5fe199b6ed7d82f8d796745cb75f1db5c0e80089bf3c900c156f7941e8838.css" integrity="sha256-uMX&#43;GZtu19gvjXlnRct18dtcDoAIm/PJAMFW95QeiDg=" rel="preload stylesheet" as="style">
+<link rel="icon" href="//localhost:49877/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="//localhost:49877/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="//localhost:49877/favicon-32x32.png">
+<link rel="apple-touch-icon" href="//localhost:49877/apple-touch-icon.png">
+<link rel="mask-icon" href="//localhost:49877/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="//localhost:49877/posts/comohospedarumapp/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="//localhost:49877/" accesskey="h" title="É Fake (Alt + H)">É Fake</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="//localhost:49877/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="//localhost:49877/categories/" title="Categorias">
+                    <span>Categorias</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="//localhost:49877/">Home</a>&nbsp;»&nbsp;<a href="//localhost:49877/posts/">Posts</a></div>
+    <h1 class="post-title entry-hint-parent">
+      Estudo: Como Hospedar um App na Play Store
+    </h1>
+    <div class="post-meta">
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#1-criar-uma-conta-de-desenvolvedor-do-google-play" aria-label="1. Criar uma conta de desenvolvedor do Google Play">1. Criar uma conta de desenvolvedor do Google Play</a></li>
+                <li>
+                    <a href="#2-prepara%c3%a7%c3%a3o-do-aplicativo" aria-label="2. Preparação do aplicativo">2. Preparação do aplicativo</a><ul>
+                        
+                <li>
+                    <a href="#aab-e-apk" aria-label="AAB e APK">AAB e APK</a></li>
+                <li>
+                    <a href="#chave-de-assinatura" aria-label="Chave de assinatura">Chave de assinatura</a></li>
+                <li>
+                    <a href="#3-prepara%c3%a7%c3%a3o-da-ficha-do-aplicativo" aria-label="3. Preparação da ficha do aplicativo">3. Preparação da ficha do aplicativo</a></li>
+                <li>
+                    <a href="#4-pol%c3%adtica-de-privacidade" aria-label="4. Política de privacidade">4. Política de privacidade</a></li>
+                <li>
+                    <a href="#5-an%c3%a1lise-e-lan%c3%a7amento" aria-label="5. Análise e lançamento">5. Análise e lançamento</a></li></ul>
+                </li>
+                <li>
+                    <a href="#refer%c3%aancias" aria-label="Referências">Referências</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><p>Este estudo tem como objetivo criar um guia e esclarecer as exigências para a publicação de um app na Play Store.</p>
+<h3 id="1-criar-uma-conta-de-desenvolvedor-do-google-play">1. Criar uma conta de desenvolvedor do Google Play<a hidden class="anchor" aria-hidden="true" href="#1-criar-uma-conta-de-desenvolvedor-do-google-play">#</a></h3>
+<p>Para publicar um aplicativo é necessário uma conta de desenvolvedor.</p>
+<ul>
+<li>Google Play Console: O Google Play Console é a plataforma web que o Google oferece para desenvolvedores publicarem, gerenciarem e acompanharem o desempenho de seus aplicativos. Para criar uma conta de desenvolvedor é necessário preencher os dados do desenvolvedor e de pagar uma <strong>taxa de registro</strong>.</li>
+<li>Taxa de registro: A Google cobra uma taxa única de US$ 25 para registrar uma conta de desenvolvedor. Após pagar essa taxa, é possível publicar um número ilimitado de apps sem nenhuma cobrança. A única outra cobrança que o Google aplica é a taxa de serviço (de 15% a 30%) sobre a receita gerada por vendas de produtos ou serviços digitais dentro do aplicativo, caso os tenha. Se o aplicativo for totalmente gratuito e não tiver compras internas, não haverá mais nenhuma cobrança por parte do Google.</li>
+</ul>
+<h3 id="2-preparação-do-aplicativo">2. Preparação do aplicativo<a hidden class="anchor" aria-hidden="true" href="#2-preparação-do-aplicativo">#</a></h3>
+<p>Antes de enviar o app, ele precisa estar pronto para o lançamento. Isto é a preparação de arquivos de compilação e da chave de assinatura.</p>
+<h4 id="aab-e-apk">AAB e APK<a hidden class="anchor" aria-hidden="true" href="#aab-e-apk">#</a></h4>
+<p>Ambos, APK e AAB, são formatos de arquivo usados para empacotar aplicativos Android, mas eles funcionam de maneiras fundamentalmente diferentes, especialmente em como o aplicativo é entregue aos usuários.</p>
+<p><strong>O que é um Bundle de Aplicativo (AAB)?</strong></p>
+<p>Um Android App Bundle (AAB) é o formato de publicação mais recente e recomendado pelo Google. Ele é um pacote que contém todo o código compilado e os recursos do app, mas de uma forma que permite que a Google Play Store otimize a entrega do aplicativo para cada dispositivo individualmente.
+Em vez de criar um único arquivo universal (como o APK) com todos os recursos e configurações para todos os tipos de dispositivos, o AAB separa o conteúdo. Ele pode incluir:</p>
+<ul>
+<li>Múltiplas arquiteturas de CPU: Versões do seu código para chips de 64 bits ou 32 bits, por exemplo.</li>
+<li>Múltiplas densidades de tela: Versões de imagens e layouts para telas de alta e baixa resolução.</li>
+<li>Múltiplos idiomas: Strings de texto para diversos idiomas.</li>
+</ul>
+<p><strong>Diferença entre AAB e APK</strong></p>
+<p>A principal diferença é que o AAB é para o upload para a loja, resultando em downloads menores e mais eficientes para os usuários, já que o dispositivo só recebe os recursos necessários, enquanto o APK é o formato final que o usuário instala. </p>
+<h4 id="chave-de-assinatura">Chave de assinatura<a hidden class="anchor" aria-hidden="true" href="#chave-de-assinatura">#</a></h4>
+<p>A chave de assinatura é um elemento de segurança essencial no processo de publicação de aplicativos Android.</p>
+<p><strong>Para que serve a chave de assinatura?</strong></p>
+<p>A chave de assinatura tem duas funções principais:</p>
+<ul>
+<li>Garantir a autenticidade: Ela garante aos usuários e à Google Play Store que a versão do aplicativo que eles estão baixando é a versão original, criada e publicada pelo desenvolvedor. Se alguém tentar modificar o app (por exemplo, injetando malware) e enviá-lo com outra chave, o Android vai detectar a fraude e não permitirá a instalação.</li>
+<li>Permitir atualizações: Para que a Google Play Store permita que um desenvolvedor envie uma atualização para seu app, a nova versão precisa ser assinada com a mesma chave da versão anterior.</li>
+</ul>
+<p><strong>Como funciona?</strong></p>
+<p>Ao publicar o aplicativo pela primeira vez, ele é assinado com uma chave privada. A partir dessa chave, é gerado um certificado público, que é o que a Google e os dispositivos Android usam para verificar a assinatura.
+O Google Play Console oferece uma ferramenta chamada &ldquo;Assinatura de apps pelo Google Play&rdquo; (App Signing by Google Play). Essa é a forma mais recomendada de gerenciar a chave. Ao usar esse serviço:</p>
+<ul>
+<li>Você envia sua chave de assinatura para a Google.</li>
+<li>A Google armazena sua chave de forma segura.</li>
+<li>Quando você envia uma nova versão do seu app, a Google a assina com a sua chave antes de publicá-la.
+Isso evita o risco de perder a chave. Se a chave privada for perdida, não será possível atualizar o aplicativo, e a única solução seria publicar um novo aplicativo (com outro nome de pacote), o que faria com que todos os usuários perdessem o acesso às atualizações. Por isso, a assinatura de apps pelo Google é a opção mais segura.</li>
+</ul>
+<h4 id="3-preparação-da-ficha-do-aplicativo">3. Preparação da ficha do aplicativo<a hidden class="anchor" aria-hidden="true" href="#3-preparação-da-ficha-do-aplicativo">#</a></h4>
+<p>A ficha do app é como uma vitrine na Google Play Store e é necessário preencher os seguintes dados:</p>
+<ul>
+<li>Título do aplicativo.</li>
+<li>Descrição: Um resumo sobre as funcionalidades do app.</li>
+<li>Ícone do aplicativo.</li>
+<li>Imagens e vídeos da interface do app.</li>
+<li>Tipo e categoria, por exemplo: &ldquo;Ferramentas&rdquo;, &ldquo;Educação&rdquo;.</li>
+</ul>
+<h4 id="4-política-de-privacidade">4. Política de privacidade<a hidden class="anchor" aria-hidden="true" href="#4-política-de-privacidade">#</a></h4>
+<p>Para cumprir as políticas do Google Play, o aplicativo deve seguir as seguintes diretrizes:</p>
+<ol>
+<li>Ter uma Política de Privacidade:</li>
+</ol>
+<ul>
+<li><strong>URL obrigatória:</strong> Um link válido e ativo para uma política de privacidade na página do app no Google Play Console.</li>
+<li><strong>Conteúdo detalhado:</strong> A política deve explicar de forma clara e completa como o app coleta, usa e compartilha dados dos usuários, e com quem esses dados são compartilhados (por exemplo, serviços de análise, publicidade, etc.).</li>
+<li><strong>Acessível no app:</strong> Em muitos casos, a política de privacidade também precisa estar facilmente acessível dentro do próprio aplicativo.</li>
+</ul>
+<ol start="2">
+<li>Transparência e Consentimento:</li>
+</ol>
+<ul>
+<li><strong>Divulgação clara:</strong> Se o app coleta dados pessoais ou confidenciais, deve avisar o usuário de forma clara e visível.</li>
+<li><strong>Consentimento explícito:</strong> O usuário deve dar um consentimento ativo e claro para a coleta de dados.</li>
+</ul>
+<h4 id="5-análise-e-lançamento">5. Análise e lançamento<a hidden class="anchor" aria-hidden="true" href="#5-análise-e-lançamento">#</a></h4>
+<p>Após configurar tudo, a Google fará uma análise do aplicativo para garantir que ele cumpre as Políticas do Google Play.</p>
+<ul>
+<li>Envie para análise: Quando lançar o app ele será enviado para análise.</li>
+<li>Aguarde a aprovação: O processo de análise pode levar de algumas horas a vários dias. A Google verifica se o app não contém malware, violações de direitos autorais ou qualquer outro tipo de conteúdo proibido.</li>
+<li>Publicação: Quando o app for aprovado, ele será publicado na Google Play Store e ficará disponível para os usuários baixarem.</li>
+</ul>
+<h3 id="referências">Referências<a hidden class="anchor" aria-hidden="true" href="#referências">#</a></h3>
+<p>Create and set up your app - Play Console Help - <a href="https://www.google.com/url?sa=t&amp;source=web&amp;rct=j&amp;opi=89978449&amp;url=https://support.google.com/googleplay/android-developer/answer/9859152%3Fhl%3Den&amp;ved=2ahUKEwi1w7be3tiPAxVjILkGHfZCEeoQFnoECCMQAQ&amp;usg=AOvVaw15kvOz88ux_SvKYA3y7oTy">https://www.google.com/url?sa=t&amp;source=web&amp;rct=j&amp;opi=89978449&amp;url=https://support.google.com/googleplay/android-developer/answer/9859152%3Fhl%3Den&amp;ved=2ahUKEwi1w7be3tiPAxVjILkGHfZCEeoQFnoECCMQAQ&amp;usg=AOvVaw15kvOz88ux_SvKYA3y7oTy</a></p>
+<p>What&rsquo;s the difference between AABs and APKs? - <a href="https://developer.android.com/guide/app-bundle/faq?hl=pt-br#:~:text=Unity%2C%20and%20Unreal.-,What's%20the%20difference%20between%20AABs%20and%20APKs?,can%20be%20installed%20on%20devices">https://developer.android.com/guide/app-bundle/faq?hl=pt-br#:~:text=Unity%2C%20and%20Unreal.-,What's%20the%20difference%20between%20AABs%20and%20APKs?,can%20be%20installed%20on%20devices</a>.</p>
+<p>Publish your app | Android Studio - <a href="https://www.google.com/url?sa=t&amp;source=web&amp;rct=j&amp;opi=89978449&amp;url=https://developer.android.com/studio/publish&amp;ved=2ahUKEwi1w7be3tiPAxVjILkGHfZCEeoQFnoECF8QAQ&amp;usg=AOvVaw0QvZbEygpJ_BkJ4Mxu7_8l">https://www.google.com/url?sa=t&amp;source=web&amp;rct=j&amp;opi=89978449&amp;url=https://developer.android.com/studio/publish&amp;ved=2ahUKEwi1w7be3tiPAxVjILkGHfZCEeoQFnoECF8QAQ&amp;usg=AOvVaw0QvZbEygpJ_BkJ4Mxu7_8l</a></p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="//localhost:49877/posts/boaspraticasdedocumentacao/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>Estudo: Boas Práticas de Documentação de Software</span>
+  </a>
+  <a class="next" href="//localhost:49877/posts/estudodocker/">
+    <span class="title">Next »</span>
+    <br>
+    <span>Estudo: Docker para Padronização de Ambientes</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="//localhost:49877/">É Fake</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

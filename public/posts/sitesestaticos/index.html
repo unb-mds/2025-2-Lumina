@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=49877&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>Estudo: Análise e Uso do Hugo | É Fake</title>
+<meta name="keywords" content="">
+<meta name="description" content="1. Sites Estáticos vs. Dinâmicos
+Sites estáticos são construídos com HTML e contêm um conteúdo pré-definido e imutável. Eles não oferecem interatividade para o usuário e carregam uma página &ldquo;crua&rdquo;. Um exemplo comum é um portfólio online ou um projeto de faculdade sem muitas funcionalidades específicas para cada usuário.
+Sites dinâmicos, por outro lado, utilizam bancos de dados para carregar informações externas, o que os torna mais complexos. Eles permitem interatividade com o usuário. A grande maioria dos sites da internet são dinâmicos, e nosso projeto também será.">
+<meta name="author" content="">
+<link rel="canonical" href="//localhost:49877/posts/sitesestaticos/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.b8c5fe199b6ed7d82f8d796745cb75f1db5c0e80089bf3c900c156f7941e8838.css" integrity="sha256-uMX&#43;GZtu19gvjXlnRct18dtcDoAIm/PJAMFW95QeiDg=" rel="preload stylesheet" as="style">
+<link rel="icon" href="//localhost:49877/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="//localhost:49877/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="//localhost:49877/favicon-32x32.png">
+<link rel="apple-touch-icon" href="//localhost:49877/apple-touch-icon.png">
+<link rel="mask-icon" href="//localhost:49877/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="//localhost:49877/posts/sitesestaticos/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="//localhost:49877/" accesskey="h" title="É Fake (Alt + H)">É Fake</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="//localhost:49877/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="//localhost:49877/categories/" title="Categorias">
+                    <span>Categorias</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="//localhost:49877/">Home</a>&nbsp;»&nbsp;<a href="//localhost:49877/posts/">Posts</a></div>
+    <h1 class="post-title entry-hint-parent">
+      Estudo: Análise e Uso do Hugo
+    </h1>
+    <div class="post-meta">
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#1-sites-est%c3%a1ticos-vs-din%c3%a2micos" aria-label="1. Sites Estáticos vs. Dinâmicos">1. Sites Estáticos vs. Dinâmicos</a></li>
+                <li>
+                    <a href="#2-o-que-%c3%a9-o-hugo" aria-label="2. O Que é o Hugo?">2. O Que é o Hugo?</a><ul>
+                        
+                <li>
+                    <a href="#21-como-instalar-o-hugo-windows" aria-label="2.1. Como Instalar o Hugo (Windows)">2.1. Como Instalar o Hugo (Windows)</a></li></ul>
+                </li>
+                <li>
+                    <a href="#3-tutorial-do-hugo-quick-start" aria-label="3. Tutorial do Hugo &ldquo;Quick Start&rdquo;">3. Tutorial do Hugo &ldquo;Quick Start&rdquo;</a></li>
+                <li>
+                    <a href="#4-sintaxe-do-markdown" aria-label="4. Sintaxe do Markdown">4. Sintaxe do Markdown</a></li>
+                <li>
+                    <a href="#5-publicando-um-site-com-hugo-no-github-pages" aria-label="5. Publicando um Site com Hugo no GitHub Pages">5. Publicando um Site com Hugo no GitHub Pages</a></li>
+                <li>
+                    <a href="#6-considera%c3%a7%c3%b5es-finais" aria-label="6. Considerações Finais">6. Considerações Finais</a></li>
+                <li>
+                    <a href="#7-refer%c3%aancias" aria-label="7. Referências">7. Referências</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h2 id="1-sites-estáticos-vs-dinâmicos">1. Sites Estáticos vs. Dinâmicos<a hidden class="anchor" aria-hidden="true" href="#1-sites-estáticos-vs-dinâmicos">#</a></h2>
+<p>Sites estáticos são construídos com HTML e contêm um conteúdo pré-definido e imutável. Eles não oferecem interatividade para o usuário e carregam uma página &ldquo;crua&rdquo;. Um exemplo comum é um portfólio online ou um projeto de faculdade sem muitas funcionalidades específicas para cada usuário.</p>
+<p>Sites dinâmicos, por outro lado, utilizam bancos de dados para carregar informações externas, o que os torna mais complexos. Eles permitem interatividade com o usuário. A grande maioria dos sites da internet são dinâmicos, e nosso projeto também será.</p>
+<h2 id="2-o-que-é-o-hugo">2. O Que é o Hugo?<a hidden class="anchor" aria-hidden="true" href="#2-o-que-é-o-hugo">#</a></h2>
+<p>Hugo é uma ferramenta que converte arquivos de texto simples, como Markdown, em sites completos com HTML, CSS e JavaScript, prontos para serem publicados. Em vez de criar cada página manualmente, você pode focar em escrever o conteúdo em arquivos de texto, e o Hugo se encarrega da parte de design e estrutura.</p>
+<p>Hugo é ideal para sites que precisam ser leves, como sites de documentação, e que tenham uma estrutura base estática.</p>
+<h3 id="21-como-instalar-o-hugo-windows">2.1. Como Instalar o Hugo (Windows)<a hidden class="anchor" aria-hidden="true" href="#21-como-instalar-o-hugo-windows">#</a></h3>
+<p>A instalação do Hugo no Windows é simples. Basta abrir o CMD e digitar <code>winget install Hugo.Hugo.Extended</code>. Durante a instalação, você precisará concordar com os termos e, em seguida, reiniciar o PowerShell.</p>
+<blockquote>
+<p><strong>Observação:</strong> Para usuários de Windows, é recomendado usar o PowerShell, WSL (Windows Subsystem for Linux) ou Git Bash em vez do Command Prompt tradicional.</p></blockquote>
+<h2 id="3-tutorial-do-hugo-quick-start">3. Tutorial do Hugo &ldquo;Quick Start&rdquo;<a hidden class="anchor" aria-hidden="true" href="#3-tutorial-do-hugo-quick-start">#</a></h2>
+<p>O tutorial &ldquo;Quick Start&rdquo; no site oficial da GoHugo promete ensinar como criar, adicionar conteúdo, configurar e publicar um site. É necessário ter o Hugo e o Git instalados na máquina antes de começar.</p>
+<p>Embora o tutorial seja intuitivo e simples de seguir, a leitura no site oficial é altamente recomendada.</p>
+<p>Se você seguiu o tutorial corretamente, o arquivo do seu projeto, chamado <code>quickstart</code>, estará na sua pasta de usuário principal.</p>
+<h2 id="4-sintaxe-do-markdown">4. Sintaxe do Markdown<a hidden class="anchor" aria-hidden="true" href="#4-sintaxe-do-markdown">#</a></h2>
+<p>O Hugo utiliza a linguagem Markdown, que se assemelha ao HTML. A sintaxe básica é simples e fácil de aprender.</p>
+<ul>
+<li><strong>Títulos:</strong> Use o caractere <code>#</code> para criar títulos. Quanto mais <code>#</code> você usar, menor o título será.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span># Título Principal
+</span></span><span style="display:flex;"><span><span style="color:#75715e">## Subtítulo
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">### Sub-subtítulo
+</span></span></span></code></pre></div></li>
+<li><strong>Ênfase (Negrito e Itálico):</strong> Use asteriscos (<code>*</code>) ou underscores (<code>_</code>) para dar ênfase.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span>Este texto é <span style="font-weight:bold">**negrito**</span> e este é <span style="font-style:italic">*itálico*</span>.
+</span></span></code></pre></div></li>
+<li><strong>Listas:</strong> Use <code>*</code> ou <code>-</code> para listas não ordenadas, e números para listas ordenadas.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span><span style="color:#66d9ef">*</span> Item 1
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">*</span> Item 2
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">*</span> Subitem
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">1.</span> Primeiro item
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">2.</span> Segundo item
+</span></span></code></pre></div></li>
+<li><strong>Links:</strong> Use colchetes para o texto e parênteses para a URL.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span>Este é um [<span style="color:#f92672">link para o Google</span>](<span style="color:#a6e22e">https://www.google.com</span>).
+</span></span></code></pre></div></li>
+<li><strong>Imagens:</strong> Similar aos links, mas com um ponto de exclamação (<code>!</code>) no início.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-markdown" data-lang="markdown"><span style="display:flex;"><span>![<span style="color:#f92672">Texto alternativo para a imagem</span>](<span style="color:#a6e22e">caminho/para/imagem.jpg</span>)
+</span></span></code></pre></div></li>
+</ul>
+<h2 id="5-publicando-um-site-com-hugo-no-github-pages">5. Publicando um Site com Hugo no GitHub Pages<a hidden class="anchor" aria-hidden="true" href="#5-publicando-um-site-com-hugo-no-github-pages">#</a></h2>
+<p>Gerar arquivos estáticos com Hugo é muito simples; basta digitar o comando <code>hugo</code> no terminal, e o site será gerado localmente.</p>
+<p>Para publicá-lo no GitHub Pages, siga estes passos:</p>
+<ol>
+<li>Crie um novo repositório no GitHub.</li>
+<li>Configure o Git na sua pasta <code>public</code>:
+<ul>
+<li>Inicialize o repositório Git localmente: <code>git init</code>.</li>
+<li>Adicione todos os arquivos gerados ao controle de versão: <code>git add .</code>.</li>
+<li>Faça o primeiro commit: <code>git commit -m &quot;Primeira publicação do site com Hugo&quot;</code>.</li>
+<li>Conecte o repositório local ao seu repositório do GitHub: <code>git remote add origin https://github.com/seu-nome-de-usuario/seu-nome-de-usuario.github.io.git</code>.</li>
+<li>Publique os arquivos do seu repositório local para o GitHub: <code>git push -u origin main</code>.</li>
+</ul>
+</li>
+</ol>
+<p>Após a conclusão, os arquivos deverão estar disponíveis em seu repositório no GitHub.</p>
+<h2 id="6-considerações-finais">6. Considerações Finais<a hidden class="anchor" aria-hidden="true" href="#6-considerações-finais">#</a></h2>
+<p>A experiência de criar um site estático com Hugo é simples e intuitiva. A ferramenta Go (na qual Hugo é baseado) foi a escolhida para este projeto, mas existem outras linguagens como Ruby, JavaScript, e React, que também são usadas para criar sites estáticos.</p>
+<p>O processo de &ldquo;deploy&rdquo; (publicação) é muito simples, bastando apenas o comando <code>hugo</code>. Embora a ferramenta seja menos estilizada e não ofereça uma estrutura com orientação a objetos como o Flask, ela é extremamente funcional para o que se propõe.</p>
+<h2 id="7-referências">7. Referências<a hidden class="anchor" aria-hidden="true" href="#7-referências">#</a></h2>
+<ul>
+<li><a href="https://gohugo.io/getting-started/quick-start/">Guia de Início Rápido do Hugo</a></li>
+<li><a href="https://www.alura.com.br/artigos/product-manager-o-que-faz-quanto-ganha-como-se-destacar">Product Manager: o que faz, quanto ganha e como se destacar - Alura</a></li>
+</ul>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="//localhost:49877/posts/metricasdeopensource/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>Estudo de Métricas Open Source</span>
+  </a>
+  <a class="next" href="//localhost:49877/posts/apiswebcrawlers/">
+    <span class="title">Next »</span>
+    <br>
+    <span>Estudo: APIs e Web Crawlers</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="//localhost:49877/">É Fake</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=49877&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>Estudo: Figma para UI/UX do Projeto | É Fake</title>
+<meta name="keywords" content="">
+<meta name="description" content="1. Objetivo
+Este roteiro detalha nosso plano de estudo para o Figma. O objetivo é unificar nosso conhecimento da ferramenta para que possamos criar o design e o protótipo do nosso aplicativo de forma consistente e eficiente. O material a seguir servirá como nosso guia para as próximas etapas de design.
+
+2. Áreas de Foco
+O estudo está organizado em quatro áreas principais, cobrindo desde o básico até as funcionalidades de colaboração.">
+<meta name="author" content="">
+<link rel="canonical" href="//localhost:49877/posts/figma/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.b8c5fe199b6ed7d82f8d796745cb75f1db5c0e80089bf3c900c156f7941e8838.css" integrity="sha256-uMX&#43;GZtu19gvjXlnRct18dtcDoAIm/PJAMFW95QeiDg=" rel="preload stylesheet" as="style">
+<link rel="icon" href="//localhost:49877/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="//localhost:49877/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="//localhost:49877/favicon-32x32.png">
+<link rel="apple-touch-icon" href="//localhost:49877/apple-touch-icon.png">
+<link rel="mask-icon" href="//localhost:49877/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="//localhost:49877/posts/figma/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="//localhost:49877/" accesskey="h" title="É Fake (Alt + H)">É Fake</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="//localhost:49877/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="//localhost:49877/categories/" title="Categorias">
+                    <span>Categorias</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="//localhost:49877/">Home</a>&nbsp;»&nbsp;<a href="//localhost:49877/posts/">Posts</a></div>
+    <h1 class="post-title entry-hint-parent">
+      Estudo: Figma para UI/UX do Projeto
+    </h1>
+    <div class="post-meta">
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#1-objetivo" aria-label="1. Objetivo">1. Objetivo</a></li>
+                <li>
+                    <a href="#2-%c3%a1reas-de-foco" aria-label="2. Áreas de Foco">2. Áreas de Foco</a><ul>
+                        
+                <li>
+                    <a href="#m%c3%b3dulo-1-fundamentos-do-figma" aria-label="Módulo 1: Fundamentos do Figma">Módulo 1: Fundamentos do Figma</a></li>
+                <li>
+                    <a href="#m%c3%b3dulo-2-componentes-e-reutiliza%c3%a7%c3%a3o" aria-label="Módulo 2: Componentes e Reutilização">Módulo 2: Componentes e Reutilização</a></li>
+                <li>
+                    <a href="#m%c3%b3dulo-3-prototipagem-interativa" aria-label="Módulo 3: Prototipagem Interativa">Módulo 3: Prototipagem Interativa</a></li>
+                <li>
+                    <a href="#m%c3%b3dulo-4-colabora%c3%a7%c3%a3o-e-handoff" aria-label="Módulo 4: Colaboração e Handoff">Módulo 4: Colaboração e Handoff</a></li></ul>
+                </li>
+                <li>
+                    <a href="#3-plano-de-a%c3%a7%c3%a3o" aria-label="3. Plano de Ação">3. Plano de Ação</a></li>
+                <li>
+                    <a href="#4-recursos-recomendados" aria-label="4. Recursos Recomendados">4. Recursos Recomendados</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h2 id="1-objetivo">1. Objetivo<a hidden class="anchor" aria-hidden="true" href="#1-objetivo">#</a></h2>
+<p>Este roteiro detalha nosso plano de estudo para o Figma. O objetivo é unificar nosso conhecimento da ferramenta para que possamos criar o design e o protótipo do nosso aplicativo de forma consistente e eficiente. O material a seguir servirá como nosso guia para as próximas etapas de design.</p>
+<hr>
+<h2 id="2-áreas-de-foco">2. Áreas de Foco<a hidden class="anchor" aria-hidden="true" href="#2-áreas-de-foco">#</a></h2>
+<p>O estudo está organizado em quatro áreas principais, cobrindo desde o básico até as funcionalidades de colaboração.</p>
+<h3 id="módulo-1-fundamentos-do-figma">Módulo 1: Fundamentos do Figma<a hidden class="anchor" aria-hidden="true" href="#módulo-1-fundamentos-do-figma">#</a></h3>
+<ul>
+<li><strong>Foco:</strong> Dominar as ferramentas essenciais para a criação de qualquer interface.</li>
+<li><strong>Tópicos Chave:</strong>
+<ul>
+<li><strong>Frames:</strong> São as &ldquo;telas&rdquo; do nosso design, onde todo o conteúdo é organizado. Aprenderemos a configurá-los para os dispositivos alvo.</li>
+<li><strong>Formas e Texto:</strong> Manipulação dos blocos de construção de qualquer interface: retângulos, círculos, ícones e texto.</li>
+<li><strong>Auto Layout:</strong> Como criar elementos que se adaptam automaticamente ao conteúdo, essencial para botões, menus e listas.</li>
+<li><strong>Organização:</strong> Boas práticas para nomear camadas (layers) e organizar os elementos de forma lógica.</li>
+</ul>
+</li>
+<li><strong>Resultado Esperado:</strong> Ser capaz de construir uma tela de aplicativo do zero, com layout bem estruturado.</li>
+</ul>
+<h3 id="módulo-2-componentes-e-reutilização">Módulo 2: Componentes e Reutilização<a hidden class="anchor" aria-hidden="true" href="#módulo-2-componentes-e-reutilização">#</a></h3>
+<ul>
+<li><strong>Foco:</strong> Aprender a criar elementos de design que podem ser usados várias vezes, garantindo consistência e agilizando futuras alterações.</li>
+<li><strong>Tópicos Chave:</strong>
+<ul>
+<li><strong>Componentes:</strong> O que são, como criá-los (componente principal) e como usá-los (instâncias).</li>
+<li><strong>Variantes:</strong> Agrupar diferentes estados de um mesmo componente (ex: um botão em seu estado padrão, desabilitado e ativo).</li>
+<li><strong>Biblioteca Central:</strong> Entender como os componentes formam a base de um Design System, nossa biblioteca de elementos visuais.</li>
+</ul>
+</li>
+<li><strong>Resultado Esperado:</strong> Criar um conjunto básico de componentes reutilizáveis para o nosso projeto (botões, campos de texto, etc.).</li>
+</ul>
+<h3 id="módulo-3-prototipagem-interativa">Módulo 3: Prototipagem Interativa<a hidden class="anchor" aria-hidden="true" href="#módulo-3-prototipagem-interativa">#</a></h3>
+<ul>
+<li><strong>Foco:</strong> Transformar as telas estáticas em um fluxo clicável que simula o uso real do aplicativo.</li>
+<li><strong>Tópicos Chave:</strong>
+<ul>
+<li><strong>Conexões:</strong> Ligar diferentes frames para criar a navegação entre as telas.</li>
+<li><strong>Interações:</strong> Definir os gatilhos para a navegação (clique, arrastar, etc.).</li>
+<li><strong>Animações:</strong> Usar transições simples para dar mais realismo e fluidez à experiência do protótipo.</li>
+</ul>
+</li>
+<li><strong>Resultado Esperado:</strong> Desenvolver um protótipo navegável do fluxo principal do nosso aplicativo.</li>
+</ul>
+<h3 id="módulo-4-colaboração-e-handoff">Módulo 4: Colaboração e Handoff<a hidden class="anchor" aria-hidden="true" href="#módulo-4-colaboração-e-handoff">#</a></h3>
+<ul>
+<li><strong>Foco:</strong> Utilizar o Figma como uma ferramenta central para o trabalho em equipe e para a entrega do design aos desenvolvedores.</li>
+<li><strong>Tópicos Chave:</strong>
+<ul>
+<li><strong>Compartilhamento e Permissões:</strong> Como compartilhar o projeto para visualização ou edição.</li>
+<li><strong>Comentários:</strong> Usar a ferramenta de comentários para dar e receber feedback diretamente no layout.</li>
+<li><strong>Modo de Inspeção (Inspect):</strong> Como os desenvolvedores podem extrair informações de um componente: cores, medidas, fontes e trechos de código.</li>
+</ul>
+</li>
+<li><strong>Resultado Esperado:</strong> Saber como compartilhar o protótipo para revisão e como o design é &ldquo;traduzido&rdquo; para o desenvolvimento.</li>
+</ul>
+<hr>
+<h2 id="3-plano-de-ação">3. Plano de Ação<a hidden class="anchor" aria-hidden="true" href="#3-plano-de-ação">#</a></h2>
+<p>Para atingir esses objetivos, seguiremos os seguintes passos:</p>
+<ol>
+<li><strong>Estudo Individual Guiado:</strong> Cada membro da equipe deve realizar um tutorial para iniciantes para cobrir os fundamentos.</li>
+<li><strong>Exercício Prático:</strong> Recriar la interface de um aplicativo conhecido para praticar as ferramentas e o conceito de componentes.</li>
+<li><strong>Aplicação no Projeto:</strong> Iniciar a criação do wireframe (protótipo de baixa fidelidade) da funcionalidade principal do nosso app.</li>
+<li><strong>Revisão em Equipe:</strong> Apresentar o protótipo inicial para a equipe, testar o fluxo e coletar feedbacks usando a ferramenta de comentários.</li>
+</ol>
+<hr>
+<h2 id="4-recursos-recomendados">4. Recursos Recomendados<a hidden class="anchor" aria-hidden="true" href="#4-recursos-recomendados">#</a></h2>
+<ul>
+<li><strong>Canal Oficial do Figma (YouTube):</strong> Ideal para tutoriais visuais e guias de funcionalidades. <a href="https://www.youtube.com/c/figma">Link Direto</a></li>
+<li><strong>Figma Community:</strong> Excelente para explorar projetos reais, baixar exemplos e entender como outros designers estruturam seus arquivos. <a href="https://www.figma.com/community">Link Direto</a></li>
+</ul>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="//localhost:49877/posts/estudodocker/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>Estudo: Docker para Padronização de Ambientes</span>
+  </a>
+  <a class="next" href="//localhost:49877/posts/flutteredart/">
+    <span class="title">Next »</span>
+    <br>
+    <span>Estudo: Flutter e Linguagem Dart</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="//localhost:49877/">É Fake</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

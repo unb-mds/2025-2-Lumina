@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=49877&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>Estudo: Arquitetura e Implementação de Agentes de IA | É Fake</title>
+<meta name="keywords" content="">
+<meta name="description" content="1. O que é um Agente de IA e seus principais padrões de arquitetura
+Um agente de IA é um sistema que percebe um ambiente, decide (planeja) e atua para atingir objetivos. No contexto de aplicações web, é um software que recebe entradas (URL, texto, prompt), usa modelos/algoritmos e ferramentas externas (buscas, DBs) e devolve ações/decisões (resposta, veredito, execução de tarefas).
+1.1. Componentes essenciais:
+
+Percepção / Input: Captura dados: texto do usuário, páginas web, feeds de notícias, APIs.
+Módulo de Planejamento / Raciocínio: Decide os passos a seguir (ex.: “buscar fontes → comparar → sintetizar”). Geralmente implementado com um LLM (Large Language Model) &#43; lógica de controle.
+Uso de Ferramentas (Tooling): Ferramentas externas chamadas pelo agente: web crawler, base de fatos, classificadores, tradutores.
+Memória:
+
+Curto prazo: histórico da sessão, contexto atual.
+Longo prazo: fatos verificados, perfis de usuário.
+
+
+Execução / Ação (Output): Geração de relatórios, atualizações no banco de dados.
+
+1.2. Principais padrões de arquitetura de agentes de IA
+1.2.1. Planner–Executor (Planejador &#43; Executor)
+
+O que é: Um módulo “planejador” gera um plano de alto nível (lista de passos/subtarefas); o “executor” implementa cada passo chamando ferramentas e retornando resultados.
+Vantagens: Facilita a decomposição de tarefas complexas e a paralelização de passos (ex.: paralelizar buscas em fontes).
+Desvantagens: Requer um componente adicional para reconciliar resultados.
+
+1.2.2. Multi-agent / Orquestração (subagentes especializados)
+
+O que é: Vários agentes especializados (pesquisador, extrator, verificador, sintetizador) colaboram; pode haver um “orquestrador” que coordena.
+Vantagens: Modularidade, independência de responsabilidades, fácil teste e substituição de componentes (ex.: trocar o extrator por outro melhor).
+Desvantagens: Complexidade operacional e de comunicação entre agentes; necessidade de mecanismos de consenso/merge de evidências.
+
+1.3. RAG (Retrieval-Augmented Generation)
+RAG é uma arquitetura de IA que aprimora os LLMs ao permitir que eles acessem e utilizem informações de fontes de dados externas para gerar respostas mais precisas e contextualmente ricas. Em vez de depender apenas do seu conhecimento de treinamento, um sistema RAG primeiro recupera dados relevantes de bancos de dados, documentos e da web e depois os usa para melhorar a geração de texto, garantindo que as respostas sejam mais atualizadas.">
+<meta name="author" content="">
+<link rel="canonical" href="//localhost:49877/posts/arquiteturadeagentesdeia/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.b8c5fe199b6ed7d82f8d796745cb75f1db5c0e80089bf3c900c156f7941e8838.css" integrity="sha256-uMX&#43;GZtu19gvjXlnRct18dtcDoAIm/PJAMFW95QeiDg=" rel="preload stylesheet" as="style">
+<link rel="icon" href="//localhost:49877/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="//localhost:49877/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="//localhost:49877/favicon-32x32.png">
+<link rel="apple-touch-icon" href="//localhost:49877/apple-touch-icon.png">
+<link rel="mask-icon" href="//localhost:49877/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="//localhost:49877/posts/arquiteturadeagentesdeia/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="//localhost:49877/" accesskey="h" title="É Fake (Alt + H)">É Fake</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="//localhost:49877/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="//localhost:49877/categories/" title="Categorias">
+                    <span>Categorias</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="//localhost:49877/">Home</a>&nbsp;»&nbsp;<a href="//localhost:49877/posts/">Posts</a></div>
+    <h1 class="post-title entry-hint-parent">
+      Estudo: Arquitetura e Implementação de Agentes de IA
+    </h1>
+    <div class="post-meta">
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#1-o-que-%c3%a9-um-agente-de-ia-e-seus-principais-padr%c3%b5es-de-arquitetura" aria-label="1. O que é um Agente de IA e seus principais padrões de arquitetura">1. O que é um Agente de IA e seus principais padrões de arquitetura</a><ul>
+                        
+                <li>
+                    <a href="#11-componentes-essenciais" aria-label="1.1. Componentes essenciais:">1.1. Componentes essenciais:</a></li>
+                <li>
+                    <a href="#12-principais-padr%c3%b5es-de-arquitetura-de-agentes-de-ia" aria-label="1.2. Principais padrões de arquitetura de agentes de IA">1.2. Principais padrões de arquitetura de agentes de IA</a><ul>
+                        
+                <li>
+                    <a href="#121-plannerexecutor-planejador--executor" aria-label="1.2.1. Planner–Executor (Planejador &#43; Executor)">1.2.1. Planner–Executor (Planejador + Executor)</a></li>
+                <li>
+                    <a href="#122-multi-agent--orquestra%c3%a7%c3%a3o-subagentes-especializados" aria-label="1.2.2. Multi-agent / Orquestração (subagentes especializados)">1.2.2. Multi-agent / Orquestração (subagentes especializados)</a></li></ul>
+                </li>
+                <li>
+                    <a href="#13-rag-retrieval-augmented-generation" aria-label="1.3. RAG (Retrieval-Augmented Generation)">1.3. RAG (Retrieval-Augmented Generation)</a></li></ul>
+                </li>
+                <li>
+                    <a href="#2-principais-frameworks-e-bibliotecas-para-construir-agentes" aria-label="2. Principais frameworks e bibliotecas para construir agentes">2. Principais frameworks e bibliotecas para construir agentes</a><ul>
+                        
+                <li>
+                    <a href="#21-langchain" aria-label="2.1. LangChain">2.1. LangChain</a></li>
+                <li>
+                    <a href="#22-autogen-microsoft" aria-label="2.2. AutoGen (Microsoft)">2.2. AutoGen (Microsoft)</a></li>
+                <li>
+                    <a href="#23-llamaindex-gpt-index" aria-label="2.3. LlamaIndex (GPT Index)">2.3. LlamaIndex (GPT Index)</a></li></ul>
+                </li>
+                <li>
+                    <a href="#3-inten%c3%a7%c3%a3o-de-um-web-crawler-com-um-agente-de-ia" aria-label="3. Intenção de um Web Crawler com um Agente de IA">3. Intenção de um Web Crawler com um Agente de IA</a><ul>
+                        
+                <li>
+                    <a href="#31-o-que-%c3%a9-um-web-crawler" aria-label="3.1. O que é um Web Crawler">3.1. O que é um Web Crawler</a></li>
+                <li>
+                    <a href="#32-intera%c3%a7%c3%a3o-do-web-crawler-com-o-agente" aria-label="3.2. Interação do web crawler com o agente">3.2. Interação do web crawler com o agente</a></li></ul>
+                </li>
+                <li>
+                    <a href="#4-proposta-de-aplica%c3%a7%c3%a3o-de-um-agente-no-projeto" aria-label="4. Proposta de aplicação de um agente no projeto">4. Proposta de aplicação de um agente no projeto</a><ul>
+                        
+                <li>
+                    <a href="#41-objetivo-da-funcionalidade" aria-label="4.1. Objetivo da funcionalidade">4.1. Objetivo da funcionalidade</a></li>
+                <li>
+                    <a href="#42-fluxo" aria-label="4.2. Fluxo">4.2. Fluxo</a></li>
+                <li>
+                    <a href="#43-intera%c3%a7%c3%b5es-do-agente" aria-label="4.3. Interações do agente">4.3. Interações do agente</a></li></ul>
+                </li>
+                <li>
+                    <a href="#5-refer%c3%aancias" aria-label="5. Referências">5. Referências</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h2 id="1-o-que-é-um-agente-de-ia-e-seus-principais-padrões-de-arquitetura">1. O que é um Agente de IA e seus principais padrões de arquitetura<a hidden class="anchor" aria-hidden="true" href="#1-o-que-é-um-agente-de-ia-e-seus-principais-padrões-de-arquitetura">#</a></h2>
+<p>Um agente de IA é um sistema que percebe um ambiente, decide (planeja) e atua para atingir objetivos. No contexto de aplicações web, é um software que recebe entradas (URL, texto, prompt), usa modelos/algoritmos e ferramentas externas (buscas, DBs) e devolve ações/decisões (resposta, veredito, execução de tarefas).</p>
+<h3 id="11-componentes-essenciais">1.1. Componentes essenciais:<a hidden class="anchor" aria-hidden="true" href="#11-componentes-essenciais">#</a></h3>
+<ul>
+<li><strong>Percepção / Input:</strong> Captura dados: texto do usuário, páginas web, feeds de notícias, APIs.</li>
+<li><strong>Módulo de Planejamento / Raciocínio:</strong> Decide os passos a seguir (ex.: “buscar fontes → comparar → sintetizar”). Geralmente implementado com um LLM (Large Language Model) + lógica de controle.</li>
+<li><strong>Uso de Ferramentas (Tooling):</strong> Ferramentas externas chamadas pelo agente: web crawler, base de fatos, classificadores, tradutores.</li>
+<li><strong>Memória:</strong>
+<ul>
+<li><strong>Curto prazo:</strong> histórico da sessão, contexto atual.</li>
+<li><strong>Longo prazo:</strong> fatos verificados, perfis de usuário.</li>
+</ul>
+</li>
+<li><strong>Execução / Ação (Output):</strong> Geração de relatórios, atualizações no banco de dados.</li>
+</ul>
+<h3 id="12-principais-padrões-de-arquitetura-de-agentes-de-ia">1.2. Principais padrões de arquitetura de agentes de IA<a hidden class="anchor" aria-hidden="true" href="#12-principais-padrões-de-arquitetura-de-agentes-de-ia">#</a></h3>
+<h4 id="121-plannerexecutor-planejador--executor">1.2.1. Planner–Executor (Planejador + Executor)<a hidden class="anchor" aria-hidden="true" href="#121-plannerexecutor-planejador--executor">#</a></h4>
+<ul>
+<li><strong>O que é:</strong> Um módulo “planejador” gera um plano de alto nível (lista de passos/subtarefas); o “executor” implementa cada passo chamando ferramentas e retornando resultados.</li>
+<li><strong>Vantagens:</strong> Facilita a decomposição de tarefas complexas e a paralelização de passos (ex.: paralelizar buscas em fontes).</li>
+<li><strong>Desvantagens:</strong> Requer um componente adicional para reconciliar resultados.</li>
+</ul>
+<h4 id="122-multi-agent--orquestração-subagentes-especializados">1.2.2. Multi-agent / Orquestração (subagentes especializados)<a hidden class="anchor" aria-hidden="true" href="#122-multi-agent--orquestração-subagentes-especializados">#</a></h4>
+<ul>
+<li><strong>O que é:</strong> Vários agentes especializados (pesquisador, extrator, verificador, sintetizador) colaboram; pode haver um “orquestrador” que coordena.</li>
+<li><strong>Vantagens:</strong> Modularidade, independência de responsabilidades, fácil teste e substituição de componentes (ex.: trocar o extrator por outro melhor).</li>
+<li><strong>Desvantagens:</strong> Complexidade operacional e de comunicação entre agentes; necessidade de mecanismos de consenso/merge de evidências.</li>
+</ul>
+<h3 id="13-rag-retrieval-augmented-generation">1.3. RAG (Retrieval-Augmented Generation)<a hidden class="anchor" aria-hidden="true" href="#13-rag-retrieval-augmented-generation">#</a></h3>
+<p>RAG é uma arquitetura de IA que aprimora os LLMs ao permitir que eles acessem e utilizem informações de fontes de dados externas para gerar respostas mais precisas e contextualmente ricas. Em vez de depender apenas do seu conhecimento de treinamento, um sistema RAG primeiro recupera dados relevantes de bancos de dados, documentos e da web e depois os usa para melhorar a geração de texto, garantindo que as respostas sejam mais atualizadas.</p>
+<h2 id="2-principais-frameworks-e-bibliotecas-para-construir-agentes">2. Principais frameworks e bibliotecas para construir agentes<a hidden class="anchor" aria-hidden="true" href="#2-principais-frameworks-e-bibliotecas-para-construir-agentes">#</a></h2>
+<h3 id="21-langchain">2.1. LangChain<a hidden class="anchor" aria-hidden="true" href="#21-langchain">#</a></h3>
+<p>É um framework que simplifica o desenvolvimento de aplicações baseadas em LLMs. Ele fornece &ldquo;blocos de construção&rdquo; prontos e ferramentas que permitem aos desenvolvedores conectar LLMs a fontes de dados, criar cadeias de processos e agentes de IA, possibilitando aplicações mais complexas e inteligentes como chatbots.</p>
+<ul>
+<li><strong>Propósito:</strong> Orquestração de LLMs, RAG, agentes (tool-calling) e integração com vector DBs.</li>
+<li><strong>Pontos fortes:</strong> Grande ecossistema, documentação, integração com provedores (OpenAI, Anthropic), suporte a agents e RAG; migração para LangGraph para execução mais sofisticada.</li>
+</ul>
+<h3 id="22-autogen-microsoft">2.2. AutoGen (Microsoft)<a hidden class="anchor" aria-hidden="true" href="#22-autogen-microsoft">#</a></h3>
+<p>AutoGen é uma estrutura de código aberto projetada para criar aplicativos de IA com vários agentes que podem operar de forma semiautônoma e totalmente autônoma.</p>
+<ul>
+<li><strong>Propósito:</strong> Framework para construir aplicações multi-agent e workflows event-driven com LLMs.</li>
+<li><strong>Pontos fortes:</strong> Pensado para cenários multi-agent, streaming e colaboração; suporte de pesquisa/produção da Microsoft.</li>
+</ul>
+<h3 id="23-llamaindex-gpt-index">2.3. LlamaIndex (GPT Index)<a hidden class="anchor" aria-hidden="true" href="#23-llamaindex-gpt-index">#</a></h3>
+<p>LlamaIndex é um framework de código aberto que conecta modelos de LLMs com os seus próprios dados, permitindo a criação de aplicações de IA generativa mais precisas e contextualizadas.</p>
+<ul>
+<li><strong>Propósito:</strong> Camada de ingestão e indexação de dados para agentes/assistentes (document parsing, RAG).</li>
+<li><strong>Pontos fortes:</strong> Facilita construir &ldquo;knowledge bases&rdquo; sobre documentos, integra com vector DBs e agentes. Útil para extrair evidências de fontes de dados baseadas em texto.</li>
+</ul>
+<h2 id="3-intenção-de-um-web-crawler-com-um-agente-de-ia">3. Intenção de um Web Crawler com um Agente de IA<a hidden class="anchor" aria-hidden="true" href="#3-intenção-de-um-web-crawler-com-um-agente-de-ia">#</a></h2>
+<h3 id="31-o-que-é-um-web-crawler">3.1. O que é um Web Crawler<a hidden class="anchor" aria-hidden="true" href="#31-o-que-é-um-web-crawler">#</a></h3>
+<p>Um web crawler é um programa que navega automaticamente pela web, visitando links e coletando informações. É usado por motores de busca (Googlebot, Bingbot) para indexar páginas.</p>
+<h3 id="32-interação-do-web-crawler-com-o-agente">3.2. Interação do web crawler com o agente<a hidden class="anchor" aria-hidden="true" href="#32-interação-do-web-crawler-com-o-agente">#</a></h3>
+<ol>
+<li>Agente (IA) recebe a intenção → “preciso verificar essa notícia”.</li>
+<li>Crawler é acionado para coletar conteúdo atualizado em sites confiáveis.</li>
+<li>O crawler retorna os dados para o agente.</li>
+<li>O agente interpreta o conteúdo (NLP, embeddings, classificação).</li>
+<li>O agente decide a resposta final e comunica ao usuário.</li>
+</ol>
+<h2 id="4-proposta-de-aplicação-de-um-agente-no-projeto">4. Proposta de aplicação de um agente no projeto<a hidden class="anchor" aria-hidden="true" href="#4-proposta-de-aplicação-de-um-agente-no-projeto">#</a></h2>
+<h3 id="41-objetivo-da-funcionalidade">4.1. Objetivo da funcionalidade<a hidden class="anchor" aria-hidden="true" href="#41-objetivo-da-funcionalidade">#</a></h3>
+<p>Permitir que um usuário submeta uma URL/texto e receba um relatório de verificação com veredito (Verdadeiro / Falso / Impreciso / Não Verificado), evidências citadas, score de confiança e explicação.</p>
+<h3 id="42-fluxo">4.2. Fluxo<a hidden class="anchor" aria-hidden="true" href="#42-fluxo">#</a></h3>
+<ul>
+<li>Recebe input (URL/texto) na UI.</li>
+<li>Classificação de intenção → “checagem factual”.</li>
+<li>Planejamento (planner) → passos: <code>retrieve-sources</code>, <code>extract-claims</code>, <code>verify-claim</code>, <code>synthesize-report</code>.</li>
+<li><strong>Tooling:</strong>
+<ul>
+<li><strong>Crawler:</strong> Busca a URL submetida + extrai texto; paralelamente aciona crawler para fontes confiáveis relacionadas ao tema.</li>
+<li><strong>RAG:</strong> Busca de artigos verificados e no banco de dados de notícias. Usar LlamaIndex para coletar, carregar e análise de dados.</li>
+<li><strong>Classificador/Comparador:</strong> Modelos que comparam claims extraídos vs. evidência.</li>
+<li><strong>Synthesis:</strong> LLM gera relatório explicável com citações diretas (trechos curtos), score e limitações.</li>
+</ul>
+</li>
+<li>Resposta: Retorna relatório ao usuário.</li>
+</ul>
+<h3 id="43-interações-do-agente">4.3. Interações do agente<a hidden class="anchor" aria-hidden="true" href="#43-interações-do-agente">#</a></h3>
+<ul>
+<li><strong>Busca:</strong> Buscar artigos relacionados (crawler + search).</li>
+<li><strong>Extração:</strong> Extrair claims/entidades/datas do texto submetido.</li>
+<li><strong>Comparação:</strong> Para cada claim, recuperar evidências e checar correspondência (factualidade/tempo/contexto).</li>
+<li><strong>Sintetizar:</strong> Gerar laudo com: veredito, evidências (links + trechos de artigos) e índice de confiança.</li>
+</ul>
+<h2 id="5-referências">5. Referências<a hidden class="anchor" aria-hidden="true" href="#5-referências">#</a></h2>
+<ul>
+<li><a href="https://cloud.google.com/discover/what-are-ai-agent">What are AI agents? - Google Cloud</a></li>
+<li><a href="https://blog.dsacademy.com.br/firecrawl-e-web-scraping-inteligente-com-ia/">Firecrawl e Web Scraping Inteligente com IA - DSA Blog</a></li>
+<li><a href="https://langchain.com">LangChain Documentation</a></li>
+<li><a href="https://www.llamaindex.ai">LlamaIndex Documentation</a></li>
+<li><a href="https://microsoft.github.io/autogen/stable//index.html">AutoGen Documentation</a></li>
+</ul>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="//localhost:49877/posts/apiswebcrawlers/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>Estudo: APIs e Web Crawlers</span>
+  </a>
+  <a class="next" href="//localhost:49877/posts/boaspraticasdedocumentacao/">
+    <span class="title">Next »</span>
+    <br>
+    <span>Estudo: Boas Práticas de Documentação de Software</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="//localhost:49877/">É Fake</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

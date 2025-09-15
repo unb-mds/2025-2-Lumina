@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=49877&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>Estudo: Geração Aumentada por Recuperação (RAG) | É Fake</title>
+<meta name="keywords" content="">
+<meta name="description" content="RAG (Retrieval-Augmented Generation) é uma técnica que combina modelos de linguagem pré-treinados com sistemas de recuperação de informação. Ela faz com que o LLM “busque” dados externos relevantes (uma base de conhecimento) antes de gerar respostas[1][2]. Em vez de confiar apenas no conhecimento embutido no modelo, o RAG recupera documentos ou trechos de texto relevantes (via embeddings e pesquisa semântica) e usa esses dados como contexto para a geração da resposta[3][2]. Isso otimiza a precisão e atualidade dos resultados, principalmente em domínios específicos, sem precisar retreinar o modelo completo[1][4].">
+<meta name="author" content="">
+<link rel="canonical" href="//localhost:49877/posts/rageaplicacoes/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.b8c5fe199b6ed7d82f8d796745cb75f1db5c0e80089bf3c900c156f7941e8838.css" integrity="sha256-uMX&#43;GZtu19gvjXlnRct18dtcDoAIm/PJAMFW95QeiDg=" rel="preload stylesheet" as="style">
+<link rel="icon" href="//localhost:49877/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="//localhost:49877/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="//localhost:49877/favicon-32x32.png">
+<link rel="apple-touch-icon" href="//localhost:49877/apple-touch-icon.png">
+<link rel="mask-icon" href="//localhost:49877/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="//localhost:49877/posts/rageaplicacoes/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="//localhost:49877/" accesskey="h" title="É Fake (Alt + H)">É Fake</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="//localhost:49877/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="//localhost:49877/categories/" title="Categorias">
+                    <span>Categorias</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="//localhost:49877/">Home</a>&nbsp;»&nbsp;<a href="//localhost:49877/posts/">Posts</a></div>
+    <h1 class="post-title entry-hint-parent">
+      Estudo: Geração Aumentada por Recuperação (RAG)
+    </h1>
+    <div class="post-meta">
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#arquitetura-e-pipeline" aria-label="Arquitetura e Pipeline">Arquitetura e Pipeline</a></li>
+                <li>
+                    <a href="#casos-de-uso" aria-label="Casos de Uso">Casos de Uso</a></li>
+                <li>
+                    <a href="#benef%c3%adcios" aria-label="Benefícios">Benefícios</a></li>
+                <li>
+                    <a href="#codigo-de-exemplo" aria-label="Codigo de exemplo">Codigo de exemplo</a></li>
+                <li>
+                    <a href="#considera%c3%a7%c3%b5es-finais" aria-label="Considerações Finais">Considerações Finais</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><p>RAG (Retrieval-Augmented Generation) é uma técnica que combina modelos de linguagem pré-treinados com sistemas de recuperação de informação. Ela faz com que o LLM “busque” dados externos relevantes (uma base de conhecimento) antes de gerar respostas<a href="https://aws.amazon.com/what-is/retrieval-augmented-generation/#:~:text=Retrieval,and%20useful%20in%20various%20contexts">[1]</a><a href="https://www.couchbase.com/blog/pt/an-overview-of-retrieval-augmented-generation/#:~:text=Muitas%20equipes%20t%C3%A9cnicas%20est%C3%A3o%20trabalhando,tenha%20acesso%20a%20fatos%20externos">[2]</a>. Em vez de confiar apenas no conhecimento embutido no modelo, o RAG recupera documentos ou trechos de texto relevantes (via embeddings e pesquisa semântica) e usa esses dados como contexto para a geração da resposta<a href="https://aws.amazon.com/what-is/retrieval-augmented-generation/#:~:text=Without%20RAG%2C%20the%20LLM%20takes,an%20overview%20of%20the%20process">[3]</a><a href="https://www.couchbase.com/blog/pt/an-overview-of-retrieval-augmented-generation/#:~:text=Muitas%20equipes%20t%C3%A9cnicas%20est%C3%A3o%20trabalhando,tenha%20acesso%20a%20fatos%20externos">[2]</a>. Isso otimiza a precisão e atualidade dos resultados, principalmente em domínios específicos, sem precisar retreinar o modelo completo<a href="https://aws.amazon.com/what-is/retrieval-augmented-generation/#:~:text=Retrieval,and%20useful%20in%20various%20contexts">[1]</a><a href="https://blogs.nvidia.com/blog/what-is-retrieval-augmented-generation/#:~:text=Retrieval,specific%20and%20relevant%20data%20sources">[4]</a>.</p>
+<h2 id="arquitetura-e-pipeline">Arquitetura e Pipeline<a hidden class="anchor" aria-hidden="true" href="#arquitetura-e-pipeline">#</a></h2>
+<p>Uma aplicação típica de RAG envolve duas fases principais: <strong>indexação</strong> e <strong>recuperação/geração</strong><a href="https://python.langchain.com/docs/tutorials/rag/#:~:text=1,and%20%20179%20model">[5]</a><a href="https://python.langchain.com/docs/tutorials/rag/#:~:text=4,question%20with%20the%20retrieved%20data">[6]</a>.</p>
+<ul>
+<li><strong>Indexação (pré-processamento):</strong> carrega-se a base de dados (por exemplo, documentos, PDFs ou páginas web) usando <em>loaders</em> adequados<a href="https://python.langchain.com/docs/tutorials/rag/#:~:text=1,and%20%20179%20model">[5]</a>. Em seguida, o texto é fragmentado em pedaços menores (usando um <em>TextSplitter</em>) para facilitar a busca<a href="https://python.langchain.com/docs/tutorials/rag/#:~:text=1,and%20%20179%20model">[5]</a>. Cada pedaço de texto é então convertido em vetor numérico por meio de um modelo de embedding (como o <em>OpenAIEmbeddings</em>) e armazenado num banco vetorial (<em>VectorStore</em>)<a href="https://python.langchain.com/docs/tutorials/rag/#:~:text=1,and%20%20179%20model">[5]</a>. Essa etapa estrutura o conhecimento, permitindo pesquisas semânticas eficientes.</li>
+<li><strong>Recuperação e geração (runtime):</strong> dada uma consulta do usuário, o sistema converte a pergunta em embedding e usa um <em>retriever</em> para encontrar os fragmentos mais relevantes no índice pré-computado<a href="https://python.langchain.com/docs/tutorials/rag/#:~:text=4,question%20with%20the%20retrieved%20data">[6]</a><a href="https://aws.amazon.com/what-is/retrieval-augmented-generation/#:~:text=Without%20RAG%2C%20the%20LLM%20takes,an%20overview%20of%20the%20process">[3]</a>. Por fim, um modelo de linguagem (por exemplo, GPT ou outro LLM) recebe a pergunta junto com os trechos recuperados e gera uma resposta contextualizada<a href="https://python.langchain.com/docs/tutorials/rag/#:~:text=4,question%20with%20the%20retrieved%20data">[6]</a><a href="https://www.anaconda.com/blog/how-to-build-a-retrieval-augmented-generation-chatbot#:~:text=Are%20you%20interested%20in%20making,based%20on%20that%20retrieved%20information">[7]</a>. Ou seja, o modelo lê o material recuperado e produz uma resposta factual e precisa em vez de depender apenas do seu conhecimento interno<a href="https://python.langchain.com/docs/tutorials/rag/#:~:text=4,question%20with%20the%20retrieved%20data">[6]</a><a href="https://www.anaconda.com/blog/how-to-build-a-retrieval-augmented-generation-chatbot#:~:text=Are%20you%20interested%20in%20making,based%20on%20that%20retrieved%20information">[7]</a>.</li>
+</ul>
+<p>Esse fluxo — documentos carregados ➔ fragmentados ➔ indexados em vetor store ➔ consulta do usuário ➔ busca semântica ➔ geração com contexto — é a essência da RAG<a href="https://python.langchain.com/docs/tutorials/rag/#:~:text=1,and%20%20179%20model">[5]</a><a href="https://python.langchain.com/docs/tutorials/rag/#:~:text=4,question%20with%20the%20retrieved%20data">[6]</a>. Bibliotecas como o LangChain facilitam essa arquitetura, oferecendo <em>document loaders</em>, <em>text splitters</em>, modelos de <em>embeddings</em>, vetores e cadeias (chains) de RAG prontas para uso.</p>
+<h2 id="casos-de-uso">Casos de Uso<a hidden class="anchor" aria-hidden="true" href="#casos-de-uso">#</a></h2>
+<p>RAG é especialmente útil em aplicações que exigem respostas precisas e baseadas em dados específicos. Entre os casos de uso mais comuns estão:</p>
+<ul>
+<li><strong>Sistemas de Perguntas e Respostas (Q&amp;A):</strong> RAG permite usuários fazerem perguntas e receber respostas detalhadas e relevantes baseadas em documentos de referência. Em comparação com sistemas tradicionais, ele oferece maior precisão e profundidade de conhecimento<a href="https://www.couchbase.com/blog/pt/an-overview-of-retrieval-augmented-generation/#:~:text=Cria%C3%A7%C3%A3o%20de%20um%20sistema%20de,Q%26A">[8]</a>.</li>
+<li><strong>Chatbots e assistentes virtuais:</strong> Ao criar chatbots de atendimento ou suporte, RAG ajuda a fornecer respostas variadas e informativas mesmo em conversas complexas. Por exemplo, um chatbot no setor de seguros pode acessar políticas e manuais para responder dúvidas sobre benefícios e sinistros<a href="https://www.couchbase.com/blog/pt/an-overview-of-retrieval-augmented-generation/#:~:text=Sistemas%20de%20conversa%C3%A7%C3%A3o">[9]</a>.</li>
+<li><strong>Aplicações educacionais:</strong> Em plataformas de ensino, RAG pode não só responder perguntas de alunos como também explicar as etapas de resolução ou gerar material de estudo com base em livros-texto e artigos relevantes<a href="https://www.couchbase.com/blog/pt/an-overview-of-retrieval-augmented-generation/#:~:text=Sistemas%20educacionais">[10]</a>. Isso enriquece a experiência de aprendizado em todos os níveis educacionais<a href="https://www.couchbase.com/blog/pt/an-overview-of-retrieval-augmented-generation/#:~:text=Sistemas%20educacionais">[10]</a>.</li>
+<li><strong>Geração de conteúdo e relatórios:</strong> Para marketing, jornalismo ou análise de dados, RAG pode recuperar informações atuais e gerar relatórios resumidos ou conteúdos criativos (artigos, postagens em rede social, roteiros) de forma automatizada<a href="https://www.couchbase.com/blog/pt/an-overview-of-retrieval-augmented-generation/#:~:text=Gera%C3%A7%C3%A3o%20de%20conte%C3%BAdo%20e%20relat%C3%B3rios">[11]</a>. Isso acelera a pesquisa e aumenta a produtividade de quem cria conteúdo.</li>
+<li><strong>Conhecimento corporativo:</strong> Quase qualquer empresa pode transformar manuais, políticas e logs internos em bases de conhecimento que alimentam assistentes internos. Esses assistentes podem ajudar em <strong>suporte ao cliente</strong>, treinamento de funcionários ou aumento de produtividade de desenvolvedores<a href="https://blogs.nvidia.com/blog/what-is-retrieval-augmented-generation/#:~:text=For%20example%2C%20a%20generative%20AI,assistant%20linked%20to%20market%20data">[12]</a>. Em suma, RAG viabiliza “conversas” com repositórios de dados em linguagem natural, abrindo amplos usos em diversos setores<a href="https://blogs.nvidia.com/blog/what-is-retrieval-augmented-generation/#:~:text=With%20retrieval,the%20number%20of%20available%20datasets">[13]</a><a href="https://www.couchbase.com/blog/pt/an-overview-of-retrieval-augmented-generation/#:~:text=Cria%C3%A7%C3%A3o%20de%20um%20sistema%20de,Q%26A">[8]</a>.</li>
+</ul>
+<h2 id="benefícios">Benefícios<a hidden class="anchor" aria-hidden="true" href="#benefícios">#</a></h2>
+<p>A RAG traz diversas vantagens sobre o uso de LLMs isoladamente:</p>
+<ul>
+<li><strong>Atualização constante:</strong> Um LLM pré-treinado tem base de conhecimento fixa (até uma certa data de corte). Com RAG, conectamos o modelo a dados atualizados em tempo real (ex.: notícias, repositórios internos), mantendo as respostas relevantes<a href="https://aws.amazon.com/what-is/retrieval-augmented-generation/#:~:text=Current%20information">[14]</a><a href="https://www.ibm.com/think/topics/retrieval-augmented-generation#:~:text=Access%20to%20current%20and%20domain,data">[15]</a>. Isso evita respostas obsoletas ou genéricas.</li>
+<li><strong>Maior precisão e menor risco de “alucinação”:</strong> Ao fundamentar as respostas em fontes externas confiáveis, RAG reduz a tendência do modelo de inventar informações. O modelo “ancora” suas respostas em fatos existentes, aumentando a confiabilidade<a href="https://www.ibm.com/think/topics/retrieval-augmented-generation#:~:text=Lower%20risk%20of%20AI%20hallucinations">[16]</a><a href="https://blogs.nvidia.com/blog/what-is-retrieval-augmented-generation/#:~:text=Retrieval,That%20builds%20trust">[17]</a>. Além disso, é possível incluir citações das fontes usadas, o que permite ao usuário verificar as informações<a href="https://blogs.nvidia.com/blog/what-is-retrieval-augmented-generation/#:~:text=Retrieval,That%20builds%20trust">[17]</a><a href="https://www.ibm.com/think/topics/retrieval-augmented-generation#:~:text=Increased%20user%20trust">[18]</a>.</li>
+<li><strong>Custo-efetividade:</strong> Introduzir novos dados via RAG é muito mais econômico do que retreinar ou ajustar finamente o modelo com grandes quantidades de texto. Em vez de pagar pelo pesado fine-tuning, a empresa simplesmente indexa os dados relevantes e deixa que o LLM os consulte<a href="https://aws.amazon.com/what-is/retrieval-augmented-generation/#:~:text=Cost">[19]</a><a href="https://www.ibm.com/think/topics/retrieval-augmented-generation#:~:text=RAG%20empowers%20organizations%20to%20avoid,it%20can%20provide%20better%20answers">[20]</a>. Isso facilita escalar aplicações de IA sem altos custos de processamento.</li>
+<li><strong>Controle do desenvolvedor:</strong> RAG dá ao desenvolvedor controle sobre as fontes de informação. É possível adicionar, atualizar ou restringir os documentos usados sem mudar o modelo em si<a href="https://aws.amazon.com/what-is/retrieval-augmented-generation/#:~:text=More%20developer%20control">[21]</a><a href="https://www.ibm.com/think/topics/retrieval-augmented-generation#:~:text=Increased%20user%20trust">[18]</a>. Dados sensíveis podem ficar protegidos “on-premise” enquanto apenas trechos autorizados são disponibilizados ao LLM<a href="https://aws.amazon.com/what-is/retrieval-augmented-generation/#:~:text=More%20developer%20control">[21]</a><a href="https://www.redhat.com/pt-br/topics/ai/what-is-retrieval-augmented-generation#:~:text=Privacidade%20e%20soberania%20de%20dados,de%20permiss%C3%A3o%20de%20seguran%C3%A7a%20deles">[22]</a>. Isso melhora a segurança e conformidade do sistema.</li>
+<li><strong>Experiência do usuário:</strong> Por apresentar respostas com fontes e mais contextuais, RAG aumenta a confiança dos usuários no chatbot ou sistema de IA<a href="https://aws.amazon.com/what-is/retrieval-augmented-generation/#:~:text=Enhanced%20user%20trust">[23]</a><a href="https://blogs.nvidia.com/blog/what-is-retrieval-augmented-generation/#:~:text=Retrieval,That%20builds%20trust">[17]</a>. Saber que as respostas vêm de documentos reais (que podem ser checados) evita o ceticismo típico de saídas dos LLMs não referenciadas.</li>
+</ul>
+<p>Em resumo, RAG combina o melhor de dois mundos: a fluência dos grandes modelos de linguagem com a precisão de bases de conhecimento específicas<a href="https://aws.amazon.com/what-is/retrieval-augmented-generation/#:~:text=Retrieval,and%20useful%20in%20various%20contexts">[1]</a><a href="https://blogs.nvidia.com/blog/what-is-retrieval-augmented-generation/#:~:text=Retrieval,specific%20and%20relevant%20data%20sources">[4]</a>.</p>
+<h2 id="codigo-de-exemplo">Codigo de exemplo<a hidden class="anchor" aria-hidden="true" href="#codigo-de-exemplo">#</a></h2>
+<p>Para rodar o codigo voce precisará de um ambiente que atenda a estes requisitos:</p>
+<p>Python 3.7 ou superior.</p>
+<p>Variáveis de Ambiente: Um arquivo .env na raiz do projeto com as suas chaves de API para o Google Gemini. O código utiliza a função load_dotenv para carregar essas chaves.</p>
+<p>Bibliotecas Python</p>
+<pre tabindex="0"><code>Bash
+
+pip install langchain langchain-google-genai langchain_chroma bs4 langgraph
+</code></pre><p>O codigo funciona da seguinte maneire, ele puxa os dados de html de um blog, divide eles em chunks, usa o embedding para transformar esses textos em vetores numericos que mais bem compreendidos pelo computador, eles são salvos de maneire indexada com base em palavras chave
+Após o usuario mandar uma pergunta, o retriever olha a pergunta e procura contexto pertinente com base em palavras chave, retornando para uma llm o contexto e o prompt para assim o usuario receber uma resposta mais precisa do sistema.</p>
+<pre tabindex="0"><code>from dotenv import load_dotenv
+from langchain_google_genai import GoogleGenerativeAIEmbeddings
+from langchain.chat_models import init_chat_model
+from langchain_chroma import Chroma
+import bs4
+from langchain_community.document_loaders import WebBaseLoader
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain import hub
+from langchain_core.documents import Document
+from typing_extensions import List, TypedDict
+from langgraph.graph import START, StateGraph
+from langchain_core.prompts import PromptTemplate
+
+
+load_dotenv()
+
+llm = init_chat_model(&#34;gemini-2.5-flash&#34;, model_provider=&#34;google_genai&#34;)
+embeddings = GoogleGenerativeAIEmbeddings(model=&#34;models/gemini-embedding-001&#34;)
+
+vector_store = Chroma(
+    collection_name=&#34;example_collection&#34;,
+    embedding_function=embeddings,
+    persist_directory=&#34;./chroma_langchain_db&#34;,  # Banco de dados para os vetores de informação
+)
+
+bs4_strainer = bs4.SoupStrainer(class_=(&#34;post-title&#34;, &#34;post-header&#34;, &#34;post-content&#34;)) # Retira apenas o necessario do site
+loader = WebBaseLoader(
+    web_paths=(&#34;https://lilianweng.github.io/posts/2023-06-23-agent/&#34;,),
+    bs_kwargs={&#34;parse_only&#34;: bs4_strainer},
+)
+docs = loader.load()
+
+text_splitter = RecursiveCharacterTextSplitter(
+    chunk_size=1000,  # chunk size (characters)
+    chunk_overlap=200,  # chunk overlap (characters)
+    add_start_index=True,  # track index in original document
+)
+all_splits = text_splitter.split_documents(docs)
+
+document_ids = vector_store.add_documents(documents=all_splits)
+
+prompt = hub.pull(&#34;rlm/rag-prompt&#34;)
+
+example_messages = prompt.invoke(
+    {&#34;context&#34;: &#34;(context goes here)&#34;, &#34;question&#34;: &#34;(question goes here)&#34;}
+).to_messages()
+
+class State(TypedDict):
+    question: str
+    context: List[Document]
+    answer: str
+
+def retrieve(state: State):
+    retrieved_docs = vector_store.similarity_search(state[&#34;question&#34;])
+    return {&#34;context&#34;: retrieved_docs}
+
+
+def generate(state: State):
+    docs_content = &#34;\n\n&#34;.join(doc.page_content for doc in state[&#34;context&#34;])
+    messages = prompt.invoke({&#34;question&#34;: state[&#34;question&#34;], &#34;context&#34;: docs_content})
+    response = llm.invoke(messages)
+    return {&#34;answer&#34;: response.content}
+
+graph_builder = StateGraph(State).add_sequence([retrieve, generate])
+graph_builder.add_edge(START, &#34;retrieve&#34;)
+graph = graph_builder.compile()
+
+response = graph.invoke({&#34;question&#34;: &#34;What is Task Decomposition?&#34;})
+print(response[&#34;answer&#34;])
+</code></pre><h2 id="considerações-finais">Considerações Finais<a hidden class="anchor" aria-hidden="true" href="#considerações-finais">#</a></h2>
+<p>A geração aumentada por recuperação (RAG) é uma técnica poderosa para criar aplicações de IA mais precisas e confiáveis. Ao integrar busca de informações e modelos de linguagem, ela permite que chatbots e sistemas de QA funcionem com dados atuais e específicos, sem exigirem modelos caros e estáticos. O uso de frameworks como LangChain simplifica essa implementação, fornecendo abstrações de loaders, vetores e <em>chains</em> prontas. Em resumo, o RAG amplia significativamente as capacidades dos LLMs, tornando-os capazes de responder com base em conhecimentos reais e atualizados<a href="https://aws.amazon.com/what-is/retrieval-augmented-generation/#:~:text=Retrieval,and%20useful%20in%20various%20contexts">[1]</a><a href="https://blogs.nvidia.com/blog/what-is-retrieval-augmented-generation/#:~:text=Retrieval,specific%20and%20relevant%20data%20sources">[4]</a>.</p>
+<p><strong>Fontes:</strong> As informações acima foram compiladas de documentos oficiais e artigos especializados sobre RAG, incluindo materiais da LangChain<a href="https://python.langchain.com/docs/tutorials/rag/#:~:text=1,and%20%20179%20model">[5]</a><a href="https://python.langchain.com/docs/tutorials/rag/#:~:text=4,question%20with%20the%20retrieved%20data">[6]</a>, AWS<a href="https://aws.amazon.com/what-is/retrieval-augmented-generation/#:~:text=Retrieval,and%20useful%20in%20various%20contexts">[1]</a><a href="https://aws.amazon.com/what-is/retrieval-augmented-generation/#:~:text=Cost">[19]</a>, NVIDIA<a href="https://blogs.nvidia.com/blog/what-is-retrieval-augmented-generation/#:~:text=Retrieval,specific%20and%20relevant%20data%20sources">[4]</a><a href="https://blogs.nvidia.com/blog/what-is-retrieval-augmented-generation/#:~:text=Retrieval,That%20builds%20trust">[17]</a>, IBM<a href="https://www.ibm.com/think/topics/retrieval-augmented-generation#:~:text=RAG%20empowers%20organizations%20to%20avoid,it%20can%20provide%20better%20answers">[20]</a><a href="https://www.ibm.com/think/topics/retrieval-augmented-generation#:~:text=RAG%20anchors%20LLMs%20in%20specific,proof">[29]</a> e publicações técnicas relevantes<a href="https://www.couchbase.com/blog/pt/an-overview-of-retrieval-augmented-generation/#:~:text=Cria%C3%A7%C3%A3o%20de%20um%20sistema%20de,Q%26A">[30]</a><a href="https://www.couchbase.com/blog/pt/an-overview-of-retrieval-augmented-generation/#:~:text=Gera%C3%A7%C3%A3o%20de%20conte%C3%BAdo%20e%20relat%C3%B3rios">[11]</a>. Cada afirmação está embasada nas referências indicadas.</p>
+<p><a href="https://aws.amazon.com/what-is/retrieval-augmented-generation/#:~:text=Retrieval,and%20useful%20in%20various%20contexts">[1]</a> <a href="https://aws.amazon.com/what-is/retrieval-augmented-generation/#:~:text=Without%20RAG%2C%20the%20LLM%20takes,an%20overview%20of%20the%20process">[3]</a> <a href="https://aws.amazon.com/what-is/retrieval-augmented-generation/#:~:text=Current%20information">[14]</a> <a href="https://aws.amazon.com/what-is/retrieval-augmented-generation/#:~:text=Cost">[19]</a> <a href="https://aws.amazon.com/what-is/retrieval-augmented-generation/#:~:text=More%20developer%20control">[21]</a> <a href="https://aws.amazon.com/what-is/retrieval-augmented-generation/#:~:text=Enhanced%20user%20trust">[23]</a> What is RAG? - Retrieval-Augmented Generation AI Explained - AWS</p>
+<p><a href="https://aws.amazon.com/what-is/retrieval-augmented-generation/">https://aws.amazon.com/what-is/retrieval-augmented-generation/</a></p>
+<p><a href="https://www.couchbase.com/blog/pt/an-overview-of-retrieval-augmented-generation/#:~:text=Muitas%20equipes%20t%C3%A9cnicas%20est%C3%A3o%20trabalhando,tenha%20acesso%20a%20fatos%20externos">[2]</a> <a href="https://www.couchbase.com/blog/pt/an-overview-of-retrieval-augmented-generation/#:~:text=Cria%C3%A7%C3%A3o%20de%20um%20sistema%20de,Q%26A">[8]</a> <a href="https://www.couchbase.com/blog/pt/an-overview-of-retrieval-augmented-generation/#:~:text=Sistemas%20de%20conversa%C3%A7%C3%A3o">[9]</a> <a href="https://www.couchbase.com/blog/pt/an-overview-of-retrieval-augmented-generation/#:~:text=Sistemas%20educacionais">[10]</a> <a href="https://www.couchbase.com/blog/pt/an-overview-of-retrieval-augmented-generation/#:~:text=Gera%C3%A7%C3%A3o%20de%20conte%C3%BAdo%20e%20relat%C3%B3rios">[11]</a> <a href="https://www.couchbase.com/blog/pt/an-overview-of-retrieval-augmented-generation/#:~:text=Cria%C3%A7%C3%A3o%20de%20um%20sistema%20de,Q%26A">[30]</a> What Is Retrieval Augmented Generation (RAG)? An Overview</p>
+<p><a href="https://www.couchbase.com/blog/pt/an-overview-of-retrieval-augmented-generation/">https://www.couchbase.com/blog/pt/an-overview-of-retrieval-augmented-generation/</a></p>
+<p><a href="https://blogs.nvidia.com/blog/what-is-retrieval-augmented-generation/#:~:text=Retrieval,specific%20and%20relevant%20data%20sources">[4]</a> <a href="https://blogs.nvidia.com/blog/what-is-retrieval-augmented-generation/#:~:text=For%20example%2C%20a%20generative%20AI,assistant%20linked%20to%20market%20data">[12]</a> <a href="https://blogs.nvidia.com/blog/what-is-retrieval-augmented-generation/#:~:text=With%20retrieval,the%20number%20of%20available%20datasets">[13]</a> <a href="https://blogs.nvidia.com/blog/what-is-retrieval-augmented-generation/#:~:text=Retrieval,That%20builds%20trust">[17]</a> What Is Retrieval-Augmented Generation aka RAG | NVIDIA Blogs</p>
+<p><a href="https://blogs.nvidia.com/blog/what-is-retrieval-augmented-generation/">https://blogs.nvidia.com/blog/what-is-retrieval-augmented-generation/</a></p>
+<p><a href="https://python.langchain.com/docs/tutorials/rag/#:~:text=1,and%20%20179%20model">[5]</a> <a href="https://python.langchain.com/docs/tutorials/rag/#:~:text=4,question%20with%20the%20retrieved%20data">[6]</a> Build a Retrieval Augmented Generation (RAG) App: Part 1 | ️ LangChain</p>
+<p><a href="https://python.langchain.com/docs/tutorials/rag/">https://python.langchain.com/docs/tutorials/rag/</a></p>
+<p><a href="https://www.anaconda.com/blog/how-to-build-a-retrieval-augmented-generation-chatbot#:~:text=Are%20you%20interested%20in%20making,based%20on%20that%20retrieved%20information">[7]</a> <a href="https://www.anaconda.com/blog/how-to-build-a-retrieval-augmented-generation-chatbot#:~:text=,are%20then%20translated%20into%20numerical">[24]</a> <a href="https://www.anaconda.com/blog/how-to-build-a-retrieval-augmented-generation-chatbot#:~:text=,are%20then%20translated%20into%20numerical">[25]</a> <a href="https://www.anaconda.com/blog/how-to-build-a-retrieval-augmented-generation-chatbot#:~:text=,questions%3A%C2%A0A%20RetrievalQA%20chain%20chains%20a">[26]</a> <a href="https://www.anaconda.com/blog/how-to-build-a-retrieval-augmented-generation-chatbot#:~:text=os.environ%5B,to%20use%20embeddings%20%3D%20OpenAIEmbeddings">[27]</a> <a href="https://www.anaconda.com/blog/how-to-build-a-retrieval-augmented-generation-chatbot#:~:text=retriever%20%3D%20db.as_retriever%28%20search_type%3D,retriever%3Dretriever%2C%20return_source_documents%3DTrue">[28]</a> How to Build a Retrieval-Augmented Generation Chatbot | Anaconda</p>
+<p><a href="https://www.anaconda.com/blog/how-to-build-a-retrieval-augmented-generation-chatbot">https://www.anaconda.com/blog/how-to-build-a-retrieval-augmented-generation-chatbot</a></p>
+<p><a href="https://www.ibm.com/think/topics/retrieval-augmented-generation#:~:text=Access%20to%20current%20and%20domain,data">[15]</a> <a href="https://www.ibm.com/think/topics/retrieval-augmented-generation#:~:text=Lower%20risk%20of%20AI%20hallucinations">[16]</a> <a href="https://www.ibm.com/think/topics/retrieval-augmented-generation#:~:text=Increased%20user%20trust">[18]</a> <a href="https://www.ibm.com/think/topics/retrieval-augmented-generation#:~:text=RAG%20empowers%20organizations%20to%20avoid,it%20can%20provide%20better%20answers">[20]</a> <a href="https://www.ibm.com/think/topics/retrieval-augmented-generation#:~:text=RAG%20anchors%20LLMs%20in%20specific,proof">[29]</a> What is RAG (Retrieval Augmented Generation)? | IBM</p>
+<p><a href="https://www.ibm.com/think/topics/retrieval-augmented-generation">https://www.ibm.com/think/topics/retrieval-augmented-generation</a></p>
+<p><a href="https://www.redhat.com/pt-br/topics/ai/what-is-retrieval-augmented-generation#:~:text=Privacidade%20e%20soberania%20de%20dados,de%20permiss%C3%A3o%20de%20seguran%C3%A7a%20deles">[22]</a> O que é geração aumentada de recuperação (RAG)?</p>
+<p><a href="https://www.redhat.com/pt-br/topics/ai/what-is-retrieval-augmented-generation">https://www.redhat.com/pt-br/topics/ai/what-is-retrieval-augmented-generation</a></p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="//localhost:49877/posts/requisitos/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>Estudo: Fundamentos de Análise de Requisitos</span>
+  </a>
+  <a class="next" href="//localhost:49877/posts/arquiteturadesistemas/">
+    <span class="title">Next »</span>
+    <br>
+    <span>Estudo: Guia Essencial de Arquitetura de Sistemas</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="//localhost:49877/">É Fake</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

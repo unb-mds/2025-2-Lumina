@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=49877&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>Análise da Linguagem para o BACKEND | É Fake</title>
+<meta name="keywords" content="">
+<meta name="description" content="A decisão mais crítica é a escolha da linguagem de programação. A funcionalidade principal do projeto se divide em duas tarefas:
+
+Web scraping → tarefa intensiva em I/O (entrada/saída)
+Processamento de Linguagem Natural → tarefa intensiva em CPU
+
+1. Python vs. Node.js
+1.1. Node.js
+
+Se destaca em tarefas I/O-bound.
+
+Obs: tarefas I/O-bound (input/output bound) são aquelas em que o fator limitante de desempenho é a velocidade de leitura ou escrita de dados.
+
+
+Sua arquitetura orientada a eventos e o motor V8 o tornam rápido para scraping.
+É excelente em sites dinâmicos que utilizam JavaScript, com bibliotecas como Puppeteer e Cheerio.
+
+1.2. Python
+
+É o padrão da indústria para ciência de dados, machine learning e Processamento de Linguagem Natural (PLN).
+A proposta central do projeto é a detecção de fake news, que depende de modelos avançados como BERT e RoBERTa.
+
+O BERT (Bidirectional Encoder Representations from Transformers) é um modelo de inteligência artificial desenvolvido pelo Google que entende o significado das palavras com base no contexto ao redor delas, tanto antes quanto depois. Isso faz com que o processamento de linguagem natural (PLN) fique muito mais próximo da maneira como os humanos realmente entendem um texto.
+
+
+Possui um ecossistema rico, com bibliotecas como spaCy e acesso a modelos de ponta via Hugging Face.
+Embora Node.js seja mais rápido para a coleta de dados, a análise de PLN é a parte mais crítica e complexa do projeto.
+Um pipeline unificado em Python (ingestão de dados → análise → API) simplifica a arquitetura e acelera o desenvolvimento.
+
+Conclusão: Python é a escolha lógica e inegociável para este projeto.">
+<meta name="author" content="">
+<link rel="canonical" href="//localhost:49877/posts/tecnologiasbackend/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.b8c5fe199b6ed7d82f8d796745cb75f1db5c0e80089bf3c900c156f7941e8838.css" integrity="sha256-uMX&#43;GZtu19gvjXlnRct18dtcDoAIm/PJAMFW95QeiDg=" rel="preload stylesheet" as="style">
+<link rel="icon" href="//localhost:49877/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="//localhost:49877/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="//localhost:49877/favicon-32x32.png">
+<link rel="apple-touch-icon" href="//localhost:49877/apple-touch-icon.png">
+<link rel="mask-icon" href="//localhost:49877/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="//localhost:49877/posts/tecnologiasbackend/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="//localhost:49877/" accesskey="h" title="É Fake (Alt + H)">É Fake</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="//localhost:49877/tags/" title="Tags">
+                    <span>Tags</span>
+                </a>
+            </li>
+            <li>
+                <a href="//localhost:49877/categories/" title="Categorias">
+                    <span>Categorias</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="//localhost:49877/">Home</a>&nbsp;»&nbsp;<a href="//localhost:49877/posts/">Posts</a></div>
+    <h1 class="post-title entry-hint-parent">
+      Análise da Linguagem para o BACKEND
+    </h1>
+    <div class="post-meta">
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#1-python-vs-nodejs" aria-label="1. Python vs. Node.js">1. Python vs. Node.js</a><ul>
+                        
+                <li>
+                    <a href="#11-nodejs" aria-label="1.1. Node.js">1.1. Node.js</a></li>
+                <li>
+                    <a href="#12-python" aria-label="1.2. Python">1.2. Python</a></li></ul>
+                </li>
+                <li>
+                    <a href="#2-sele%c3%a7%c3%a3o-do-framework-de-api-produtividade-com-django-e-drf" aria-label="2. Seleção do Framework de API: Produtividade com Django e DRF">2. Seleção do Framework de API: Produtividade com Django e DRF</a><ul>
+                        
+                <li>
+                    <a href="#21-flask" aria-label="2.1. Flask">2.1. Flask</a></li>
+                <li>
+                    <a href="#22-django" aria-label="2.2. Django">2.2. Django</a></li></ul>
+                </li>
+                <li>
+                    <a href="#3-refer%c3%aancias" aria-label="3. Referências">3. Referências</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><p>A decisão mais crítica é a escolha da linguagem de programação. A funcionalidade principal do projeto se divide em duas tarefas:</p>
+<ul>
+<li><strong>Web scraping</strong> → tarefa intensiva em <strong>I/O (entrada/saída)</strong></li>
+<li><strong>Processamento de Linguagem Natural</strong> → tarefa intensiva em <strong>CPU</strong></li>
+</ul>
+<h2 id="1-python-vs-nodejs">1. Python vs. Node.js<a hidden class="anchor" aria-hidden="true" href="#1-python-vs-nodejs">#</a></h2>
+<h3 id="11-nodejs">1.1. Node.js<a hidden class="anchor" aria-hidden="true" href="#11-nodejs">#</a></h3>
+<ul>
+<li>Se destaca em tarefas <strong>I/O-bound</strong>.
+<ul>
+<li><strong>Obs:</strong> tarefas <strong>I/O-bound</strong> (<strong>input</strong>/<strong>output</strong> bound) são aquelas em que o fator limitante de desempenho é a velocidade de leitura ou escrita de dados.</li>
+</ul>
+</li>
+<li>Sua arquitetura orientada a eventos e o motor V8 o tornam rápido para scraping.</li>
+<li>É excelente em <strong>sites dinâmicos</strong> que utilizam <strong>JavaScript</strong>, com bibliotecas como <strong>Puppeteer</strong> e <strong>Cheerio</strong>.</li>
+</ul>
+<h3 id="12-python">1.2. Python<a hidden class="anchor" aria-hidden="true" href="#12-python">#</a></h3>
+<ul>
+<li>É o <strong>padrão da indústria</strong> para ciência de dados, machine learning e Processamento de Linguagem Natural (PLN).</li>
+<li>A proposta central do projeto é a <strong>detecção de fake news</strong>, que depende de modelos avançados como <strong>BERT</strong> e <strong>RoBERTa</strong>.
+<ul>
+<li>O <strong>BERT</strong> (Bidirectional Encoder Representations from Transformers) é um modelo de inteligência artificial desenvolvido pelo Google que entende o significado das palavras com base no contexto ao redor delas, tanto antes quanto depois. Isso faz com que o processamento de linguagem natural (PLN) fique muito mais próximo da maneira como os humanos realmente entendem um texto.</li>
+</ul>
+</li>
+<li>Possui um ecossistema rico, com bibliotecas como <strong>spaCy</strong> e acesso a modelos de ponta via <strong>Hugging Face</strong>.</li>
+<li>Embora Node.js seja mais rápido para a coleta de dados, a <strong>análise de PLN</strong> é a parte mais crítica e complexa do projeto.</li>
+<li>Um pipeline unificado em Python (ingestão de dados → análise → API) simplifica a arquitetura e acelera o desenvolvimento.</li>
+</ul>
+<p><strong>Conclusão:</strong> Python é a escolha lógica e inegociável para este projeto.</p>
+<h2 id="2-seleção-do-framework-de-api-produtividade-com-django-e-drf">2. Seleção do Framework de API: Produtividade com Django e DRF<a hidden class="anchor" aria-hidden="true" href="#2-seleção-do-framework-de-api-produtividade-com-django-e-drf">#</a></h2>
+<p>Com Python definido, a escolha do framework de API se resume a <strong>Django</strong> e <strong>Flask</strong>.</p>
+<h3 id="21-flask">2.1. Flask<a hidden class="anchor" aria-hidden="true" href="#21-flask">#</a></h3>
+<ul>
+<li>É um micro-framework flexível, ideal para projetos pequenos ou que exigem forte personalização.</li>
+<li>Requer a integração manual de componentes para autenticação, ORM e banco de dados.</li>
+</ul>
+<h3 id="22-django">2.2. Django<a hidden class="anchor" aria-hidden="true" href="#22-django">#</a></h3>
+<ul>
+<li>Segue a filosofia de <strong>“baterias inclusas”</strong>, oferecendo uma solução completa com ORM, autenticação e painel administrativo.</li>
+<li>Com o <strong>Django REST Framework (DRF)</strong>, ganha-se:
+<ul>
+<li>Serialização robusta.</li>
+<li>Autenticação integrada.</li>
+<li><strong>API navegável automática</strong>, que acelera testes e a exploração de endpoints.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Conclusão:</strong> A complexidade do projeto está no pipeline de PLN, não na API. O Django com DRF permite focar na análise de dados sem reinventar funcionalidades básicas.</p>
+<h2 id="3-referências">3. Referências<a hidden class="anchor" aria-hidden="true" href="#3-referências">#</a></h2>
+<ul>
+<li><strong>Comparativo Python vs. Node.js para Web Scraping:</strong> <a href="https://scrape.do/blog/web-scraping-python-vs-nodejs/">https://scrape.do/blog/web-scraping-python-vs-nodejs/</a></li>
+<li><strong>Comparativo Django vs. Flask para APIs REST:</strong> <a href="https://www.excella.com/insights/creating-a-restful-api-django-rest-framework-vs-flask">https://www.excella.com/insights/creating-a-restful-api-django-rest-framework-vs-flask</a></li>
+<li><strong>BERT: o que é, como funciona e como implementar com Python?:</strong> <a href="https://hub.asimov.academy/blog/bert-o-que-e-como-funciona">https://hub.asimov.academy/blog/bert-o-que-e-como-funciona</a></li>
+</ul>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+    </ul>
+<nav class="paginav">
+  <a class="next" href="//localhost:49877/posts/tenologiasfrontend/">
+    <span class="title">Next »</span>
+    <br>
+    <span>Análise de Tecnologias para o FRONTEND</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="//localhost:49877/">É Fake</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>
