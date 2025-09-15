@@ -1,4 +1,4 @@
-## Requisitos Funcionais
+## *Requisitos Funcionais*
 
 ---
 
@@ -137,7 +137,7 @@ Explicando como funcionará a ordem de ação do usuario (Para melhor explicaç�
 
 
 
-## Requisitos Não Funcionais
+## *Requisitos Não Funcionais*
 
 ---
 
@@ -187,4 +187,5 @@ Explicando como funcionará a ordem de ação do usuario (Para melhor explicaç�
 - https://www.perforce.com/blog/alm/what-are-functional-requirements-examples
 
 ##### Artigo sobre requisitos não funcionais
+
 - https://www.perforce.com/blog/alm/what-are-non-functional-requirements-examples
