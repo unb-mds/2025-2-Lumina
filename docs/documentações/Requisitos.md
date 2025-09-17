@@ -1,39 +1,150 @@
-## Resumos do projeto
+# Documento de Requisitos de Software (DRS): Chatbot Anti-Fake News  
+**Versão:** 2.0 
+**Data:** 17 de Setembro de 2025  
 
-Um app mobile onde o usuario pode conversar com um chatbot que utiliza de um banco de dados com dados de varios jornais atravez da arquitetura RAG para assim informar o usuario melhor e combater as fake news
+---
 
-Uma LLM ve a pergunta, procura reportagems relevantes a pergunta, analisa elas, e responde o usuario com maior precisão e evitando alucinação.
+## 1. Introdução  
 
-## Requisitos Funcionais
 
--  Tela inicial
-     - Componentes necessarios na tela
-        - Caixa da texto para o usuario colocar seu nome e salvar no sistema localmente
-        - Logo e nome do app
-- Tela de chat interativa onde o usuario pode ver a suas mensagems enviadas e as mensagems recebidas do bot 
-    - Componentes necessarios na tela
-        - Caixa de texto para receber mensagems do usuarios
-        - Logo do aplicativo em cima
-        - Icone de 3 barras horizontais para abrir uma aba lateral
-        - Aba Lateral com toggle para abrir ela terá um historico LOCAL de chats e abas explicando sobre o app
-- Sistema de RAG para mandar informações precisas para o usuario
-    - Componentes do Sistema
-        - Sistema para enviar para o chatbot e receber mensagems do chatbot.
-        - Banco de dados com vetores sobre informações relevantes e fontes confiaveis para verificação pelo chatbot
-        - Sistema para um admin enviar reportagems e artigos confiaveis para o banco de dados
-        - Analise de links de reportagems e artigos para analisar confiabilidade do conteudo e da fonte
-            - Caso o usuario mande um link fora desse escopo, retornar uma mensagem falando que está fora das opções
+### 1.1 Problema
+A disseminação de **notícias falsas (fake news)** é um dos maiores desafios da sociedade conectada. Com a velocidade da informação em redes sociais e aplicativos de mensagens, conteúdos enganosos ou manipulados podem se espalhar rapidamente, impactando negativamente áreas como saúde, política, economia e segurança pública.  
 
-## Requisitos Não-Funcionais
+Atualmente, usuários comuns têm dificuldade em identificar a veracidade das informações que recebem, pois a checagem de fatos exige tempo, acesso a fontes confiáveis e habilidades específicas de análise crítica. Além disso, ferramentas tradicionais de busca não oferecem, de forma simples e imediata, uma validação contextualizada das notícias.  
 
-- Desempenho
-    - O sistema de envio e recebimento de mensagems depende naturalmente do sistema de busca de informações pertinentes com base na pergunta do usuario e do tempo de resposta da api da llm utilizada. Portanto não é possivel tempos de respostas extremamente rapidos (<1s) porem um tempo de espera muito grande para uma resposta maior que 10s prejudica muito a experiencia do usuario, portanto um tempo há uma necessidade de optimização do sistema para atingir tempos menores que 10s,
-- Segurança
-    - Como o app não salva na nuvem os dados do usuario, segurança não é de maxima prioridade, buscar apenas segurança para não vazar as conversas entre o chat é o usuario é suficiente
-- Confiablidade
-    - O app deve garantir respostas confiaveis, de maneira em que a confiabiliade é um requisito de alta prioridade, pois caso ele não consiga uma informação no banco de dados para responder o usuario o sistema deve mandar uma resposta indicando que não sabe ao em vez de alucinar e mandar respostas imprecisas.
-- Usabilidade
-    - O usuario deve conseguir mandar mensagens e receber com bas em padrões de sistemas de chat já implementados na industria (Whatsapp, Gemini, ChatGPT), assim mesmo usuarios com menor afinidade em tecnologia conseguiram utilizar nosso sistema
-- Escalabilidade
-    - Em primeiro momento, por nosso projeto utilizar API's externas para boa parte do processamento de dados, não há grande necessidade de um alto poder de processamento para conseguir atingir uma quantidade decente de usuarios simultaneos (<100 users)
+O problema central, portanto, é a **falta de uma solução acessível e confiável** que auxilie usuários a verificarem, em tempo real, a credibilidade de informações recebidas, reduzindo a propagação de fake news e fortalecendo o consumo consciente de conteúdo digital.  
+
+### 1.2. Propósito  
+O propósito deste documento é descrever de forma clara e detalhada todos os requisitos funcionais, não-funcionais e de interface para o aplicativo móvel de chatbot anti-fake news. Este DRS servirá como guia para a equipe de desenvolvimento, base para o planejamento de testes e como um acordo formal entre os stakeholders do projeto.  
+### 1.3. Escopo do Produto  
+O produto será um aplicativo móvel para a plataforma **Android**. Sua função principal é permitir que usuários conversem com um chatbot inteligente para obter informações precisas e verificadas sobre notícias e eventos atuais.  
+
+Utilizando uma arquitetura de **Geração Aumentada por Recuperação (RAG)**, o sistema consultará uma base de dados curada de jornais e artigos confiáveis para formular respostas, combatendo a desinformação e as *fake news*.  
+
+**Estarão fora do escopo desta versão:**  
+- Autenticação de usuários com login e senha em nuvem.  
+- Sincronização de histórico de chat entre múltiplos dispositivos.  
+- Funcionalidades de chat em grupo ou social.  
+- Monetização ou sistemas de assinatura.  
+
+### 1.4. Definições, Acrônimos e Abreviações  
+- **DRS:** Documento de Requisitos de Software.  
+- **App:** Aplicativo móvel.  
+- **LLM (Large Language Model):** Modelo de Linguagem de Grande Porte, a tecnologia de IA que potencializa o chatbot.  
+- **RAG (Retrieval-Augmented Generation):** Geração Aumentada por Recuperação. Arquitetura que combina um LLM com uma base de dados externa para gerar respostas mais precisas e baseadas em fatos.  
+- **API (Application Programming Interface):** Interface de Programação de Aplicação.  
+- **UI (User Interface):** Interface do Usuário.  
+
+---
+
+## 2. Descrição Geral  
+
+### 2.1. Perspectiva do Produto  
+O aplicativo é um produto independente e autocontido. Ele se posiciona como uma ferramenta de verificação de fatos e informação rápida, competindo com mecanismos de busca tradicionais e outras plataformas de checagem de notícias, com o diferencial de uma interface conversacional intuitiva.  
+
+### 2.2. Características dos Usuários  
+O público-alvo do aplicativo são usuários de smartphones em geral, preocupados com a veracidade das informações que consomem. Isso inclui:  
+
+- **Usuário Geral:** Pessoas com pouca afinidade tecnológica que buscam respostas rápidas e confiáveis para suas dúvidas.  
+- **Estudantes e Pesquisadores:** Utilizarão o app como ponto de partida para obter informações de fontes seguras.  
+- **Profissionais de Comunicação:** Jornalistas e criadores de conteúdo que necessitam de uma ferramenta ágil para checagem de fatos.  
+
+### 2.3. Restrições Gerais  
+- O sistema dependerá de uma conexão ativa com a internet para se comunicar com a API da LLM.  
+- Toda a curadoria de conteúdo para o banco de dados deve seguir princípios éticos de jornalismo e imparcialidade.  
+
+### 2.4. Suposições e Dependências  
+- **Dependência de API Externa:** O funcionamento do chatbot depende diretamente da disponibilidade e dos termos de serviço da API da LLM escolhida (ex: Gemini, OpenAI API).  
+- **Qualidade do Banco de Dados:** A precisão das respostas do chatbot é proporcional à qualidade e atualização do banco de dados vetorial.  
+
+---
+
+## 3. Requisitos Funcionais  
+
+### RF-001: Configuração Inicial do Usuário  
+**Descrição:** Na primeira vez que abrir o aplicativo, o usuário será apresentado a uma tela inicial.  
+
+**Componentes:**  
+- **RF-001.1:** A tela deve exibir o logo e o nome do aplicativo.  
+- **RF-001.2:** Campo de texto para que o usuário insira um nome/apelido.  
+- **RF-001.3:** Botão "Salvar" ou "Entrar" deve persistir o nome do usuário localmente no dispositivo.  
+
+### RF-002: Interface de Chat  
+**Descrição:** A tela principal do aplicativo será uma interface de chat interativa.  
+
+**Componentes:**  
+- **RF-002.1:** Exibir mensagens do usuário e do chatbot em formato cronológico.  
+- **RF-002.2:** Campo de texto para digitação de mensagens.  
+- **RF-002.3:** Botão "Enviar" para enviar mensagens ao chatbot.  
+- **RF-002.4:** Exibir o logo do aplicativo na parte superior da tela.  
+
+### RF-003: Menu Lateral e Histórico  
+**Descrição:** A tela de chat deve conter um menu lateral para acesso a outras funcionalidades.  
+
+**Componentes:**  
+- **RF-003.1:** Ícone (três barras horizontais) abre o menu lateral.  
+- **RF-003.2:** O menu lateral deve conter lista de chats anteriores armazenados localmente.  
+- **RF-003.3:** O menu lateral deve conter seção "Sobre".  
+
+### RF-004: Sistema de Interação com o Chatbot (RAG)  
+**Descrição:** Núcleo do sistema que processa as perguntas e gera respostas.  
+
+**Componentes:**  
+- **RF-004.1:** Receber pergunta do usuário.  
+- **RF-004.2:** Consultar banco de dados vetorial para artigos relevantes.  
+- **RF-004.3:** Enviar dados para a LLM.  
+- **RF-004.4:** Receber resposta e exibir na interface de chat.  
+- **RF-004.5:** Analisar se entrada é um link. Caso não confiável, retornar mensagem:  
+  > "Desculpe, só posso analisar informações de fontes confiáveis que fazem parte do meu conhecimento."  
+
+### RF-005: Sistema de Administração de Conteúdo  
+**Descrição:** Interface web para administradores manterem o banco de dados atualizado.  
+
+**Componentes:**  
+- **RF-005.1:** Permitir envio de novos artigos (link ou upload).  
+- **RF-005.2:** Processar e converter conteúdos em vetores para o banco de dados.  
+
+---
+
+## 4. Requisitos Não-Funcionais  
+
+- **RNF-001: Desempenho**  
+  Tempo de resposta deve ser < **10 segundos** em média.  
+
+- **RNF-002: Segurança**  
+  Comunicação via **HTTPS**. Dados de usuário armazenados apenas localmente.  
+
+- **RNF-003: Confiabilidade**  
+  Se não houver dados relevantes, chatbot deve responder:  
+  > "Não encontrei informações sobre este tópico em minha base de dados para fornecer uma resposta confiável."  
+
+- **RNF-004: Usabilidade**  
+  Interface deve seguir padrões de apps de mensagens populares (WhatsApp, Telegram, ChatGPT, Gemini).  
+
+- **RNF-005: Escalabilidade**  
+  Suporte estável para até **100 usuários simultâneos**.  
+
+---
+
+## 5. Requisitos de Interface Externa  
+
+### 5.1. Interfaces de Usuário (UI)  
+- UI deve ser limpa, moderna e intuitiva.  
+- Adaptar-se a diferentes tamanhos de tela.  
+- Exibir feedback visual quando o chatbot estiver "digitando".  
+
+### 5.2. Interfaces de Software  
+- **API da LLM:** Comunicação via **HTTP RESTful**.  
+- **Banco de Dados Vetorial:** Backend conectado a serviço de vetores (ex: ChromaDB).  
+
+### 6. Impacto Esperado  
+
+O aplicativo de chatbot anti-fake news pretende gerar um impacto positivo em diferentes níveis:  
+
+- **Social:** reduzir a disseminação de desinformação, promovendo um consumo mais consciente e responsável de notícias.  
+- **Educacional:** oferecer uma ferramenta de apoio para estudantes, pesquisadores e cidadãos em geral, facilitando o acesso a informações verificadas.  
+- **Tecnológico:** demonstrar o uso prático de arquiteturas baseadas em **LLM** e **RAG**, aplicadas a um problema real de relevância global.  
+- **Comunicacional:** apoiar profissionais de mídia e criadores de conteúdo na checagem rápida de fatos, fortalecendo a credibilidade das informações divulgadas.  
+
+Com isso, espera-se contribuir para um ambiente digital mais confiável, onde usuários possam tomar decisões melhor informadas e reduzir os efeitos nocivos das fake news na sociedade.  
 
