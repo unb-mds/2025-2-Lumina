@@ -67,7 +67,8 @@ O público-alvo do aplicativo são usuários de smartphones em geral, preocupado
 **Componentes:**  
 - **RF-001.1:** A tela deve exibir o logo e o nome do aplicativo.  
 - **RF-001.2:** Campo de texto para que o usuário insira um nome/apelido.  
-- **RF-001.3:** Botão "Salvar" ou "Entrar" deve persistir o nome do usuário localmente no dispositivo.  
+- **RF-001.3:** Botão "Salvar" ou "Entrar" deve persistir o nome do usuário localmente no dispositivo.
+- **RF-001.4:** Tutorial ensinando o funcionamento do app.  
 
 ### RF-002: Interface de Chat  
 **Descrição:** A tela principal do aplicativo será uma interface de chat interativa.  
@@ -84,9 +85,15 @@ O público-alvo do aplicativo são usuários de smartphones em geral, preocupado
 **Componentes:**  
 - **RF-003.1:** Ícone (três barras horizontais) abre o menu lateral.  
 - **RF-003.2:** O menu lateral deve conter lista de chats anteriores armazenados localmente.  
-- **RF-003.3:** O menu lateral deve conter seção "Sobre".  
+- **RF-003.3:** Botão para acessar a pagina de configurações
 
-### RF-004: Sistema de Interação com o Chatbot (RAG)  
+### RF-004: Tela de Configuração 
+
+**Componentes:**  
+- **RF-004.1:** Opção para mudar a linguagem em que a LLM responde e do app
+- **RF-004.2:** Um botão "Saiba Mais" que leva ao github pages.
+
+### RF-005: Sistema de Interação com o Chatbot (RAG)  
 **Descrição:** Núcleo do sistema que processa as perguntas e gera respostas.  
 
 **Componentes:**  
@@ -97,7 +104,7 @@ O público-alvo do aplicativo são usuários de smartphones em geral, preocupado
 - **RF-004.5:** Analisar se entrada é um link. Caso não confiável, retornar mensagem:  
   > "Desculpe, só posso analisar informações de fontes confiáveis que fazem parte do meu conhecimento."  
 
-### RF-005: Sistema de Administração de Conteúdo  
+### RF-006: Sistema de Administração de Conteúdo  
 **Descrição:** Interface web para administradores manterem o banco de dados atualizado.  
 
 **Componentes:**  
@@ -147,4 +154,5 @@ O aplicativo de chatbot anti-fake news pretende gerar um impacto positivo em dif
 - **Comunicacional:** apoiar profissionais de mídia e criadores de conteúdo na checagem rápida de fatos, fortalecendo a credibilidade das informações divulgadas.  
 
 Com isso, espera-se contribuir para um ambiente digital mais confiável, onde usuários possam tomar decisões melhor informadas e reduzir os efeitos nocivos das fake news na sociedade.  
+
 
