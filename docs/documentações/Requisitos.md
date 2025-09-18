@@ -97,19 +97,19 @@ O público-alvo do aplicativo são usuários de smartphones em geral, preocupado
 **Descrição:** Núcleo do sistema que processa as perguntas e gera respostas.  
 
 **Componentes:**  
-- **RF-004.1:** Receber pergunta do usuário.  
-- **RF-004.2:** Consultar banco de dados vetorial para artigos relevantes.  
-- **RF-004.3:** Enviar dados para a LLM.  
-- **RF-004.4:** Receber resposta e exibir na interface de chat.  
-- **RF-004.5:** Analisar se entrada é um link. Caso não confiável, retornar mensagem:  
+- **RF-005.1:** Receber pergunta do usuário.  
+- **RF-005.2:** Consultar banco de dados vetorial para artigos relevantes.  
+- **RF-005.3:** Enviar dados para a LLM.  
+- **RF-005.4:** Receber resposta e exibir na interface de chat.  
+- **RF-005.5:** Analisar se entrada é um link. Caso não confiável, retornar mensagem:  
   > "Desculpe, só posso analisar informações de fontes confiáveis que fazem parte do meu conhecimento."  
 
 ### RF-006: Sistema de Administração de Conteúdo  
 **Descrição:** Interface web para administradores controlarem quais reportagems estão sendo colocadas no banco de dados.  
 
 **Componentes:**  
-- **RF-005.1:** Permitir envio e remoção de novos artigos (link ou upload).  
-- **RF-005.2:** Mostrar quais reportagens e a fonte da mesma estão armazenadas no banco de dados.
+- **RF-006.1:** Permitir envio e remoção de novos artigos (link ou upload).  
+- **RF-006.2:** Mostrar quais reportagens e a fonte da mesma estão armazenadas no banco de dados.
 
 ---
 
@@ -154,6 +154,7 @@ O aplicativo de chatbot anti-fake news pretende gerar um impacto positivo em dif
 - **Comunicacional:** apoiar profissionais de mídia e criadores de conteúdo na checagem rápida de fatos, fortalecendo a credibilidade das informações divulgadas.  
 
 Com isso, espera-se contribuir para um ambiente digital mais confiável, onde usuários possam tomar decisões melhor informadas e reduzir os efeitos nocivos das fake news na sociedade.  
+
 
 
 
