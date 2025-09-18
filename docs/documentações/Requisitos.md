@@ -105,11 +105,11 @@ O público-alvo do aplicativo são usuários de smartphones em geral, preocupado
   > "Desculpe, só posso analisar informações de fontes confiáveis que fazem parte do meu conhecimento."  
 
 ### RF-006: Sistema de Administração de Conteúdo  
-**Descrição:** Interface web para administradores manterem o banco de dados atualizado.  
+**Descrição:** Interface web para administradores controlarem quais reportagems estão sendo colocadas no banco de dados.  
 
 **Componentes:**  
-- **RF-005.1:** Permitir envio de novos artigos (link ou upload).  
-- **RF-005.2:** Processar e converter conteúdos em vetores para o banco de dados.  
+- **RF-005.1:** Permitir envio e remoção de novos artigos (link ou upload).  
+- **RF-005.2:** Mostrar quais reportagens e a fonte da mesma estão armazenadas no banco de dados.
 
 ---
 
@@ -154,5 +154,6 @@ O aplicativo de chatbot anti-fake news pretende gerar um impacto positivo em dif
 - **Comunicacional:** apoiar profissionais de mídia e criadores de conteúdo na checagem rápida de fatos, fortalecendo a credibilidade das informações divulgadas.  
 
 Com isso, espera-se contribuir para um ambiente digital mais confiável, onde usuários possam tomar decisões melhor informadas e reduzir os efeitos nocivos das fake news na sociedade.  
+
 
 
