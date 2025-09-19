@@ -10,3 +10,8 @@
     ```
 - Ter um arquivo .env com uma chave de api do gemini
 
+- para rodar o servidor localmente basta rodar o comando
+   ```
+    uvicorn main:app --reload
+    ```
+
