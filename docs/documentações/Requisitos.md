@@ -87,11 +87,33 @@ O público-alvo do aplicativo são usuários de smartphones em geral, preocupado
 - **RF-003.2:** O menu lateral deve conter lista de chats anteriores armazenados localmente.  
 - **RF-003.3:** Botão para acessar a pagina de configurações
 
-### RF-004: Tela de Configuração 
+### RF-004-1: Tela de Configuração 
 
 **Componentes:**  
-- **RF-004.1:** Opção para mudar a linguagem em que a LLM responde e do app
-- **RF-004.2:** Um botão "Saiba Mais" que leva ao github pages.
+- **RF-004-1.1:** Botão de edição do nome de usuário.
+- **RF-004-1.2:** Dentro a opção app: Idioma, botão para mudar a linguagem em que a LLM responde e do app.
+- **RF-004-1.3:** Dentro a opção app: Aparência, botão para trocar o tema do aplicativo para claro ou escuro, começa pelo padrão do sistema
+- **RF-004-1.4:** Dentro a opção app: Tamanho da Fonte, botão para trocar o tamanho da fonte
+- **RF-004-1.5:** Dentro da opção sobre: Um botão "Saiba Mais" que redireciona ao github pages.
+- **RF-004-1.6:** Dentro da opção sobre: Um botão de "Tutorial" que redireciona o usuário a landing page.
+- **RF-004-1.7:** Dentro da opção sobre: Um botão de Termos de Serviço.
+- **RF-004-1.8:** Botão de volta a tela principal.
+
+### RF-004-2: Tela de Configuração em Janela
+- **RF-004-2.1:** Tanto o botão "Idioma" quanto o "Aparência" irão redirecionar a uma tela em janela que será aberta dentro das configurações, aplicando um filtro para escurecer tudo fora da janela.
+- **RF-004-2.2:** Essa configuração em janela tem opções de escolha a esqueda que podem ser selecionadas a direita.
+- **RF-004-2.3:** Um botão que irá voltar a tela de configurações. 
+
+### RF-004-3: Tela de Configuração de Fonte
+- **RF-004-3.1:** Uma tela separada de configurações com um texto explicativo mostrando o tamanho da fonte atual que está sendo ultilizado pelo chatbot.
+- **RF-004-3.2:** Caixa interativa na parte inferior da tela com opções de diminuir e aumentar a fonte, mudando em tempo real o texto explicativo.
+- **RF-004-3.3:** Botão de volta a página de configurações. 
+
+### RF-004-4: Tela de Configuração de Termos de Serviço
+- **RF-004-4.1:** Quando clicado, irá redirecionar a uma tela com duas opções: Termos de Uso e Política de Privacidade.
+- **RF-004-4.2:** Botão em ambas as opções que ira redirecionar o usuario até a tela especifica a isso. 
+- **RF-004-4.3:** Tela contendo de forma crua os termos de serviço e política de privacidade, com botão de volta a tela de termos de seviço.
+- **RF-004-4.4:** Botão de volta a configurações.
 
 ### RF-005: Sistema de Interação com o Chatbot (RAG)  
 **Descrição:** Núcleo do sistema que processa as perguntas e gera respostas.  
@@ -154,6 +176,7 @@ O aplicativo de chatbot anti-fake news pretende gerar um impacto positivo em dif
 - **Comunicacional:** apoiar profissionais de mídia e criadores de conteúdo na checagem rápida de fatos, fortalecendo a credibilidade das informações divulgadas.  
 
 Com isso, espera-se contribuir para um ambiente digital mais confiável, onde usuários possam tomar decisões melhor informadas e reduzir os efeitos nocivos das fake news na sociedade.  
+
 
 
 
