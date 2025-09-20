@@ -1,19 +1,21 @@
 from fastapi import FastAPI
-from langchain_google_genai import ChatGoogleGenerativeAI
+from app.ai.gemini import GeminiModel
 from dotenv import load_dotenv
+from pydantic import BaseModel
+import os  # Importe a biblioteca 'os'
 
 load_dotenv()
 
+GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 
-llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash")
+llm = GeminiModel(api_key=GOOGLE_API_KEY)
 
 app = FastAPI()
 
 @app.get("/")
 def root():
-    return {"Hello":"World"}
+    return {"message": "The API is working!"}
 
-@app.get("/prompt/{prompt}") 
-def get_prompt(prompt: str):
-    result = llm.invoke(prompt)
-    return {"response": result.content}
+@app.get("/prompt/{prompt}")
+def response(prompt: str):
+    return {"response": llm.chat(prompt)}
