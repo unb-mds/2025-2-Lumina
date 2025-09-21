@@ -1,191 +1,183 @@
-## *Requisitos Funcionais*
+# Documento de Requisitos de Software (DRS): Chatbot Anti-Fake News  
+**Versão:** 2.0 
+**Data:** 17 de Setembro de 2025  
 
 ---
 
-### Dentro desse tópico vou esclarecer o que o sistema ira ter e quais são as funcionalidades tecnicas que ele obrigatoriamente deve ter para funcionar de forma adequada ao projeto
-
-#### Irei separar por alguns topicos para que no futuro fique de melhor entendimento, lembrando que caso prefira algo mais visual, futuramente (Caso ainda não implementado enquanto você estiver lendo), existe um campo no Figma para requisitos.
-
-#### Primeiramente irei explicar a jornada do usuario ao usar o aplicativo depois irei detalhar individualmente os processos necessarios para que isso aconteça.
-
----
-
-### Para que fique claro o que foi apresentado, dentro da idealização da interface e desing do aplicativo, foi acordado que seria algo com uma tématica clean e esteticamente parecida com a página de buscas inicial do google.
-
-Explicando como funcionará a ordem de ação do usuario (Para melhor explicação irei criar uma pessoa ficticia e ela sera o usuario)
-
-1- Carla é uma professora universitaria que se encontra diariamente debatendo com seus alunos em classe. Dentro desses debates Carla constantemente se encontra com infomações que seus alunos trazem a ela, tais como constações absurdas ou mesmo noticias que ela não tem o conhecimento de sua veracidade.
-
-2- Por ser uma pessoa ligada nas redes sociais, Carla para se previnir da desinformação na internet escolheu uma forma de se inteirar sobre o que #ÉFake, baixando assim o aplicativo mobile em seu Android. (Unica opção devido ao aplicativo não existir para IOS) 
-
-3- Ao instalar o aplicativo sem dificuldades, Carla depois de poucos segundos (no maximo 3) se depara com uma interface clara e intuitiva, contendo uma caixa de buscas, uma interface interresante que comunica bem a ideia do projeto e algumas outras funcionalidades, como: configurações, historico de conversas*, saiba mais e uma caixa de login. (Não foi discutido se o login será obrigatorio ainda)
-
-4- Carla logo que visualizou a caixa de buscas entendeu que ali deve ser o local aonde irá anexar seu link de noticia ou mesmo digitar o que quer verificar sua verossimilidade.
-
-5- Ao anexar uma notícia que um aluno comentou com ela em sala de aula dentro da caixa de texto, carla cola o link dento da caixa de textos e agora espera ansiosamente por uma resposta desse aplicativo detector de mentiras.
-
-6- Após alguns segundos (10 a 15), a professora Universitaria se surpreende com a resposta clara e conclusiva oriunda do aplicativo (Podendo ser Verdadeira, Falsa ou Inconclusivo), com uma resposa rápida escrita em destaque, agora em outra tela, avisando-a a resposta sobre sua pesquisa.
-
-7- Carla tem curiosiadade de saber mais sobre sua pesquisa, não apenas se algo e verdadeiro ou falso, então se surpreende novamente ao perceber que junto a resposta de sua pesquisa, encontra-se a fonte de onde o fato foi buscado, junto de um texto breve e explicativo sobre o tema.
-
-8- Por ter conhecimento previo, ela reconhece que esse procedimento foi feito por um agente de IA, que com um webcrawiling usando de jornais e fontes confiaveis buscou e fez o link para trazer uma resposta.
-
-9- Contente com o conteudo de sua resposta, ela suspira de alivio com a nova informação adiquirida e em outra oportunidade irá novemente usar esse canal confiavel e rapido de buscas.
+## 1. Introdução  
 
 
----
+### 1.1 Problema
+A disseminação de **notícias falsas (fake news)** é um dos maiores desafios da sociedade conectada. Com a velocidade da informação em redes sociais e aplicativos de mensagens, conteúdos enganosos ou manipulados podem se espalhar rapidamente, impactando negativamente áreas como saúde, política, economia e segurança pública.  
 
-### (1) Interface e Fluxo de Busca
-####	Estes critérios focam na experiência do usuário e no fluxo principal da aplicação, desde a entrada de dados até a exibição dos resultados.
+Atualmente, usuários comuns têm dificuldade em identificar a veracidade das informações que recebem, pois a checagem de fatos exige tempo, acesso a fontes confiáveis e habilidades específicas de análise crítica. Além disso, ferramentas tradicionais de busca não oferecem, de forma simples e imediata, uma validação contextualizada das notícias.  
 
+O problema central, portanto, é a **falta de uma solução acessível e confiável** que auxilie usuários a verificarem, em tempo real, a credibilidade de informações recebidas, reduzindo a propagação de fake news e fortalecendo o consumo consciente de conteúdo digital.  
 
-#### Interface de Entrada de Busca: 
+### 1.2. Propósito  
+O propósito deste documento é descrever de forma clara e detalhada todos os requisitos funcionais, não-funcionais e de interface para o aplicativo móvel de chatbot anti-fake news. Este DRS servirá como guia para a equipe de desenvolvimento, base para o planejamento de testes e como um acordo formal entre os stakeholders do projeto.  
+### 1.3. Escopo do Produto  
+O produto será um aplicativo móvel para a plataforma **Android**. Sua função principal é permitir que usuários conversem com um chatbot inteligente para obter informações precisas e verificadas sobre notícias e eventos atuais.  
 
-- A tela inicial do aplicativo deve conter um campo de texto principal para o usuário digitar ou colar a informação a ser verificada. A interface deve ser simples e limpa, similar a uma barra de busca do Google.
+Utilizando uma arquitetura de **Geração Aumentada por Recuperação (RAG)**, o sistema consultará uma base de dados curada de jornais e artigos confiáveis para formular respostas, combatendo a desinformação e as *fake news*.  
 
-#### Botão de Ação: 
+**Estarão fora do escopo desta versão:**  
+- Autenticação de usuários com login e senha em nuvem.  
+- Sincronização de histórico de chat entre múltiplos dispositivos.  
+- Funcionalidades de chat em grupo ou social.  
+- Monetização ou sistemas de assinatura.  
 
-- Deve haver um botão claro e visível (por exemplo, "Verificar" ou um ícone de lupa) ao lado do campo de busca que inicie o processo de análise quando pressionado.
-
-#### Tela de Carregamento: 
-
-- Após o usuário iniciar a busca, o aplicativo deve exibir uma tela de carregamento ou uma animação de progresso para indicar que a análise está em andamento. Essa tela deve ser mantida até que o resultado seja processado, com a meta de tempo de resposta do agente de IA em 10 segundos, aceitável em até 15 segundos.
-
-#### Tela de Resultados:
-
-- A tela de resultados deve ser distinta da tela de busca e deve apresentar a resposta de forma clara e organizada. Ela deve conter as seguintes informações:
-
-	O veredito final (por exemplo, "Verdadeiro", "Falso" ou "Inconclusivo").
-
-	Uma justificativa detalhada, em texto, sobre a conclusão.
-
-	Fontes e links para os jornais ou artigos usados na análise.
-
-#### Navegação de Volta:
-
-- O usuário deve ser capaz de retornar facilmente da tela de resultados para a tela de busca inicial para realizar uma nova verificação.
-
-##### Para que fique claro o que foi apresentado, dentro da idealização da interface e desing do aplicativo, foi acordado que seria algo com uma tématica clean e esteticamente parecida com a página de buscas inicial do google.
+### 1.4. Definições, Acrônimos e Abreviações  
+- **DRS:** Documento de Requisitos de Software.  
+- **App:** Aplicativo móvel.  
+- **LLM (Large Language Model):** Modelo de Linguagem de Grande Porte, a tecnologia de IA que potencializa o chatbot.  
+- **RAG (Retrieval-Augmented Generation):** Geração Aumentada por Recuperação. Arquitetura que combina um LLM com uma base de dados externa para gerar respostas mais precisas e baseadas em fatos.  
+- **API (Application Programming Interface):** Interface de Programação de Aplicação.  
+- **UI (User Interface):** Interface do Usuário.  
 
 ---
 
-### (2) Processamento e Conteúdo
-#### 	Esses critérios se concentram na lógica interna do aplicativo, garantindo que o processamento e a apresentação da informação sejam precisos e relevantes.
+## 2. Descrição Geral  
 
+### 2.1. Perspectiva do Produto  
+O aplicativo é um produto independente e autocontido. Ele se posiciona como uma ferramenta de verificação de fatos e informação rápida, competindo com mecanismos de busca tradicionais e outras plataformas de checagem de notícias, com o diferencial de uma interface conversacional intuitiva.  
 
-#### Análise do Agente de IA:
+### 2.2. Características dos Usuários  
+O público-alvo do aplicativo são usuários de smartphones em geral, preocupados com a veracidade das informações que consomem. Isso inclui:  
 
-- O agente de IA deve ser capaz de realizar um web crawling em uma lista de jornais pré-selecionados para buscar informações relevantes sobre o conteúdo inserido pelo usuário.
+- **Usuário Geral:** Pessoas com pouca afinidade tecnológica que buscam respostas rápidas e confiáveis para suas dúvidas.  
+- **Estudantes e Pesquisadores:** Utilizarão o app como ponto de partida para obter informações de fontes seguras.  
+- **Profissionais de Comunicação:** Jornalistas e criadores de conteúdo que necessitam de uma ferramenta ágil para checagem de fatos.  
 
-#### Verificação de Conteúdo:
+### 2.3. Restrições Gerais  
+- O sistema dependerá de uma conexão ativa com a internet para se comunicar com a API da LLM.  
+- Toda a curadoria de conteúdo para o banco de dados deve seguir princípios éticos de jornalismo e imparcialidade.  
 
-- O sistema deve comparar a informação do usuário com o conteúdo obtido dos jornais confiáveis e, com base nessa análise, determinar se a informação é verdadeira ou falsa. O sistema deve ser intuitivo de usar.
-
-#### Justificativa da IA:
-
-- A resposta do sistema deve incluir uma justificativa para o veredito, explicando por que a informação foi classificada daquela forma. A IA terá acesso a jornais de notícia e páginas confiáveis para essa análise.
-
-#### Tratamento de Inconclusividade:
-
-- Se o sistema não conseguir chegar a uma conclusão clara sobre a veracidade da informação, ele deve indicar que o resultado é inconclusivo e explicar o motivo.
-
-#### Coleta de Fontes:
-
-- As fontes utilizadas pelo agente de IA para a verificação devem ser listadas na tela de resultados para que o usuário possa consultá-las diretamente. A forma de produzir escalabilidade no projeto é trazer cada vez mais artigos para fazer o web crawling
-
-
-##### Essa será as funções que terão a implementação com inteligencia artificial, serão o grande show da peça
+### 2.4. Suposições e Dependências  
+- **Dependência de API Externa:** O funcionamento do chatbot depende diretamente da disponibilidade e dos termos de serviço da API da LLM escolhida (ex: Gemini, OpenAI API).  
+- **Qualidade do Banco de Dados:** A precisão das respostas do chatbot é proporcional à qualidade e atualização do banco de dados vetorial.  
 
 ---
 
-### (3) Funções de Usuabilidade, Dados e Segurança
-#### Esses critérios se concentram em recursos que vão além da funcionalidade principal de busca, melhorando a experiência do usuário e a segurança do aplicativo.
+## 3. Requisitos Funcionais  
 
-#### Cadastro de Usuário: 
+### RF-001: Configuração Inicial do Usuário  
+**Descrição:** Na primeira vez que abrir o aplicativo, o usuário será apresentado a uma tela inicial.  
 
-- O sistema deve permitir que o usuário crie uma conta usando seu e-mail e uma senha.
+**Componentes:**  
+- **RF-001.1:** A tela deve exibir o logo e o nome do aplicativo.  
+- **RF-001.2:** Campo de texto para que o usuário insira um nome/apelido.  
+- **RF-001.3:** Botão "Salvar" ou "Entrar" deve persistir o nome do usuário localmente no dispositivo.
+- **RF-001.4:** Tutorial ensinando o funcionamento do app.  
 
-#### Login e Autenticação:
+### RF-002: Interface de Chat  
+**Descrição:** A tela principal do aplicativo será uma interface de chat interativa.  
 
-- Deve ser possível que o usuário faça login na aplicação. Uma vez logado, o usuário deve permanecer assim até que ele decida sair. O sistema também deve ter um serviço de autenticação por dois fatores.
+**Componentes:**  
+- **RF-002.1:** Exibir mensagens do usuário e do chatbot em formato cronológico.  
+- **RF-002.2:** Campo de texto para digitação de mensagens.  
+- **RF-002.3:** Botão "Enviar" para enviar mensagens ao chatbot.  
+- **RF-002.4:** Exibir o logo do aplicativo na parte superior da tela.  
 
-#### Proteção de Dados:
+### RF-003: Menu Lateral e Histórico  
+**Descrição:** A tela de chat deve conter um menu lateral para acesso a outras funcionalidades.  
 
-- Ao cadastrar uma conta, os dados do usuário devem ser protegidos com criptografia básica. O sistema também deve garantir a segurança dos dados armazenados sobre o uso do usuário dentro da aplicação, podendo usar criptografia ou salvá-los fora do servidor que o aplicativo roda.
+**Componentes:**  
+- **RF-003.1:** Ícone (três barras horizontais) abre o menu lateral.  
+- **RF-003.2:** O menu lateral deve conter lista de chats anteriores armazenados localmente.  
+- **RF-003.3:** Botão para acessar a pagina de configurações
 
-#### Histórico de Buscas:
+### RF-004-1: Tela de Configuração 
 
-- O aplicativo deve armazenar o histórico de buscas do usuário. Essa funcionalidade permitirá que o usuário revisite verificações anteriores sem ter que digitar a informação novamente.
+**Componentes:**  
+- **RF-004-1.1:** Botão de edição do nome de usuário.
+- **RF-004-1.2:** Dentro a opção app: Idioma, botão para mudar a linguagem em que a LLM responde e do app.
+- **RF-004-1.3:** Dentro a opção app: Aparência, botão para trocar o tema do aplicativo para claro ou escuro, começa pelo padrão do sistema
+- **RF-004-1.4:** Dentro a opção app: Tamanho da Fonte, botão para trocar o tamanho da fonte
+- **RF-004-1.5:** Dentro da opção sobre: Um botão "Saiba Mais" que redireciona ao github pages.
+- **RF-004-1.6:** Dentro da opção sobre: Um botão de "Tutorial" que redireciona o usuário a landing page.
+- **RF-004-1.7:** Dentro da opção sobre: Um botão de Termos de Serviço.
+- **RF-004-1.8:** Botão de volta a tela principal.
 
-#### Exclusão de Histórico:
+### RF-004-2: Tela de Configuração em Janela
+- **RF-004-2.1:** Tanto o botão "Idioma" quanto o "Aparência" irão redirecionar a uma tela em janela que será aberta dentro das configurações, aplicando um filtro para escurecer tudo fora da janela.
+- **RF-004-2.2:** Essa configuração em janela tem opções de escolha a esqueda que podem ser selecionadas a direita.
+- **RF-004-2.3:** Um botão que irá voltar a tela de configurações. 
 
-- O usuário deve ter a opção de limpar seu histórico de buscas a qualquer momento nas configurações do aplicativo.
+### RF-004-3: Tela de Configuração de Fonte
+- **RF-004-3.1:** Uma tela separada de configurações com um texto explicativo mostrando o tamanho da fonte atual que está sendo ultilizado pelo chatbot.
+- **RF-004-3.2:** Caixa interativa na parte inferior da tela com opções de diminuir e aumentar a fonte, mudando em tempo real o texto explicativo.
+- **RF-004-3.3:** Botão de volta a página de configurações. 
 
-##### Essas adições ajudam a construir um projeto mais robusto e completo, considerando tanto a usabilidade quanto a segurança dos dados do usuário.
+### RF-004-4: Tela de Configuração de Termos de Serviço
+- **RF-004-4.1:** Quando clicado, irá redirecionar a uma tela com duas opções: Termos de Uso e Política de Privacidade.
+- **RF-004-4.2:** Botão em ambas as opções que ira redirecionar o usuario até a tela especifica a isso. 
+- **RF-004-4.3:** Tela contendo de forma crua os termos de serviço e política de privacidade, com botão de volta a tela de termos de seviço.
+- **RF-004-4.4:** Botão de volta a configurações.
 
----
+### RF-005: Sistema de Interação com o Chatbot (RAG)  
+**Descrição:** Núcleo do sistema que processa as perguntas e gera respostas.  
 
-### (4) Requisito Funcional Adicional: Coleta de Dados
+**Componentes:**  
+- **RF-005.1:** Receber pergunta do usuário.  
+- **RF-005.2:** Consultar banco de dados vetorial para artigos relevantes.  
+- **RF-005.3:** Enviar dados para a LLM.  
+- **RF-005.4:** Receber resposta e exibir na interface de chat.  
+- **RF-005.5:** Analisar se entrada é um link. Caso não confiável, retornar mensagem:  
+  > "Desculpe, só posso analisar informações de fontes confiáveis que fazem parte do meu conhecimento."  
 
-#### Coleta de Dados para Análise (Opcional):
+### RF-006: Sistema de Administração de Conteúdo  
+**Descrição:** Interface web para administradores controlarem quais reportagems estão sendo colocadas no banco de dados.  
 
-- O sistema pode ser projetado para, em uma futura iteração, coletar de forma anônima e agregada os dados de busca dos usuários. O objetivo principal dessa coleta seria refinar o algoritmo de busca e a precisão do agente de IA. Esta funcionalidade deve ser implementada de forma a proteger a privacidade do usuário, garantindo que nenhum dado pessoal seja armazenado sem consentimento explícito.
-
-
-
----
-
-
-
-## *Requisitos Não Funcionais*
-
----
-
-#### Desempenho: 
-- Não demorar mais que três segundos para fazer as funções básicas como login, cadastro, acessar as configurações, refresh na página. (recomendação da professora sobre tempo que um site deve demorar para funcionar).
-
-- Tempo de resposta para o agente de IA, META DE 10 SEGUNDOS   porém caso fique na média de 15 ainda vai ser aceitável ao projeto.
-		
-#### Segurança:  (Ter a certeza do grau de complexidade de segurança que nosso projeto precisa)
-- Criptografia básica para proteção de dados dos usuários ao cadastrar uma conta à aplicação.
-
-- Serviço de autenticação por dois fatores ao fazer login no aplicativo. *Não fazer com que o usuário tenha que realizar login diversas vezes para entrar no aplicativo, deixando o usuário logado nele caso não tenha se desconectado*
-
-- Segurança com os dados que serão armazenados dos usuários sobre o seu uso dentro da aplicação, criptografia seria uma saída ou salva-los fora do servidor que a aplicação roda.
-
-#### Capacidade: 
-- A capacidade de armazenamento e processamento são importantes ao projeto devido ao banco de dados do projeto ser extenso e todos os processos dele tambem serem pesados. (Devido a ser um projeto de faculdade, não precisa ser tão robusto assim, porém e bom dar uma estudada melhor para ter certeza de quanto será o mínimo para o projeto rodar).
-
-- Um sistema capaz de suportar no seu pico de acessos 20 usuários.
-
-- A possibilidade de um escalonamento horizontal pode ser útil, ter esse conhecimento prévio.
- 
-#### Confiabilidade e Disponibilidade:
-- Falando sobre quanto tempo o aplicativo deve ficar no ar, durante o período do semestre e durante mais algum tempo, caso seja válido e não tão custoso.
-
-- Em caso de falha dentro do aplicativo por ser praticamente um sistema de buscas, acho viável o aplicativo ter uma tela apenas para avisar que ele está fora do ar para manutenção.
-
-- Durante o período que a aplicação estiver no ar, manutenções quinzenais serão mais que do que necessárias.
-
-#### Escalabilidade:
-- O aplicativo por ter uma tema muito ambicioso e atual ao momento presente da internet pode ser escalável a algo maior, como um aplicativo de verificação de vídeos e coisas mais complexas.
-
-- Uma forma de produzir escabilidade ao projeto é trazer cada vez mais artigos para fazer o webcrawling.
-
-#### Usabilidade: 
-- O sistema tem que ser intuitivo ao uso, tendo em sua interface claramente como utilizar o aplicativo.
-
-#### Compatibilidade:
-- O aplicativo será compatível apenas com o sistema operacional Android.
-
+**Componentes:**  
+- **RF-006.1:** Permitir envio e remoção de novos artigos (link ou upload).  
+- **RF-006.2:** Mostrar quais reportagens e a fonte da mesma estão armazenadas no banco de dados.
 
 ---
 
-#### Referencias:
+## 4. Requisitos Não-Funcionais  
 
-##### Artigo sobre requisitos funcionais
-- https://www.perforce.com/blog/alm/what-are-functional-requirements-examples
+- **RNF-001: Desempenho**  
+  Tempo de resposta deve ser < **10 segundos** em média.  
 
-##### Artigo sobre requisitos não funcionais
+- **RNF-002: Segurança**  
+  Comunicação via **HTTPS**. Dados de usuário armazenados apenas localmente.  
 
-- https://www.perforce.com/blog/alm/what-are-non-functional-requirements-examples
+- **RNF-003: Confiabilidade**  
+  Se não houver dados relevantes, chatbot deve responder:  
+  > "Não encontrei informações sobre este tópico em minha base de dados para fornecer uma resposta confiável."  
+
+- **RNF-004: Usabilidade**  
+  Interface deve seguir padrões de apps de mensagens populares (WhatsApp, Telegram, ChatGPT, Gemini).  
+
+- **RNF-005: Escalabilidade**  
+  Suporte estável para até **100 usuários simultâneos**.  
+
+---
+
+## 5. Requisitos de Interface Externa  
+
+### 5.1. Interfaces de Usuário (UI)  
+- UI deve ser limpa, moderna e intuitiva.  
+- Adaptar-se a diferentes tamanhos de tela.  
+- Exibir feedback visual quando o chatbot estiver "digitando".  
+
+### 5.2. Interfaces de Software  
+- **API da LLM:** Comunicação via **HTTP RESTful**.  
+- **Banco de Dados Vetorial:** Backend conectado a serviço de vetores (ex: ChromaDB).  
+
+### 6. Impacto Esperado  
+
+O aplicativo de chatbot anti-fake news pretende gerar um impacto positivo em diferentes níveis:  
+
+- **Social:** reduzir a disseminação de desinformação, promovendo um consumo mais consciente e responsável de notícias.  
+- **Educacional:** oferecer uma ferramenta de apoio para estudantes, pesquisadores e cidadãos em geral, facilitando o acesso a informações verificadas.  
+- **Tecnológico:** demonstrar o uso prático de arquiteturas baseadas em **LLM** e **RAG**, aplicadas a um problema real de relevância global.  
+- **Comunicacional:** apoiar profissionais de mídia e criadores de conteúdo na checagem rápida de fatos, fortalecendo a credibilidade das informações divulgadas.  
+
+Com isso, espera-se contribuir para um ambiente digital mais confiável, onde usuários possam tomar decisões melhor informadas e reduzir os efeitos nocivos das fake news na sociedade.  
+
+
+
+
+
