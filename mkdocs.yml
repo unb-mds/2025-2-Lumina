@@ -7,9 +7,10 @@ nav:
       - Diagramas: documentações/diagramas/diagramas.md
       - Documentação BackEnd: documentações/documentação-back-end.md
       - Documentação FrontEnd: documentações/documentação-front-end.md
-      - Requisitos: documentação/Requisitos.md
-      - Story
+      - Requisitos: documentações/Requisitos.md
+      - Story Map: documentações/StoryMap.md
 
+      
 site_url: https://mydomain.org/mysite
 
 theme:
