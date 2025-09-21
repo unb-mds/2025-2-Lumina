@@ -1,0 +1,1290 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://mydomain.org/mysite/estudos/ArquiteturaDeSistemas/">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.20">
+    
+    
+      
+        <title>Estudo: Guia Essencial de Arquitetura de Sistemas - Lumina</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.e53b48f4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#estudo-guia-essencial-de-arquitetura-de-sistemas" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Lumina" class="md-header__button md-logo" aria-label="Lumina" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Lumina
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Estudo: Guia Essencial de Arquitetura de Sistemas
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Lumina" class="md-nav__button md-logo" aria-label="Lumina" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Lumina
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Início
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sobre
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Documentações
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Documentações
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../documenta%C3%A7%C3%B5es/diagramas/diagramas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Diagramas
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../documenta%C3%A7%C3%B5es/documenta%C3%A7%C3%A3o-back-end/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentação BackEnd
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../documenta%C3%A7%C3%B5es/documenta%C3%A7%C3%A3o-front-end/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentação FrontEnd
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../documenta%C3%A7%C3%B5es/Requisitos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Requisitos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../documenta%C3%A7%C3%B5es/StoryMap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Story Map
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-o-que-e-arquitetura-de-software" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. O que é Arquitetura de Software?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-principios-fundamentais" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Princípios Fundamentais
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Princípios Fundamentais">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-atributos-de-qualidade-requisitos-nao-funcionais" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1. Atributos de Qualidade (Requisitos Não Funcionais)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-a-arte-do-trade-off" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2. A Arte do Trade-off
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-a-lei-de-conway" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3. A Lei de Conway
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-estilos-arquiteturais" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Estilos Arquiteturais
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Estilos Arquiteturais">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-monolito" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1. Monolito
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-microsservicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2. Microsserviços
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-arquitetura-orientada-a-servicos-soa" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3. Arquitetura Orientada a Serviços (SOA)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34-arquitetura-orientada-a-eventos-eda" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.4. Arquitetura Orientada a Eventos (EDA)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-tabela-comparativa-de-estilos" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Tabela Comparativa de Estilos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-elementos-da-arquitetura-de-sistemas" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Elementos da Arquitetura de Sistemas
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Elementos da Arquitetura de Sistemas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51-camadas" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.1. Camadas
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52-servicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.2. Serviços
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53-interfaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.3. Interfaces
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54-protocolos-de-comunicacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.4. Protocolos de Comunicação
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#55-padroes-de-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.5. Padrões de Design
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-padroes-para-sistemas-distribuidos" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Padrões para Sistemas Distribuídos
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Padrões para Sistemas Distribuídos">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#61-padroes-de-comunicacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.1. Padrões de Comunicação
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62-padroes-de-descoberta-e-roteamento" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.2. Padrões de Descoberta e Roteamento
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#63-padrao-de-consistencia-de-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.3. Padrão de Consistência de Dados
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-a-pratica-da-arquitetura" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. A Prática da Arquitetura
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. A Prática da Arquitetura">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-architecture-decision-records-adrs" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.1. Architecture Decision Records (ADRs)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-observabilidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.2. Observabilidade
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-migracao-com-strangler-fig-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      7.3. Migração com Strangler Fig Pattern
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-estudos-de-caso" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Estudos de Caso
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-analise-da-arquitetura-de-sistemas-da-netflix" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. Análise da Arquitetura de Sistemas da Netflix
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Análise da Arquitetura de Sistemas da Netflix">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91-problema-original" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.1. Problema Original
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92-microsservicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.2. Microsserviços
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93-comunicacao-entre-servicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.3. Comunicação entre Serviços
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#94-entrega-de-video-cdn-open-connect" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.4. Entrega de Vídeo (CDN – Open Connect)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#95-escalabilidade-e-resiliencia" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.5. Escalabilidade e Resiliência
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#96-observabilidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.6. Observabilidade
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#97-experiencia-do-usuario" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.7. Experiência do Usuário
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#98-resumo-da-arquitetura" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.8. Resumo da Arquitetura
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#99-pros-e-contras-da-decisao-da-netflix-monolito-microsservicos" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.9. Prós e Contras da Decisão da Netflix: Monólito → Microsserviços
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9.9. Prós e Contras da Decisão da Netflix: Monólito → Microsserviços">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#991-pros" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.9.1. Prós
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#992-contras" class="md-nav__link">
+    <span class="md-ellipsis">
+      9.9.2. Contras
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-conclusao" class="md-nav__link">
+    <span class="md-ellipsis">
+      10. Conclusão
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      11. Referências
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="11. Referências">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#111-fundamentos-e-conceitos" class="md-nav__link">
+    <span class="md-ellipsis">
+      11.1. Fundamentos e Conceitos
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#112-padroes-arquitetonicos-e-comunicacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      11.2. Padrões Arquitetônicos e Comunicação
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#113-trade-offs-e-principios-avancados" class="md-nav__link">
+    <span class="md-ellipsis">
+      11.3. Trade-offs e Princípios Avançados
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#114-estudos-de-caso-e-cultura" class="md-nav__link">
+    <span class="md-ellipsis">
+      11.4. Estudos de Caso e Cultura
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="estudo-guia-essencial-de-arquitetura-de-sistemas">Estudo: Guia Essencial de Arquitetura de Sistemas</h1>
+<h2 id="1-o-que-e-arquitetura-de-software">1. O que é Arquitetura de Software?</h2>
+<p>Arquitetura de software define a estrutura de um sistema: seus componentes, como eles interagem e as regras que governam sua evolução.</p>
+<p>Mais do que um diagrama, é o entendimento compartilhado sobre as decisões de design mais importantes — aquelas que são difíceis de mudar no futuro.</p>
+<p>Uma boa arquitetura acelera o desenvolvimento e reduz custos a longo prazo, sendo crucial para o sucesso do negócio.</p>
+<p>O arquiteto de software guia essas decisões importantes, garantindo que o sistema atenda a requisitos de escalabilidade, segurança e desempenho.</p>
+<h2 id="2-principios-fundamentais">2. Princípios Fundamentais</h2>
+<h3 id="21-atributos-de-qualidade-requisitos-nao-funcionais">2.1. Atributos de Qualidade (Requisitos Não Funcionais)</h3>
+<p>Atributos de qualidade definem como um sistema deve operar. Eles são os principais direcionadores das decisões arquiteturais e incluem:</p>
+<ul>
+<li><strong>Escalabilidade:</strong> Capacidade de lidar com o aumento de carga.</li>
+<li><strong>Manutenibilidade:</strong> Facilidade para modificar ou corrigir o sistema.</li>
+<li><strong>Desempenho:</strong> Velocidade e responsividade do sistema.</li>
+<li><strong>Segurança:</strong> Proteção contra acesso não autorizado.</li>
+<li><strong>Disponibilidade:</strong> Garantia de que o sistema está operacional quando necessário.</li>
+</ul>
+<h3 id="22-a-arte-do-trade-off">2.2. A Arte do Trade-off</h3>
+<p>A primeira lei da arquitetura é: <strong>tudo é um trade-off.</strong></p>
+<p>Não existe solução perfeita. Cada escolha otimiza um atributo em detrimento de outro. Ignorar isso gera dívida técnica.</p>
+<p>Exemplos comuns incluem:</p>
+<ul>
+<li><strong>Desempenho vs. Escalabilidade:</strong> Otimizar para baixa latência pode dificultar a distribuição da carga.</li>
+<li><strong>Custo vs. Confiabilidade:</strong> Alta disponibilidade exige redundância, o que aumenta os custos.</li>
+<li><strong>Segurança vs. Usabilidade:</strong> Controles de segurança rigorosos podem adicionar complexidade para o usuário.</li>
+</ul>
+<p><strong>Teorema CAP:</strong>
+Um sistema só pode garantir duas de três propriedades: <strong>Consistência (C)</strong>, <strong>Disponibilidade (A)</strong> e <strong>Tolerância a Partições (P)</strong>.
+Como falhas de rede (P) são inevitáveis, a escolha real é entre consistência e disponibilidade.</p>
+<h3 id="23-a-lei-de-conway">2.3. A Lei de Conway</h3>
+<p>A Lei de Conway afirma que a arquitetura do software espelha a estrutura de comunicação da equipe que o constrói.</p>
+<ul>
+<li>Equipes divididas em silos produzem sistemas fragmentados.</li>
+<li>A solução é a <strong>"Manobra Inversa de Conway"</strong>: moldar a equipe para produzir a arquitetura desejada.</li>
+<li><strong>Exemplo:</strong> Times pequenos e autônomos criam microsserviços.</li>
+</ul>
+<h2 id="3-estilos-arquiteturais">3. Estilos Arquiteturais</h2>
+<h3 id="31-monolito">3.1. Monolito</h3>
+<ul>
+<li><strong>Vantagens:</strong> Simplicidade inicial no desenvolvimento e implantação.</li>
+<li><strong>Desvantagens:</strong> Com o crescimento, a manutenção se torna complexa, a escalabilidade é ineficiente e as implantações são arriscadas.</li>
+</ul>
+<h3 id="32-microsservicos">3.2. Microsserviços</h3>
+<ul>
+<li><strong>Vantagens:</strong> Escalabilidade granular, agilidade para as equipes, resiliência e liberdade tecnológica.</li>
+<li><strong>Desvantagens:</strong> A complexidade se move do código para a infraestrutura, exigindo gerenciamento de sistemas distribuídos.</li>
+</ul>
+<h3 id="33-arquitetura-orientada-a-servicos-soa">3.3. Arquitetura Orientada a Serviços (SOA)</h3>
+<ul>
+<li>Precursora dos microsserviços, com serviços maiores e de escopo corporativo.</li>
+<li>Geralmente integrados por um Barramento de Serviço (ESB) central.</li>
+</ul>
+<h3 id="34-arquitetura-orientada-a-eventos-eda">3.4. Arquitetura Orientada a Eventos (EDA)</h3>
+<ul>
+<li>Comunicação assíncrona através de eventos.</li>
+<li>Promove desacoplamento máximo, escalabilidade e resiliência.</li>
+</ul>
+<h2 id="4-tabela-comparativa-de-estilos">4. Tabela Comparativa de Estilos</h2>
+<table>
+<thead>
+<tr>
+<th>Característica</th>
+<th>Monolito</th>
+<th>SOA</th>
+<th>Microsserviços</th>
+<th>EDA</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Granularidade</strong></td>
+<td>Aplicação única</td>
+<td>Serviços de negócio (grosso)</td>
+<td>Serviços de função única (fino)</td>
+<td>Serviços reativos a eventos</td>
+</tr>
+<tr>
+<td><strong>Acoplamento</strong></td>
+<td>Forte</td>
+<td>Fraco (via ESB)</td>
+<td>Muito fraco</td>
+<td>Extremamente fraco</td>
+</tr>
+<tr>
+<td><strong>Comunicação</strong></td>
+<td>Em processo</td>
+<td>Síncrona (via ESB)</td>
+<td>Síncrona (API) ou Assíncrona</td>
+<td>Assíncrona (eventos)</td>
+</tr>
+<tr>
+<td><strong>Consistência</strong></td>
+<td>Forte (ACID)</td>
+<td>Forte (dentro do serviço)</td>
+<td>Eventual (entre serviços)</td>
+<td>Eventual por natureza</td>
+</tr>
+<tr>
+<td><strong>Escalabilidade</strong></td>
+<td>Unidade inteira</td>
+<td>Limitada pelo ESB</td>
+<td>Granular e horizontal</td>
+<td>Altamente elástica</td>
+</tr>
+<tr>
+<td><strong>Complexidade</strong></td>
+<td>Baixa no início, alta em escala</td>
+<td>Alta (governança, ESB)</td>
+<td>Alta (operacional)</td>
+<td>Alta (fluxo de dados)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="5-elementos-da-arquitetura-de-sistemas">5. Elementos da Arquitetura de Sistemas</h2>
+<h3 id="51-camadas">5.1. Camadas</h3>
+<p>A arquitetura de sistemas frequentemente é organizada em camadas, cada uma responsável por diferentes aspectos do funcionamento do sistema:</p>
+<ul>
+<li><strong>Camada de Apresentação:</strong> gerencia a interface do usuário e a interação com o sistema.</li>
+<li><strong>Camada de Aplicação:</strong> trata a lógica de negócios e as regras de operação.</li>
+<li><strong>Camada de Dados:</strong> responsável pelo armazenamento, recuperação e manipulação dos dados.</li>
+</ul>
+<h3 id="52-servicos">5.2. Serviços</h3>
+<p>Serviços são componentes independentes que executam funções específicas dentro de um sistema. Eles promovem reutilização e modularidade.</p>
+<p><strong>Tipos de serviços:</strong></p>
+<ul>
+<li><strong>Microservices (Microserviços):</strong> pequenas aplicações que executam uma única função. Exemplo: serviço de autenticação.</li>
+<li><strong>Web Services:</strong> APIs que permitem comunicação entre sistemas via protocolos como HTTP/HTTPS. Exemplo: serviço de previsão do tempo.</li>
+<li><strong>SOA (Service-Oriented Architecture):</strong> abordagem em que os serviços são blocos de construção principais, como processamento de pagamento ou gestão de inventário.</li>
+</ul>
+<h3 id="53-interfaces">5.3. Interfaces</h3>
+<p>Interfaces definem como diferentes componentes do sistema interagem entre si, especificando métodos e protocolos de comunicação para garantir compatibilidade e integração.</p>
+<h3 id="54-protocolos-de-comunicacao">5.4. Protocolos de Comunicação</h3>
+<p>Protocolos estabelecem as regras e formatos para troca de dados entre componentes, assegurando segurança e eficiência.</p>
+<p><strong>Exemplos:</strong></p>
+<ul>
+<li><strong>HTTP (Hypertext Transfer Protocol):</strong> usado para transferência de páginas e recursos na web.</li>
+<li><strong>TCP/IP (Transmission Control Protocol/Internet Protocol):</strong> base da comunicação na internet.</li>
+<li><strong>WebSockets:</strong> comunicação bidirecional em tempo real, útil para chats online e streaming.</li>
+</ul>
+<h3 id="55-padroes-de-design">5.5. Padrões de Design</h3>
+<p>Padrões de design são soluções reutilizáveis para problemas comuns no desenvolvimento de software, ajudando a garantir robustez e facilidade de manutenção.</p>
+<h2 id="6-padroes-para-sistemas-distribuidos">6. Padrões para Sistemas Distribuídos</h2>
+<p>Adotar microsserviços exige resolver desafios de comunicação, descoberta e consistência de dados.</p>
+<h3 id="61-padroes-de-comunicacao">6.1. Padrões de Comunicação</h3>
+<ul>
+<li><strong>Síncrona vs. Assíncrona:</strong><ul>
+<li><strong>Síncrona:</strong> API REST (cliente bloqueia até resposta).</li>
+<li><strong>Assíncrona:</strong> Filas de mensagens (desacopla serviços, aumenta resiliência).</li>
+</ul>
+</li>
+<li><strong>API REST vs. gRPC:</strong><ul>
+<li><strong>REST:</strong> HTTP/1.1 + JSON (simples e legível).</li>
+<li><strong>gRPC:</strong> HTTP/2 + Protocol Buffers (rápido, eficiente).</li>
+</ul>
+</li>
+<li><strong>Filas de Mensagens:</strong><ul>
+<li>Atuam como buffer para mensagens.</li>
+<li>Garantem entrega confiável.</li>
+<li>Permitem que serviços operem de forma independente.</li>
+</ul>
+</li>
+</ul>
+<h3 id="62-padroes-de-descoberta-e-roteamento">6.2. Padrões de Descoberta e Roteamento</h3>
+<ul>
+<li><strong>API Gateway:</strong> Ponto de entrada único para requisições, centralizando autenticação, logging e limitação de taxa.</li>
+<li><strong>Service Discovery:</strong> Serviços encontram uns aos outros dinamicamente, usando um <em>Service Registry</em>.</li>
+</ul>
+<h3 id="63-padrao-de-consistencia-de-dados">6.3. Padrão de Consistência de Dados</h3>
+<ul>
+<li><strong>Saga:</strong><ul>
+<li>Gerencia transações que abrangem múltiplos serviços.</li>
+<li>Usa transações locais + compensações em caso de falha.</li>
+<li>Garante consistência eventual.</li>
+</ul>
+</li>
+</ul>
+<h2 id="7-a-pratica-da-arquitetura">7. A Prática da Arquitetura</h2>
+<h3 id="71-architecture-decision-records-adrs">7.1. Architecture Decision Records (ADRs)</h3>
+<ul>
+<li>Documentos concisos que registram uma decisão arquitetural, seu contexto e consequências.</li>
+<li>Combatem a "amnésia do projeto", explicando o <em>porquê</em> das escolhas.</li>
+</ul>
+<h3 id="72-observabilidade">7.2. Observabilidade</h3>
+<p>Capacidade de entender o estado do sistema a partir de dados externos.</p>
+<ul>
+<li><strong>Logs:</strong> Registros de eventos discretos.</li>
+<li><strong>Métricas:</strong> Dados numéricos agregados ao longo do tempo.</li>
+<li><strong>Traces:</strong> Caminho completo de uma requisição entre serviços.</li>
+</ul>
+<h3 id="73-migracao-com-strangler-fig-pattern">7.3. Migração com Strangler Fig Pattern</h3>
+<ul>
+<li>Estratégia para modernizar monolitos sem risco.</li>
+<li>Um proxy intercepta tráfego.</li>
+<li>Novas funcionalidades são criadas como microsserviços.</li>
+<li>Tráfego é gradualmente redirecionado até desativar o legado.</li>
+</ul>
+<h2 id="8-estudos-de-caso">8. Estudos de Caso</h2>
+<ul>
+<li><strong>Netflix:</strong> Usou microsserviços para alcançar escalabilidade e disponibilidade massivas em streaming, aceitando alta complexidade operacional.</li>
+<li><strong>Uber:</strong> Adotou microsserviços para lidar com escala organizacional e acelerar a inovação.</li>
+<li><strong>Spotify:</strong> Focou primeiro na cultura organizacional (Squads, Tribes), moldando naturalmente uma arquitetura ágil.</li>
+</ul>
+<h2 id="9-analise-da-arquitetura-de-sistemas-da-netflix">9. Análise da Arquitetura de Sistemas da Netflix</h2>
+<h3 id="91-problema-original">9.1. Problema Original</h3>
+<ul>
+<li><strong>Início:</strong> monólito em datacenter próprio.</li>
+<li><strong>Desafios:</strong> escalar, alta disponibilidade e baixa latência global.</li>
+<li><strong>Solução:</strong> migração para AWS + microsserviços.</li>
+</ul>
+<h3 id="92-microsservicos">9.2. Microsserviços</h3>
+<ul>
+<li><strong>Catálogo</strong> → lista de filmes/séries.</li>
+<li><strong>Recomendações</strong> → sugestões personalizadas.</li>
+<li><strong>Autenticação</strong> → login e segurança.</li>
+<li><strong>Streaming</strong> → vídeo adaptativo.</li>
+<li><strong>Billing</strong> → pagamentos.</li>
+</ul>
+<p>Cada serviço é independente, escalável e atualizável.</p>
+<h3 id="93-comunicacao-entre-servicos">9.3. Comunicação entre Serviços</h3>
+<ul>
+<li><strong>API Gateway</strong> → entrada única (apps e web).</li>
+<li><strong>REST/gRPC</strong> → comunicação interna.</li>
+<li><strong>Kafka</strong> → eventos assíncronos (histórico, estatísticas, recomendações).</li>
+</ul>
+<h3 id="94-entrega-de-video-cdn-open-connect">9.4. Entrega de Vídeo (CDN – Open Connect)</h3>
+<ul>
+<li>CDN própria com servidores de cache nos ISPs.</li>
+<li>Conteúdo entregue do ponto mais próximo → menos latência e menor custo de banda.</li>
+</ul>
+<h3 id="95-escalabilidade-e-resiliencia">9.5. Escalabilidade e Resiliência</h3>
+<ul>
+<li><strong>Elastic Load Balancing</strong> → distribui requisições.</li>
+<li><strong>Auto-scaling (AWS)</strong> → adapta a demanda (picos em estreias).</li>
+<li><strong>Chaos Engineering (Simian Army/Chaos Monkey)</strong> → falhas simuladas para testar resiliência.</li>
+</ul>
+<h3 id="96-observabilidade">9.6. Observabilidade</h3>
+<ul>
+<li>Logs centralizados.</li>
+<li>Métricas em tempo real (ex: streams/segundo).</li>
+<li>Tracing distribuído (acompanha requisições entre microsserviços).</li>
+</ul>
+<h3 id="97-experiencia-do-usuario">9.7. Experiência do Usuário</h3>
+<ul>
+<li>Recomendações personalizadas (histórico).</li>
+<li>Testes A/B (interface, imagens, algoritmos).</li>
+<li>Machine Learning → prever engajamento de conteúdo.</li>
+</ul>
+<h3 id="98-resumo-da-arquitetura">9.8. Resumo da Arquitetura</h3>
+<ul>
+<li>Microsserviços desacoplados.</li>
+<li>API Gateway unificada.</li>
+<li>Kafka para eventos assíncronos.</li>
+<li>Open Connect (CDN própria).</li>
+<li>Escalabilidade (AWS + load balancing + auto-scaling).</li>
+<li>Resiliência (Chaos Engineering).</li>
+<li>Observabilidade avançada.</li>
+<li>Personalização com dados e ML.</li>
+</ul>
+<h3 id="99-pros-e-contras-da-decisao-da-netflix-monolito-microsservicos">9.9. Prós e Contras da Decisão da Netflix: Monólito → Microsserviços</h3>
+<h4 id="991-pros">9.9.1. Prós</h4>
+<ul>
+<li><strong>Escalabilidade:</strong> cada serviço pode crescer independentemente.</li>
+<li><strong>Resiliência:</strong> falhas em um serviço não derrubam todo o sistema.</li>
+<li><strong>Agilidade:</strong> times pequenos podem desenvolver e implantar autonomamente.</li>
+<li><strong>Personalização:</strong> dados e ML aplicados de forma modular.</li>
+<li><strong>Infraestrutura global:</strong> CDN própria reduz latência e custos.</li>
+</ul>
+<h4 id="992-contras">9.9.2. Contras</h4>
+<ul>
+<li><strong>Complexidade operacional:</strong> muitos serviços distribuídos para gerenciar.</li>
+<li><strong>Maior overhead de comunicação:</strong> APIs internas e mensageria aumentam a complexidade.</li>
+<li><strong>Dependência de cloud:</strong> custos e configuração de auto-scaling e balanceamento.</li>
+</ul>
+<h2 id="10-conclusao">10. Conclusão</h2>
+<p>Arquitetura de software é um processo contínuo de tomada de decisão. Exige:</p>
+<ul>
+<li>Gerenciar trade-offs.</li>
+<li>Ser guiado por atributos de qualidade.</li>
+<li>Entender que a estrutura da equipe molda o sistema.</li>
+</ul>
+<h2 id="11-referencias">11. Referências</h2>
+<h3 id="111-fundamentos-e-conceitos">11.1. Fundamentos e Conceitos</h3>
+<ul>
+<li><a href="https://www.redhat.com/pt-br/topics/cloud-native-apps/what-is-systems-architecture">O que é arquitetura de sistemas? - Red Hat</a></li>
+<li><a href="https://azure.microsoft.com/en-us/solutions/software-architecture/">O que é Arquitetura de Software - Microsoft Azure</a></li>
+<li><a href="https://www.zup.com.br/blog/arquitetura-de-software">A importância da arquitetura de software - Zup</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Software_architecture">Software architecture - Wikipedia</a></li>
+</ul>
+<h3 id="112-padroes-arquitetonicos-e-comunicacao">11.2. Padrões Arquitetônicos e Comunicação</h3>
+<ul>
+<li><a href="https://www.atlassian.com/microservices/architecture/monolithic-architecture">Arquitetura monolítica - Atlassian</a></li>
+<li><a href="https://aws.amazon.com/pt/microservices/">O que são microsserviços? - AWS</a></li>
+<li><a href="https://aws.amazon.com/pt/event-driven-architecture/">O que é arquitetura orientada a eventos? - AWS</a></li>
+<li><a href="https://aws.amazon.com/pt/compare/the-difference-between-grpc-and-rest/">Comparando gRPC e REST - AWS</a></li>
+<li><a href="https://www.ibm.com/br-pt/topics/message-queues">O que são filas de mensagens? - IBM</a></li>
+<li><a href="https://learn.microsoft.com/pt-br/azure/architecture/microservices/design/communication-patterns">Padrões de comunicação em microsserviços - Microsoft</a></li>
+</ul>
+<h3 id="113-trade-offs-e-principios-avancados">11.3. Trade-offs e Princípios Avançados</h3>
+<ul>
+<li><a href="https://dev.to/thawkin3/software-architecture-tradeoffs-3f5f">Trade-offs em Arquitetura de Software - DEV Community</a></li>
+<li><a href="https://www.ibm.com/br-pt/think/topics/cap-theorem">Teorema CAP - IBM</a></li>
+<li><a href="https://lachlanwhite.com/posts/architecture/architecture-decision-records/">Architecture Decision Records - Lachlan White</a></li>
+<li><a href="https://martinfowler.com/bliki/ConwaysLaw.html">Conway's Law - Martin Fowler</a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/architecture/microservices/design/gateway">API Gateway pattern - Microsoft</a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/architecture/reference-architectures/saga/saga">Padrão Saga - Microsoft</a></li>
+</ul>
+<h3 id="114-estudos-de-caso-e-cultura">11.4. Estudos de Caso e Cultura</h3>
+<ul>
+<li><a href="https://www.techaheadcorp.com/blog/design-of-microservices-architecture-at-netflix/">A arquitetura de microsserviços da Netflix - TechAhead</a></li>
+<li><a href="https://www.geeksforgeeks.org/system-design/system-design-of-uber-app-uber-system-architecture/">Arquitetura de sistema do app Uber - GeeksforGeeks</a></li>
+<li><a href="https://www.atlassian.com/agile/agile-at-scale/spotify">O Modelo Spotify - Atlassian</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1032 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://mydomain.org/mysite/estudos/Git_e_GitHub/">
+      
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.20">
+    
+    
+      
+        <title>Guia Completo de Git e GitHub - Lumina</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.e53b48f4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#guia-completo-de-git-e-github" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Lumina" class="md-header__button md-logo" aria-label="Lumina" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Lumina
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Guia Completo de Git e GitHub
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Lumina" class="md-nav__button md-logo" aria-label="Lumina" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Lumina
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Início
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sobre
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Documentações
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Documentações
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../documenta%C3%A7%C3%B5es/diagramas/diagramas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Diagramas
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../documenta%C3%A7%C3%B5es/documenta%C3%A7%C3%A3o-back-end/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentação BackEnd
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../documenta%C3%A7%C3%B5es/documenta%C3%A7%C3%A3o-front-end/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Documentação FrontEnd
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../documenta%C3%A7%C3%B5es/Requisitos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Requisitos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../documenta%C3%A7%C3%B5es/StoryMap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Story Map
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-conceitos-fundamentais-git-vs-github" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Conceitos Fundamentais: Git vs. GitHub
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-configuracao-inicial-do-projeto" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Configuração Inicial do Projeto
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Configuração Inicial do Projeto">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#criando-e-conectando-um-novo-repositorio" class="md-nav__link">
+    <span class="md-ellipsis">
+      Criando e Conectando um Novo Repositório
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clonando-um-repositorio-existente" class="md-nav__link">
+    <span class="md-ellipsis">
+      Clonando um Repositório Existente
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-o-fluxo-de-trabalho-essencial-salvando-e-sincronizando" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. O Fluxo de Trabalho Essencial: Salvando e Sincronizando
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. O Fluxo de Trabalho Essencial: Salvando e Sincronizando">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#passo-1-verificar-o-status-das-alteracoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Passo 1: Verificar o Status das Alterações
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#passo-2-adicionar-alteracoes-a-area-de-preparacao" class="md-nav__link">
+    <span class="md-ellipsis">
+      Passo 2: Adicionar Alterações à Área de Preparação
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#passo-3-comitar-as-alteracoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Passo 3: "Comitar" as Alterações
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#passo-4-sincronizar-com-o-repositorio-remoto" class="md-nav__link">
+    <span class="md-ellipsis">
+      Passo 4: Sincronizar com o Repositório Remoto
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-trabalhando-com-branches-ramificacoes" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Trabalhando com Branches (Ramificações)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Trabalhando com Branches (Ramificações)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#comandos-de-branch-linux-e-windows" class="md-nav__link">
+    <span class="md-ellipsis">
+      Comandos de Branch (Linux e Windows)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#merge-integrando-branches" class="md-nav__link">
+    <span class="md-ellipsis">
+      Merge: Integrando Branches
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-padroes-de-branches-gitflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Padrões de Branches: GitFlow
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Padrões de Branches: GitFlow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#branches-principais" class="md-nav__link">
+    <span class="md-ellipsis">
+      Branches Principais:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#branches-de-suporte" class="md-nav__link">
+    <span class="md-ellipsis">
+      Branches de Suporte:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-tags-para-versionamento-de-software" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Tags para Versionamento de Software
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-colaboracao-eficiente" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Colaboração Eficiente
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Colaboração Eficiente">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pull-requests-prs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pull Requests (PRs)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Issues
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-boas-praticas-adicionais" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Boas Práticas Adicionais
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Boas Práticas Adicionais">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#o-arquivo-gitignore" class="md-nav__link">
+    <span class="md-ellipsis">
+      O Arquivo .gitignore
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#padrao-para-mensagens-de-commit-conventional-commits" class="md-nav__link">
+    <span class="md-ellipsis">
+      Padrão para Mensagens de Commit (Conventional Commits)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-resolvendo-conflitos" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. Resolvendo Conflitos
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-fluxo-de-trabalho-do-desenvolvedor-passo-a-passo" class="md-nav__link">
+    <span class="md-ellipsis">
+      10. Fluxo de Trabalho do Desenvolvedor (Passo a Passo)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      11. Referências:
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="guia-completo-de-git-e-github">Guia Completo de Git e GitHub</h1>
+<p>Este guia oferece um passo a passo detalhado sobre como utilizar Git e GitHub de forma colaborativa. O material aborda desde a configuração inicial até fluxos de trabalho avançados, explicando os conceitos, os comandos essenciais e o "porquê" de cada processo para garantir a eficiência da equipe.</p>
+<h2 id="1-conceitos-fundamentais-git-vs-github">1. Conceitos Fundamentais: Git vs. GitHub</h2>
+<p>É crucial entender a diferença entre as ferramentas:</p>
+<ul>
+<li><strong>Git:</strong> É o sistema de controle de versão distribuído instalado em sua máquina. Ele é responsável por rastrear todas as alterações nos arquivos do projeto, criando um histórico detalhado.</li>
+<li><strong>GitHub:</strong> É a plataforma online que hospeda repositórios Git. Ele funciona como o servidor central onde a equipe sincroniza seu trabalho.</li>
+</ul>
+<p>Basicamente, o fluxo de trabalho consiste em manter seu repositório local (em sua máquina) sincronizado com o repositório remoto (no GitHub).</p>
+<h2 id="2-configuracao-inicial-do-projeto">2. Configuração Inicial do Projeto</h2>
+<p>Existem duas maneiras de começar um projeto: criando um novo ou clonando um existente.</p>
+<h3 id="criando-e-conectando-um-novo-repositorio">Criando e Conectando um Novo Repositório</h3>
+<p>Este processo é ideal para projetos que estão começando do zero.</p>
+<p><strong>Instruções (Linux e Windows):</strong></p>
+<ol>
+<li>Crie um repositório remoto no GitHub.</li>
+<li>Na pasta do seu projeto em sua máquina, abra o terminal (Terminal/Bash no Linux, PowerShell/CMD/Git Bash no Windows).</li>
+<li>Inicie um repositório Git local:
+   <code>bash
+   git init</code>
+   Este comando inicia um repositório local.</li>
+<li>Renomeie a branch principal para <code>main</code> (uma prática moderna):
+   <code>bash
+   git branch -M main</code>
+   Este comando cria a "gaveta principal" do projeto.</li>
+<li>Conecte seu repositório local ao repositório remoto que você criou no GitHub:
+   <code>bash
+   git remote add origin [URL_DO_SEU_REPOSITORIO.GIT]</code>
+   Este passo conecta os dois repositórios.</li>
+</ol>
+<h3 id="clonando-um-repositorio-existente">Clonando um Repositório Existente</h3>
+<p>Para trabalhar em um projeto que já está no GitHub, o primeiro passo é "clonar" o repositório. Isso cria uma cópia local completa do projeto em sua máquina.</p>
+<p><strong>Instruções (Linux e Windows):</strong></p>
+<pre><code class="language-bash">git clone [URL_DO_REPOSITORIO]
+</code></pre>
+<h2 id="3-o-fluxo-de-trabalho-essencial-salvando-e-sincronizando">3. O Fluxo de Trabalho Essencial: Salvando e Sincronizando</h2>
+<p>O ciclo diário de trabalho envolve salvar suas alterações (commits) e sincronizá-las com a equipe.</p>
+<h3 id="passo-1-verificar-o-status-das-alteracoes">Passo 1: Verificar o Status das Alterações</h3>
+<p>Verifique quais arquivos foram modificados. Arquivos que não estão no repositório ou não foram atualizados aparecerão marcados.</p>
+<p><strong>Comando (Linux e Windows):</strong></p>
+<pre><code class="language-bash">git status
+</code></pre>
+<p>Este comando mostra os arquivos que ainda não foram adicionados ao próximo commit (geralmente em vermelho).</p>
+<h3 id="passo-2-adicionar-alteracoes-a-area-de-preparacao">Passo 2: Adicionar Alterações à Área de Preparação</h3>
+<p>Para incluir as alterações no próximo commit, você precisa adicioná-las à "área de preparação" (Staging Area).</p>
+<p><strong>Comando (Linux e Windows):</strong></p>
+<pre><code class="language-bash">git add .
+</code></pre>
+<p>Este comando encaminha todos os arquivos modificados para o repositório local, preparando-os para o commit.</p>
+<h3 id="passo-3-comitar-as-alteracoes">Passo 3: "Comitar" as Alterações</h3>
+<p>O commit salva um "pacote" de alterações no histórico do repositório local. É fundamental que a mensagem do commit resuma o que foi feito.</p>
+<p><strong>Comando (Linux e Windows):</strong></p>
+<pre><code class="language-bash">git commit -m &quot;Sua mensagem descritiva aqui&quot;
+</code></pre>
+<p>Para visualizar o registro de commits, você pode usar o comando <code>git log</code>.</p>
+<h3 id="passo-4-sincronizar-com-o-repositorio-remoto">Passo 4: Sincronizar com o Repositório Remoto</h3>
+<ul>
+<li>
+<p><strong>Baixar alterações (Pull):</strong> Antes de enviar suas mudanças, sempre baixe as atualizações feitas por outros membros da equipe para evitar conflitos.</p>
+<p><strong>Comando (Linux e Windows):</strong>
+<code>bash
+git pull origin main</code>
+Este comando atualiza seu repositório local com as mudanças que estão no repositório remoto.</p>
+</li>
+<li>
+<p><strong>Enviar alterações (Push):</strong> Após fazer seus commits, envie suas contribuições para o GitHub.</p>
+<p><strong>Comando (Linux e Windows):</strong>
+<code>bash
+git push origin main</code>
+Isso envia todas as alterações confirmadas do seu repositório local para o remoto.</p>
+</li>
+</ul>
+<h2 id="4-trabalhando-com-branches-ramificacoes">4. Trabalhando com Branches (Ramificações)</h2>
+<p>Branches são como cópias independentes do projeto, permitindo desenvolver funcionalidades ou testar ideias de forma isolada. O código só é integrado à branch principal (<code>main</code>) depois de aprovado.</p>
+<blockquote>
+<p><strong>Por que usar várias branches?</strong></p>
+<ul>
+<li><strong>Isolamento e Segurança:</strong> Permite que desenvolvedores trabalhem em tarefas diferentes simultaneamente sem afetar a versão estável do código.</li>
+<li><strong>Organização:</strong> Facilita o gerenciamento de funcionalidades, correções e diferentes versões do software.</li>
+</ul>
+</blockquote>
+<h3 id="comandos-de-branch-linux-e-windows">Comandos de Branch (Linux e Windows)</h3>
+<ul>
+<li>
+<p><strong>Listar branches:</strong>
+    <code>bash
+    git branch</code>
+    Este comando mostra todas as ramificações existentes no repositório.</p>
+</li>
+<li>
+<p><strong>Criar uma nova branch e já mudar para ela:</strong>
+    <code>bash
+    git checkout -b nome-da-nova-branch</code>
+    O comando <code>checkout</code> altera para a nova branch, e a flag <code>-b</code> a cria.</p>
+</li>
+<li>
+<p><strong>Mudar para uma branch existente:</strong>
+    <code>bash
+    git checkout nome-da-branch</code>
+    Este comando apenas muda para a branch especificada.</p>
+</li>
+<li>
+<p><strong>Excluir uma branch:</strong></p>
+<ul>
+<li><strong>Localmente:</strong> <code>git branch -d nome-da-branch</code></li>
+<li><strong>Remotamente:</strong> <code>git push origin --delete nome-da-branch</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="merge-integrando-branches">Merge: Integrando Branches</h3>
+<p>Merge é o processo de integrar as alterações de uma branch em outra.</p>
+<p><strong>Como fazer um merge:</strong></p>
+<ol>
+<li>Primeiro, vá para a branch que vai <strong>receber</strong> as alterações (ex: <code>main</code> ou <code>develop</code>).
+    <code>bash
+    git checkout main</code></li>
+<li>Execute o comando <code>merge</code>, especificando qual branch você quer integrar:
+    <code>bash
+    git merge nome-da-branch-a-ser-integrada</code></li>
+</ol>
+<h2 id="5-padroes-de-branches-gitflow">5. Padrões de Branches: GitFlow</h2>
+<p>GitFlow é um modelo popular que organiza o fluxo de trabalho em projetos maiores.</p>
+<h4 id="branches-principais">Branches Principais:</h4>
+<ul>
+<li><code>main</code>: Contém o código estável, pronto para produção.</li>
+<li><code>develop</code>: Serve como base para a criação de outras branches e integra todas as novas funcionalidades.</li>
+</ul>
+<h4 id="branches-de-suporte">Branches de Suporte:</h4>
+<ul>
+<li><code>feature</code>: Criadas a partir da <code>develop</code> para implementar novas funcionalidades.</li>
+<li><code>release</code>: Usadas para testar o código da <code>develop</code> antes de mesclá-lo com a <code>main</code> para um novo lançamento.</li>
+<li><code>hotfix</code>: Criadas a partir da <code>main</code> para corrigir problemas críticos em produção de forma rápida. As correções são aplicadas tanto na <code>main</code> quanto na <code>develop</code>.</li>
+</ul>
+<h2 id="6-tags-para-versionamento-de-software">6. Tags para Versionamento de Software</h2>
+<p>Tags são marcadores usados para identificar pontos específicos no histórico, geralmente para marcar lançamentos de versões (v1.0, v1.1, v2.0).</p>
+<blockquote>
+<p><strong>Por que é importante?</strong> Facilita a visualização e o acesso ao código exato de cada versão lançada, o que é fundamental para manutenção e organização.</p>
+</blockquote>
+<p><strong>Comando (Linux e Windows):</strong></p>
+<pre><code class="language-bash">git tag -a v1.0 -m &quot;Lançamento da versão 1.0&quot;
+</code></pre>
+<p>Com <code>-a</code> definimos a versão e com <code>-m</code>, a mensagem da tag.</p>
+<h2 id="7-colaboracao-eficiente">7. Colaboração Eficiente</h2>
+<h3 id="pull-requests-prs">Pull Requests (PRs)</h3>
+<p>Um Pull Request (PR) é um mecanismo do GitHub para propor e analisar um merge antes que ele aconteça. É uma prática essencial para o trabalho em equipe, pois permite testar e analisar o código antes da integração.</p>
+<blockquote>
+<p><strong>Por que usar Pull Requests?</strong></p>
+<ul>
+<li><strong>Revisão de Código:</strong> Permite que a equipe analise o código, sugira melhorias e garanta a qualidade antes da integração.</li>
+<li><strong>Discussão e Rastreabilidade:</strong> Cria um registro formal das alterações e das decisões tomadas.</li>
+<li><strong>Testes:</strong> Permite a execução de testes automatizados para garantir que as novas mudanças não quebrem o sistema.</li>
+</ul>
+</blockquote>
+<p>O processo envolve abrir um PR, onde as alterações são apontadas, a equipe revisa, e por fim, a branch é mesclada (<code>merge</code>).</p>
+<h3 id="issues">Issues</h3>
+<p>Issues no GitHub são usadas para organizar o projeto, funcionando como um checklist de tarefas. Elas permitem rastrear bugs, documentação, novas funcionalidades e outras demandas, ajudando a equipe a se manter alinhada. É possível usar <code>tags</code> (labels) para organizar cada issue.</p>
+<h2 id="8-boas-praticas-adicionais">8. Boas Práticas Adicionais</h2>
+<h3 id="o-arquivo-gitignore">O Arquivo <code>.gitignore</code></h3>
+<blockquote>
+<p><strong>O que é?</strong> Um arquivo de texto chamado <code>.gitignore</code> que você coloca na raiz do seu projeto.</p>
+<p><strong>Por que é importante?</strong> Nele, você lista arquivos e pastas que o Git deve ignorar completamente. Isso é crucial para evitar que arquivos desnecessários ou sensíveis sejam enviados para o repositório, como:</p>
+<ul>
+<li>Pastas de dependências (ex: <code>node_modules</code>).</li>
+<li>Arquivos de configuração do sistema operacional (ex: <code>.DS_Store</code> no macOS).</li>
+<li>Arquivos com senhas ou chaves de API (ex: <code>.env</code>).</li>
+<li>Arquivos compilados ou gerados automaticamente.</li>
+</ul>
+</blockquote>
+<h3 id="padrao-para-mensagens-de-commit-conventional-commits">Padrão para Mensagens de Commit (Conventional Commits)</h3>
+<blockquote>
+<p><strong>O que é?</strong> É uma convenção simples sobre como escrever as mensagens de commit para torná-las mais claras e padronizadas.</p>
+<p><strong>Por que é importante?</strong> Torna o histórico do projeto muito mais legível e permite a automação de processos. Um formato comum é:</p>
+<ul>
+<li><code>feat</code>: Adiciona modal de login (para novas funcionalidades).</li>
+<li><code>fix</code>: Corrige validação de e-mail no formulário (para correção de bugs).</li>
+<li><code>docs</code>: Atualiza documentação do componente de botão (para mudanças na documentação).</li>
+</ul>
+</blockquote>
+<h2 id="9-resolvendo-conflitos">9. Resolvendo Conflitos</h2>
+<p>Um conflito ocorre quando o Git não consegue mesclar duas alterações porque elas foram feitas na mesma parte do mesmo arquivo.</p>
+<p><strong>Como resolver:</strong></p>
+<ol>
+<li>Primeiro, execute <code>git pull origin main</code> para trazer as alterações remotas e revelar o conflito em sua máquina local.</li>
+<li>Abra os arquivos conflitantes. O Git marcará as áreas problemáticas com <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</code>, <code>=======</code> e <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>.</li>
+<li>Edite manualmente o arquivo para manter a versão final correta, removendo as marcações do Git. Você pode manter a versão local, a remota ou uma combinação de ambas.</li>
+<li>Após resolver, adicione os arquivos corrigidos com <code>git add .</code>.</li>
+<li>Faça o commit da resolução. Geralmente, não é preciso escrever uma mensagem, pois o Git cria uma automaticamente.
+    <code>bash
+    git commit</code></li>
+</ol>
+<h2 id="10-fluxo-de-trabalho-do-desenvolvedor-passo-a-passo">10. Fluxo de Trabalho do Desenvolvedor (Passo a Passo)</h2>
+<p>Aqui está um resumo prático do fluxo de trabalho para iniciar e concluir uma nova tarefa:</p>
+<ol>
+<li>
+<p><strong>Sincronize seu ambiente:</strong> Antes de começar, garanta que sua branch principal local está atualizada.
+    <code>bash
+    git checkout main
+    git pull origin main</code></p>
+</li>
+<li>
+<p><strong>Crie uma branch para a tarefa:</strong> Crie uma nova branch a partir da <code>main</code> (ou <code>develop</code>).
+    <code>bash
+    git checkout -b feature/nome-da-sua-tarefa</code></p>
+</li>
+<li>
+<p><strong>Desenvolva e faça commits:</strong> Trabalhe no seu código e faça commits pequenos e frequentes com mensagens claras.
+    <code>bash
+    # ... faz alterações no código ...
+    git add .
+    git commit -m "feat: implementa a lógica inicial do componente X"</code></p>
+</li>
+<li>
+<p><strong>Envie sua branch para o GitHub:</strong> Ao finalizar a tarefa (ou ao final do dia), envie seu trabalho.
+    <code>bash
+    git push origin feature/nome-da-sua-tarefa</code></p>
+</li>
+<li>
+<p><strong>Abra um Pull Request:</strong> No GitHub, crie um Pull Request da sua branch para a branch principal (<code>main</code> ou <code>develop</code>).</p>
+</li>
+<li>
+<p><strong>Revise e faça o Merge:</strong> Aguarde a revisão do time. Após a aprovação, o Pull Request será mesclado.</p>
+</li>
+<li>
+<p><strong>Limpeza:</strong> Após o merge, você pode excluir sua branch de tarefa localmente.
+    <code>bash
+    git checkout main
+    git branch -d feature/nome-da-sua-tarefa</code></p>
+</li>
+</ol>
+<h2 id="11-referencias">11. Referências:</h2>
+<ul>
+<li><a href="https://git-scm.com/doc">Documentação Oficial do Git</a></li>
+<li><a href="https://docs.github.com/pt">Guias do GitHub (GitHub Docs)</a></li>
+<li><a href="https://www.atlassian.com/br/git/tutorials/comparing-workflows/gitflow-workflow">Tutorial sobre o fluxo GitFlow (Atlassian)</a></li>
+<li><a href="https://try.github.io/">Tutorial Interativo para Aprender Git</a></li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>
