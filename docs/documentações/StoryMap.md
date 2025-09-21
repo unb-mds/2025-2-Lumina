@@ -11,8 +11,8 @@
 - **Histórias (Detalhes):**
 	- Quero ver uma tela de boas-vindas.
 	- Quero inserir meu nome/apelido.
-	- Quero ver uma explicação simples sobre o que o app faz.
-	- Quero ser informado sobre o que o app não faz.
+	- Quero ver uma explicação sobre o que o app faz. (checa fatos em fontes confiáveis)
+	- Quero ser informado sobre o que o app não faz. (não analisa qualquer link da internet, não é um chat de IA genérico)
 
 **Épico 2: Interação Principal**
 
@@ -44,14 +44,14 @@
 - **Funcionalidades: Como usuário, quero poder personalizar o aplicativo.**
 
 - **Histórias (Detalhes):**
-	- Quero poder inserir um nome ou apelido.
+	- Quero poder trocar o nome ou apelido previamente colocado.
 	- Quero mudar o idioma da interface e das respostas.
 	- Quero escolher entre tema claro e tema escuro.
 	- Quero ajustar o tamanho da fonte no chat.
-	- Quero acessar uma tela de "Tutorial" ou "Sobre".
+	- Quero acessar uma tela de "Tutorial". (Landing Page inicial)
+	- Quero acessar o "Sobre" do aplicativo. (redireciona ao git pages)
 	- Quero ver os termos de serviço e a política de privacidade.
 	- Quero ver a versão do app.
-	- Quero ver uma explicação sobre a metodologia do app (RAG).
 	- Quero saber as fontes confiáveis que o app utiliza.
 
 
@@ -69,14 +69,3 @@
 	-Quero receber uma confirmação visual quando um novo link for processado com sucesso.
 	-Quero remover um artigo específico que julgar tendencioso ou irrelevante.
 	-Quero conseguir buscar ou filtrar a lista de artigos para encontrar uma matéria específica.
-
-
-
-
-
-
-
-
-
-
-
