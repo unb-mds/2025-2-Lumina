@@ -11,6 +11,10 @@
         <link rel="canonical" href="https://mydomain.org/mysite/estudos/Estudo%20sobre%20Arquitetura%20de%20Agentes%20de%20IA/">
       
       
+        <link rel="prev" href="../Defini%C3%A7%C3%A3o_de_Produto/">
+      
+      
+        <link rel="next" href="../Estudo%20sobre%20como%20hospedar%20um%20app%20na%20Play%20Store/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -18,7 +22,7 @@
     
     
       
-        <title>Estudo: Arquitetura e Implementação de Agentes de IA - Lumina</title>
+        <title>Arquitetura de agentes de IA - Lumina</title>
       
     
     
@@ -106,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Estudo: Arquitetura e Implementação de Agentes de IA
+              Arquitetura de agentes de IA
             
           </span>
         </div>
@@ -435,6 +439,953 @@
   
 
     
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Estudos
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Estudos
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ArquiteturaDeSistemas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Arquitetura de sistemas
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../BoasPraticasDeDocumentacao/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Boas práticas de documentação
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Defini%C3%A7%C3%A3o_de_Produto/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Definição de produto
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Arquitetura de agentes de IA
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Arquitetura de agentes de IA
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-o-que-e-um-agente-de-ia-e-seus-principais-padroes-de-arquitetura" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. O que é um Agente de IA e seus principais padrões de arquitetura
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. O que é um Agente de IA e seus principais padrões de arquitetura">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11-componentes-essenciais" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1. Componentes essenciais:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12-principais-padroes-de-arquitetura-de-agentes-de-ia" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2. Principais padrões de arquitetura de agentes de IA
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1.2. Principais padrões de arquitetura de agentes de IA">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#121-plannerexecutor-planejador-executor" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2.1. Planner–Executor (Planejador + Executor)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#122-multi-agent-orquestracao-subagentes-especializados" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2.2. Multi-agent / Orquestração (subagentes especializados)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13-rag-retrieval-augmented-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3. RAG (Retrieval-Augmented Generation)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-principais-frameworks-e-bibliotecas-para-construir-agentes" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Principais frameworks e bibliotecas para construir agentes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Principais frameworks e bibliotecas para construir agentes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-langchain" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.1. LangChain
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-autogen-microsoft" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.2. AutoGen (Microsoft)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23-llamaindex-gpt-index" class="md-nav__link">
+    <span class="md-ellipsis">
+      2.3. LlamaIndex (GPT Index)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-intencao-de-um-web-crawler-com-um-agente-de-ia" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Intenção de um Web Crawler com um Agente de IA
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Intenção de um Web Crawler com um Agente de IA">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-o-que-e-um-web-crawler" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1. O que é um Web Crawler
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-interacao-do-web-crawler-com-o-agente" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2. Interação do web crawler com o agente
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-proposta-de-aplicacao-de-um-agente-no-projeto" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Proposta de aplicação de um agente no projeto
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Proposta de aplicação de um agente no projeto">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41-objetivo-da-funcionalidade" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.1. Objetivo da funcionalidade
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42-fluxo" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.2. Fluxo
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43-interacoes-do-agente" class="md-nav__link">
+    <span class="md-ellipsis">
+      4.3. Interações do agente
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-referencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Referências
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Estudo%20sobre%20como%20hospedar%20um%20app%20na%20Play%20Store/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Como hospedar um app na Play Store
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Estudo_APIsEWebCrawlers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    APIs e WebCrawlers
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Estudo_Docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Docker
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Estudo_Figma/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Figma
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Estudo_SitesEstaticos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sites estáticos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../EstudoRAG_e%20_Aplica%C3%A7%C3%B5es/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    RAG e aplicações
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Flutter%20e%20Dart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Flutter e Dart
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Git_e_GitHub/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Git e GitHub
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../GitHubInsights/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    GitHub Insights
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../MetricasdeOpenSouce/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Métricas de OpenSource
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Requisitos/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Requisitos
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Tecnologias_Backend/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tecnologias Backend
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Tecnologias_Frontend/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tecnologias Frontend
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Planejamento
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Planejamento
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Atas
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            Atas
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../planejamentos/atas/ata_Sprint00/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ata Sprint 00
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../planejamentos/atas/ata_Sprint01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ata Sprint 01
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../planejamentos/atas/ata_Sprint02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ata Sprint 02
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Sprints
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            Sprints
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../planejamentos/sprints/sprint_00/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sprint 00
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../planejamentos/sprints/sprint_01/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sprint 01
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../planejamentos/sprints/sprint_02/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sprint 02
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -669,10 +1620,10 @@
 
 
 
-<h1 id="estudo-arquitetura-e-implementacao-de-agentes-de-ia">Estudo: Arquitetura e Implementação de Agentes de IA</h1>
-<h2 id="1-o-que-e-um-agente-de-ia-e-seus-principais-padroes-de-arquitetura">1. O que é um Agente de IA e seus principais padrões de arquitetura</h2>
+<h1 id="estudo-arquitetura-e-implementacao-de-agentes-de-ia">Estudo: Arquitetura e Implementação de Agentes de IA<a class="headerlink" href="#estudo-arquitetura-e-implementacao-de-agentes-de-ia" title="Permanent link">&para;</a></h1>
+<h2 id="1-o-que-e-um-agente-de-ia-e-seus-principais-padroes-de-arquitetura">1. O que é um Agente de IA e seus principais padrões de arquitetura<a class="headerlink" href="#1-o-que-e-um-agente-de-ia-e-seus-principais-padroes-de-arquitetura" title="Permanent link">&para;</a></h2>
 <p>Um agente de IA é um sistema que percebe um ambiente, decide (planeja) e atua para atingir objetivos. No contexto de aplicações web, é um software que recebe entradas (URL, texto, prompt), usa modelos/algoritmos e ferramentas externas (buscas, DBs) e devolve ações/decisões (resposta, veredito, execução de tarefas).</p>
-<h3 id="11-componentes-essenciais">1.1. Componentes essenciais:</h3>
+<h3 id="11-componentes-essenciais">1.1. Componentes essenciais:<a class="headerlink" href="#11-componentes-essenciais" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Percepção / Input:</strong> Captura dados: texto do usuário, páginas web, feeds de notícias, APIs.</li>
 <li><strong>Módulo de Planejamento / Raciocínio:</strong> Decide os passos a seguir (ex.: “buscar fontes → comparar → sintetizar”). Geralmente implementado com um LLM (Large Language Model) + lógica de controle.</li>
@@ -684,44 +1635,44 @@
 </li>
 <li><strong>Execução / Ação (Output):</strong> Geração de relatórios, atualizações no banco de dados.</li>
 </ul>
-<h3 id="12-principais-padroes-de-arquitetura-de-agentes-de-ia">1.2. Principais padrões de arquitetura de agentes de IA</h3>
-<h4 id="121-plannerexecutor-planejador-executor">1.2.1. Planner–Executor (Planejador + Executor)</h4>
+<h3 id="12-principais-padroes-de-arquitetura-de-agentes-de-ia">1.2. Principais padrões de arquitetura de agentes de IA<a class="headerlink" href="#12-principais-padroes-de-arquitetura-de-agentes-de-ia" title="Permanent link">&para;</a></h3>
+<h4 id="121-plannerexecutor-planejador-executor">1.2.1. Planner–Executor (Planejador + Executor)<a class="headerlink" href="#121-plannerexecutor-planejador-executor" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>O que é:</strong> Um módulo “planejador” gera um plano de alto nível (lista de passos/subtarefas); o “executor” implementa cada passo chamando ferramentas e retornando resultados.</li>
 <li><strong>Vantagens:</strong> Facilita a decomposição de tarefas complexas e a paralelização de passos (ex.: paralelizar buscas em fontes).</li>
 <li><strong>Desvantagens:</strong> Requer um componente adicional para reconciliar resultados.</li>
 </ul>
-<h4 id="122-multi-agent-orquestracao-subagentes-especializados">1.2.2. Multi-agent / Orquestração (subagentes especializados)</h4>
+<h4 id="122-multi-agent-orquestracao-subagentes-especializados">1.2.2. Multi-agent / Orquestração (subagentes especializados)<a class="headerlink" href="#122-multi-agent-orquestracao-subagentes-especializados" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>O que é:</strong> Vários agentes especializados (pesquisador, extrator, verificador, sintetizador) colaboram; pode haver um “orquestrador” que coordena.</li>
 <li><strong>Vantagens:</strong> Modularidade, independência de responsabilidades, fácil teste e substituição de componentes (ex.: trocar o extrator por outro melhor).</li>
 <li><strong>Desvantagens:</strong> Complexidade operacional e de comunicação entre agentes; necessidade de mecanismos de consenso/merge de evidências.</li>
 </ul>
-<h3 id="13-rag-retrieval-augmented-generation">1.3. RAG (Retrieval-Augmented Generation)</h3>
+<h3 id="13-rag-retrieval-augmented-generation">1.3. RAG (Retrieval-Augmented Generation)<a class="headerlink" href="#13-rag-retrieval-augmented-generation" title="Permanent link">&para;</a></h3>
 <p>RAG é uma arquitetura de IA que aprimora os LLMs ao permitir que eles acessem e utilizem informações de fontes de dados externas para gerar respostas mais precisas e contextualmente ricas. Em vez de depender apenas do seu conhecimento de treinamento, um sistema RAG primeiro recupera dados relevantes de bancos de dados, documentos e da web e depois os usa para melhorar a geração de texto, garantindo que as respostas sejam mais atualizadas.</p>
-<h2 id="2-principais-frameworks-e-bibliotecas-para-construir-agentes">2. Principais frameworks e bibliotecas para construir agentes</h2>
-<h3 id="21-langchain">2.1. LangChain</h3>
+<h2 id="2-principais-frameworks-e-bibliotecas-para-construir-agentes">2. Principais frameworks e bibliotecas para construir agentes<a class="headerlink" href="#2-principais-frameworks-e-bibliotecas-para-construir-agentes" title="Permanent link">&para;</a></h2>
+<h3 id="21-langchain">2.1. LangChain<a class="headerlink" href="#21-langchain" title="Permanent link">&para;</a></h3>
 <p>É um framework que simplifica o desenvolvimento de aplicações baseadas em LLMs. Ele fornece "blocos de construção" prontos e ferramentas que permitem aos desenvolvedores conectar LLMs a fontes de dados, criar cadeias de processos e agentes de IA, possibilitando aplicações mais complexas e inteligentes como chatbots.</p>
 <ul>
 <li><strong>Propósito:</strong> Orquestração de LLMs, RAG, agentes (tool-calling) e integração com vector DBs.</li>
 <li><strong>Pontos fortes:</strong> Grande ecossistema, documentação, integração com provedores (OpenAI, Anthropic), suporte a agents e RAG; migração para LangGraph para execução mais sofisticada.</li>
 </ul>
-<h3 id="22-autogen-microsoft">2.2. AutoGen (Microsoft)</h3>
+<h3 id="22-autogen-microsoft">2.2. AutoGen (Microsoft)<a class="headerlink" href="#22-autogen-microsoft" title="Permanent link">&para;</a></h3>
 <p>AutoGen é uma estrutura de código aberto projetada para criar aplicativos de IA com vários agentes que podem operar de forma semiautônoma e totalmente autônoma.</p>
 <ul>
 <li><strong>Propósito:</strong> Framework para construir aplicações multi-agent e workflows event-driven com LLMs.</li>
 <li><strong>Pontos fortes:</strong> Pensado para cenários multi-agent, streaming e colaboração; suporte de pesquisa/produção da Microsoft.</li>
 </ul>
-<h3 id="23-llamaindex-gpt-index">2.3. LlamaIndex (GPT Index)</h3>
+<h3 id="23-llamaindex-gpt-index">2.3. LlamaIndex (GPT Index)<a class="headerlink" href="#23-llamaindex-gpt-index" title="Permanent link">&para;</a></h3>
 <p>LlamaIndex é um framework de código aberto que conecta modelos de LLMs com os seus próprios dados, permitindo a criação de aplicações de IA generativa mais precisas e contextualizadas.</p>
 <ul>
 <li><strong>Propósito:</strong> Camada de ingestão e indexação de dados para agentes/assistentes (document parsing, RAG).</li>
 <li><strong>Pontos fortes:</strong> Facilita construir "knowledge bases" sobre documentos, integra com vector DBs e agentes. Útil para extrair evidências de fontes de dados baseadas em texto.</li>
 </ul>
-<h2 id="3-intencao-de-um-web-crawler-com-um-agente-de-ia">3. Intenção de um Web Crawler com um Agente de IA</h2>
-<h3 id="31-o-que-e-um-web-crawler">3.1. O que é um Web Crawler</h3>
+<h2 id="3-intencao-de-um-web-crawler-com-um-agente-de-ia">3. Intenção de um Web Crawler com um Agente de IA<a class="headerlink" href="#3-intencao-de-um-web-crawler-com-um-agente-de-ia" title="Permanent link">&para;</a></h2>
+<h3 id="31-o-que-e-um-web-crawler">3.1. O que é um Web Crawler<a class="headerlink" href="#31-o-que-e-um-web-crawler" title="Permanent link">&para;</a></h3>
 <p>Um web crawler é um programa que navega automaticamente pela web, visitando links e coletando informações. É usado por motores de busca (Googlebot, Bingbot) para indexar páginas.</p>
-<h3 id="32-interacao-do-web-crawler-com-o-agente">3.2. Interação do web crawler com o agente</h3>
+<h3 id="32-interacao-do-web-crawler-com-o-agente">3.2. Interação do web crawler com o agente<a class="headerlink" href="#32-interacao-do-web-crawler-com-o-agente" title="Permanent link">&para;</a></h3>
 <ol>
 <li>Agente (IA) recebe a intenção → “preciso verificar essa notícia”.</li>
 <li>Crawler é acionado para coletar conteúdo atualizado em sites confiáveis.</li>
@@ -729,10 +1680,10 @@
 <li>O agente interpreta o conteúdo (NLP, embeddings, classificação).</li>
 <li>O agente decide a resposta final e comunica ao usuário.</li>
 </ol>
-<h2 id="4-proposta-de-aplicacao-de-um-agente-no-projeto">4. Proposta de aplicação de um agente no projeto</h2>
-<h3 id="41-objetivo-da-funcionalidade">4.1. Objetivo da funcionalidade</h3>
+<h2 id="4-proposta-de-aplicacao-de-um-agente-no-projeto">4. Proposta de aplicação de um agente no projeto<a class="headerlink" href="#4-proposta-de-aplicacao-de-um-agente-no-projeto" title="Permanent link">&para;</a></h2>
+<h3 id="41-objetivo-da-funcionalidade">4.1. Objetivo da funcionalidade<a class="headerlink" href="#41-objetivo-da-funcionalidade" title="Permanent link">&para;</a></h3>
 <p>Permitir que um usuário submeta uma URL/texto e receba um relatório de verificação com veredito (Verdadeiro / Falso / Impreciso / Não Verificado), evidências citadas, score de confiança e explicação.</p>
-<h3 id="42-fluxo">4.2. Fluxo</h3>
+<h3 id="42-fluxo">4.2. Fluxo<a class="headerlink" href="#42-fluxo" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Recebe input (URL/texto) na UI.</li>
 <li>Classificação de intenção → “checagem factual”.</li>
@@ -746,14 +1697,14 @@
 </li>
 <li>Resposta: Retorna relatório ao usuário.</li>
 </ul>
-<h3 id="43-interacoes-do-agente">4.3. Interações do agente</h3>
+<h3 id="43-interacoes-do-agente">4.3. Interações do agente<a class="headerlink" href="#43-interacoes-do-agente" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Busca:</strong> Buscar artigos relacionados (crawler + search).</li>
 <li><strong>Extração:</strong> Extrair claims/entidades/datas do texto submetido.</li>
 <li><strong>Comparação:</strong> Para cada claim, recuperar evidências e checar correspondência (factualidade/tempo/contexto).</li>
 <li><strong>Sintetizar:</strong> Gerar laudo com: veredito, evidências (links + trechos de artigos) e índice de confiança.</li>
 </ul>
-<h2 id="5-referencias">5. Referências</h2>
+<h2 id="5-referencias">5. Referências<a class="headerlink" href="#5-referencias" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="https://cloud.google.com/discover/what-are-ai-agent">What are AI agents? - Google Cloud</a></li>
 <li><a href="https://blog.dsacademy.com.br/firecrawl-e-web-scraping-inteligente-com-ia/">Firecrawl e Web Scraping Inteligente com IA - DSA Blog</a></li>
@@ -785,6 +1736,46 @@
       
         <footer class="md-footer">
   
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../Defini%C3%A7%C3%A3o_de_Produto/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Definição de produto">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Definição de produto
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../Estudo%20sobre%20como%20hospedar%20um%20app%20na%20Play%20Store/" class="md-footer__link md-footer__link--next" aria-label="Next: Como hospedar um app na Play Store">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Como hospedar um app na Play Store
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
       <div class="md-copyright">
@@ -809,7 +1800,7 @@
     
     
       
-      <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.footer"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
