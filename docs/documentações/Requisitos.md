@@ -135,8 +135,12 @@ O público-alvo do aplicativo são usuários de smartphones em geral, preocupado
 **Descrição:** Interface web para administradores controlarem quais reportagems estão sendo colocadas no banco de dados.  
 
 **Componentes:**  
-- **RF-006.1:** Permitir envio e remoção de novos artigos (link ou upload).  
-- **RF-006.2:** Mostrar quais reportagens e a fonte da mesma estão armazenadas no banco de dados.
+- **RF-006.1:** O sistema deve exibir uma lista de todos os artigos e jornais armazenados no banco de dados.
+- **RF-006.2:** Para cada item na lista, o sistema deve mostrar a fonte (nome do jornal ou site) e um link para o artigo original.
+- **RF-006.3:** O sistema deve permitir que o administrador adicione novos artigos ao banco de dados, inserindo um link para a matéria.
+- **RF-006.4:** O sistema deve fornecer uma confirmação visual quando um novo artigo for adicionado com sucesso.
+- **RF-006.5:** O sistema deve permitir que o administrador remova um artigo específico do banco de dados.
+- **RF-006.6:** A interface deve ter um campo de busca ou filtros para ajudar o administrador a encontrar artigos específicos.
 
 ---
 
@@ -181,6 +185,7 @@ O aplicativo de chatbot anti-fake news pretende gerar um impacto positivo em dif
 - **Comunicacional:** apoiar profissionais de mídia e criadores de conteúdo na checagem rápida de fatos, fortalecendo a credibilidade das informações divulgadas.  
 
 Com isso, espera-se contribuir para um ambiente digital mais confiável, onde usuários possam tomar decisões melhor informadas e reduzir os efeitos nocivos das fake news na sociedade.  
+
 
 
 
