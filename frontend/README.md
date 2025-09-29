@@ -10,6 +10,7 @@
     - Substitua "Minha_URL" pela URL do seu servidor local
     - Caso queira rodar no android emulator use a URL http://10.0.2.2:8000
     - Não deixe espaço no texto
+    - O arquivo .env deve estar na pasta frontend
 
 - Baixar os pacotes do flutter
   - Para baixar basta rodar
