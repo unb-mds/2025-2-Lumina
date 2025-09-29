@@ -12,7 +12,7 @@
     - Não deixe espaço no texto
     - O arquivo .env deve estar na pasta frontend
 
-- Baixar os pacotes do flutter
+- Baixar os pacotes do flutter necessarios para esse projeto
   - Para baixar basta rodar
     ```
     flutter pub get
