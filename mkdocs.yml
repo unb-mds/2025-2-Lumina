@@ -1,0 +1,114 @@
+site_name: Lumina
+
+repo_url: https://github.com/unb-mds/2025-2-Lumina
+repo_name: 'Lumina'
+
+nav:
+  - Início: index.md
+  - Arquitetura: documentações/diagramas/arquitetura.md
+  - Levantamento de Requisitos:
+      - Requisitos: documentações/Requisitos.md
+      - Story Map: documentações/StoryMap.md
+  - Estudos:
+      - Arquitetura de sistemas: estudos/ArquiteturaDeSistemas.md
+      - Boas práticas de documentação: estudos/BoasPraticasDeDocumentacao.md
+      - Definição de produto: estudos/Definição_de_Produto.md
+      - Arquitetura de agentes de IA: estudos/Estudo sobre Arquitetura de Agentes de IA.md
+      - Como hospedar um app na Play Store: estudos/Estudo sobre como hospedar um app na Play Store.md
+      - APIs e WebCrawlers: estudos/Estudo_APIsEWebCrawlers.md
+      - Docker: estudos/Estudo_Docker.md
+      - Figma: estudos/Estudo_Figma.md
+      - Sites estáticos: estudos/Estudo_SitesEstaticos.md
+      - RAG e aplicações: estudos/EstudoRAG_e _Aplicações.md
+      - Flutter e Dart: estudos/Flutter e Dart.md
+      - Git e GitHub: estudos/Git_e_GitHub.md
+      - GitHub Insights: estudos/GitHubInsights.md
+      - Métricas de OpenSource: estudos/MetricasdeOpenSouce.md
+      - Requisitos: estudos/Requisitos.md
+      - Tecnologias Backend: estudos/Tecnologias_Backend.md
+      - Tecnologias Frontend: estudos/Tecnologias_Frontend.md
+  - Planejamento:
+      - Sprints:
+          - Sprint 00: planejamentos/sprints/sprint_00.md
+          - Sprint 01: planejamentos/sprints/sprint_01.md
+          - Sprint 02: planejamentos/sprints/sprint_02.md
+  - Atas:
+        - Ata Sprint 00: planejamentos/atas/ata_Sprint00.md
+        - Ata Sprint 01: planejamentos/atas/ata_Sprint01.md
+        - Ata Sprint 02: planejamentos/atas/ata_Sprint02.md
+        - Ata Sprint 03: planejamentos/atas/ata_Sprint03.md
+
+site_url: https://mydomain.org/mysite
+
+theme:
+    name: material
+    font: Roboto Mono
+    palette: 
+
+      # Palette toggle for automatic mode
+     - media: "(prefers-color-scheme)"
+       toggle:
+         icon: material/brightness-auto
+         name: Switch to light mode
+        
+
+     # Palette toggle for light mode
+     - media: "(prefers-color-scheme: light)"
+       scheme: default
+       toggle:
+         icon: material/weather-sunny
+         name: Switch to dark mode
+       primary: custom
+
+     # Palette toggle for dark mode
+     - media: "(prefers-color-scheme: dark)"
+       scheme: slate
+       toggle:
+         icon: material/weather-night
+         name: Switch to system preference
+       primary: custom
+
+    features:
+      - navigation.footer
+
+    logo: assets/logo.png
+    favicon: assets/logo.png
+
+extra_css:
+  - stylesheets/extra.css
+
+
+markdown_extensions:
+
+  # Python Markdown
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - toc:
+      permalink: true
+
+  # Python Markdown Extensions
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+  - pymdownx.blocks.caption
