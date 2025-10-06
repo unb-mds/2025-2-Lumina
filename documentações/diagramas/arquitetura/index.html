@@ -8,28 +8,28 @@
       
       
       
-        <link rel="canonical" href="https://mydomain.org/mysite/estudos/MetricasdeOpenSouce/">
+        <link rel="canonical" href="https://mydomain.org/mysite/documenta%C3%A7%C3%B5es/diagramas/arquitetura/">
       
       
-        <link rel="prev" href="../GitHubInsights/">
+        <link rel="prev" href="../../..">
       
       
-        <link rel="next" href="../Requisitos/">
+        <link rel="next" href="../../Requisitos/">
       
       
-      <link rel="icon" href="../../assets/images/favicon.png">
+      <link rel="icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.20">
     
     
       
-        <title>Métricas de OpenSource - Lumina</title>
+        <title>Arquitetura - Lumina</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.e53b48f4.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.e53b48f4.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -48,9 +48,9 @@
       
     
     
-      <link rel="stylesheet" href="../../stylesheets/extra.css">
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#estudo-de-metricas-open-source" class="md-skip">
+        <a href="#arquitetura-do-sistema-de-chatbot-anti-fake-news" class="md-skip">
           Skip to content
         </a>
       
@@ -92,7 +92,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="Lumina" class="md-header__button md-logo" aria-label="Lumina" data-md-component="logo">
+    <a href="../../.." title="Lumina" class="md-header__button md-logo" aria-label="Lumina" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -112,7 +112,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Métricas de OpenSource
+              Arquitetura
             
           </span>
         </div>
@@ -238,7 +238,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="Lumina" class="md-nav__button md-logo" aria-label="Lumina" data-md-component="logo">
+    <a href="../../.." title="Lumina" class="md-nav__button md-logo" aria-label="Lumina" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -268,7 +268,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         
   
   
@@ -287,10 +287,32 @@
       
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../documenta%C3%A7%C3%B5es/diagramas/arquitetura/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Arquitetura
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -301,6 +323,227 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#diagramas-da-arquitetura-do-sistema" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagramas da Arquitetura do Sistema
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Diagramas da Arquitetura do Sistema">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stack-tecnologica" class="md-nav__link">
+    <span class="md-ellipsis">
+      Stack Tecnológica
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#contexto" class="md-nav__link">
+    <span class="md-ellipsis">
+      Contexto
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conteineres" class="md-nav__link">
+    <span class="md-ellipsis">
+      Contêineres
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#componentes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Componentes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#descricao-dos-modulos-e-componentes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Descrição dos Módulos e Componentes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Descrição dos Módulos e Componentes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-frontend-mobile-aplicativo-flutter" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Frontend Mobile: Aplicativo (Flutter)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-backend-api-do-chatbot-fastapi" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Backend: API do Chatbot (FastAPI)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-pipeline-de-ingestao-de-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Pipeline de Ingestão de Dados
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-bancos-de-dados" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Bancos de Dados
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Bancos de Dados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#chromadb" class="md-nav__link">
+    <span class="md-ellipsis">
+      ChromaDB:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sqlite" class="md-nav__link">
+    <span class="md-ellipsis">
+      SQLite:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-frontend-web-interface-de-administracao-htmljscss" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Frontend Web: Interface de Administração (HTML/JS/CSS)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-componentes-de-ia-e-logica-dentro-da-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Componentes de IA e Lógica (dentro da API)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Componentes de IA e Lógica (dentro da API)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#retriever" class="md-nav__link">
+    <span class="md-ellipsis">
+      Retriever:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#llm-api-externa-do-gemini" class="md-nav__link">
+    <span class="md-ellipsis">
+      LLM (API Externa do Gemini):
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#requisitos-e-deploy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Requisitos e Deploy
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Requisitos e Deploy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#requisitos-de-software" class="md-nav__link">
+    <span class="md-ellipsis">
+      Requisitos de Software
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deploy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deploy
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -350,7 +593,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../documenta%C3%A7%C3%B5es/Requisitos/" class="md-nav__link">
+      <a href="../../Requisitos/" class="md-nav__link">
         
   
   
@@ -373,7 +616,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../documenta%C3%A7%C3%B5es/StoryMap/" class="md-nav__link">
+      <a href="../../StoryMap/" class="md-nav__link">
         
   
   
@@ -400,20 +643,18 @@
       
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
         
           
           <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
@@ -429,7 +670,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             Estudos
@@ -443,7 +684,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ArquiteturaDeSistemas/" class="md-nav__link">
+      <a href="../../../estudos/ArquiteturaDeSistemas/" class="md-nav__link">
         
   
   
@@ -466,7 +707,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../BoasPraticasDeDocumentacao/" class="md-nav__link">
+      <a href="../../../estudos/BoasPraticasDeDocumentacao/" class="md-nav__link">
         
   
   
@@ -489,7 +730,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Defini%C3%A7%C3%A3o_de_Produto/" class="md-nav__link">
+      <a href="../../../estudos/Defini%C3%A7%C3%A3o_de_Produto/" class="md-nav__link">
         
   
   
@@ -512,7 +753,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Estudo%20sobre%20Arquitetura%20de%20Agentes%20de%20IA/" class="md-nav__link">
+      <a href="../../../estudos/Estudo%20sobre%20Arquitetura%20de%20Agentes%20de%20IA/" class="md-nav__link">
         
   
   
@@ -535,7 +776,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Estudo%20sobre%20como%20hospedar%20um%20app%20na%20Play%20Store/" class="md-nav__link">
+      <a href="../../../estudos/Estudo%20sobre%20como%20hospedar%20um%20app%20na%20Play%20Store/" class="md-nav__link">
         
   
   
@@ -558,7 +799,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Estudo_APIsEWebCrawlers/" class="md-nav__link">
+      <a href="../../../estudos/Estudo_APIsEWebCrawlers/" class="md-nav__link">
         
   
   
@@ -581,7 +822,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Estudo_Docker/" class="md-nav__link">
+      <a href="../../../estudos/Estudo_Docker/" class="md-nav__link">
         
   
   
@@ -604,7 +845,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Estudo_Figma/" class="md-nav__link">
+      <a href="../../../estudos/Estudo_Figma/" class="md-nav__link">
         
   
   
@@ -627,7 +868,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Estudo_SitesEstaticos/" class="md-nav__link">
+      <a href="../../../estudos/Estudo_SitesEstaticos/" class="md-nav__link">
         
   
   
@@ -650,7 +891,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../EstudoRAG_e%20_Aplica%C3%A7%C3%B5es/" class="md-nav__link">
+      <a href="../../../estudos/EstudoRAG_e%20_Aplica%C3%A7%C3%B5es/" class="md-nav__link">
         
   
   
@@ -673,7 +914,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Flutter%20e%20Dart/" class="md-nav__link">
+      <a href="../../../estudos/Flutter%20e%20Dart/" class="md-nav__link">
         
   
   
@@ -696,7 +937,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Git_e_GitHub/" class="md-nav__link">
+      <a href="../../../estudos/Git_e_GitHub/" class="md-nav__link">
         
   
   
@@ -719,7 +960,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../GitHubInsights/" class="md-nav__link">
+      <a href="../../../estudos/GitHubInsights/" class="md-nav__link">
         
   
   
@@ -739,32 +980,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    Métricas de OpenSource
-    
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../../estudos/MetricasdeOpenSouce/" class="md-nav__link">
         
   
   
@@ -775,221 +994,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#1-a-saude-do-projeto-como-terceiro-pilar-estrategico" class="md-nav__link">
-    <span class="md-ellipsis">
-      1. A Saúde do Projeto como Terceiro Pilar Estratégico
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2-estrutura-de-analise-quatro-dimensoes" class="md-nav__link">
-    <span class="md-ellipsis">
-      2. Estrutura de Análise: Quatro Dimensões
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="2. Estrutura de Análise: Quatro Dimensões">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#21-vitalidade-da-comunidade" class="md-nav__link">
-    <span class="md-ellipsis">
-      2.1. Vitalidade da Comunidade
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#22-velocidade-de-desenvolvimento" class="md-nav__link">
-    <span class="md-ellipsis">
-      2.2. Velocidade de Desenvolvimento
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#23-governanca-e-manutenibilidade" class="md-nav__link">
-    <span class="md-ellipsis">
-      2.3. Governança e Manutenibilidade
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#24-resiliencia-e-influencia-no-ecossistema" class="md-nav__link">
-    <span class="md-ellipsis">
-      2.4. Resiliência e Influência no Ecossistema
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-principais-metricas" class="md-nav__link">
-    <span class="md-ellipsis">
-      3. Principais Métricas
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="3. Principais Métricas">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#31-vitalidade-da-comunidade" class="md-nav__link">
-    <span class="md-ellipsis">
-      3.1. Vitalidade da Comunidade
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#32-velocidade-de-desenvolvimento" class="md-nav__link">
-    <span class="md-ellipsis">
-      3.2. Velocidade de Desenvolvimento
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#33-governanca-e-manutenibilidade" class="md-nav__link">
-    <span class="md-ellipsis">
-      3.3. Governança e Manutenibilidade
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#34-resiliencia-e-influencia" class="md-nav__link">
-    <span class="md-ellipsis">
-      3.4. Resiliência e Influência
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-ferramentas-de-analise" class="md-nav__link">
-    <span class="md-ellipsis">
-      4. Ferramentas de Análise
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="4. Ferramentas de Análise">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#41-framework-chaoss" class="md-nav__link">
-    <span class="md-ellipsis">
-      4.1. Framework CHAOSS
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#42-github-insights" class="md-nav__link">
-    <span class="md-ellipsis">
-      4.2. GitHub Insights
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5-aplicacao-pratica" class="md-nav__link">
-    <span class="md-ellipsis">
-      5. Aplicação Prática
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="5. Aplicação Prática">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#51-casos-de-uso" class="md-nav__link">
-    <span class="md-ellipsis">
-      5.1. Casos de Uso
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#52-painel-inicial-recomendado" class="md-nav__link">
-    <span class="md-ellipsis">
-      5.2. Painel Inicial Recomendado
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6-conclusao" class="md-nav__link">
-    <span class="md-ellipsis">
-      6. Conclusão
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#7-referencias" class="md-nav__link">
-    <span class="md-ellipsis">
-      7. Referências
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1002,7 +1006,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Requisitos/" class="md-nav__link">
+      <a href="../../../estudos/Requisitos/" class="md-nav__link">
         
   
   
@@ -1025,7 +1029,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Tecnologias_Backend/" class="md-nav__link">
+      <a href="../../../estudos/Tecnologias_Backend/" class="md-nav__link">
         
   
   
@@ -1048,7 +1052,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../Tecnologias_Frontend/" class="md-nav__link">
+      <a href="../../../estudos/Tecnologias_Frontend/" class="md-nav__link">
         
   
   
@@ -1154,7 +1158,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../planejamentos/sprints/sprint_00/" class="md-nav__link">
+      <a href="../../../planejamentos/sprints/sprint_00/" class="md-nav__link">
         
   
   
@@ -1177,7 +1181,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../planejamentos/sprints/sprint_01/" class="md-nav__link">
+      <a href="../../../planejamentos/sprints/sprint_01/" class="md-nav__link">
         
   
   
@@ -1200,7 +1204,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../planejamentos/sprints/sprint_02/" class="md-nav__link">
+      <a href="../../../planejamentos/sprints/sprint_02/" class="md-nav__link">
         
   
   
@@ -1276,7 +1280,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../planejamentos/atas/ata_Sprint00/" class="md-nav__link">
+      <a href="../../../planejamentos/atas/ata_Sprint00/" class="md-nav__link">
         
   
   
@@ -1299,7 +1303,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../planejamentos/atas/ata_Sprint01/" class="md-nav__link">
+      <a href="../../../planejamentos/atas/ata_Sprint01/" class="md-nav__link">
         
   
   
@@ -1322,7 +1326,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../planejamentos/atas/ata_Sprint02/" class="md-nav__link">
+      <a href="../../../planejamentos/atas/ata_Sprint02/" class="md-nav__link">
         
   
   
@@ -1345,7 +1349,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../planejamentos/atas/ata_Sprint03/" class="md-nav__link">
+      <a href="../../../planejamentos/atas/ata_Sprint03/" class="md-nav__link">
         
   
   
@@ -1395,55 +1399,19 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-a-saude-do-projeto-como-terceiro-pilar-estrategico" class="md-nav__link">
+  <a href="#diagramas-da-arquitetura-do-sistema" class="md-nav__link">
     <span class="md-ellipsis">
-      1. A Saúde do Projeto como Terceiro Pilar Estratégico
+      Diagramas da Arquitetura do Sistema
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2-estrutura-de-analise-quatro-dimensoes" class="md-nav__link">
-    <span class="md-ellipsis">
-      2. Estrutura de Análise: Quatro Dimensões
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="2. Estrutura de Análise: Quatro Dimensões">
+    <nav class="md-nav" aria-label="Diagramas da Arquitetura do Sistema">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#21-vitalidade-da-comunidade" class="md-nav__link">
+  <a href="#stack-tecnologica" class="md-nav__link">
     <span class="md-ellipsis">
-      2.1. Vitalidade da Comunidade
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#22-velocidade-de-desenvolvimento" class="md-nav__link">
-    <span class="md-ellipsis">
-      2.2. Velocidade de Desenvolvimento
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#23-governanca-e-manutenibilidade" class="md-nav__link">
-    <span class="md-ellipsis">
-      2.3. Governança e Manutenibilidade
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#24-resiliencia-e-influencia-no-ecossistema" class="md-nav__link">
-    <span class="md-ellipsis">
-      2.4. Resiliência e Influência no Ecossistema
+      Stack Tecnológica
     </span>
   </a>
   
@@ -1455,46 +1423,92 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-principais-metricas" class="md-nav__link">
+  <a href="#contexto" class="md-nav__link">
     <span class="md-ellipsis">
-      3. Principais Métricas
+      Contexto
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="3. Principais Métricas">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conteineres" class="md-nav__link">
+    <span class="md-ellipsis">
+      Contêineres
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#componentes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Componentes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#descricao-dos-modulos-e-componentes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Descrição dos Módulos e Componentes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Descrição dos Módulos e Componentes">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#31-vitalidade-da-comunidade" class="md-nav__link">
+  <a href="#1-frontend-mobile-aplicativo-flutter" class="md-nav__link">
     <span class="md-ellipsis">
-      3.1. Vitalidade da Comunidade
+      1. Frontend Mobile: Aplicativo (Flutter)
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#32-velocidade-de-desenvolvimento" class="md-nav__link">
+  <a href="#2-backend-api-do-chatbot-fastapi" class="md-nav__link">
     <span class="md-ellipsis">
-      3.2. Velocidade de Desenvolvimento
+      2. Backend: API do Chatbot (FastAPI)
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#33-governanca-e-manutenibilidade" class="md-nav__link">
+  <a href="#3-pipeline-de-ingestao-de-dados" class="md-nav__link">
     <span class="md-ellipsis">
-      3.3. Governança e Manutenibilidade
+      3. Pipeline de Ingestão de Dados
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#34-resiliencia-e-influencia" class="md-nav__link">
+  <a href="#4-bancos-de-dados" class="md-nav__link">
     <span class="md-ellipsis">
-      3.4. Resiliência e Influência
+      4. Bancos de Dados
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Bancos de Dados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#chromadb" class="md-nav__link">
+    <span class="md-ellipsis">
+      ChromaDB:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sqlite" class="md-nav__link">
+    <span class="md-ellipsis">
+      SQLite:
     </span>
   </a>
   
@@ -1504,30 +1518,39 @@
     </nav>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#4-ferramentas-de-analise" class="md-nav__link">
-    <span class="md-ellipsis">
-      4. Ferramentas de Análise
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="4. Ferramentas de Análise">
-      <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#41-framework-chaoss" class="md-nav__link">
+  <a href="#5-frontend-web-interface-de-administracao-htmljscss" class="md-nav__link">
     <span class="md-ellipsis">
-      4.1. Framework CHAOSS
+      5. Frontend Web: Interface de Administração (HTML/JS/CSS)
     </span>
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#42-github-insights" class="md-nav__link">
+  <a href="#6-componentes-de-ia-e-logica-dentro-da-api" class="md-nav__link">
     <span class="md-ellipsis">
-      4.2. GitHub Insights
+      6. Componentes de IA e Lógica (dentro da API)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Componentes de IA e Lógica (dentro da API)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#retriever" class="md-nav__link">
+    <span class="md-ellipsis">
+      Retriever:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#llm-api-externa-do-gemini" class="md-nav__link">
+    <span class="md-ellipsis">
+      LLM (API Externa do Gemini):
     </span>
   </a>
   
@@ -1537,34 +1560,6 @@
     </nav>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#5-aplicacao-pratica" class="md-nav__link">
-    <span class="md-ellipsis">
-      5. Aplicação Prática
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="5. Aplicação Prática">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#51-casos-de-uso" class="md-nav__link">
-    <span class="md-ellipsis">
-      5.1. Casos de Uso
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#52-painel-inicial-recomendado" class="md-nav__link">
-    <span class="md-ellipsis">
-      5.2. Painel Inicial Recomendado
-    </span>
-  </a>
-  
-</li>
         
       </ul>
     </nav>
@@ -1572,20 +1567,35 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#6-conclusao" class="md-nav__link">
+  <a href="#requisitos-e-deploy" class="md-nav__link">
     <span class="md-ellipsis">
-      6. Conclusão
+      Requisitos e Deploy
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Requisitos e Deploy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#requisitos-de-software" class="md-nav__link">
+    <span class="md-ellipsis">
+      Requisitos de Software
     </span>
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#7-referencias" class="md-nav__link">
+        
+          <li class="md-nav__item">
+  <a href="#deploy" class="md-nav__link">
     <span class="md-ellipsis">
-      7. Referências
+      Deploy
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1608,80 +1618,123 @@
   
 
 
-<h1 id="estudo-de-metricas-open-source">Estudo de Métricas Open Source<a class="headerlink" href="#estudo-de-metricas-open-source" title="Permanent link">&para;</a></h1>
-<p>A saúde de projetos open source (OSS) tornou-se uma disciplina crucial. A viabilidade e sustentabilidade de um projeto dependem da vitalidade da sua comunidade e da eficácia dos seus processos.</p>
-<h2 id="1-a-saude-do-projeto-como-terceiro-pilar-estrategico">1. A Saúde do Projeto como Terceiro Pilar Estratégico<a class="headerlink" href="#1-a-saude-do-projeto-como-terceiro-pilar-estrategico" title="Permanent link">&para;</a></h2>
-<p>A gestão de risco em OSS tradicionalmente foca em:
-- Conformidade de licenças
-- Segurança de vulnerabilidades</p>
-<p>Estes são pilares reativos. A <strong>saúde do projeto</strong> emerge como um terceiro pilar proativo que avalia o bem-estar social e a resiliência de um projeto.</p>
-<p>Em vez de procurar falhas no código, esta abordagem foca na dinâmica da comunidade de contribuidores e na eficiência das atividades de desenvolvimento. OSS é um artefacto sociotécnico: o código é o esqueleto, mas a comunidade é o motor.</p>
-<h2 id="2-estrutura-de-analise-quatro-dimensoes">2. Estrutura de Análise: Quatro Dimensões<a class="headerlink" href="#2-estrutura-de-analise-quatro-dimensoes" title="Permanent link">&para;</a></h2>
-<h3 id="21-vitalidade-da-comunidade">2.1. Vitalidade da Comunidade<a class="headerlink" href="#21-vitalidade-da-comunidade" title="Permanent link">&para;</a></h3>
-<p>Avalia o capital humano do projeto. Uma comunidade vibrante, com fluxo de novos contribuidores e diversidade organizacional, indica sustentabilidade.</p>
-<h3 id="22-velocidade-de-desenvolvimento">2.2. Velocidade de Desenvolvimento<a class="headerlink" href="#22-velocidade-de-desenvolvimento" title="Permanent link">&para;</a></h3>
-<p>Mede o pulso operacional. Refere-se à eficiência do ciclo de desenvolvimento, desde a resposta a contribuições até a entrega de versões. Resposta rápida sinaliza mantenedores engajados.</p>
-<h3 id="23-governanca-e-manutenibilidade">2.3. Governança e Manutenibilidade<a class="headerlink" href="#23-governanca-e-manutenibilidade" title="Permanent link">&para;</a></h3>
-<p>Examina a estrutura organizacional e processos. Boa governança proporciona clareza e transparência. Documentação de qualidade reduz a barreira para novos contribuidores.</p>
-<h3 id="24-resiliencia-e-influencia-no-ecossistema">2.4. Resiliência e Influência no Ecossistema<a class="headerlink" href="#24-resiliencia-e-influencia-no-ecossistema" title="Permanent link">&para;</a></h3>
-<p>Avalia o impacto e posição do projeto no ecossistema de software. Quantifica adoção, popularidade e importância para outras tecnologias.</p>
-<p>Estas dimensões funcionam em ciclo de feedback contínuo.</p>
-<h2 id="3-principais-metricas">3. Principais Métricas<a class="headerlink" href="#3-principais-metricas" title="Permanent link">&para;</a></h2>
-<h3 id="31-vitalidade-da-comunidade">3.1. Vitalidade da Comunidade<a class="headerlink" href="#31-vitalidade-da-comunidade" title="Permanent link">&para;</a></h3>
+<h1 id="arquitetura-do-sistema-de-chatbot-anti-fake-news">Arquitetura do Sistema de Chatbot Anti-Fake News<a class="headerlink" href="#arquitetura-do-sistema-de-chatbot-anti-fake-news" title="Permanent link">&para;</a></h1>
+<p>Este documento descreve a arquitetura do Sistema de Chatbot Anti-Fake News. O objetivo principal do sistema é combater a desinformação, permitindo que usuários verifiquem notícias e façam perguntas, enquanto administradores gerenciam as fontes de dados. A aplicação foi projetada com foco em escalabilidade, manutenção e fácil gerenciamento da base de conhecimento.</p>
+<h2 id="diagramas-da-arquitetura-do-sistema">Diagramas da Arquitetura do Sistema<a class="headerlink" href="#diagramas-da-arquitetura-do-sistema" title="Permanent link">&para;</a></h2>
+<h3 id="stack-tecnologica">Stack Tecnológica<a class="headerlink" href="#stack-tecnologica" title="Permanent link">&para;</a></h3>
 <ul>
-<li><strong>Bus Factor:</strong> O menor número de pessoas responsáveis por 50% das contribuições. Bus factor baixo (1 ou 2) é sinal de alerta de dependência de indivíduos-chave.</li>
-<li><strong>Diversidade Organizacional:</strong> Número de empresas cujos funcionários contribuem. Reduz o risco de abandono por uma única entidade.</li>
+<li><strong>Backend</strong>: Python com o framework FastAPI</li>
+<li><strong>Frontend Mobile</strong>: Aplicativo nativo desenvolvido em Flutter para Android e iOS</li>
+<li><strong>Frontend Web</strong>: Interface de administração construída com HTML, JS e CSS, hospedada em GitHub Pages</li>
+<li><strong>Bancos de Dados</strong>: ChromaDB para armazenamento de vetores e SQLite para dados locais do usuário no aplicativo móvel</li>
+<li><strong>IA/LLM</strong>: API externa do Gemini (Google) para processamento de linguagem e geração de respostas</li>
+<li><strong>Outras Ferramentas</strong>: Web Crawler (Python) para ingestão de dados</li>
 </ul>
-<h3 id="32-velocidade-de-desenvolvimento">3.2. Velocidade de Desenvolvimento<a class="headerlink" href="#32-velocidade-de-desenvolvimento" title="Permanent link">&para;</a></h3>
+<h2 id="contexto">Contexto<a class="headerlink" href="#contexto" title="Permanent link">&para;</a></h2>
+<p>O diagrama a seguir ilustra a interação do sistema com seus principais atores e sistemas externos.</p>
+<p><img alt="Diagrama de Contexto" src="../diagrama-de-contexto.png" /></p>
+<h2 id="conteineres">Contêineres<a class="headerlink" href="#conteineres" title="Permanent link">&para;</a></h2>
+<p>Este diagrama detalha os principais "contêineres" do sistema, mostrando como eles se comunicam.</p>
+<p><img alt="Diagrama de Contêineres" src="../diagrama-de-conteiners.png" /></p>
+<h2 id="componentes">Componentes<a class="headerlink" href="#componentes" title="Permanent link">&para;</a></h2>
+<p>Este diagrama detalha o fluxo de dados e os principais componentes da lógica do sistema, com foco na pipeline de ingestão e na geração de respostas.</p>
+<p><img alt="Diagrama de Componentes" src="../diagrama-de-componentes.png" /></p>
+<h2 id="descricao-dos-modulos-e-componentes">Descrição dos Módulos e Componentes<a class="headerlink" href="#descricao-dos-modulos-e-componentes" title="Permanent link">&para;</a></h2>
+<h3 id="1-frontend-mobile-aplicativo-flutter">1. Frontend Mobile: Aplicativo (Flutter)<a class="headerlink" href="#1-frontend-mobile-aplicativo-flutter" title="Permanent link">&para;</a></h3>
+<p><strong>Função</strong>: Camada de apresentação para o usuário final.</p>
+<p><strong>Tecnologias</strong>: Flutter.</p>
+<p><strong>Responsabilidades</strong>:</p>
 <ul>
-<li><strong>Tempo para Primeira Resposta:</strong> Tempo mediano para resposta humana a nova issue ou pull request. Impacta diretamente a retenção de novos contribuidores.</li>
-<li><strong>Rácio de Fecho de Issues/PRs:</strong> Relação entre issues/PRs abertos e fechados. Backlog crescente indica equipa sobrecarregada.</li>
-</ul>
-<h3 id="33-governanca-e-manutenibilidade">3.3. Governança e Manutenibilidade<a class="headerlink" href="#33-governanca-e-manutenibilidade" title="Permanent link">&para;</a></h3>
-<ul>
-<li><strong>Qualidade da Documentação:</strong> Presença de README, CONTRIBUTING.md e Código de Conduta. Indica projeto acolhedor e bem gerido.</li>
-</ul>
-<h3 id="34-resiliencia-e-influencia">3.4. Resiliência e Influência<a class="headerlink" href="#34-resiliencia-e-influencia" title="Permanent link">&para;</a></h3>
-<ul>
-<li><strong>Dependentes do Projeto:</strong> Número de outros projetos que dependem deste. Número elevado indica infraestrutura crítica.</li>
-</ul>
-<h2 id="4-ferramentas-de-analise">4. Ferramentas de Análise<a class="headerlink" href="#4-ferramentas-de-analise" title="Permanent link">&para;</a></h2>
-<h3 id="41-framework-chaoss">4.1. Framework CHAOSS<a class="headerlink" href="#41-framework-chaoss" title="Permanent link">&para;</a></h3>
-<p>Iniciativa da Linux Foundation que cria padrão universal para saúde de comunidades open source. Oferece catálogo de métricas e "Modelos de Métricas" para análise estratégica profunda.</p>
-<h3 id="42-github-insights">4.2. GitHub Insights<a class="headerlink" href="#42-github-insights" title="Permanent link">&para;</a></h3>
-<p>Ferramentas de análise nativas do GitHub, acessível no separador "Insights". Fornece dados em tempo real sobre tráfego, contribuidores e commits. Perfeito para monitorização tática diária.</p>
-<p><strong>As ferramentas são complementares:</strong> GitHub Insights oferece visão tática do "agora", CHAOSS fornece lente estratégica para análise de risco.</p>
-<h2 id="5-aplicacao-pratica">5. Aplicação Prática<a class="headerlink" href="#5-aplicacao-pratica" title="Permanent link">&para;</a></h2>
-<h3 id="51-casos-de-uso">5.1. Casos de Uso<a class="headerlink" href="#51-casos-de-uso" title="Permanent link">&para;</a></h3>
-<ul>
-<li><strong>Avaliação de Dependências Externas:</strong> Use lista de verificação de devida diligência para avaliar risco de nova dependência. Inclui verificação de documentação, análise de atividade no GitHub Insights e avaliação de risco da comunidade.</li>
-<li><strong>Monitorização de Projetos Internos:</strong> Crie painel de saúde para monitorização contínua. Balance indicadores antecipados (preveem saúde futura) e indicadores atrasados (relatam desempenho passado).</li>
-</ul>
-<h3 id="52-painel-inicial-recomendado">5.2. Painel Inicial Recomendado<a class="headerlink" href="#52-painel-inicial-recomendado" title="Permanent link">&para;</a></h3>
-<ul>
-<li><strong>Para avaliação de dependências:</strong><ul>
-<li>Bus Factor</li>
-<li>Frequência de Lançamentos</li>
-<li>Diversidade Organizacional</li>
-</ul>
+<li>
+<p>Renderizar a interface de chat</p>
 </li>
-<li><strong>Para gestão de projetos internos:</strong><ul>
-<li>Tempo para Primeira Resposta</li>
-<li>Contagem de Novos Contribuidores</li>
-<li>Tempo Médio para Merge de PRs</li>
-</ul>
+<li>
+<p>Coletar as perguntas do usuário e enviá-las para a API do Chatbot</p>
+</li>
+<li>
+<p>Exibir as respostas geradas</p>
+</li>
+<li>
+<p>Armazenar dados locais (histórico de conversas, dados do usuário) usando SQLite</p>
 </li>
 </ul>
-<h2 id="6-conclusao">6. Conclusão<a class="headerlink" href="#6-conclusao" title="Permanent link">&para;</a></h2>
-<p>As métricas não são alvo, mas ferramenta para iniciar conversas e orientar estratégia. O contexto de cada projeto é fundamental. Use os dados para tomar medidas informadas que melhorem a saúde e sustentabilidade do ecossistema open source.</p>
-<h2 id="7-referencias">7. Referências<a class="headerlink" href="#7-referencias" title="Permanent link">&para;</a></h2>
+<h3 id="2-backend-api-do-chatbot-fastapi">2. Backend: API do Chatbot (FastAPI)<a class="headerlink" href="#2-backend-api-do-chatbot-fastapi" title="Permanent link">&para;</a></h3>
+<p><strong>Função</strong>: Lógica de negócio e orquestração do sistema.</p>
+<p><strong>Tecnologias</strong>: Python, FastAPI.</p>
+<p><strong>Responsabilidades</strong>:</p>
 <ul>
-<li><strong>CHAOSS (Community Health Analytics in Open Source Software):</strong> <a href="https://chaoss.community/">https://chaoss.community/</a></li>
-<li><strong>Guia de Métricas de Código Aberto:</strong> <a href="https://opensource.guide/metrics/">https://opensource.guide/metrics/</a></li>
-<li><strong>Project Health as the Third Pillar of Open Source Strategy:</strong> <a href="https://bitergia.com/blog/project-health-is-the-third-pillar-of-open-source-strategy/">https://bitergia.com/blog/project-health-is-the-third-pillar-of-open-source-strategy/</a></li>
-<li><strong>GitHub Insights:</strong> <a href="https://docs.github.com/en/repositories/viewing-activity-and-data-for-your-repository/viewing-traffic-to-a-repository">https://docs.github.com/en/repositories/viewing-activity-and-data-for-your-repository/viewing-traffic-to-a-repository</a></li>
-<li><strong>Guia Conciso OpenSSF para Avaliação de Software Open Source:</strong> <a href="https://best.openssf.org/Concise-Guide-for-Evaluating-Open-Source-Software.html">https://best.openssf.org/Concise-Guide-for-Evaluating-Open-Source-Software.html</a></li>
+<li>Receber requisições da interface móvel e web</li>
+<li>Interagir com o Banco de Dados Vetorial (ChromaDB) para buscar contexto relevante</li>
+<li>Chamar a API Externa do Gemini (LLM) para gerar respostas</li>
+<li>Gerenciar a base de notícias (adicionar, remover, visualizar) através da interface de administração</li>
 </ul>
+<h3 id="3-pipeline-de-ingestao-de-dados">3. Pipeline de Ingestão de Dados<a class="headerlink" href="#3-pipeline-de-ingestao-de-dados" title="Permanent link">&para;</a></h3>
+<p><strong>Função</strong>: Coleta, processamento e armazenamento de novos artigos.</p>
+<p><strong>Componentes</strong>:</p>
+<ul>
+<li><strong>WebCrawler</strong>: Acessa fontes de notícias e minera o conteúdo dos artigos</li>
+<li><strong>Splitter e Embedder</strong>: Processa o conteúdo bruto. O splitter divide os artigos em pedaços menores (chunks) para melhor gerenciamento. O embedder transforma esses chunks em vetores numéricos, que são mais eficientes para busca por similaridade</li>
+</ul>
+<p><strong>Responsabilidades</strong>: Inserir os vetores processados no Banco de Dados Vetorial (ChromaDB).</p>
+<h3 id="4-bancos-de-dados">4. Bancos de Dados<a class="headerlink" href="#4-bancos-de-dados" title="Permanent link">&para;</a></h3>
+<h4 id="chromadb">ChromaDB:<a class="headerlink" href="#chromadb" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Função</strong>: Armazenamento de vetores de artigos de notícias</li>
+<li><strong>Tipo</strong>: Banco de dados vetorial</li>
+<li>
+<p><strong>Responsabilidades</strong>:</p>
+<ul>
+<li>Receber os vetores gerados pelo Pipeline de Ingestão</li>
+<li>Permitir buscas de alta velocidade por similaridade de texto, que são cruciais para a função de Retriever</li>
+</ul>
+</li>
+</ul>
+<h4 id="sqlite">SQLite:<a class="headerlink" href="#sqlite" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Função</strong>: Armazenamento de dados locais no dispositivo móvel</li>
+<li><strong>Tipo</strong>: Banco de dados relacional (local)</li>
+<li><strong>Responsabilidades</strong>:<ul>
+<li>Armazenar o histórico de conversas e as informações de login do usuário, garantindo uma experiência contínua e personalizada</li>
+</ul>
+</li>
+</ul>
+<h3 id="5-frontend-web-interface-de-administracao-htmljscss">5. Frontend Web: Interface de Administração (HTML/JS/CSS)<a class="headerlink" href="#5-frontend-web-interface-de-administracao-htmljscss" title="Permanent link">&para;</a></h3>
+<p><strong>Função</strong>: Interface para gerenciar o sistema.</p>
+<p><strong>Tecnologias</strong>: HTML, JS, CSS.</p>
+<p><strong>Responsabilidades</strong>:</p>
+<ul>
+<li>Fornecer uma interface gráfica para que o administrador possa adicionar ou remover fontes de notícias</li>
+<li>Visualizar o estado da base de dados e o histórico de ingestões</li>
+<li>Interagir com a API do Chatbot para executar essas operações</li>
+</ul>
+<h3 id="6-componentes-de-ia-e-logica-dentro-da-api">6. Componentes de IA e Lógica (dentro da API)<a class="headerlink" href="#6-componentes-de-ia-e-logica-dentro-da-api" title="Permanent link">&para;</a></h3>
+<h4 id="retriever">Retriever:<a class="headerlink" href="#retriever" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Função</strong>: Mecanismo de busca de contexto</li>
+<li><strong>Responsabilidades</strong>: Receber a pergunta do usuário, convertê-la em um vetor e buscar no ChromaDB os vetores de artigos mais semelhantes. Retorna o conteúdo original desses artigos para ser usado como contexto</li>
+</ul>
+<h4 id="llm-api-externa-do-gemini">LLM (API Externa do Gemini):<a class="headerlink" href="#llm-api-externa-do-gemini" title="Permanent link">&para;</a></h4>
+<ul>
+<li><strong>Função</strong>: Geração de respostas</li>
+<li><strong>Responsabilidades</strong>: Receber a pergunta do usuário junto com o contexto fornecido pelo Retriever e um prompt específico. Com base nessas informações, gera uma resposta coesa e informativa, focada em desmentir ou confirmar a notícia</li>
+</ul>
+<h2 id="requisitos-e-deploy">Requisitos e Deploy<a class="headerlink" href="#requisitos-e-deploy" title="Permanent link">&para;</a></h2>
+<h3 id="requisitos-de-software">Requisitos de Software<a class="headerlink" href="#requisitos-de-software" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Python 3.10+</li>
+<li>Flutter SDK</li>
+<li>FastAPI, Uvicorn, ChromaDB</li>
+<li>Bibliotecas para web scraping (ex: BeautifulSoup, Scrapy) e embedding (ex: Hugging Face)</li>
+</ul>
+<h3 id="deploy">Deploy<a class="headerlink" href="#deploy" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Backend (API)</strong>: Pode ser hospedado em um provedor de nuvem como AWS, GCP ou Azure. O uso de Docker pode simplificar o deploy</li>
+<li><strong>Frontend Mobile</strong>: Os aplicativos serão publicados nas lojas Google Play Store e Apple App Store</li>
+<li><strong>Frontend Web</strong>: A interface de administração será hospedada em uma plataforma de hospedagem estática, como GitHub Pages</li>
+<li><strong>Bancos de Dados</strong>: O ChromaDB pode ser executado em um servidor dedicado na nuvem. O SQLite é local e faz parte do aplicativo móvel</li>
+</ul>
+<hr />
+<p>Este documento de arquitetura serve como um mapa para o desenvolvimento do projeto, garantindo que todas as partes do sistema estejam alinhadas e se comuniquem de forma eficiente.</p>
 
 
 
@@ -1711,7 +1764,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../GitHubInsights/" class="md-footer__link md-footer__link--prev" aria-label="Previous: GitHub Insights">
+          <a href="../../.." class="md-footer__link md-footer__link--prev" aria-label="Previous: Início">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -1721,14 +1774,14 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                GitHub Insights
+                Início
               </div>
             </div>
           </a>
         
         
           
-          <a href="../Requisitos/" class="md-footer__link md-footer__link--next" aria-label="Next: Requisitos">
+          <a href="../../Requisitos/" class="md-footer__link md-footer__link--next" aria-label="Next: Requisitos">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
@@ -1770,10 +1823,10 @@
     
     
       
-      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.footer"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.footer"], "search": "../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.f55a23d4.min.js"></script>
       
     
   </body>
