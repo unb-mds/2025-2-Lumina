@@ -1,28 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:flutter_dotenv/flutter_dotenv.dart'; // Importa flutter_dotenv
+import 'package:flutter_dotenv/flutter_dotenv.dart'; 
 
-// Define a variável de URL de base da API, que será lida do .env
-late final String kApiBaseUrl;
 
-// --- Configuração da Aplicação Flutter ---
+late final String apiBaseUrl;
 
-// A função main precisa ser assíncrona para carregar o arquivo .env
+
 Future<void> main() async {
-  // Garante que o Flutter Binding esteja inicializado antes de carregar o .env
+  
   WidgetsFlutterBinding.ensureInitialized(); 
 
-  // Carrega o arquivo .env do caminho especificado (.env)
+  
   try {
     await dotenv.load(fileName: ".env");
-    // Define a URL da API lendo a variável do .env
-    kApiBaseUrl = dotenv.env['API_BASE_URL']!;
-    debugPrint("URL da API carregada: $kApiBaseUrl");
+   
+    apiBaseUrl = dotenv.env['API_BASE_URL']!;
+    debugPrint("URL da API carregada: $apiBaseUrl");
   } catch (e) {
-    // Caso haja um erro no carregamento ou a chave esteja faltando, usamos um fallback
+   
     debugPrint("ERRO: Não foi possível carregar o arquivo .env ou a chave API_BASE_URL está faltando. Usando fallback.");
-    kApiBaseUrl = "http://10.0.2.2:8000"; // Fallback para desenvolvimento
+    apiBaseUrl = "http://10.0.2.2:8000"; 
   }
   
   runApp(const ChatApp());
@@ -39,11 +37,10 @@ class ChatApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
-        // Configuração de cores para um visual moderno (similar ao WhatsApp/Telegram)
+        
         colorScheme: ColorScheme.fromSeed(
           seedColor: Colors.blueGrey,
-          primary: const Color.fromARGB(255, 93, 7, 173), // Cor principal do topo (roxo)
-          secondary: const Color(0xFF128C7E), // Cor de destaque (Verde mais claro)
+          primary: const Color.fromARGB(255, 93, 7, 173), 
         ),
         useMaterial3: true,
       ),
@@ -52,12 +49,10 @@ class ChatApp extends StatelessWidget {
   }
 }
 
-// --- Modelo de Dados e Tela Principal ---
 
-/// Classe para representar uma única mensagem no chat.
 class ChatMessage {
   final String text;
-  final bool isUser; // true se for o usuário, false se for o robô
+  final bool isUser; 
   final DateTime timestamp;
 
   ChatMessage({
@@ -75,17 +70,17 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
-  // Lista de mensagens exibidas no chat.
+  
   final List<ChatMessage> _messages = <ChatMessage>[];
-  // Controlador para o campo de texto.
+  
   final TextEditingController _textController = TextEditingController();
-  // Estado para controlar o loading da resposta da API.
+  
   bool _isSending = false;
 
   @override
   void initState() {
     super.initState();
-    // Mensagem de boas-vindas inicial
+    
     _messages.add(
       ChatMessage(
         text: "Olá! Sou o seu chatbot. Pergunte algo!",
@@ -95,11 +90,11 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 
-  /// Constrói e envia a mensagem do usuário.
+  
   void _handleSubmitted(String text) {
     if (text.trim().isEmpty || _isSending) return;
 
-    // 1. Adiciona a mensagem do usuário na lista
+    
     ChatMessage userMessage = ChatMessage(
       text: text.trim(),
       isUser: true,
@@ -109,29 +104,29 @@ class _ChatScreenState extends State<ChatScreen> {
     setState(() {
       _messages.insert(0, userMessage);
       _textController.clear();
-      _isSending = true; // Ativa o loading
+      _isSending = true; 
     });
 
-    // 2. Chama a função de comunicação com a API
+    
     _fetchGeminiResponse(userMessage.text);
   }
 
-  /// Faz a requisição HTTP GET para o endpoint FastAPI.
+ 
   Future<void> _fetchGeminiResponse(String prompt) async {
-    // Codifica o prompt para que caracteres especiais sejam tratados corretamente na URL
+   
     final encodedPrompt = Uri.encodeComponent(prompt);
-    // Usa a variável global kApiBaseUrl, lida do .env
-    final url = Uri.parse('$kApiBaseUrl/prompt/$encodedPrompt'); 
+    
+    final url = Uri.parse('$apiBaseUrl/prompt/$encodedPrompt'); 
 
     try {
       final response = await http.get(url);
 
       if (response.statusCode == 200) {
-        // Sucesso: Decodifica o JSON e extrai a resposta.
+        
         final jsonResponse = json.decode(utf8.decode(response.bodyBytes));
         final String botResponseText = jsonResponse['response'] ?? "Erro: Resposta vazia.";
 
-        // 3. Adiciona a resposta do robô na lista
+        
         ChatMessage botMessage = ChatMessage(
           text: botResponseText,
           isUser: false,
@@ -143,21 +138,21 @@ class _ChatScreenState extends State<ChatScreen> {
         });
 
       } else {
-        // Falha na requisição
+        
         _addErrorMessage('Erro na API: Status Code ${response.statusCode}');
       }
     } catch (e) {
-      // Erro de rede ou parse
-      _addErrorMessage('Erro de conexão: Verifique se o FastAPI está rodando em $kApiBaseUrl.');
+      
+      _addErrorMessage('Erro de conexão: Verifique se o FastAPI está rodando em $apiBaseUrl.');
     } finally {
-      // 4. Desativa o loading
+      
       setState(() {
         _isSending = false;
       });
     }
   }
 
-  /// Função auxiliar para adicionar mensagens de erro (visíveis ao usuário).
+  
   void _addErrorMessage(String message) {
      ChatMessage errorMessage = ChatMessage(
           text: message,
@@ -170,18 +165,16 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
 
-  // --- Widgets da Interface ---
-
-  /// Constrói o balão de mensagem individual.
+  
   Widget _buildMessage(ChatMessage message) {
-    // Alinhamento (direita para usuário, esquerda para robô)
+    
     final alignment =
         message.isUser ? CrossAxisAlignment.end : CrossAxisAlignment.start;
-    // Cor do balão
+    
     final color = message.isUser
-        ? const Color(0xFFDCF8C6) // Verde claro (Usuário)
-        : Colors.white; // Branco (Robô)
-    // Alinhamento do container
+        ? const Color(0xFFDCF8C6) 
+        : Colors.white; 
+    
     final mainAlignment =
         message.isUser ? Alignment.centerRight : Alignment.centerLeft;
 
@@ -190,7 +183,7 @@ class _ChatScreenState extends State<ChatScreen> {
       child: Column(
         crossAxisAlignment: alignment,
         children: <Widget>[
-          // Balão da mensagem
+          
           Align(
             alignment: mainAlignment,
             child: Container(
@@ -215,7 +208,7 @@ class _ChatScreenState extends State<ChatScreen> {
               ),
             ),
           ),
-          // Timestamp (Opcional, para dar um toque mais real)
+          
           Padding(
             padding: const EdgeInsets.only(top: 4.0, right: 8.0, left: 8.0),
             child: Text(
@@ -231,7 +224,7 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 
-  /// Constrói a barra de entrada de texto e o botão de envio.
+  
   Widget _buildMessageComposer() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
@@ -241,7 +234,7 @@ class _ChatScreenState extends State<ChatScreen> {
       ),
       child: Row(
         children: <Widget>[
-          // Campo de texto
+          
           Flexible(
             child: TextField(
               controller: _textController,
@@ -254,7 +247,7 @@ class _ChatScreenState extends State<ChatScreen> {
               ),
             ),
           ),
-          // Botão de envio
+         
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 4.0),
             child: _isSending
@@ -276,7 +269,7 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 
-  // --- Layout Completo da Tela ---
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -287,22 +280,22 @@ class _ChatScreenState extends State<ChatScreen> {
         centerTitle: false,
       ),
       body: Container(
-        // Cor de fundo para simular a interface de chat
-        color: const Color(0xFFECE5DD), // Bege claro
+        
+        color: const Color(0xFFECE5DD), 
         child: Column(
           children: <Widget>[
-            // Lista de mensagens (exibidas de forma reversa)
+            
             Flexible(
               child: ListView.builder(
                 padding: const EdgeInsets.all(8.0),
-                reverse: true, // As novas mensagens aparecem no topo
+                reverse: true, 
                 itemBuilder: (_, int index) => _buildMessage(_messages[index]),
                 itemCount: _messages.length,
               ),
             ),
-            // Linha divisória
+            
             const Divider(height: 1.0),
-            // Barra de entrada de mensagem
+           
             _buildMessageComposer(),
           ],
         ),
