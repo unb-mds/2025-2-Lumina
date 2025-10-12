@@ -14,7 +14,7 @@
         <link rel="prev" href="../../..">
       
       
-        <link rel="next" href="../../Requisitos/">
+        <link rel="next" href="../diagramas/">
       
       
       <link rel="icon" href="../../../assets/logo.png">
@@ -289,6 +289,46 @@
   
   
   
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Arquitetura
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Arquitetura
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
     <li class="md-nav__item md-nav__item--active">
       
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
@@ -541,6 +581,37 @@
     </ul>
   
 </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../diagramas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Diagramas
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
       
     </li>
   
@@ -1630,13 +1701,86 @@
 </ul>
 <h2 id="contexto">Contexto<a class="headerlink" href="#contexto" title="Permanent link">&para;</a></h2>
 <p>O diagrama a seguir ilustra a interação do sistema com seus principais atores e sistemas externos.</p>
-<p><img alt="Diagrama de Contexto" src="../diagrama-de-contexto.png" /></p>
+<pre class="mermaid"><code>---
+config:
+  theme: forest
+---
+graph TD
+    subgraph " "
+        direction LR
+        User["Usuário Final"]
+        Admin["Administrador"]
+    end
+    subgraph " "
+        direction LR
+        LLM_API["API Externa do Gemini"]
+        NewsSources["Fontes de Notícias"]
+    end
+    System["Sistema de Chatbot Anti-Fake News"]
+    User -- "Verifica notícias e faz perguntas [via App Móvel]" --&gt; System
+    Admin -- "Gerencia a base de notícias [via Interface Web de Admin]" --&gt; System
+    System -- "Envia prompts com contexto para gerar respostas [HTTPS/JSON]" --&gt; LLM_API
+    System -- "Coleta artigos para a base de dados [via Web Crawler]" --&gt; NewsSources</code></pre>
 <h2 id="conteineres">Contêineres<a class="headerlink" href="#conteineres" title="Permanent link">&para;</a></h2>
 <p>Este diagrama detalha os principais "contêineres" do sistema, mostrando como eles se comunicam.</p>
-<p><img alt="Diagrama de Contêineres" src="../diagrama-de-conteiners.png" /></p>
+<pre class="mermaid"><code>---
+config:
+  theme: forest
+---
+flowchart TD
+ subgraph subGraph0["Sistema de Chatbot Anti-Fake News"]
+    direction LR
+        MobileApp["Aplicativo Móvel (Flutter, Android)"]
+        API["API do Chatbot (Python, FastAPI)"]
+        VectorDB["Banco de Dados Vetorial (ChromaDB)"]
+        AdminWeb["Interface Web de Admin (HTML/JS/CSS)"]
+        IngestionPipeline["Pipeline de Ingestão (Web Crawler - Python Script)"]
+        LocalDB["Banco de Dados Local (SQLite)"]
+  end
+    User["Usuário Final"] -- Usa --&gt; MobileApp
+    MobileApp -- Armazena histórico/usuário --&gt; LocalDB
+    MobileApp -- Envia perguntas, recebe respostas [HTTPS/JSON] --&gt; API
+    Admin["Administrador"] -- Usa --&gt; AdminWeb
+    AdminWeb -- Adiciona/Remove fontes, visualiza dados [HTTPS/JSON] --&gt; API
+    API -- Busca por similaridade de texto --&gt; VectorDB
+    API -- Envia prompt com contexto [HTTPS/JSON] --&gt; LLM_API["API Externa do Gemini"]
+    IngestionPipeline -- Coleta artigos --&gt; NewsSources["Fontes de Notícias (Portais Online)"]
+    IngestionPipeline -- Processa e insere vetores de artigos --&gt; VectorDB
+     MobileApp:::containerStyle
+     API:::containerStyle
+     VectorDB:::containerStyle
+     AdminWeb:::containerStyle
+     IngestionPipeline:::containerStyle
+     LocalDB:::databaseStyle
+     User:::actorStyle
+     Admin:::actorStyle
+     LLM_API:::systemStyle
+     NewsSources:::systemStyle
+    classDef actorStyle fill:#f9f,stroke:#333,stroke-width:2px
+    classDef systemStyle fill:#bbf,stroke:#333,stroke-width:2px
+    classDef containerStyle fill:#ffc,stroke:#333,stroke-width:2px
+    classDef databaseStyle fill:#cfc,stroke:#333,stroke-width:2px
+    style MobileApp fill:#FFFFFF,stroke:#000000
+    style API fill:#FFFFFF
+    style VectorDB fill:#FFFFFF
+    style AdminWeb fill:#FFFFFF
+    style IngestionPipeline fill:#FFFFFF
+    style LocalDB fill:#FFFFFF
+    style User fill:#00C853,stroke:#00C853
+    style Admin stroke:#00C853,fill:#00C853
+    style LLM_API stroke:#2962FF,fill:#2962FF</code></pre>
 <h2 id="componentes">Componentes<a class="headerlink" href="#componentes" title="Permanent link">&para;</a></h2>
 <p>Este diagrama detalha o fluxo de dados e os principais componentes da lógica do sistema, com foco na pipeline de ingestão e na geração de respostas.</p>
-<p><img alt="Diagrama de Componentes" src="../diagrama-de-componentes.png" /></p>
+<pre class="mermaid"><code>---
+config:
+  theme: forest
+  layout: dagre
+---
+flowchart TD
+    A[WebCrawler&lt;br&gt;&lt;br&gt;Acessa sites relevantes de artigos e informações para obter o conteúdo dentro deles e minerar para dentro do sistema] --&gt; B[Splitter e Embedder&lt;br&gt;&lt;br&gt;Separa o conteúdo minerado em chunks para guardar melhor no banco de dados, e utiliza um algoritmo de embedding para transformá-los em vetores numéricos]
+    B --&gt; C[Retriever&lt;br&gt;&lt;br&gt;Após uma pergunta do Usuário usa um algoritmo para buscar informações relevantes no banco de dados e retorna a pergunta junto com o contexto relevante]
+    A --&gt; D[LLM&lt;br&gt;&lt;br&gt;Recebe o contexto, um prompt e a pergunta do usuário para retornar uma mensagem com maior precisão de acordo com o que foi perguntado]
+    C --&gt; D</code></pre>
 <h2 id="descricao-dos-modulos-e-componentes">Descrição dos Módulos e Componentes<a class="headerlink" href="#descricao-dos-modulos-e-componentes" title="Permanent link">&para;</a></h2>
 <h3 id="1-frontend-mobile-aplicativo-flutter">1. Frontend Mobile: Aplicativo (Flutter)<a class="headerlink" href="#1-frontend-mobile-aplicativo-flutter" title="Permanent link">&para;</a></h3>
 <p><strong>Função</strong>: Camada de apresentação para o usuário final.</p>
@@ -1779,13 +1923,13 @@
         
         
           
-          <a href="../../Requisitos/" class="md-footer__link md-footer__link--next" aria-label="Next: Requisitos">
+          <a href="../diagramas/" class="md-footer__link md-footer__link--next" aria-label="Next: Diagramas">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Requisitos
+                Diagramas
               </div>
             </div>
             <div class="md-footer__button md-icon">
