@@ -54,6 +54,10 @@
 	- Quero ver a versão do app.
 	- Quero saber as fontes confiáveis que o app utiliza.
 
+## **Critério de Aceitação**
+- CA1: A tela de tutorial deve apresentar todo o conteudo do aplicativo e explicar como ultiliza-lo.
+- CA2: A interface de uso do chatbot deve estar funcional e responder corretamente todo tipo de mensagem.
+- CA3: As funções de histórico devem funcionar para trazer devolta conversas antigas ou começar novas. CA4: Todas as funções de configurações devem estar funcionais e com suas telas interiores também implementadas. 
 
 ## **Persona: Administrador**
 ### **Jornada do Usuário: Gerenciar e Curar o Conteúdo do Banco de Dados.**
@@ -69,3 +73,7 @@
 	-Quero receber uma confirmação visual quando um novo link for processado com sucesso.
 	-Quero remover um artigo específico que julgar tendencioso ou irrelevante.
 	-Quero conseguir buscar ou filtrar a lista de artigos para encontrar uma matéria específica.
+
+## Critério de Aceitação
+- CA1:  Dado que o projeto se comunica corretamente com o frontend e backend, essa área de admin deve tambem se comunicar corretamente e atualizar os dados que existem no banco de dados.
+- CA2: Dado que a comunicação funciona, quero poder editar, deletar ou adicionar contéudo a esse banco de dados.
