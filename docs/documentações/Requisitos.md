@@ -10,7 +10,7 @@
 ### 1.1 Problema
 A disseminação de **notícias falsas (fake news)** é um dos maiores desafios da sociedade conectada. Com a velocidade da informação em redes sociais e aplicativos de mensagens, conteúdos enganosos ou manipulados podem se espalhar rapidamente, impactando negativamente áreas como saúde, política, economia e segurança pública.  
 
-Atualmente, usuários comuns têm dificuldade em identificar a veracidade das informações que recebem, pois a checagem de fatos exige tempo, acesso a fontes confiáveis e habilidades específicas de análise crítica. Além disso, ferramentas tradicionais de busca não oferecem, de forma simples e imediata, uma validação contextualizada das notícias.  
+Atualmente, usuários comuns, principalmente os mais velhos, têm dificuldade em identificar a veracidade das informações que recebem, pois a checagem de fatos exige tempo, acesso a fontes confiáveis e habilidades específicas de análise crítica. Além disso, ferramentas tradicionais de busca não oferecem, de forma simples e imediata, uma validação contextualizada das notícias.  
 
 O problema central, portanto, é a **falta de uma solução acessível e confiável** que auxilie usuários a verificarem, em tempo real, a credibilidade de informações recebidas, reduzindo a propagação de fake news e fortalecendo o consumo consciente de conteúdo digital.  
 
@@ -47,7 +47,8 @@ O público-alvo do aplicativo são usuários de smartphones em geral, preocupado
 
 - **Usuário Geral:** Pessoas com pouca afinidade tecnológica que buscam respostas rápidas e confiáveis para suas dúvidas.  
 - **Estudantes e Pesquisadores:** Utilizarão o app como ponto de partida para obter informações de fontes seguras.  
-- **Profissionais de Comunicação:** Jornalistas e criadores de conteúdo que necessitam de uma ferramenta ágil para checagem de fatos.  
+- **Profissionais de Comunicação:** Jornalistas e criadores de conteúdo que necessitam de uma ferramenta ágil para checagem de fatos.
+- **Idosos:** Pessoas de idade que tenham contato frequente com notícias falsas nas redes sociais, sendo o grupo etário mais propenso a espalharem notícias falsas de acordo com estudo recente da BBC news.
 
 ### 2.3. Restrições Gerais  
 - O sistema dependerá de uma conexão ativa com a internet para se comunicar com a API da LLM.  
@@ -81,6 +82,9 @@ O público-alvo do aplicativo são usuários de smartphones em geral, preocupado
 - **RF-002.3:** Botão "Enviar" para enviar mensagens ao chatbot.  
 - **RF-002.4:** Exibir o logo do aplicativo na parte superior da tela.  
 - **RF-002.5:** A interface do chat deve exibir um nome ou identificador claro para o chatbot (ex: "Nome do Agente"), diferenciando-o das mensagens do usuário.
+- **RF-002.6:** Cada resposta deve conter um anexo para o link que foi ultilizado como fonte para regerar a resposta, ele deve estar junto de cada pesquisa realizada.
+- **RF-002.7:** Botão de avaliação da resposta do chatbot, sendo positivo ou negativo.
+- **RF-002.8:** Indicador visual que o processo de "Pensamento" está acontecendo.
 
 ### RF-003: Menu Lateral e Histórico  
 **Descrição:** A tela de chat deve conter um menu lateral para acesso a outras funcionalidades.  
@@ -91,9 +95,13 @@ O público-alvo do aplicativo são usuários de smartphones em geral, preocupado
 - **RF-003.3:** Botão para acessar a pagina de configurações
 - **RF-003.4:** O menu deve incluir um botão "Nova Conversa" que limpa a interface e permite iniciar uma nova sessão.
 - **RF-003.5:** A lista de chats deve ser organizada sob um título como "Conversas Recentes" para clareza.
+- **RF-003.6:** Deve ser incluido um ícone com a função de apagar uma conversa em específico ao lado de cada conversa.
+- **RF-003.7:** Botão de lixeira com função de apagar todas as conversas armazenadas.
 
-### RF-004-1: Tela de Configuração 
+### RF-004: Configurações, Personalização e Informações Adicionais
+**Descrição:**  A tela de configurações deve ser clara e concisa, tendo opções de personalização e informações sobre o aplicativo.
 
+### RF-004-1: Tela Principal de Configuração
 **Componentes:**  
 - **RF-004-1.1:** Botão de edição do nome de usuário.
 - **RF-004-1.2:** Dentro a opção app: Idioma, botão para mudar a linguagem em que a LLM responde e do app.
@@ -103,6 +111,7 @@ O público-alvo do aplicativo são usuários de smartphones em geral, preocupado
 - **RF-004-1.6:** Dentro da opção sobre: Um botão de "Tutorial" que redireciona o usuário a landing page.
 - **RF-004-1.7:** Dentro da opção sobre: Um botão de Termos de Serviço.
 - **RF-004-1.8:** Botão de volta a tela principal.
+- **RF-004-1.9:** Ícone em acima de termos de serviço mostrando a versão atual do aplicativo.
 
 ### RF-004-2: Tela de Configuração em Janela
 - **RF-004-2.1:** Tanto o botão "Idioma" quanto o "Aparência" irão redirecionar a uma tela em janela que será aberta dentro das configurações, aplicando um filtro para escurecer tudo fora da janela.
@@ -130,6 +139,8 @@ O público-alvo do aplicativo são usuários de smartphones em geral, preocupado
 - **RF-005.4:** Receber resposta e exibir na interface de chat.  
 - **RF-005.5:** Analisar se entrada é um link. Caso não confiável, retornar mensagem:  
   > "Desculpe, só posso analisar informações de fontes confiáveis que fazem parte do meu conhecimento."  
+  - **RF-005.6:** Em caso de erro por falha de conexão, uma mensagem clara deve ser mostrada explicando o erro.
+  - **RF-005.7:** O Chatbot deve entender o contexto da conversa, sendo cada nova conversa um contexto separado.
 
 ### RF-006: Sistema de Administração de Conteúdo  
 **Descrição:** Interface web para administradores controlarem quais reportagems estão sendo colocadas no banco de dados.  
@@ -157,7 +168,8 @@ O público-alvo do aplicativo são usuários de smartphones em geral, preocupado
   > "Não encontrei informações sobre este tópico em minha base de dados para fornecer uma resposta confiável."  
 
 - **RNF-004: Usabilidade**  
-  Interface deve seguir padrões de apps de mensagens populares (WhatsApp, Telegram, ChatGPT, Gemini).  
+  Interface deve seguir padrões de apps de mensagens populares (WhatsApp, Telegram, ChatGPT, Gemini).
+  A interface deve ser auto explicativa ao usuário, tendo em mente que pessoas de idade fazem parte das Personas do projeto, por isso conta com funcionalidades de personalização como Alterar o tamanho da fonte
 
 - **RNF-005: Escalabilidade**  
   Suporte estável para até **100 usuários simultâneos**.  
@@ -179,12 +191,14 @@ O público-alvo do aplicativo são usuários de smartphones em geral, preocupado
 
 O aplicativo de chatbot anti-fake news pretende gerar um impacto positivo em diferentes níveis:  
 
-- **Social:** reduzir a disseminação de desinformação, promovendo um consumo mais consciente e responsável de notícias.  
-- **Educacional:** oferecer uma ferramenta de apoio para estudantes, pesquisadores e cidadãos em geral, facilitando o acesso a informações verificadas.  
-- **Tecnológico:** demonstrar o uso prático de arquiteturas baseadas em **LLM** e **RAG**, aplicadas a um problema real de relevância global.  
-- **Comunicacional:** apoiar profissionais de mídia e criadores de conteúdo na checagem rápida de fatos, fortalecendo a credibilidade das informações divulgadas.  
+- **Social:** Reduzir a disseminação de desinformação, promovendo um consumo mais consciente e responsável de notícias.  
+- **Educacional:** Oferecer uma ferramenta de apoio para estudantes, pesquisadores e cidadãos em geral, facilitando o acesso a informações verificadas.  
+- **Tecnológico:** Demonstrar o uso prático de arquiteturas baseadas em **LLM** e **RAG**, aplicadas a um problema real de relevância global.  
+- **Comunicacional:** Apoiar profissionais de mídia e criadores de conteúdo na checagem rápida de fatos, fortalecendo a credibilidade das informações divulgadas.
+- **Acessibilidade:** Facilitar o acesso e verificação de notícias falsas por grupos mais impactados, trazendo funções e modos de personalização para facilitar o seu uso.
 
 Com isso, espera-se contribuir para um ambiente digital mais confiável, onde usuários possam tomar decisões melhor informadas e reduzir os efeitos nocivos das fake news na sociedade.  
+
 
 
 
