@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/ChatScreen.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart'; 
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:frontend/Settings.dart'; 
 
 
 late final String apiBaseUrl;
@@ -34,7 +35,7 @@ class ChatApp extends StatelessWidget {
       title: 'Gemini Chatbot',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.deepPurple,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         
         colorScheme: ColorScheme.fromSeed(
@@ -44,6 +45,9 @@ class ChatApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const ChatScreen(),
+      routes: {
+        '/settings': (context) => const SettingsScreen(),
+      },
     );
   }
 }

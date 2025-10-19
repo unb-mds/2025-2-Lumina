@@ -141,7 +141,7 @@ class _ChatScreenState extends State<ChatScreen> {
             alignment: mainAlignment,
             child: Container(
               constraints: BoxConstraints(
-                maxWidth: MediaQuery.of(context).size.width * 0.75, // Máximo de 75% da tela
+                maxWidth: MediaQuery.of(context).size.width * 0.75, 
               ),
               decoration: BoxDecoration(
                 color: color,
@@ -192,7 +192,7 @@ class _ChatScreenState extends State<ChatScreen> {
             child: TextField(
               controller: _textController,
               onSubmitted: _handleSubmitted,
-              enabled: !_isSending, // Desabilita enquanto espera a resposta
+              enabled: !_isSending, 
               decoration: InputDecoration.collapsed(
                 hintText: _isSending
                     ? "Aguardando resposta..."
@@ -229,7 +229,7 @@ class _ChatScreenState extends State<ChatScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Lumina', style: TextStyle(color: Colors.white)),
-        backgroundColor: Theme.of(context).colorScheme.primary, // Cor escura do topo
+        backgroundColor: Theme.of(context).colorScheme.primary, 
         centerTitle: false,
       ),
       body: Container(
@@ -253,6 +253,105 @@ class _ChatScreenState extends State<ChatScreen> {
           ],
         ),
       ),
+      drawer: Drawer(
+        child: Column(
+          children: <Widget>[
+           
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 93, 7, 173),
+              ),
+              child: SizedBox(
+                width: double.infinity,
+                child: Text(
+                  'LUMINA',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+            
+            
+            const Expanded(child: SizedBox()),
+
+            
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Align(
+                alignment: Alignment.bottomLeft,
+                child: ListTile(
+                  leading: const Icon(Icons.more_horiz), 
+                  title: const Text('Configurações', style: TextStyle(fontSize: 16)),
+                  onTap: () {
+                    
+                    Navigator.pop(context); 
+                   
+                    Navigator.pushNamed(context, '/settings');
+                  },
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
+@override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Flutter Gemini Chat", style: TextStyle(color: Colors.white)),
+        backgroundColor: Color.fromARGB(255, 93, 7, 173),
+        elevation: 4,
+      ),
+      
+      drawer: Drawer(
+        child: Column(
+          children: <Widget>[
+           
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 93, 7, 173),
+              ),
+              child: SizedBox(
+                width: double.infinity,
+                child: Text(
+                  'LUMINA',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+            
+            
+            const Expanded(child: SizedBox()),
+
+            
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Align(
+                alignment: Alignment.bottomLeft,
+                child: ListTile(
+                  leading: const Icon(Icons.more_horiz), 
+                  title: const Text('Configurações', style: TextStyle(fontSize: 16)),
+                  onTap: () {
+                    
+                    Navigator.pop(context); 
+                   
+                    Navigator.pushNamed(context, '/settings');
+                  },
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
