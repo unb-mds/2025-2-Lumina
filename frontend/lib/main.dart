@@ -46,7 +46,7 @@ class ChatApp extends StatelessWidget {
       ),
       home: const ChatScreen(),
       routes: {
-        '/settings': (context) => const SettingsScreen(),
+        '/settings': (context) => const ConfiguracoesPage(),
       },
     );
   }
