@@ -25,22 +25,26 @@ jobs:
           script: |
             echo "🚀 Iniciando deploy do Lumina Backend..."
             
-            # Navegar para o diretório do projeto
-            cd /home/lumina-backend/backend
+            # Criar diretório temporário
+            TEMP_DIR=$(mktemp -d)
             
-            # Fazer backup do .env (caso precise reverter)
-            cp .env .env.backup
+            # Clonar repositório completo no temp
+            echo "📥 Clonando repositório..."
+            git clone --depth 1 https://github.com/${{ github.repository }}.git $TEMP_DIR
             
-            # Atualizar código do repositório
-            echo "📥 Atualizando código..."
-            git pull origin main
+            # Fazer backup do .env
+            cp /home/lumina-backend/backend/.env /home/lumina-backend/backend/.env.backup
             
-            # Ativar ambiente virtual
-            # source venv/bin/activate
+            # Copiar apenas a pasta backend
+            echo "📦 Copiando arquivos do backend..."
+            rsync -av --exclude='.env' --exclude='venv' --exclude='__pycache__' $TEMP_DIR/backend/ /home/lumina-backend/backend/
             
-            # Instalar/atualizar dependências
+            # Limpar temp
+            rm -rf $TEMP_DIR
+            
+            # Instalar/atualizar dependências usando o venv
             echo "📦 Instalando dependências..."
-            pip install -r requirements.txt --no-cache-dir
+            /home/lumina-backend/backend/venv/bin/pip install -r requirements.txt --no-cache-dir
             
             # Ajustar permissões
             echo "🔐 Ajustando permissões..."
