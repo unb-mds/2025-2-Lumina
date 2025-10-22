@@ -50,3 +50,5 @@ uvicorn main:app --reload
 * `--reload`: Ativa o modo de recarga automática. O servidor será reiniciado automaticamente sempre que você salvar alterações no seu código-fonte, o que é ótimo para o desenvolvimento.
 
 O servidor estará rodando, geralmente, em `http://127.0.0.1:8000` (ou `http://localhost:8000`).
+
+ip do servidor na nuvem: 152.67.59.120
