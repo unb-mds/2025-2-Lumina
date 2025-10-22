@@ -1,0 +1,76 @@
+name: Deploy FastAPI to Oracle Cloud
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+      - main
+
+jobs:
+  deploy:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Deploy to Oracle Cloud Server
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            echo "🚀 Iniciando deploy do Lumina Backend..."
+            
+            # Navegar para o diretório do projeto
+            cd /home/lumina-backend/backend
+            
+            # Fazer backup do .env (caso precise reverter)
+            cp .env .env.backup
+            
+            # Atualizar código do repositório
+            echo "📥 Atualizando código..."
+            git pull origin main
+            
+            # Ativar ambiente virtual
+            # source venv/bin/activate
+            
+            # Instalar/atualizar dependências
+            echo "📦 Instalando dependências..."
+            pip install -r requirements.txt --no-cache-dir
+            
+            # Ajustar permissões
+            echo "🔐 Ajustando permissões..."
+            sudo chown -R ubuntu:ubuntu /home/lumina-backend/backend
+            
+            # Reiniciar o serviço systemd
+            echo "🔄 Reiniciando serviço..."
+            sudo systemctl restart luminabackend.service
+            
+            # Aguardar o serviço inicializar
+            sleep 5
+            
+            # Verificar status do serviço
+            echo "✅ Verificando status do serviço..."
+            sudo systemctl status luminabackend.service --no-pager
+            
+            # Testar o endpoint
+            echo "🧪 Testando API..."
+            curl -f http://localhost/ || exit 1
+            
+            echo "✨ Deploy concluído com sucesso!"
+      
+      - name: Notify deployment success
+        if: success()
+        run: |
+          echo "✅ Deploy realizado com sucesso em http://152.67.59.120"
+          echo "🕐 Horário: $(date)"
+      
+      - name: Notify deployment failure
+        if: failure()
+        run: |
+          echo "❌ Falha no deploy - verifique os logs"
+          exit 1
