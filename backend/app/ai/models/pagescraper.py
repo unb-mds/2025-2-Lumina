@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from bs4 import BeautifulSoup
-from .article_model import Article  # Changed to relative import
+from .article_model import Article  
+
 
 class PageScraper(ABC):
     def __init__(self, url):
