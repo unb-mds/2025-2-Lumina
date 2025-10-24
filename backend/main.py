@@ -12,9 +12,11 @@ llm = GeminiModel(api_key=GOOGLE_API_KEY)
 
 app = FastAPI()
 
+
 @app.get("/")
 def root():
     return {"message": "The API is working!"}
+
 
 @app.get("/prompt/{prompt}")
 def response(prompt: str):
