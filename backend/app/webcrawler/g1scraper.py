@@ -1,9 +1,11 @@
+import logging
+import time
+
 import requests
 from bs4 import BeautifulSoup
+
 from app.ai.models.article_model import Article
 from app.ai.models.pagescraper import PageScraper
-import time
-import logging
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)

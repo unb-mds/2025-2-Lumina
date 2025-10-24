@@ -1,6 +1,8 @@
 from abc import ABC, abstractmethod
+
 from bs4 import BeautifulSoup
-from .article_model import Article  
+
+from .article_model import Article
 
 
 class PageScraper(ABC):

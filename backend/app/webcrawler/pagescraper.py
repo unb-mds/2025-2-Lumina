@@ -1,7 +1,9 @@
+import time
+
 import requests
 from bs4 import BeautifulSoup
+
 from app.models.article import Article
-import time
 
 
 class PageScraper:
