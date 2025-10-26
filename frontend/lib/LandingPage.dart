@@ -21,7 +21,7 @@ class _LandingPageState extends State<LandingPage> {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              Colors.black,
+              Color.fromARGB(255, 20, 0, 36),
               Color.fromARGB(255, 31, 0, 56),
               Color.fromARGB(255, 77, 0, 132),
             ],
@@ -116,8 +116,7 @@ class _LandingPageState extends State<LandingPage> {
                       onTap: () {
                         String nomeusuario = _nomeController.text.trim();
                         if (nomeusuario.isNotEmpty) {
-                          // se o nome do usuario for prenchido mostra uma mensagem
-                          // aqui pode mudar para caso o nome for prenchido, ir para a proxima pagina
+                          
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: Text('Bem-vindo, $nomeusuario!'),
@@ -131,6 +130,15 @@ class _LandingPageState extends State<LandingPage> {
                             arguments: nomeusuario, 
                           );
                     
+                        }
+                         else {
+                           
+                           ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Por favor, digite seu nome para continuar.'),
+                              backgroundColor: Colors.redAccent,
+                            ),
+                          );
                         }
                       },
                       child: Container(

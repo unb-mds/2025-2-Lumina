@@ -40,7 +40,7 @@ class _ChatScreenState extends State<ChatScreen> {
     
     _messages.add(
       ChatMessage(
-        text: "Olá $nome! Sou o seu chatbot. Pergunte algo!",
+        text: "Olá $nome! Sou Lumina, sua agente de IA para o combate à desinformação, como posso te ajudar hoje?",
         isUser: false,
         timestamp: DateTime.now(),
       ),
