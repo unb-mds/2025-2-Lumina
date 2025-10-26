@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:frontend/main.dart';
-
 class ChatMessage {
   final String text;
   final bool isUser; 
@@ -16,11 +15,14 @@ class ChatMessage {
 }
 
 class ChatScreen extends StatefulWidget {
-  const ChatScreen({super.key});
+  final String? username;
+
+  const ChatScreen({super.key, this.username});
 
   @override
   State<ChatScreen> createState() => _ChatScreenState();
 }
+
 
 class _ChatScreenState extends State<ChatScreen> {
   
@@ -28,15 +30,17 @@ class _ChatScreenState extends State<ChatScreen> {
   
   final TextEditingController _textController = TextEditingController();
   
+  
   bool _isSending = false;
 
   @override
   void initState() {
     super.initState();
+     final nome = widget.username ?? "Visitante";
     
     _messages.add(
       ChatMessage(
-        text: "Olá! Sou o seu chatbot. Pergunte algo!",
+        text: "Olá $nome! Sou Lumina, sua agente de IA para o combate à desinformação, como posso te ajudar hoje?",
         isUser: false,
         timestamp: DateTime.now(),
       ),

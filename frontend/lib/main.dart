@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/ChatScreen.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:frontend/LandingPage.dart';
 import 'package:frontend/Settings.dart'; 
 
 
@@ -44,9 +45,14 @@ class ChatApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: const ChatScreen(),
+      home: const LandingPage(),
       routes: {
         '/settings': (context) => const ConfiguracoesPage(),
+        
+        '/chat':(context) { final args = ModalRoute.of(context)!.settings.arguments as String?;
+          return ChatScreen(username: args);
+        },
+
       },
     );
   }
