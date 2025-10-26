@@ -123,7 +123,14 @@ class _LandingPageState extends State<LandingPage> {
                               content: Text('Bem-vindo, $nomeusuario!'),
                               backgroundColor: Colors.purpleAccent,
                             ),
+                            
                           );
+                          Navigator.pushReplacementNamed(
+                            context, 
+                            '/chat',
+                            arguments: nomeusuario, 
+                          );
+                    
                         }
                       },
                       child: Container(
