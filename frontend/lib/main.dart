@@ -48,9 +48,12 @@ class ChatApp extends StatelessWidget {
       home: const LandingPage(),
       routes: {
         '/settings': (context) => const ConfiguracoesPage(),
+<<<<<<< HEAD
         '/chat':(context) { final args = ModalRoute.of(context)!.settings.arguments as String?;
           return ChatScreen(username: args);
         },
+=======
+>>>>>>> 19dd2472a4bb184bd9fe390c50d844c189dae2e9
       },
     );
   }
