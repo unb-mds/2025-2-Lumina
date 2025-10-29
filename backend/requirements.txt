@@ -1,5 +1,16 @@
+# --- Core Web Framework ---
+uvicorn[standard]>=0.24.0
 fastapi>=0.104.0
-uvicorn>=0.24.0
+gunicorn>=21.2.0
+
+# --- Database (SQLite para os artigos) ---
+sqlmodel>=0.0.14
+aiosqlite>=0.19.0
+
+# --- AI / LangChain (Embedding e LLM) ---
+langchain>=0.1.0
 langchain-google-genai>=0.0.5
+
+# --- Configuração ---
 python-dotenv>=1.0.0
 pydantic>=2.4.2
