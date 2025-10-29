@@ -1,8 +1,6 @@
 from pathlib import Path
-
 from langchain_google_genai import ChatGoogleGenerativeAI
-
-from ..models.AIPlatform import AIPlatform
+from app.ai.ai_models.AIPlatform import AIPlatform
 
 
 class GeminiModel(AIPlatform):

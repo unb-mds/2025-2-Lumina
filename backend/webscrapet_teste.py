@@ -1,10 +1,16 @@
-from app.webcrawler.g1scraper import G1Scraper
+from app.webcrawler.G1.g1linkextractor import G1LinkExtractor
+from app.webcrawler.dowloader import Downloader
 
-url = "https://g1.globo.com/sp/sao-paulo/noticia/2025/10/10/policia-civil-localiza-fabrica-clandestina-de-bebidas-ligadas-a-morte-de-duas-pessoas-por-intoxicacao-com-metanol-em-sp.ghtml"
+downloader = Downloader()
+extractor = G1LinkExtractor()
 
-webcralwer = G1Scraper(url)
+url = "https://g1.globo.com/rj/rio-de-janeiro/noticia/2025/10/29/corpos-sao-levados-por-moradores.ghtml"
 
-article = webcralwer.scrape_article()
+html_data = downloader.fetch(url)
 
-for key, value in article.__dict__.items():
-    print(f"{key}: {value}\n")
+if html_data:
+    links = extractor.extract(html_data)
+    for link in links:
+        print(link)
+else:
+    print("Falha ao baixar o conteúdo da página.")
