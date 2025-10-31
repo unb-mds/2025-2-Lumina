@@ -5,11 +5,13 @@ from bs4 import BeautifulSoup
 
 logger = logging.getLogger(__name__)
 
+
 class Downloader:
     """
     Responsável por baixar o conteúdo de uma URL.
     Implementa retries, backoff exponencial e headers.
     """
+
     def __init__(self, max_tries=3):
         self.max_tries = max_tries
         self.headers = {

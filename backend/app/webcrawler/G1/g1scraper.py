@@ -2,7 +2,7 @@ import logging
 from bs4 import BeautifulSoup
 
 from app.models.article import Article
-from app.models.pagescraper import PageScraper 
+from app.models.pagescraper import PageScraper
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -13,21 +13,19 @@ class G1Scraper(PageScraper):
 
     SELECTORS = {
         "title": "content-head__title",
-        "subtitle": "content-head__subtitle",
         "author": "content-publication-data__from",
-        "date": "content-publication-data__updated",
         "body": "content-text__container",
     }
 
     def __init__(self):
-        pass 
+        pass
 
     def _extract_body_text(self, container):
         """
         Extract body text preserving paragraph structure.
-        (Sua implementação aqui está ótima, sem mudanças)        
+        (Sua implementação aqui está ótima, sem mudanças)
         """
-       
+
         paragraphs = container.find_all(
             "p", class_=lambda x: x != "content-text__advertising"
         )
@@ -63,7 +61,9 @@ class G1Scraper(PageScraper):
                     elements_text[element] = found_element.get_text(strip=True)
             else:
                 elements_text[element] = ""
-                logger.debug(f"Elemento '{element}' (classe: '{class_name}') não encontrado em {url}")
+                logger.debug(
+                    f"Elemento '{element}' (classe: '{class_name}') não encontrado em {url}"
+                )
 
         if not elements_text.get("title"):
             logger.error(f"Elemento crítico faltando: title (URL: {url})")
@@ -73,20 +73,11 @@ class G1Scraper(PageScraper):
             logger.error(f"Elemento crítico faltando: body (URL: {url})")
             return None
 
-        optional_elements = ["subtitle", "author", "date"]
-        missing_optional = [
-            elem for elem in optional_elements if not elements_text.get(elem)
-        ]
-        if missing_optional:
-            logger.warning(
-                f"Elementos opcionais faltando em {url}: {', '.join(missing_optional)}"
-            )
-
         return Article(
             title=elements_text["title"],
-            subtitle=elements_text.get("subtitle", ""),
-            date=elements_text.get("date", ""),
             author=elements_text.get("author", ""),
-            url=url,  
-            body=elements_text["body"],
+            url=url,
+            content=elements_text["body"],
         )
+    
+

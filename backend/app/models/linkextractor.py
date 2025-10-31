@@ -6,6 +6,7 @@ from bs4 import BeautifulSoup
 # Configuração do logging
 logger = logging.getLogger(__name__)
 
+
 class BaseLinkExtractor(ABC):
     """
     Componente "stateless" responsável por extrair, limpar e validar
@@ -26,9 +27,9 @@ class BaseLinkExtractor(ABC):
         """
         O "motor de regras" que decide se vale a pena colocar um link na fila de urls a visitar.
         """
+
     @abstractmethod
     def clean_url(self, url: str) -> str:
         """
         Remove a query string (parte após '?') de uma URL e fragmentos
         """
-        
