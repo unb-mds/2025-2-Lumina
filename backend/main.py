@@ -22,3 +22,5 @@ def root():
 @app.get("/prompt/{prompt}")
 def response(prompt: str):
     return {"response": llm.chat(prompt)}
+
+#deploy
