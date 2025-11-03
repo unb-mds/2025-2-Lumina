@@ -1,6 +1,6 @@
-from ..models.AIPlatform import AIPlatform
-from langchain_google_genai import ChatGoogleGenerativeAI
 from pathlib import Path
+from langchain_google_genai import ChatGoogleGenerativeAI
+from app.ai.ai_models.AIPlatform import AIPlatform
 
 
 class GeminiModel(AIPlatform):
@@ -17,5 +17,5 @@ class GeminiModel(AIPlatform):
 
     def load_system_prompt(self) -> str:
         prompt_path = Path(__file__).parent / "system_prompts" / "system_prompt.md"
-        with open(prompt_path, "r") as file:
+        with open(prompt_path) as file:
             return file.read()

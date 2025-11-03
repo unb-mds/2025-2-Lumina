@@ -1,8 +1,9 @@
-from fastapi import FastAPI
-from app.ai.gemini import GeminiModel
+import os  # Importe a biblioteca 'os'
+
 from dotenv import load_dotenv
-from pydantic import BaseModel
-import os 
+from fastapi import FastAPI
+
+from app.ai.gemini import GeminiModel
 
 load_dotenv()
 
