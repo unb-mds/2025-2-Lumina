@@ -53,13 +53,15 @@ class _ChatScreenState extends State<ChatScreen> {
   void didUpdateWidget(covariant ChatScreen oldWidget) {
     super.didUpdateWidget(oldWidget);
     
-    
+    // 1. Verifica se a propriedade 'username' do widget mudou
     if (widget.username != oldWidget.username) {
-      
+      // 2. Chama setState para atualizar qualquer parte da UI que use o nome.
       setState(() {
         _currentDisplayedUsername = widget.username ?? "Visitante";
         
-        
+        // **OPCIONAL:** Se você precisar atualizar a mensagem de saudação inicial, 
+        // a forma mais simples (se ela for sempre a primeira) é substituí-la:
+        // Se a lista de mensagens não estiver vazia, atualiza a primeira mensagem
         if (_messages.isNotEmpty && !_messages.first.isUser) {
              _messages[0] = ChatMessage(
                 text: "Olá $_currentDisplayedUsername! Sou Lumina, sua agente de IA para o combate à desinformação, como posso te ajudar hoje?",
@@ -153,14 +155,14 @@ class _ChatScreenState extends State<ChatScreen> {
     final alignment =
         message.isUser ? CrossAxisAlignment.end : CrossAxisAlignment.start;
     final Color bubbleColor = isUser
-      
+      // Mensagem Enviada (Usuário): Use a cor primária ou container do tema
       ? theme.colorScheme.primary 
-      
+      // Mensagem Recebida (Lumina): Use uma cor de superfície sutil para contraste
       : theme.colorScheme.surfaceContainerHigh;
       final Color textColor = isUser
-      
+      // Texto da Mensagem Enviada: Use a cor 'onPrimary' (texto sobre a cor primária)
       ? theme.colorScheme.onPrimary 
-     
+      // Texto da Mensagem Recebida: Use a cor 'onSurfaceVariant' (texto sobre a surfaceVariant)
       : theme.colorScheme.onSurfaceVariant;
     
     
@@ -180,7 +182,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 maxWidth: MediaQuery.of(context).size.width * 0.75, 
               ),
               decoration: BoxDecoration(
-                color: bubbleColor, 
+                color: bubbleColor, // <-- SUBSTITUA A COR FIXA (ex: Colors.green ou Colors.white)
                 borderRadius: BorderRadius.circular(12.0),
                 boxShadow: [
                   BoxShadow(
@@ -261,7 +263,7 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
  String _t(String pt, String en) {
-    
+    // Retorna 0 para Português, 1 para Inglês
     return widget.currentLanguage == 'portugues' ? pt : en;
   }
 
@@ -271,7 +273,7 @@ class _ChatScreenState extends State<ChatScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('LUMINA'),
-       
+        // É bom garantir que o AppBar use a cor primária do tema.
         backgroundColor: theme.colorScheme.primary, 
         foregroundColor: theme.colorScheme.onPrimary,
         iconTheme: IconThemeData(color: theme.colorScheme.onPrimary),
@@ -279,7 +281,7 @@ class _ChatScreenState extends State<ChatScreen> {
       body: SafeArea(
         child: Column(
           children: <Widget>[
-           
+            // Lista de Mensagens
             Flexible(
               child: ListView.builder(
                 padding: const EdgeInsets.all(8.0),

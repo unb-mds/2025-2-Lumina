@@ -13,7 +13,12 @@ class LandingPage extends StatefulWidget {
 
 class _LandingPageState extends State<LandingPage> {
   final TextEditingController _nomeController = TextEditingController();
- 
+ @override
+  void initState() {
+    super.initState();
+    // Carrega o nome persistido (se houver)
+    _nomeController.text = widget.initialUsername ?? ''; 
+  }
   @override
   void dispose() {
     _nomeController.dispose();
@@ -126,10 +131,10 @@ class _LandingPageState extends State<LandingPage> {
                       onTap: () {
                         final nomeusuario = _nomeController.text.trim();
                         if (nomeusuario.isNotEmpty) {
-                          
+                          // NOVO: Salva o nome de usuário no estado global/persitente
                           widget.onUsernameSet?.call(nomeusuario);
 
-                          
+                          // Mudar de tela
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: Text('Bem-vindo(a), $nomeusuario!'),
@@ -138,7 +143,8 @@ class _LandingPageState extends State<LandingPage> {
                           );
                           Navigator.pushReplacementNamed(
                             context, 
-                            '/chat',                      
+                            '/chat',
+                            arguments: nomeusuario, 
                             
                           );
                     
