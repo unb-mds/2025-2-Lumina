@@ -3,7 +3,7 @@
 ## 1. Informações Gerais
 
 - **Sprint:** 04
-- **Duração:** 29/09/2025 a 05/10/2025
+- **Duração:** 22/09/2025 a 28/09/2025
 - **Product Owner:** Arthur Luiz Silva Guedes
 - **Scrum Master:** Cecília Costa Rebelo Cunha
 - **Time de Desenvolvimento:** Átila Sobral de Oliveira, João Pedro Ferreira Gomes, Nathan Pontes Romão, Tiago Geovane da Silva Sousa
