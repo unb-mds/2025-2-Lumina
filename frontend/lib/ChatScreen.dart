@@ -16,8 +16,9 @@ class ChatMessage {
 
 class ChatScreen extends StatefulWidget {
   final String? username;
+  final String currentLanguage;
 
-  const ChatScreen({super.key, this.username});
+  const ChatScreen({super.key, this.username,required this.currentLanguage});
 
   @override
   State<ChatScreen> createState() => _ChatScreenState();
@@ -25,6 +26,8 @@ class ChatScreen extends StatefulWidget {
 
 
 class _ChatScreenState extends State<ChatScreen> {
+  
+  String? _currentDisplayedUsername;
   
   final List<ChatMessage> _messages = <ChatMessage>[];
   
@@ -36,17 +39,40 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   void initState() {
     super.initState();
-     final nome = widget.username ?? "Visitante";
+     _currentDisplayedUsername = widget.username ?? "Visitante";
     
     _messages.add(
       ChatMessage(
-        text: "Olá $nome! Sou Lumina, sua agente de IA para o combate à desinformação, como posso te ajudar hoje?",
+        text: "Olá $_currentDisplayedUsername! Sou Lumina, sua agente de IA para o combate à desinformação, como posso te ajudar hoje?",
         isUser: false,
         timestamp: DateTime.now(),
       ),
     );
   }
-
+@override
+  void didUpdateWidget(covariant ChatScreen oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    
+    // 1. Verifica se a propriedade 'username' do widget mudou
+    if (widget.username != oldWidget.username) {
+      // 2. Chama setState para atualizar qualquer parte da UI que use o nome.
+      setState(() {
+        _currentDisplayedUsername = widget.username ?? "Visitante";
+        
+        // **OPCIONAL:** Se você precisar atualizar a mensagem de saudação inicial, 
+        // a forma mais simples (se ela for sempre a primeira) é substituí-la:
+        // Se a lista de mensagens não estiver vazia, atualiza a primeira mensagem
+        if (_messages.isNotEmpty && !_messages.first.isUser) {
+             _messages[0] = ChatMessage(
+                text: "Olá $_currentDisplayedUsername! Sou Lumina, sua agente de IA para o combate à desinformação, como posso te ajudar hoje?",
+                isUser: false,
+                timestamp: DateTime.now(),
+            );
+        }
+        
+      });
+    }
+  }
   
   void _handleSubmitted(String text) {
     if (text.trim().isEmpty || _isSending) return;
@@ -124,13 +150,21 @@ class _ChatScreenState extends State<ChatScreen> {
 
   
   Widget _buildMessage(ChatMessage message) {
-    
+    final theme = Theme.of(context);
+  final isUser = message.isUser;
     final alignment =
         message.isUser ? CrossAxisAlignment.end : CrossAxisAlignment.start;
+    final Color bubbleColor = isUser
+      // Mensagem Enviada (Usuário): Use a cor primária ou container do tema
+      ? theme.colorScheme.primary 
+      // Mensagem Recebida (Lumina): Use uma cor de superfície sutil para contraste
+      : theme.colorScheme.surfaceContainerHigh;
+      final Color textColor = isUser
+      // Texto da Mensagem Enviada: Use a cor 'onPrimary' (texto sobre a cor primária)
+      ? theme.colorScheme.onPrimary 
+      // Texto da Mensagem Recebida: Use a cor 'onSurfaceVariant' (texto sobre a surfaceVariant)
+      : theme.colorScheme.onSurfaceVariant;
     
-    final color = message.isUser
-        ? const Color(0xFFDCF8C6) 
-        : Colors.white; 
     
     final mainAlignment =
         message.isUser ? Alignment.centerRight : Alignment.centerLeft;
@@ -148,7 +182,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 maxWidth: MediaQuery.of(context).size.width * 0.75, 
               ),
               decoration: BoxDecoration(
-                color: color,
+                color: bubbleColor, // <-- SUBSTITUA A COR FIXA (ex: Colors.green ou Colors.white)
                 borderRadius: BorderRadius.circular(12.0),
                 boxShadow: [
                   BoxShadow(
@@ -161,7 +195,8 @@ class _ChatScreenState extends State<ChatScreen> {
               padding: const EdgeInsets.all(12.0),
               child: Text(
                 message.text,
-                style: const TextStyle(fontSize: 16.0),
+                style: TextStyle(fontSize: 16.0,color: textColor,),
+                
               ),
             ),
           ),
@@ -183,10 +218,11 @@ class _ChatScreenState extends State<ChatScreen> {
 
   
   Widget _buildMessageComposer() {
+    final theme = Theme.of(context);
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: theme.colorScheme.surface,
         border: Border(top: BorderSide(color: Colors.grey.shade300)),
       ),
       child: Row(
@@ -226,26 +262,30 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 
- 
+ String _t(String pt, String en) {
+    // Retorna 0 para Português, 1 para Inglês
+    return widget.currentLanguage == 'portugues' ? pt : en;
+  }
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Lumina', style: TextStyle(color: Colors.white)),
-        backgroundColor: Theme.of(context).colorScheme.primary, 
-        centerTitle: false,
+        title: const Text('LUMINA'),
+        // É bom garantir que o AppBar use a cor primária do tema.
+        backgroundColor: theme.colorScheme.primary, 
+        foregroundColor: theme.colorScheme.onPrimary,
+        iconTheme: IconThemeData(color: theme.colorScheme.onPrimary),
       ),
-      body: Container(
-        
-        color: const Color(0xFFECE5DD), 
+      body: SafeArea(
         child: Column(
           children: <Widget>[
-            
+            // Lista de Mensagens
             Flexible(
               child: ListView.builder(
                 padding: const EdgeInsets.all(8.0),
-                reverse: true, 
+                reverse: true,
                 itemBuilder: (_, int index) => _buildMessage(_messages[index]),
                 itemCount: _messages.length,
               ),
@@ -288,7 +328,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 alignment: Alignment.bottomLeft,
                 child: ListTile(
                   leading: const Icon(Icons.more_horiz), 
-                  title: const Text('Configurações', style: TextStyle(fontSize: 16)),
+                  title: Text(_t('Configurações', 'Settings'), style: const TextStyle(fontSize: 16)),
                   onTap: () {
                     
                     Navigator.pop(context); 
