@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
 class LandingPage extends StatefulWidget {
-  const LandingPage({super.key});
+  final String? initialUsername;
+  final void Function(String)? onUsernameSet;
+  const LandingPage({super.key,
+    this.initialUsername,
+    this.onUsernameSet,});
 
   @override
   State<LandingPage> createState() => _LandingPageState();
@@ -9,7 +13,17 @@ class LandingPage extends StatefulWidget {
 
 class _LandingPageState extends State<LandingPage> {
   final TextEditingController _nomeController = TextEditingController();
-
+ @override
+  void initState() {
+    super.initState();
+    // Carrega o nome persistido (se houver)
+    _nomeController.text = widget.initialUsername ?? ''; 
+  }
+  @override
+  void dispose() {
+    _nomeController.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -101,6 +115,7 @@ class _LandingPageState extends State<LandingPage> {
                     Expanded(
                       child: TextField(
                         controller: _nomeController,
+                        style: const TextStyle(color: Colors.black),
                         decoration: const InputDecoration(
                           hintText: 'Nome de Usuário',
                           hintStyle: TextStyle(
@@ -112,22 +127,25 @@ class _LandingPageState extends State<LandingPage> {
                         ),
                       ),
                     ),
-                    InkWell(
+                    GestureDetector(
                       onTap: () {
-                        String nomeusuario = _nomeController.text.trim();
+                        final nomeusuario = _nomeController.text.trim();
                         if (nomeusuario.isNotEmpty) {
-                          
+                          // NOVO: Salva o nome de usuário no estado global/persitente
+                          widget.onUsernameSet?.call(nomeusuario);
+
+                          // Mudar de tela
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
-                              content: Text('Bem-vindo, $nomeusuario!'),
+                              content: Text('Bem-vindo(a), $nomeusuario!'),
                               backgroundColor: Colors.purpleAccent,
                             ),
-                            
                           );
                           Navigator.pushReplacementNamed(
                             context, 
                             '/chat',
                             arguments: nomeusuario, 
+                            
                           );
                     
                         }

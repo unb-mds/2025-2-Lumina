@@ -1,1 +1,0 @@
- /home/tiago/Projects/2025-2-Lumina/frontend/.dart_tool/flutter_build/fd3b23b87ce526defc6a620693723f3a/dart_build_result.json: 
