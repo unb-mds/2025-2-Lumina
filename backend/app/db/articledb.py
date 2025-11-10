@@ -51,7 +51,7 @@ class ArticleDB:
         """Retorna artigos que ainda não foram vetorizados"""
         cursor = self.conn.execute(
             """
-            SELECT id, title, author, url, content, crawled_at, saved_at, 
+            SELECT id, title, author, url, content, saved_at, 
                    vectorized_at, vector_db_id
             FROM articles
             WHERE vectorized_at IS NULL
@@ -68,10 +68,9 @@ class ArticleDB:
                     author=row[2],
                     url=row[3],
                     content=row[4],
-                    crawled_at=row[5],
-                    saved_at=row[6],
-                    vectorized_at=row[7],
-                    vector_db_id=row[8],
+                    saved_at=row[5],
+                    vectorized_at=row[6],
+                    vector_db_id=row[7],
                 )
             )
         return articles
@@ -92,7 +91,7 @@ class ArticleDB:
         """Busca um artigo pela URL (útil para evitar duplicatas)"""
         cursor = self.conn.execute(
             """
-            SELECT id, title, author, url, content, crawled_at, saved_at,
+            SELECT id, title, author, url, content, saved_at,
                    vectorized_at, vector_db_id
             FROM articles
             WHERE url = ?
@@ -108,10 +107,9 @@ class ArticleDB:
                 author=row[2],
                 url=row[3],
                 content=row[4],
-                crawled_at=row[5],
-                saved_at=row[6],
-                vectorized_at=row[7],
-                vector_db_id=row[8],
+                saved_at=row[5],
+                vectorized_at=row[6],
+                vector_db_id=row[7],
             )
         return None
 

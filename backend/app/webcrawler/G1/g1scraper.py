@@ -14,7 +14,7 @@ class G1Scraper(PageScraper):
     SELECTORS = {
         "title": "content-head__title",
         "author": "content-publication-data__from",
-        "body": "content-text__container",
+        "body": "mc-article-body",
     }
 
 
@@ -25,7 +25,7 @@ class G1Scraper(PageScraper):
         """
 
         paragraphs = container.find_all(
-            "p", class_=lambda x: x != "content-text__advertising"
+            "p", class_=lambda x: x == "content-text__container"
         )
         if paragraphs:
             return "\n\n".join(
