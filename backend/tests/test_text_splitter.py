@@ -161,3 +161,37 @@ def test_splitter_overlap_funciona(splitter_teste: TextSplitter):
         f"O início do chunk 2 ('{inicio_chunk_2}') "
         f"não foi encontrado no final do chunk 1 ('{final_chunk_1}')"
     )
+
+# (No final do arquivo tests/test_text_splitter.py)
+
+def test_splitter_lida_com_excecao_do_langchain(
+    splitter_teste: TextSplitter,
+    sample_article: Article,
+    mocker  # O 'mocker' vem do pytest-mock que acabamos de instalar
+):
+    """
+    Testa (Caminho 5) se o código lida corretamente com uma falha
+    inesperada da biblioteca LangChain (ex: create_documents falha).
+
+    O código deve capturar a exceção e retornar uma lista vazia.
+    """
+    # 1. Configura o Mock
+    # Dizemos ao mocker para "interceptar" a chamada ao método
+    # 'create_documents' e, em vez de executá-lo,
+    # apenas levantar (raise) uma exceção genérica.
+    mocker.patch.object(
+        splitter_teste.splitter,  # O objeto onde o método está
+        "create_documents",       # O nome do método (como string)
+        side_effect=Exception("Erro Simulado da Biblioteca LangChain")
+    )
+
+    # 2. Chama a função
+    # Agora, quando split_article tentar chamar
+    # self.splitter.create_documents, o mock vai disparar
+    # a Exceção que simulamos.
+    chunks = splitter_teste.split_article(sample_article)
+
+    # 3. Verifica
+    # O bloco 'except' no nosso código deve ter capturado
+    # a exceção e retornado uma lista vazia.
+    assert chunks == []
