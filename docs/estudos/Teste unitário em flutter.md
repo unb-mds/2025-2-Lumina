@@ -16,6 +16,6 @@ Em questão da automatização dos testes, é necessário criar um arquivo YAML,
 
 ## 4. Referencias
 
-**Artigo**: [Testes no Flutter: guia completo para iniciantes-Alura](https://www.alura.com.br/artigos/testes-flutter?srsltid=AfmBOoqZNuqrNr3nN3bd-Ag20Wi8KkjKFf_ZQufTvWH-m68Ssfo6FjLN)
-**Artigo**: [Testes unitários — Dart e Flutter - medium (Por Cristiano Raffi Cunha)](https://medium.com/cristiano-cunha/testes-automatizados-dart-cf9df0e741ab)
-**Documentação**: [An introduction to unit testing - Flutter docs](https://docs.flutter.dev/cookbook/testing/unit/introduction)
+- **Artigo**: [Testes no Flutter: guia completo para iniciantes-Alura](https://www.alura.com.br/artigos/testes-flutter?srsltid=AfmBOoqZNuqrNr3nN3bd-Ag20Wi8KkjKFf_ZQufTvWH-m68Ssfo6FjLN)
+- **Artigo**: [Testes unitários — Dart e Flutter - medium (Por Cristiano Raffi Cunha)](https://medium.com/cristiano-cunha/testes-automatizados-dart-cf9df0e741ab)
+- **Documentação**: [An introduction to unit testing - Flutter docs](https://docs.flutter.dev/cookbook/testing/unit/introduction)

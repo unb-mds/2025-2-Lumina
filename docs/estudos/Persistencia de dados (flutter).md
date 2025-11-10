@@ -22,4 +22,4 @@ Considerando que o aplicativo já esta utilizando do shared preferences para sal
 Considerando o escopo do projeto e a ideia do que vai ser trabalhado com a persistência de dados, a sugestão é que seja trabalhado com o Hive, visto que a ideia é manter um histórico de chat e o contexto da conversa do bot
 
 ## 4. Referencias
-**Artigo**: [**Flutter: como persistir dados e quais ferramentas usar** - Alura](https://www.alura.com.br/artigos/alternativas-de-persistencia-de-dados-com-flutter?srsltid=AfmBOopAJHEvA128YUL8QzBZnKSPEEU9a9RUOABYXerKkkUef03wqmTk)
+- **Artigo**: [**Flutter: como persistir dados e quais ferramentas usar** - Alura](https://www.alura.com.br/artigos/alternativas-de-persistencia-de-dados-com-flutter?srsltid=AfmBOopAJHEvA128YUL8QzBZnKSPEEU9a9RUOABYXerKkkUef03wqmTk)
