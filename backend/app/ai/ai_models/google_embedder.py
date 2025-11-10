@@ -3,7 +3,7 @@ from typing import List
 from app.ai.ai_models.EmbeddingPlatform import EmbeddingPlatform
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 
-logger = logging.getLogger(_name_)
+logger = logging.getLogger(__name__)
 
 
 class GoogleEmbedder(EmbeddingPlatform):
