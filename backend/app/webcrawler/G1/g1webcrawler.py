@@ -33,7 +33,7 @@ class WebCrawler:
             html_data = self.downloader.fetch(current_url)
             if not html_data:
                 continue
-            if "noticia" in current_url:
+            if "noticia" in current_url and current_url.endswith(".ghtml"):
                 article = self.scraper.scrape_article(current_url, html_data)
                 if article:
                     print(f"Artigo extraído: {article.title}")
