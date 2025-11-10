@@ -17,8 +17,6 @@ class G1Scraper(PageScraper):
         "body": "content-text__container",
     }
 
-    def __init__(self):
-        pass
 
     def _extract_body_text(self, container):
         """
