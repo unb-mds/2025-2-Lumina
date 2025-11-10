@@ -15,6 +15,8 @@ lxml>=5.1.0
 # --- AI / LangChain ---
 langchain>=0.1.0
 langchain-google-genai>=0.0.5
+langchain-core
+langchain-text-splitters
 
 # --- Configuração ---
 python-dotenv>=1.0.0
@@ -22,3 +24,7 @@ pydantic>=2.4.2
 
 # --- Desenvolvimento & Testes ---
 pytest>=8.4.0
+
+# --- Testes de implementação Spliter ---
+langchain-core
+langchain-text-splitters
