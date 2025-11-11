@@ -120,6 +120,16 @@ class _ChatAppState extends State<ChatApp> {
     });
   }
  
+  // Função para resetar os tutoriais
+  void _resetTutorials() async {
+  final prefs = await SharedPreferences.getInstance();
+  await prefs.setBool('hasSeenChatTutorial', false);
+  await prefs.setBool('hasSeenMenuTutorial', false);
+  debugPrint("Tutoriais resetados.");
+  }
+
+
+
   // Definições de cores para os dois temas
   final _lightColorScheme = ColorScheme.fromSeed(
     seedColor: Colors.blueGrey,
@@ -193,6 +203,7 @@ class _ChatAppState extends State<ChatApp> {
                 currentLanguage: _currentLanguage,
                 onLanguageChanged: _setLanguage,
                 onResetSettings: _resetSelectSettings,
+                onResetTutorials: _resetTutorials,
               );
             },
           );

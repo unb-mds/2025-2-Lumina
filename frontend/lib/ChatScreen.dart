@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:frontend/main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 class ChatMessage {
   final String text;
   final bool isUser; 
@@ -33,8 +35,14 @@ class _ChatScreenState extends State<ChatScreen> {
   
   final TextEditingController _textController = TextEditingController();
   
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   
   bool _isSending = false;
+
+  bool _showChatTutorial = false;
+  bool _showMenuTutorial = false;
+
 
   @override
   void initState() {
@@ -48,7 +56,45 @@ class _ChatScreenState extends State<ChatScreen> {
         timestamp: DateTime.now(),
       ),
     );
+    _checkTutorialStatus();
   }
+
+
+Future<void> _checkTutorialStatus() async {
+  final prefs = await SharedPreferences.getInstance();
+  final seenChatTutorial = prefs.getBool('hasSeenChatTutorial') ?? false;
+  final seenMenuTutorial = prefs.getBool('hasSeenMenuTutorial') ?? false;
+
+  if (!seenChatTutorial) {
+    setState(() => _showChatTutorial = true);
+  }
+
+  if (seenChatTutorial && !seenMenuTutorial) {
+    // caso já tenha visto o tutorial do chat, mas ainda não o do menu
+    setState(() => _showMenuTutorial = true);
+  }
+}
+
+
+Future<void> _closeChatTutorial() async {
+  final prefs = await SharedPreferences.getInstance();
+  await prefs.setBool('hasSeenChatTutorial', true);
+  setState(() {
+    _showChatTutorial = false;
+  });
+}
+
+Future<void> _closeMenuTutorial() async {
+  final prefs = await SharedPreferences.getInstance();
+  await prefs.setBool('hasSeenMenuTutorial', true);
+  setState(() {
+    _showMenuTutorial = false;
+  });
+}
+
+
+
+
 @override
   void didUpdateWidget(covariant ChatScreen oldWidget) {
     super.didUpdateWidget(oldWidget);
@@ -267,10 +313,66 @@ class _ChatScreenState extends State<ChatScreen> {
     return widget.currentLanguage == 'portugues' ? pt : en;
   }
 
+
+
+Widget _buildBalloonWithArrow(String text, {ArrowDirection direction = ArrowDirection.down}) {
+  final theme = Theme.of(context); // pega o tema atual (claro/escuro)
+  final bool isDarkMode = theme.brightness == Brightness.dark;
+
+  // define as cores de acordo com o tema
+  final Color balloonColor = isDarkMode
+      ? theme.colorScheme.surfaceContainerHighest 
+      : theme.colorScheme.surface;               
+
+  final Color textColor = isDarkMode
+      ? theme.colorScheme.onSurface
+      : Colors.black87;
+
+  return CustomPaint(
+    painter: BalloonArrowPainter(direction, color: balloonColor),
+    child: Container(
+      margin: const EdgeInsets.all(8),
+      padding: const EdgeInsets.all(14),
+      constraints: const BoxConstraints(maxWidth: 280),
+      decoration: BoxDecoration(
+        color: balloonColor,
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.2),
+            blurRadius: 6,
+            offset: const Offset(2, 2),
+          )
+        ],
+      ),
+      child: Text(
+        text,
+        style: TextStyle(color: textColor, fontSize: 15),
+      ),
+    ),
+  );
+}
+
+
+
+
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
+      key: _scaffoldKey,
+  onDrawerChanged: (isOpened) async {
+    if (isOpened) {
+      final prefs = await SharedPreferences.getInstance();
+      final seenChat = prefs.getBool('hasSeenChatTutorial') ?? false;
+      final seenMenu = prefs.getBool('hasSeenMenuTutorial') ?? false;
+
+      if (seenChat && !seenMenu) {
+        setState(() => _showMenuTutorial = true);
+      }
+    }
+  },
       appBar: AppBar(
         title: const Text('LUMINA'),
         // É bom garantir que o AppBar use a cor primária do tema.
@@ -278,7 +380,9 @@ class _ChatScreenState extends State<ChatScreen> {
         foregroundColor: theme.colorScheme.onPrimary,
         iconTheme: IconThemeData(color: theme.colorScheme.onPrimary),
       ),
-      body: SafeArea(
+      body: Stack(
+        children: [
+          SafeArea(
         child: Column(
           children: <Widget>[
             // Lista de Mensagens
@@ -297,7 +401,42 @@ class _ChatScreenState extends State<ChatScreen> {
           ],
         ),
       ),
-      drawer: Drawer(
+
+       
+      if (_showChatTutorial)
+      GestureDetector(
+        onTap: _closeChatTutorial,
+        child: Container(
+          color: Colors.black.withValues(alpha: 0.6),
+          child: Stack(
+            children: [
+              Positioned(
+                top: 20,
+                left: 10,
+                child: _buildBalloonWithArrow(
+                  _t("Clique aqui para abrir o menu","Tap here to open the menu"),
+                   direction: ArrowDirection.up,
+                  ),
+              ),
+              Positioned(
+                bottom: 75,
+                left: 20,
+                child: _buildBalloonWithArrow(
+                    _t("Digite aqui a notícia que você quer verificar","Type the news you want to check here"),
+                     direction: ArrowDirection.down,
+                    ),
+              ),
+            ],
+          ),
+        ),
+      ),
+
+      ],
+    ),
+
+      drawer: Stack(
+        children:[ 
+          Drawer(
         child: Column(
           children: <Widget>[
            
@@ -341,6 +480,91 @@ class _ChatScreenState extends State<ChatScreen> {
           ],
         ),
       ),
+
+
+      if (_showMenuTutorial)
+      GestureDetector(
+        onTap: _closeMenuTutorial,
+        child: Container(
+          color: Colors.black.withValues(alpha: 0.6),
+          child: Stack(
+            children: [
+              Positioned(
+                bottom: 65,
+                left: 15,
+                child: _buildBalloonWithArrow(
+                  _t("Clique aqui para abrir as configurações","Tap here to open settings"),
+                   direction: ArrowDirection.down,
+                  ),
+              ),
+              Positioned(
+                top: 200,
+                left: 100,
+                child: _buildBalloonWithArrow(
+                    _t("Aqui ficam salvas as suas conversas anteriores","Your previous conversations are saved here"),
+                     direction: ArrowDirection.left,
+                    ),
+              ),
+            ],
+          ),
+        ),
+      ),
+  ],
+),
+
     );
   }
+}
+
+enum ArrowDirection { up, down, left, right }
+
+class BalloonArrowPainter extends CustomPainter {
+  final ArrowDirection direction;
+  final Color color;
+
+  BalloonArrowPainter(this.direction, {this.color = Colors.white});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()..color = color;
+    final path = Path();
+
+    const arrowSize = 15.0;
+    const arrowWidth = 16.0;
+
+    switch (direction) {
+      case ArrowDirection.up:
+         path.moveTo(20, -arrowSize); // ponta da seta (acima)
+         path.lineTo(20 - arrowWidth / 2, 0); // base esquerda
+         path.lineTo(20 + arrowWidth / 2, 0); // base direita
+         path.close();
+        break;
+
+      case ArrowDirection.down:
+        path.moveTo(20, size.height + arrowSize);
+        path.lineTo(20 - arrowWidth / 2, size.height);
+        path.lineTo(20 + arrowWidth / 2, size.height);
+        path.close();
+        break;
+
+      case ArrowDirection.left:
+        path.moveTo(0, 20);
+        path.lineTo(-arrowSize, 20 - arrowWidth / 2);
+        path.lineTo(-arrowSize, 20 + arrowWidth / 2);
+        path.close();
+        break;
+
+      case ArrowDirection.right:
+        path.moveTo(size.width + arrowSize, 20);
+        path.lineTo(size.width, 20 - arrowWidth / 2);
+        path.lineTo(size.width, 20 + arrowWidth / 2);
+        path.close();
+        break;
+    }
+
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) => false;
 }
