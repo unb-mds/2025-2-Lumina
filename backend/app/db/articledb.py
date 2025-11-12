@@ -113,6 +113,31 @@ class ArticleDB:
             )
         return None
 
+    def get_article_by_id(self, article_id: int) -> Optional[Article]:
+        """Busca um artigo pelo seu ID."""
+        cursor = self.conn.execute(
+            """
+            SELECT id, title, author, url, content, saved_at,
+                   vectorized_at, vector_db_id
+            FROM articles
+            WHERE id = ?
+        """,
+            (article_id,),
+        )
+        row = cursor.fetchone()
+        if row:
+            return Article(
+                id=row[0],
+                title=row[1],
+                author=row[2],
+                url=row[3],
+                content=row[4],
+                saved_at=row[5],
+                vectorized_at=row[6],
+                vector_db_id=row[7],
+            )
+        return None
+
     def get_stats(self) -> dict:
         """Retorna estatísticas do banco"""
         cursor = self.conn.execute(
@@ -127,10 +152,12 @@ class ArticleDB:
         row = cursor.fetchone()
         return {"total": row[0], "pending_vectorization": row[1], "vectorized": row[2]}
 
-    def close(self):
-        self.conn.close()
     def get_all_titles_and_urls(self) -> list[tuple[str, str]]:
         """Retorna lista com (título, url) de todos os artigos"""
         cursor = self.conn.execute('SELECT title, url FROM articles ORDER BY id')
         return cursor.fetchall()
+    
+    def close(self):
+        self.conn.close()
+
 

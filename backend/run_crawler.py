@@ -6,7 +6,7 @@ def main():
     try:
         crawler = WebCrawler()
         
-        crawler.crawl(max_pages=500) 
+        crawler.crawl(max_pages=2500) 
         
         print("WebCrawler finalizado com sucesso.")
     except Exception as e:
