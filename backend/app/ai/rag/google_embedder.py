@@ -11,18 +11,15 @@ class GoogleEmbedder(EmbeddingPlatform):
     Implementação concreta do EmbeddingPlatform usando os modelos
     de embedding do Google (via LangChain).
 
-    Utiliza a mesma GOOGLE_API_KEY usada pelo GeminiModel.
     """
 
-    def _init_(self, api_key: str, model_name: str = "models/embedding-001"):
+    def __init__ (self, api_key: str, model_name: str = "models/gemini-embedding-001"):
         """
         Inicializa o cliente de embedding do Google.
 
         Args:
             api_key (str): A chave de API do Google AI Studio.
-            model_name (str, optional): O nome do modelo de embedding.
-                                        "models/embedding-001" é o padrão
-                                        e mais comum. (Tamanho do vetor: 768)
+            model_name (str, optional): O nome do modelo de embedding a ser usado.
         """
         self.api_key = api_key
         self.model_name = model_name
