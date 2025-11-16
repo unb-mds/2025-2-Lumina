@@ -290,7 +290,7 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
       titlePadding: EdgeInsets.zero,
       title: Container(
         decoration: BoxDecoration(
-          color: theme.colorScheme.primary.withOpacity(0.1),
+          color: theme.colorScheme.primary.withValues(alpha:0.1),
           borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
         ),
         padding: const EdgeInsets.all(20),
@@ -341,7 +341,7 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
       titlePadding: EdgeInsets.zero,
       title: Container(
         decoration: BoxDecoration(
-          color: theme.colorScheme.primary.withOpacity(0.1),
+          color: theme.colorScheme.primary.withValues(alpha:0.1),
           borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
         ),
         padding: const EdgeInsets.all(20),
@@ -532,7 +532,7 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
                       Text(
                         subtitle,
                         style: theme.textTheme.bodyMedium?.copyWith(
-                          color: theme.colorScheme.onSurface.withOpacity(0.6),
+                          color: theme.colorScheme.onSurface.withValues(alpha:0.6),
                         ),
                       ),
                   ],
@@ -541,7 +541,7 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
             ),
             actionButton ?? Icon(
               Icons.arrow_forward_ios, 
-              color: theme.colorScheme.onSurface.withOpacity(0.6), 
+              color: theme.colorScheme.onSurface.withValues(alpha:0.6), 
               size: 18
             ),
           ],
