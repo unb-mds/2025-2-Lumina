@@ -2,14 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
-// Mapeamento de traduções (PT: índice 0, EN: índice 1)
 const Map<String, List<String>> _translations = {
-  // Títulos e Headers
   'config_title': ['Configurações', 'Settings'],
   'section_account': ['Conta', 'Account'],
   'section_general': ['Geral', 'General'],
   'section_help': ['Ajuda e Legal', 'Help and Legal'],
-  // Tiles
   'tile_user': ['Usuário', 'User'],
   'tile_theme': ['Tema', 'Theme'],
   'tile_language': ['Idioma', 'Language'],
@@ -18,7 +15,6 @@ const Map<String, List<String>> _translations = {
   'tile_terms': ['Termos de Serviço', 'Terms of Service'],
   'tile_reset_defaults': ['Restaurar Configurações', 'Reset Settings'], 
   
-  // Subtítulos/Labels
   'subtitle_light': ['Claro', 'Light'],
   'subtitle_dark': ['Escuro', 'Dark'],
   'subtitle_system': ['Sistema', 'System'],
@@ -28,7 +24,7 @@ const Map<String, List<String>> _translations = {
   'subtitle_extralarge': ['Extra Grande', 'Extra Large'],
   'button_edit': ['EDITAR', 'EDIT'],
   'button_reset': ['RESTAURAR', 'RESET'],
-  // Diálogos
+
   'dialog_user_title': ['Alterar Usuário', 'Change User'],
   'dialog_user_hint': ['Novo nome de usuário', 'New username'],
   'dialog_font_title': ['Tamanho da Fonte', 'Font Size'],
@@ -45,14 +41,12 @@ const Map<String, List<String>> _translations = {
   'button_apply': ['APLICAR', 'APPLY'],
 };
 
-// Função de tradução
 String _t(String key, String lang) {
   final langIndex = lang == 'portugues' ? 0 : 1; 
   final texts = _translations[key] ?? [key, key];
   return texts[langIndex.clamp(0, 1)]; 
 }
 
-// CORREÇÃO: Transformado em StatefulWidget
 class ConfiguracoesPage extends StatefulWidget {
   final ThemeMode currentThemeMode;
   final void Function(ThemeMode)? onThemeModeChanged;
@@ -89,14 +83,12 @@ class ConfiguracoesPage extends StatefulWidget {
   State<ConfiguracoesPage> createState() => _ConfiguracoesPageState();
 }
 
-// O restante da lógica agora vive no State
 class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
   late String _localUsername; 
   
  @override
   void initState() {
     super.initState();
-    // 2. Inicializa com o valor passado pelo widget
     _localUsername = widget.currentUsername; 
   }
   String _getFontSizeLabel(double scale) {
@@ -129,13 +121,10 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
             ),
             TextButton(
               onPressed: () {
-                // 1. Chama o callback que limpa apenas as preferências selecionadas
                 widget.onResetSettings?.call();
                 
-                // 2. Fecha o diálogo
                 Navigator.pop(context);
                 
-                // 3. Mostra uma SnackBar de sucesso
                 ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text(
@@ -230,7 +219,6 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
     );
   }
 
-  // DIÁLOGO PARA ATUALIZAR O NOME DE USUÁRIO
   void _openUsernameDialog(BuildContext context) {
     final TextEditingController usernameController = 
         TextEditingController(text: _localUsername);
@@ -254,7 +242,6 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
             onSubmitted: (value) {
               final newName = value.trim();
               if (newName.isNotEmpty) {
-                // CHAMA O CALLBACK E FORÇA O REBUILD DO CHATAPP
                 widget.onUsernameChanged?.call(newName);
                 Navigator.pop(context);
               }
@@ -269,13 +256,9 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
               onPressed: () {
                final newName = usernameController.text.trim();
                 if (newName.isNotEmpty) {
-                  // 3. ATUALIZAÇÃO CHAVE:
                   
-                  // 3a. Chama o callback para salvar no AppState e persistir
                   widget.onUsernameChanged?.call(newName); 
                   
-                  // 3b. Atualiza o estado local para forçar o rebuild do widget
-                  // Isso garante a atualização instantânea do subtítulo do tile
                   setState(() {
                     _localUsername = newName;
                   }); 
@@ -433,7 +416,6 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
               icon: Icons.person_outline,
               color: Colors.blueAccent,
               title: _t('tile_user', lang),
-              // Agora, ao ser um StatefulWidget, ele força o build
               subtitle: _localUsername, 
               tileColor: tileColor,
               actionButton: TextButton(
@@ -491,11 +473,11 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
               tileColor: tileColor,
               onTap: () async {
                 final prefs = await SharedPreferences.getInstance();
-                await prefs.setBool('hasSeenChatTutorial', false); // força reexibir tutorial
-                await prefs.setBool('hasSeenMenuTutorial', false); // força reexibir o do menu lateral
+                await prefs.setBool('hasSeenChatTutorial', false);
+                await prefs.setBool('hasSeenMenuTutorial', false); 
                 if (mounted) {
-                  Navigator.pop(context); // fecha as configurações
-                  Navigator.pushNamed(context, '/chat'); // abre novamente o chat
+                  Navigator.pop(context);
+                  Navigator.pushNamed(context, '/chat'); 
                   }
                 },
             ),
