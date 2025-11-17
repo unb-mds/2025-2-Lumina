@@ -53,7 +53,10 @@ jobs:
               echo "⚠️ Falha ao atualizar dependências com pip. Continuando com as versões já instaladas..."
             fi
             set -e
-
+            
+            cd .. 
+            cd .. 
+            
             # Ajustar permissões
             echo "🔐 Ajustando permissões..."
             sudo chown -R ubuntu:ubuntu lumina-backend/backend
