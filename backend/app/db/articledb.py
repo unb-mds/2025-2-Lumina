@@ -6,7 +6,7 @@ from ..models.article import Article
 
 
 class ArticleDB:
-    def __init__(self, db_path: str = "backend/app/db/articles.db"):
+    def __init__(self, db_path: str = "app/db/articles.db"):
         self.conn = sqlite3.connect(db_path)
         self.create_table()
 
