@@ -33,22 +33,22 @@ jobs:
             git clone --depth 1 https://github.com/${{ github.repository }}.git $TEMP_DIR
             
             # Fazer backup do .env
-            cp /home/lumina-backend/backend/.env /home/lumina-backend/backend/.env.backup
+            cp lumina-backend/backend/.env lumina-backend/backend/.env.backup
             
             # Copiar apenas a pasta backend
             echo "📦 Copiando arquivos do backend..."
-            rsync -av --exclude='.env' --exclude='venv' --exclude='__pycache__' $TEMP_DIR/backend/ /home/lumina-backend/backend/
+            rsync -av --exclude='.env' --exclude='venv' --exclude='__pycache__' $TEMP_DIR/backend/ lumina-backend/backend/
             
             # Limpar temp
             rm -rf $TEMP_DIR
             
             # Instalar/atualizar dependências usando o venv
             echo "📦 Instalando dependências..."
-            /home/lumina-backend/backend/venv/bin/pip install -r requirements.txt --no-cache-dir
+            lumina-backend/backend/venv/bin/pip install -r requirements.txt --no-cache-dir
             
             # Ajustar permissões
             echo "🔐 Ajustando permissões..."
-            sudo chown -R ubuntu:ubuntu /home/lumina-backend/backend
+            sudo chown -R ubuntu:ubuntu lumina-backend/backend
             
             # Reiniciar o serviço systemd
             echo "🔄 Reiniciando serviço..."
