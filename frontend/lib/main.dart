@@ -25,11 +25,16 @@ Future<void> main() async {
     apiBaseUrl = "http://10.0.2.2:8000"; 
   }
   
-  runApp(const ChatApp());
+// Verifica se o usuário já viu a landing page
+  final prefs = await SharedPreferences.getInstance();
+  final hasSeenLanding = prefs.getBool('hasSeenLanding') ?? false;
+
+  runApp(ChatApp(showLanding: !hasSeenLanding,));
 }
 
 class ChatApp extends StatefulWidget {
-  const ChatApp({super.key});
+  final bool showLanding;
+  const ChatApp({super.key, required this.showLanding});
 
   @override
   State<ChatApp> createState() => _ChatAppState();
@@ -175,7 +180,7 @@ class _ChatAppState extends State<ChatApp> {
       },
        
     
-      initialRoute: '/',
+      initialRoute: widget.showLanding ? '/' : '/chat',
       routes: {
         '/': (context) => LandingPage(
          initialUsername: _username,
