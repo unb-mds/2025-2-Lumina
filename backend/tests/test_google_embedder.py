@@ -1,6 +1,6 @@
 import pytest
 
-from backend.app.ai.rag.google_embedder import GoogleEmbedder
+from app.ai.rag.google_embedder import GoogleEmbedder
 
 # Dimensão esperada dos vetores do modelo "models/embedding-001"
 EXPECTED_DIMENSION = 768

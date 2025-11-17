@@ -1,11 +1,36 @@
-fastapi
-requests
-beautifulsoup4
-google-generativeai
-langchain-google-genai
-langchain-text-splitters
+
+# --- Core Web Framework ---
+gunicorn>=21.2.0
+uvicorn[standard]>=0.24.0
+fastapi>=0.104.0
+
+# --- Banco de Dados ---
+sqlmodel>=0.0.14
+aiosqlite>=0.19.0
+chromadb>=0.4.3
+
+# --- Web Crawler () ---
+requests>=2.32.0
+beautifulsoup4>=4.12.0
+lxml>=5.1.0
+
+# --- AI / LangChain ---
+langchain
+langchain-google-genai>=0.0.5
 langchain-core
-chromadb
-pytest
-pytest-mock
-dotenv
+langchain-text-splitters
+
+# --- Configuração ---
+python-dotenv>=1.0.0
+pydantic>=2.4.2
+
+# --- Desenvolvimento & Testes ---
+pytest>=8.4.0
+
+# --- Testes de implementação Spliter ---
+langchain-core
+langchain-text-splitters
+
+# --- Testes de implementação ---
+pytest>=8.4.0
+pytest_mock

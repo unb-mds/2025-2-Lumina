@@ -3,7 +3,7 @@ from typing import Set
 import pytest
 from bs4 import BeautifulSoup
 
-from backend.app.models.linkextractor import BaseLinkExtractor
+from app.models.linkextractor import BaseLinkExtractor
 
 
 # 1. Teste da Regra Abstrata

@@ -4,10 +4,10 @@ from unittest.mock import patch
 import pytest
 from langchain_core.documents import Document
 
-from backend.app.ai.rag.google_embedder import GoogleEmbedder
-from backend.app.ai.rag.text_splitter import TextSplitter
-from backend.app.db.vectordb import VectorDB
-from backend.app.models.article import Article
+from app.ai.rag.google_embedder import GoogleEmbedder
+from app.ai.rag.text_splitter import TextSplitter
+from app.db.vectordb import VectorDB
+from app.models.article import Article
 
 # --- Fixtures ---
 

@@ -1,9 +1,8 @@
 from typing import List
 
-from langchain.schema import Document
-
-from backend.app.ai.gemini import GeminiModel
-from backend.app.ai.rag.retriever import NewsRetriever
+from langchain_core.documents import Document
+from app.ai.gemini import GeminiModel
+from app.ai.rag.retriever import NewsRetriever
 
 
 class ChatService:

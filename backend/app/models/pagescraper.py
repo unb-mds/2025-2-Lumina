@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from backend.app.models.article import Article
+from app.models.article import Article
 
 
 class PageScraper(ABC):
