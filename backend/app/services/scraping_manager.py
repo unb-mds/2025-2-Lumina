@@ -1,4 +1,3 @@
-
 from app.webcrawler.G1.g1scraper import G1Scraper
 from app.db.articledb import ArticleDB
 from app.models.article import Article
