@@ -1,6 +1,6 @@
 import logging
 from typing import List
-from app.ai.ai_models.EmbeddingPlatform import EmbeddingPlatform
+from backend.app.ai.ai_models.EmbeddingPlatform import EmbeddingPlatform
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 
 logger = logging.getLogger(__name__)

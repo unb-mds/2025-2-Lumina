@@ -1,7 +1,7 @@
 
-from app.webcrawler.G1.g1scraper import G1Scraper
-from app.db.articledb import ArticleDB
-from app.models.article import Article
+from backend.app.webcrawler.G1.g1scraper import G1Scraper
+from backend.app.db.articledb import ArticleDB
+from backend.app.webcrawler.dowloader import Downloader
 
 class ScrapingError(Exception):
     """Custom exception for scraping errors."""
@@ -16,6 +16,7 @@ class ScrapingManager:
 
     def __init__(self):
         self.db = ArticleDB()
+        self.downloader = Downloader()
 
     def scrape_and_save(self, url: str) -> tuple[int, bool]:
         """
@@ -43,7 +44,11 @@ class ScrapingManager:
             return existing_article.id, False
         
         try:
-            article = scraper.scrape(url)
+            html_data = self.downloader.fetch(url)
+            if not html_data:
+                raise ScrapingError(f"Não foi possível baixar o conteúdo da URL: {url}")
+
+            article = scraper.scrape_article(url, html_data)
             if not article:
                 raise ScrapingError("Não foi possível extrair o conteúdo do artigo da URL.")
         except Exception as e:

@@ -1,8 +1,8 @@
 import logging
 from bs4 import BeautifulSoup
 
-from app.models.article import Article
-from app.models.pagescraper import PageScraper
+from backend.app.models.article import Article
+from backend.app.models.pagescraper import PageScraper
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)

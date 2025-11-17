@@ -1,13 +1,13 @@
 import logging
 import uuid
-from typing import List, Optional
+from typing import Optional
 
 import chromadb
 from chromadb.types import Collection
 
-from app.ai.ai_models.EmbeddingPlatform import EmbeddingPlatform
-from app.ai.rag.text_splitter import TextSplitter
-from app.models.article import Article
+from backend.app.ai.ai_models.EmbeddingPlatform import EmbeddingPlatform
+from backend.app.ai.rag.text_splitter import TextSplitter
+from backend.app.models.article import Article
 
 logger = logging.getLogger(__name__)
 
@@ -114,3 +114,28 @@ class VectorDB:
                 f"Falha ao salvar chunks do artigo ID {article.id} no ChromaDB: {e}"
             )
             return None
+
+    def delete_article_by_url(self, url: str) -> int:
+        """
+        Deleta todos os chunks de um artigo do ChromaDB com base na URL.
+
+        Args:
+            url (str): A URL do artigo a ser deletado.
+
+        Returns:
+            int: O número de documentos deletados.
+        """
+        try:
+            # O ChromaDB permite deletar por filtro de metadados
+            # A URL é armazenada como metadado 'url'
+            deleted_ids = self.collection.delete(where={"url": url})
+            num_deleted = len(deleted_ids)
+            logger.info(
+                f"Deletados {num_deleted} chunks associados à URL '{url}' do ChromaDB."
+            )
+            return num_deleted
+        except Exception as e:
+            logger.error(
+                f"Falha ao deletar chunks para a URL '{url}' do ChromaDB: {e}"
+            )
+            return 0

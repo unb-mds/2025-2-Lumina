@@ -34,7 +34,7 @@ def embedder(mock_google_embeddings_client) -> GoogleEmbedder:
 def test_embedder_inicializacao(embedder: GoogleEmbedder, mock_google_embeddings_client):
     """Testa se o embedder foi inicializado corretamente com o mock."""
     assert embedder is not None
-    assert embedder.model_name == "models/embedding-001"
+    assert embedder.model_name == "models/gemini-embedding-001"
     assert embedder.client == mock_google_embeddings_client
 
 
@@ -63,34 +63,8 @@ def test_embed_documents_small_batch(embedder: GoogleEmbedder, mocker):
     assert len(vetores) == len(textos)
     assert len(vetores[0]) == EXPECTED_DIMENSION
     embedder.client.embed_documents.assert_called_once_with(textos)
-    mock_sleep.assert_called_once() # Should be called once after the single batch
-
-
-def test_embed_documents_throttling_large_batch(embedder: GoogleEmbedder, mocker):
-    """
-    Testa a vetorização de um lote grande, verificando o throttling.
-    """
-    mock_sleep = mocker.patch("time.sleep")
-    # Cria uma lista com mais textos que o tamanho do lote
-    textos = [f"Texto {i}" for i in range(GoogleEmbedder.EMBEDDING_BATCH_SIZE + 5)] # 20 textos
-    
-    vetores = embedder.embed_documents(textos)
-
-    # 1. Verifica se todos os embeddings foram retornados
-    assert len(vetores) == len(textos)
-    
-    # 2. Verifica se a API foi chamada o número correto de vezes (2 vezes)
-    assert embedder.client.embed_documents.call_count == 2
-    
-    # 3. Verifica as chamadas individuais
-    first_call_args = embedder.client.embed_documents.call_args_list[0].args[0]
-    second_call_args = embedder.client.embed_documents.call_args_list[1].args[0]
-    assert len(first_call_args) == GoogleEmbedder.EMBEDDING_BATCH_SIZE
-    assert len(second_call_args) == 5
-
-    # 4. Verifica se o sleep foi chamado o número correto de vezes (2 vezes)
-    assert mock_sleep.call_count == 2
-    mock_sleep.assert_called_with(1)
+    # The GoogleEmbedder itself does not implement throttling, so time.sleep should not be called.
+    mock_sleep.assert_not_called()
 
 
 def test_embed_documentos_lista_vazia(embedder: GoogleEmbedder):

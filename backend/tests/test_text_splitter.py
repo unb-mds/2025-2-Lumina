@@ -1,6 +1,6 @@
 import pytest
-from app.models.article import Article
-from app.ai.rag.text_splitter import TextSplitter
+from backend.app.models.article import Article
+from backend.app.ai.rag.text_splitter import TextSplitter
 from langchain_core.documents import Document
 
 # -- Fixtures (Ambiente de Teste) --
