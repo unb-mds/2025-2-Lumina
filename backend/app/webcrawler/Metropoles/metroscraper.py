@@ -2,7 +2,7 @@ import logging
 from bs4 import BeautifulSoup
 from app.models.article import Article
 from app.models.pagescraper import PageScraper
-from typing import List, Optional
+from typing import Optional
 
 # Configuração do logging
 logger = logging.getLogger(__name__)

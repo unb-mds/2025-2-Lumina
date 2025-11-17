@@ -1,7 +1,7 @@
 import pytest
 from typing import Set
 from bs4 import BeautifulSoup
-from app.models.linkextractor import BaseLinkExtractor
+from backend.app.models.linkextractor import BaseLinkExtractor
 
 # 1. Teste da Regra Abstrata
 def test_base_link_extractor_is_abstract():

@@ -61,7 +61,7 @@ class WebCrawler:
                 try:
                     logger.info(f"Artigo identificado, raspando: {current_url}")
                     # ... (etc) ...
-                except Exception as e:
+                except Exception:
                     logger.error(...)
             else:
                 logger.debug(f"Página é uma seção (sem 'article:section'), pulando raspagem: {current_url}")

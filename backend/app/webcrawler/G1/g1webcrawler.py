@@ -182,7 +182,7 @@ class WebCrawler:
 
         # Log final detalhado
         self.save_state()
-        print(f"\n[CRAWL] ========== FINALIZADO ==========")
+        print("\n[CRAWL] ========== FINALIZADO ==========")
         print(f"[CRAWL] Motivo: {'Fila vazia' if self.Urls_to_visit.empty() else 'Limite de páginas atingido'}")
         print(f"[CRAWL] Total artigos extraídos: {pages_crawled}")
         print(f"[CRAWL] Total URLs processados: {len(self.visited_urls)}")
@@ -191,4 +191,4 @@ class WebCrawler:
         print(f"[CRAWL] URLs pulados (outra categoria): {skipped_wrong_category}")
         print(f"[CRAWL] Falhas de download: {failed_downloads}")
         print(f"[CRAWL] URLs restantes na fila: {self.Urls_to_visit.qsize()}")
-        print(f"[CRAWL] ====================================\n")
+        print("[CRAWL] ====================================\n")

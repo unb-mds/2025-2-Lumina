@@ -1,6 +1,6 @@
 import pytest
-from app.models.pagescraper import PageScraper
-from app.models.article import Article
+from backend.app.models.pagescraper import PageScraper
+from backend.app.models.article import Article
 
 def test_pagescraper_is_abstract_and_cannot_be_instantiated():
     """

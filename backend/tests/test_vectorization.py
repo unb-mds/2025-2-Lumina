@@ -2,10 +2,10 @@ import pytest
 from unittest.mock import patch
 import uuid
 
-from app.models.article import Article
-from app.ai.rag.text_splitter import TextSplitter
+from backend.app.models.article import Article
+from backend.app.ai.rag.text_splitter import TextSplitter
 from backend.app.ai.rag.google_embedder import GoogleEmbedder
-from app.db.vectordb import VectorDB
+from backend.app.db.vectordb import VectorDB
 from langchain_core.documents import Document
 
 # --- Fixtures ---
@@ -14,7 +14,10 @@ from langchain_core.documents import Document
 def mock_google_embedder(mocker):
     """Provides a GoogleEmbedder instance with its internal client fully mocked."""
     # Mock the client inside the GoogleEmbedder
-    mock_client = mocker.patch("langchain_google_genai.GoogleGenerativeAIEmbeddings").return_value
+    mock_client = mocker.patch(
+        "langchain_google_genai.GoogleGenerativeAIEmbeddings",
+    ).return_value
+    
     mock_client.embed_documents.return_value = [[0.1] * 768, [0.2] * 768]
 
     # Create a real embedder but replace its client with our mock
@@ -84,7 +87,7 @@ def test_vectordb_init_success(mock_google_embedder, mock_text_splitter, mock_ch
     """Tests successful initialization of VectorDB."""
     vectordb = VectorDB(embedding_platform=mock_google_embedder, text_splitter=mock_text_splitter)
 
-    mock_chroma_client.assert_called_once_with(path="chroma_db")
+    mock_chroma_client.assert_called_once_with(path="app/db/chroma_db")
     mock_chroma_client.return_value.get_or_create_collection.assert_called_once_with(
         name="lumina_articles"
     )
@@ -180,3 +183,15 @@ def test_vectorize_article_chroma_add_failure(
     mock_text_splitter.split_article.assert_called_once_with(sample_article)
     mock_google_embedder.client.embed_documents.assert_called_once_with(["chunk 1", "chunk 2"])
     mock_chroma_collection.add.assert_called_once()
+
+def test_delete_article_by_url(
+    mock_google_embedder, mock_text_splitter, mock_chroma_collection
+):
+    """Tests deleting an article by URL."""
+    vectordb = VectorDB(embedding_platform=mock_google_embedder, text_splitter=mock_text_splitter)
+    vectordb.collection = mock_chroma_collection
+    url_to_delete = "http://example.com/to-delete"
+
+    vectordb.delete_article_by_url(url_to_delete)
+
+    mock_chroma_collection.delete.assert_called_once_with(where={"url": url_to_delete})

@@ -1,5 +1,5 @@
 import pytest
-from app.models.article import Article
+from backend.app.models.article import Article
 
 # Dados de teste variados
 test_articles = [

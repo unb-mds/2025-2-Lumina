@@ -1,6 +1,6 @@
 import logging
 from typing import List
-from app.models.article import Article
+from backend.app.models.article import Article
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_core.documents import Document
 
