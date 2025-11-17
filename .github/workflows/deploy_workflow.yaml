@@ -10,11 +10,11 @@ jobs:
   deploy:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      
+
       - name: Deploy to Oracle Cloud Server
         uses: appleboy/ssh-action@v1.0.0
         with:
@@ -24,55 +24,87 @@ jobs:
           port: 22
           script: |
             echo "🚀 Iniciando deploy do Lumina Backend..."
-            
-            # Criar diretório temporário
+
+            ###############################################
+            # 1. Criar diretório temporário
+            ###############################################
             TEMP_DIR=$(mktemp -d)
-            
-            # Clonar repositório completo no temp
+
             echo "📥 Clonando repositório..."
-            git clone --depth 1 https://github.com/${{ github.repository }}.git $TEMP_DIR
-            
-            # Fazer backup do .env
-            cp lumina-backend/backend/.env lumina-backend/backend/.env.backup
-            
-            # Copiar apenas a pasta backend
+            git clone --depth 1 https://github.com/unb-mds/2025-2-Lumina.git "$TEMP_DIR"
+
+            ###############################################
+            # 2. Fazer backup do .env (se existir)
+            ###############################################
+            if [ -f "lumina-backend/backend/.env" ]; then
+                echo "🛟 Fazendo backup do .env..."
+                cp lumina-backend/backend/.env lumina-backend/backend/.env.backup
+            else
+                echo "⚠️ Nenhum .env encontrado para backup."
+            fi
+
+            ###############################################
+            # 3. Copiar backend atualizado
+            ###############################################
             echo "📦 Copiando arquivos do backend..."
-            rsync -av --exclude='.env' --exclude='venv' --exclude='__pycache__' $TEMP_DIR/backend/ lumina-backend/backend/
-            
-            # Limpar temp
-            rm -rf $TEMP_DIR
-            
-            # Instalar/atualizar dependências usando o venv
+
+            rsync -av \
+                --exclude='.env' \
+                --exclude='venv' \
+                --exclude='__pycache__' \
+                --exclude='app/db/chroma_db' \
+                "$TEMP_DIR/backend/" \
+                lumina-backend/backend/
+
+            rm -rf "$TEMP_DIR"
+
+            ###############################################
+            # 4. Instalar / atualizar dependências
+            ###############################################
             echo "📦 Instalando dependências..."
-            lumina-backend/backend/venv/bin/pip install -r requirements.txt --no-cache-dir
-            
-            # Ajustar permissões
+
+            cd lumina-backend/backend || exit 1
+
+            venv/bin/pip install -r requirements.txt --no-cache-dir
+
+            ###############################################
+            # 5. Ajustar permissões
+            ###############################################
             echo "🔐 Ajustando permissões..."
-            sudo chown -R ubuntu:ubuntu lumina-backend/backend
-            
-            # Reiniciar o serviço systemd
+            sudo chown -R ***:*** /home/***/lumina-backend/backend
+
+            ###############################################
+            # 6. Reiniciar serviço systemd
+            ###############################################
             echo "🔄 Reiniciando serviço..."
             sudo systemctl restart luminabackend.service
-            
-            # Aguardar o serviço inicializar
+
+            echo "⏳ Aguardando serviço iniciar..."
             sleep 5
-            
-            # Verificar status do serviço
-            echo "✅ Verificando status do serviço..."
+
+            ###############################################
+            # 7. Verificar status do serviço
+            ###############################################
+            echo "✅ Status do serviço:"
             sudo systemctl status luminabackend.service --no-pager
-            
-            # Testar o endpoint
+
+            ###############################################
+            # 8. Testar API
+            ###############################################
             echo "🧪 Testando API..."
-            curl -f http://localhost/ || exit 1
-            
-            echo "✨ Deploy concluído com sucesso!"
-      
+            if curl -f http://localhost/; then
+                echo "✨ Deploy concluído com sucesso!"
+            else
+                echo "❌ ERRO: API não respondeu corretamente!"
+                exit 1
+            fi
+
       - name: Notify deployment success
         if: success()
         run: |
           echo "✅ Deploy realizado com sucesso em http://152.67.59.120"
           echo "🕐 Horário: $(date)"
-      
+
       - name: Notify deployment failure
         if: failure()
         run: |
