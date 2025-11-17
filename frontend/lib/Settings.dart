@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 
 // Mapeamento de traduções (PT: índice 0, EN: índice 1)
 const Map<String, List<String>> _translations = {
@@ -66,6 +68,9 @@ class ConfiguracoesPage extends StatefulWidget {
 
   final VoidCallback? onResetSettings;
 
+  final VoidCallback? onResetTutorials;
+
+
   const ConfiguracoesPage({
     super.key,
     required this.currentThemeMode, 
@@ -77,6 +82,7 @@ class ConfiguracoesPage extends StatefulWidget {
     required this.currentUsername,
     this.onUsernameChanged,
     this.onResetSettings,
+    this.onResetTutorials,
   });
 
   @override
@@ -475,13 +481,26 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
             ),
 
             _buildSectionHeader(context, _t('section_help', lang)),
+            
+            
             _configTile(
               context: context,
               icon: Icons.book,
               color: theme.colorScheme.onSurface,
               title: _t('tile_tutorial', lang),
               tileColor: tileColor,
+              onTap: () async {
+                final prefs = await SharedPreferences.getInstance();
+                await prefs.setBool('hasSeenChatTutorial', false); // força reexibir tutorial
+                await prefs.setBool('hasSeenMenuTutorial', false); // força reexibir o do menu lateral
+                if (mounted) {
+                  Navigator.pop(context); // fecha as configurações
+                  Navigator.pushNamed(context, '/chat'); // abre novamente o chat
+                  }
+                },
             ),
+
+
             _configTile(
               context: context,
               icon: Icons.description_outlined,

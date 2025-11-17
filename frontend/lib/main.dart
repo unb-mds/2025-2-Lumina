@@ -25,11 +25,16 @@ Future<void> main() async {
     apiBaseUrl = "http://10.0.2.2:8000"; 
   }
   
-  runApp(const ChatApp());
+// Verifica se o usuário já viu a landing page
+  final prefs = await SharedPreferences.getInstance();
+  final hasSeenLanding = prefs.getBool('hasSeenLanding') ?? false;
+
+  runApp(ChatApp(showLanding: !hasSeenLanding,));
 }
 
 class ChatApp extends StatefulWidget {
-  const ChatApp({super.key});
+  final bool showLanding;
+  const ChatApp({super.key, required this.showLanding});
 
   @override
   State<ChatApp> createState() => _ChatAppState();
@@ -120,6 +125,16 @@ class _ChatAppState extends State<ChatApp> {
     });
   }
  
+  // Função para resetar os tutoriais
+  void _resetTutorials() async {
+  final prefs = await SharedPreferences.getInstance();
+  await prefs.setBool('hasSeenChatTutorial', false);
+  await prefs.setBool('hasSeenMenuTutorial', false);
+  debugPrint("Tutoriais resetados.");
+  }
+
+
+
   // Definições de cores para os dois temas
   final _lightColorScheme = ColorScheme.fromSeed(
     seedColor: Colors.blueGrey,
@@ -165,7 +180,7 @@ class _ChatAppState extends State<ChatApp> {
       },
        
     
-      initialRoute: '/',
+      initialRoute: widget.showLanding ? '/' : '/chat',
       routes: {
         '/': (context) => LandingPage(
          initialUsername: _username,
@@ -193,6 +208,7 @@ class _ChatAppState extends State<ChatApp> {
                 currentLanguage: _currentLanguage,
                 onLanguageChanged: _setLanguage,
                 onResetSettings: _resetSelectSettings,
+                onResetTutorials: _resetTutorials,
               );
             },
           );
