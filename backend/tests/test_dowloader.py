@@ -1,18 +1,21 @@
+import time
+from unittest.mock import Mock
+
 import pytest
 import requests
-import time
-from bs4 import BeautifulSoup
-from unittest.mock import Mock
 from app.webcrawler.dowloader import Downloader
+from bs4 import BeautifulSoup
 from pytest_mock import MockerFixture
 
 # --- Fixture de Teste (Ambiente Controlado) ---
+
 
 @pytest.fixture
 def downloader():
     """Retorna uma instância do Downloader com 3 retries para os testes."""
     # Usamos max_tries=3 para garantir que os testes de retry funcionem
     return Downloader(max_tries=3)
+
 
 @pytest.fixture
 def mock_requests_get(mocker: MockerFixture):
@@ -22,6 +25,7 @@ def mock_requests_get(mocker: MockerFixture):
     """
     # 'mocker.patch' substitui o 'requests.get' real por um simulacro
     return mocker.patch("requests.get")
+
 
 @pytest.fixture
 def mock_time_sleep(mocker: MockerFixture):
@@ -33,6 +37,7 @@ def mock_time_sleep(mocker: MockerFixture):
 
 
 # --- Testes ---
+
 
 def test_fetch_success_caminho_feliz(
     downloader: Downloader, mock_requests_get: MockerFixture
@@ -60,8 +65,11 @@ def test_fetch_success_caminho_feliz(
         "http://sucesso.com", headers=downloader.headers, timeout=10
     )
 
+
 def test_fetch_timeout_com_retry_e_sucesso(
-    downloader: Downloader, mock_requests_get: MockerFixture, mock_time_sleep: MockerFixture
+    downloader: Downloader,
+    mock_requests_get: MockerFixture,
+    mock_time_sleep: MockerFixture,
 ):
     """
     Testa o 'except requests.Timeout'.
@@ -70,12 +78,12 @@ def test_fetch_timeout_com_retry_e_sucesso(
     # 1. Configuração do Mock
     # Simula falha de Timeout na primeira chamada, e sucesso na segunda
     mock_requests_get.side_effect = [
-        requests.Timeout("Simulação de Timeout"), # 1ª chamada (falha)
-        Mock( # 2ª chamada (sucesso)
+        requests.Timeout("Simulação de Timeout"),  # 1ª chamada (falha)
+        Mock(  # 2ª chamada (sucesso)
             status_code=200,
             text="<html><h1>Sucesso</h1></html>",
-            raise_for_status = Mock(return_value=None)
-        )
+            raise_for_status=Mock(return_value=None),
+        ),
     ]
 
     # 2. Execução
@@ -87,10 +95,13 @@ def test_fetch_timeout_com_retry_e_sucesso(
     # Garante que o requests.get foi chamado 2 vezes
     assert mock_requests_get.call_count == 2
     # Garante que ele esperou (chamou o time.sleep)
-    mock_time_sleep.assert_called_once_with(1) # 2**0 = 1 segundo
+    mock_time_sleep.assert_called_once_with(1)  # 2**0 = 1 segundo
+
 
 def test_fetch_http_error_404_sem_retry(
-    downloader: Downloader, mock_requests_get: MockerFixture, mock_time_sleep: MockerFixture
+    downloader: Downloader,
+    mock_requests_get: MockerFixture,
+    mock_time_sleep: MockerFixture,
 ):
     """
     Testa o 'except requests.HTTPError' para erros 4xx (ex: 404 Not Found).
@@ -108,14 +119,18 @@ def test_fetch_http_error_404_sem_retry(
     result = downloader.fetch("http://notfound404.com")
 
     # 3. Verificação
-    assert result is None # Deve falhar e retornar None
+    assert result is None  # Deve falhar e retornar None
     # Garante que foi chamado apenas 1 vez (desistiu no 'break')
     mock_requests_get.assert_called_once()
     # Garante que NÃO esperou (não chamou time.sleep)
     mock_time_sleep.assert_not_called()
 
+
 def test_fetch_http_error_503_com_retry_e_falha(
-    downloader: Downloader, mock_requests_get: MockerFixture, mock_time_sleep: MockerFixture, mocker: MockerFixture
+    downloader: Downloader,
+    mock_requests_get: MockerFixture,
+    mock_time_sleep: MockerFixture,
+    mocker: MockerFixture,
 ):
     """
     Testa o 'except requests.HTTPError' para erros 5xx (ex: 503 Server Error).
@@ -131,19 +146,19 @@ def test_fetch_http_error_503_com_retry_e_falha(
     result = downloader.fetch("http://servererror503.com")
 
     # 3. Verificação
-    assert result is None # Deve falhar e retornar None
+    assert result is None  # Deve falhar e retornar None
     # Garante que tentou 3 vezes (max_tries)
     assert mock_requests_get.call_count == 3
     # Garante que tentou 2 retries (chamou sleep 2 vezes)
     assert mock_time_sleep.call_count == 2
     # Verifica as pausas com backoff exponencial (2**0=1s, 2**1=2s)
-    mock_time_sleep.assert_has_calls([
-        mocker.call(1),
-        mocker.call(2)
-    ])
+    mock_time_sleep.assert_has_calls([mocker.call(1), mocker.call(2)])
+
 
 def test_fetch_general_exception_com_retry_e_falha(
-    downloader: Downloader, mock_requests_get: MockerFixture, mock_time_sleep: MockerFixture
+    downloader: Downloader,
+    mock_requests_get: MockerFixture,
+    mock_time_sleep: MockerFixture,
 ):
     """
     Testa o 'except requests.RequestException' genérico.
@@ -157,7 +172,7 @@ def test_fetch_general_exception_com_retry_e_falha(
     result = downloader.fetch("http://genericerror.com")
 
     # 3. Verificação
-    assert result is None # Deve falhar e retornar None
+    assert result is None  # Deve falhar e retornar None
     # Garante que tentou 3 vezes (max_tries)
     assert mock_requests_get.call_count == 3
     # Garante que tentou 2 retries (chamou sleep 2 vezes)

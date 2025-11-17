@@ -1,14 +1,15 @@
 import json
 import os
 from queue import Queue
-from app.webcrawler.G1.g1scraper import G1Scraper
-from app.webcrawler.G1.g1linkextractor import G1LinkExtractor
-from ..dowloader import Downloader
+
 from app.db.articledb import ArticleDB
+from app.webcrawler.G1.g1linkextractor import G1LinkExtractor
+from app.webcrawler.G1.g1scraper import G1Scraper
+
+from ..dowloader import Downloader
 
 
 class WebCrawler:
-
     def __init__(self):
         self.downloader = Downloader()
         self.scraper = G1Scraper()
@@ -22,12 +23,7 @@ class WebCrawler:
         self.state_file = "crawler_state.json"
 
         # Categorias permitidas para crawlear
-        self.categorias_permitidas = [
-            "politica",
-            "economia",
-            "mundo",
-            "tecnologia"
-        ]
+        self.categorias_permitidas = ["politica", "economia", "mundo", "tecnologia"]
 
         # Adiciona as páginas iniciais de cada categoria
         for categoria in self.categorias_permitidas:
@@ -45,12 +41,14 @@ class WebCrawler:
         try:
             state_data = {
                 "visited_urls": list(self.visited_urls),
-                "urls_to_visit": list(self.Urls_to_visit.queue)
+                "urls_to_visit": list(self.Urls_to_visit.queue),
             }
             with open(self.state_file, "w", encoding="utf-8") as f:
                 json.dump(state_data, f, ensure_ascii=False, indent=2)
-            print(f"[STATE] Progresso salvo em '{self.state_file}' "
-                  f"({len(self.visited_urls)} visitados, {self.Urls_to_visit.qsize()} na fila).")
+            print(
+                f"[STATE] Progresso salvo em '{self.state_file}' "
+                f"({len(self.visited_urls)} visitados, {self.Urls_to_visit.qsize()} na fila)."
+            )
         except Exception as e:
             print(f"[STATE] Erro ao salvar progresso: {e}")
 
@@ -71,12 +69,13 @@ class WebCrawler:
                 for url in state_data.get("urls_to_visit", []):
                     self.Urls_to_visit.put(url)
 
-            print(f"[STATE] Progresso carregado — "
-                f"{len(self.visited_urls)} visitados, {self.Urls_to_visit.qsize()} pendentes.")
+            print(
+                f"[STATE] Progresso carregado — "
+                f"{len(self.visited_urls)} visitados, {self.Urls_to_visit.qsize()} pendentes."
+            )
 
         except Exception as e:
             print(f"[STATE] Erro ao carregar progresso: {e}")
-
 
     def reset_state(self):
         """Apaga o progresso salvo (recomeça do zero)."""
@@ -105,28 +104,38 @@ class WebCrawler:
             if current_url in self.visited_urls:
                 skipped_visited += 1
                 if skipped_visited % 50 == 0:
-                    print(f"[CRAWL] {skipped_visited} URLs já visitados pulados até agora")
+                    print(
+                        f"[CRAWL] {skipped_visited} URLs já visitados pulados até agora"
+                    )
                 continue
 
             html_data = self.downloader.fetch(current_url)
             if not html_data:
                 failed_downloads += 1
-                print(f"[CRAWL] Falha ao baixar ({failed_downloads} falhas): {current_url}")
+                print(
+                    f"[CRAWL] Falha ao baixar ({failed_downloads} falhas): {current_url}"
+                )
                 continue
 
             # Verifica se é um artigo válido DAS CATEGORIAS PERMITIDAS
             is_article = (
                 "noticia" in current_url
                 and current_url.endswith(".ghtml")
-                and any(categoria in current_url for categoria in self.categorias_permitidas)
+                and any(
+                    categoria in current_url for categoria in self.categorias_permitidas
+                )
             )
 
             if is_article:
                 article = self.scraper.scrape_article(current_url, html_data)
                 if article:
                     categoria_artigo = next(
-                        (cat for cat in self.categorias_permitidas if cat in current_url),
-                        "desconhecida"
+                        (
+                            cat
+                            for cat in self.categorias_permitidas
+                            if cat in current_url
+                        ),
+                        "desconhecida",
                     )
                     print(f"Artigo extraído [{categoria_artigo}]: {article.title}")
                     self.database.save_article(article)
@@ -135,10 +144,14 @@ class WebCrawler:
                     print(f"[CRAWL] Falha ao extrair artigo de: {current_url}")
             else:
                 if current_url.endswith(".ghtml"):
-                    if not any(cat in current_url for cat in self.categorias_permitidas):
+                    if not any(
+                        cat in current_url for cat in self.categorias_permitidas
+                    ):
                         skipped_wrong_category += 1
                         if skipped_wrong_category <= 10:
-                            print(f"[DEBUG] Artigo de outra categoria pulado: {current_url}")
+                            print(
+                                f"[DEBUG] Artigo de outra categoria pulado: {current_url}"
+                            )
                     else:
                         skipped_not_article += 1
                 else:
@@ -150,7 +163,9 @@ class WebCrawler:
 
             for link in found_links:
                 if link not in self.visited_urls:
-                    if any(categoria in link for categoria in self.categorias_permitidas):
+                    if any(
+                        categoria in link for categoria in self.categorias_permitidas
+                    ):
                         self.Urls_to_visit.put(link)
                         links_added += 1
 
@@ -158,17 +173,23 @@ class WebCrawler:
 
             # Salva progresso periodicamente (a cada 50 URLs processadas)
             total_processed = (
-                pages_crawled + skipped_visited + skipped_not_article + failed_downloads + skipped_wrong_category
+                pages_crawled
+                + skipped_visited
+                + skipped_not_article
+                + failed_downloads
+                + skipped_wrong_category
             )
             if total_processed % 50 == 0:
                 self.save_state()
 
             # Log de progresso a cada 10 artigos extraídos
             if pages_crawled > 0 and pages_crawled % 10 == 0:
-                print(f"[PROGRESSO] {pages_crawled}/{max_pages} artigos | "
-                      f"Fila: {self.Urls_to_visit.qsize()} URLs | "
-                      f"Links adicionados agora: {links_added} | "
-                      f"Visitados: {len(self.visited_urls)}")
+                print(
+                    f"[PROGRESSO] {pages_crawled}/{max_pages} artigos | "
+                    f"Fila: {self.Urls_to_visit.qsize()} URLs | "
+                    f"Links adicionados agora: {links_added} | "
+                    f"Visitados: {len(self.visited_urls)}"
+                )
 
             # Log detalhado a cada 100 URLs processados
             if total_processed % 100 == 0:
@@ -183,7 +204,9 @@ class WebCrawler:
         # Log final detalhado
         self.save_state()
         print("\n[CRAWL] ========== FINALIZADO ==========")
-        print(f"[CRAWL] Motivo: {'Fila vazia' if self.Urls_to_visit.empty() else 'Limite de páginas atingido'}")
+        print(
+            f"[CRAWL] Motivo: {'Fila vazia' if self.Urls_to_visit.empty() else 'Limite de páginas atingido'}"
+        )
         print(f"[CRAWL] Total artigos extraídos: {pages_crawled}")
         print(f"[CRAWL] Total URLs processados: {len(self.visited_urls)}")
         print(f"[CRAWL] URLs pulados (já visitados): {skipped_visited}")

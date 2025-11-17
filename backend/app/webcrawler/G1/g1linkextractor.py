@@ -1,9 +1,10 @@
 import logging
 from typing import Set
 from urllib.parse import urljoin, urlparse, urlunparse
-from bs4 import BeautifulSoup
-from app.models.linkextractor import BaseLinkExtractor
 
+from bs4 import BeautifulSoup
+
+from app.models.linkextractor import BaseLinkExtractor
 
 logger = logging.getLogger(__name__)
 

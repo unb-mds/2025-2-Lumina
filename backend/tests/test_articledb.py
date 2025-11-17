@@ -1,7 +1,10 @@
-import pytest
 import sqlite3
+
+import pytest
+
 from backend.app.db.articledb import ArticleDB
 from backend.app.models.article import Article
+
 
 @pytest.fixture
 def memory_db():
@@ -13,6 +16,7 @@ def memory_db():
     yield db
     db.close()
 
+
 @pytest.fixture
 def sample_article():
     """Fixture to provide a sample article."""
@@ -20,14 +24,18 @@ def sample_article():
         title="Test Title",
         author="Test Author",
         url="http://example.com/test",
-        content="Test content."
+        content="Test content.",
     )
+
 
 def test_create_table(memory_db: ArticleDB):
     """Test if the articles table is created correctly."""
     cursor = memory_db.conn.cursor()
-    cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='articles';")
+    cursor.execute(
+        "SELECT name FROM sqlite_master WHERE type='table' AND name='articles';"
+    )
     assert cursor.fetchone() is not None
+
 
 def test_save_article(memory_db: ArticleDB, sample_article: Article):
     """Test saving an article to the database."""
@@ -41,12 +49,16 @@ def test_save_article(memory_db: ArticleDB, sample_article: Article):
     assert row[1] == sample_article.title
     assert row[3] == sample_article.url
 
-def test_get_articles_pending_vectorization(memory_db: ArticleDB, sample_article: Article):
+
+def test_get_articles_pending_vectorization(
+    memory_db: ArticleDB, sample_article: Article
+):
     """Test retrieving articles that are pending vectorization."""
     memory_db.save_article(sample_article)
     articles = memory_db.get_articles_pending_vectorization()
     assert len(articles) == 1
     assert articles[0].title == sample_article.title
+
 
 def test_mark_as_vectorized(memory_db: ArticleDB, sample_article: Article):
     """Test marking an article as vectorized."""
@@ -55,11 +67,14 @@ def test_mark_as_vectorized(memory_db: ArticleDB, sample_article: Article):
     memory_db.mark_as_vectorized(article_id, vector_db_id)
 
     cursor = memory_db.conn.cursor()
-    cursor.execute("SELECT vectorized_at, vector_db_id FROM articles WHERE id=?", (article_id,))
+    cursor.execute(
+        "SELECT vectorized_at, vector_db_id FROM articles WHERE id=?", (article_id,)
+    )
     row = cursor.fetchone()
     assert row is not None
     assert row[0] is not None
     assert row[1] == vector_db_id
+
 
 def test_get_article_by_url(memory_db: ArticleDB, sample_article: Article):
     """Test retrieving an article by its URL."""
@@ -68,12 +83,14 @@ def test_get_article_by_url(memory_db: ArticleDB, sample_article: Article):
     assert retrieved_article is not None
     assert retrieved_article.title == sample_article.title
 
+
 def test_get_article_by_id(memory_db: ArticleDB, sample_article: Article):
     """Test retrieving an article by its ID."""
     article_id = memory_db.save_article(sample_article)
     retrieved_article = memory_db.get_article_by_id(article_id)
     assert retrieved_article is not None
     assert retrieved_article.title == sample_article.title
+
 
 def test_get_stats(memory_db: ArticleDB, sample_article: Article):
     """Test retrieving database statistics."""
@@ -90,12 +107,14 @@ def test_get_stats(memory_db: ArticleDB, sample_article: Article):
     assert stats["pending_vectorization"] == 0
     assert stats["vectorized"] == 1
 
+
 def test_get_all_titles_and_urls(memory_db: ArticleDB, sample_article: Article):
     """Test retrieving all titles and URLs."""
     memory_db.save_article(sample_article)
     titles_and_urls = memory_db.get_all_titles_and_urls()
     assert len(titles_and_urls) == 1
     assert titles_and_urls[0] == (sample_article.title, sample_article.url)
+
 
 def test_close_connection(memory_db: ArticleDB):
     """Test closing the database connection."""

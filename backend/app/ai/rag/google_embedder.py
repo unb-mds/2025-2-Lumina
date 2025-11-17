@@ -1,7 +1,9 @@
 import logging
 from typing import List
-from backend.app.ai.ai_models.EmbeddingPlatform import EmbeddingPlatform
+
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
+
+from backend.app.ai.ai_models.EmbeddingPlatform import EmbeddingPlatform
 
 logger = logging.getLogger(__name__)
 
@@ -13,7 +15,7 @@ class GoogleEmbedder(EmbeddingPlatform):
 
     """
 
-    def __init__ (self, api_key: str, model_name: str = "models/gemini-embedding-001"):
+    def __init__(self, api_key: str, model_name: str = "models/gemini-embedding-001"):
         """
         Inicializa o cliente de embedding do Google.
 
@@ -30,9 +32,7 @@ class GoogleEmbedder(EmbeddingPlatform):
             )
             logger.info(f"GoogleEmbedder inicializado com o modelo: {self.model_name}")
         except Exception as e:
-            logger.error(
-                f"Falha ao inicializar o GoogleGenerativeAIEmbeddings: {e}"
-            )
+            logger.error(f"Falha ao inicializar o GoogleGenerativeAIEmbeddings: {e}")
             # Propaga o erro para falhar rapidamente se a chave for inválida
             raise
 

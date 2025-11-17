@@ -1,7 +1,9 @@
 import logging
 from typing import Set
 from urllib.parse import urljoin, urlparse, urlunparse
+
 from bs4 import BeautifulSoup
+
 from app.models.linkextractor import BaseLinkExtractor
 
 logger = logging.getLogger(__name__)
@@ -16,7 +18,7 @@ class MetroLinkExtractor(BaseLinkExtractor):
     def __init__(self, allowed_domain: str = "www.metropoles.com"):
         self.allowed_domain = allowed_domain
         self.base_url = f"https://{self.allowed_domain}"
-        
+
         # --- ALTERAÇÃO AQUI ---
         # Lista de prefixos de caminho a serem ignorados
         # Removemos o "/" desta lista
@@ -31,23 +33,29 @@ class MetroLinkExtractor(BaseLinkExtractor):
             "/busca",
             "/ao-vivo",
         )
-        
+
         # --- NOVO TRECHO ---
         # Lista de caminhos EXATOS a ignorar
         self.IGNORED_PATHS = (
-            "/", # Ignora a própria homepage
+            "/",  # Ignora a própria homepage
         )
-        
+
         # Lista de sufixos de arquivo a serem ignorados
         self.IGNORED_SUFFIXES = (
-            ".jpg", ".jpeg", ".png", ".gif",
-            ".pdf", ".zip", ".rar", ".mp4",
+            ".jpg",
+            ".jpeg",
+            ".png",
+            ".gif",
+            ".pdf",
+            ".zip",
+            ".rar",
+            ".mp4",
         )
 
     def extract(self, html_soup: BeautifulSoup) -> Set[str]:
         """Extrai todos os links válidos de uma página HTML do Metrópoles."""
         found_links: Set[str] = set()
-        
+
         for link_tag in html_soup.find_all("a", href=True):
             url = link_tag["href"]
 
@@ -88,14 +96,14 @@ class MetroLinkExtractor(BaseLinkExtractor):
         # REGRA 4: Ignora links de "serviço" (ex: /sobre, /fale-conosco)
         if parsed.path.startswith(self.IGNORED_PREFIXES):
             return False
-            
+
         # REGRA 5: Ignora links de arquivos (ex: .jpg, .pdf)
         if parsed.path.endswith(self.IGNORED_SUFFIXES):
             return False
 
         # REGRA 6: Garante que é um link de artigo (ex: /secao/nome-artigo)
         # Um link de artigo válido deve ter pelo menos 2 barras no caminho.
-        if parsed.path.count('/') < 2:
+        if parsed.path.count("/") < 2:
             return False
 
         return True
@@ -108,7 +116,7 @@ class MetroLinkExtractor(BaseLinkExtractor):
         if not isinstance(url, str):
             logger.warning(f"Entrada não é uma string, retornando como está: {url}")
             return url
-            
+
         parsed_url = urlparse(url)
 
         cleaned_url = urlunparse(
