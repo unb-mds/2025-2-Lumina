@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+
 from backend.app.models.article import Article
 
 
@@ -10,4 +11,4 @@ class PageScraper(ABC):
 
     @abstractmethod
     def scrape_article(self, url: str, html_str: str) -> Article | None:
-        pass    
+        pass

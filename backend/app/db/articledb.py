@@ -1,6 +1,7 @@
 import sqlite3
 from datetime import datetime
 from typing import Optional
+
 from ..models.article import Article
 
 
@@ -154,10 +155,8 @@ class ArticleDB:
 
     def get_all_titles_and_urls(self) -> list[tuple[str, str]]:
         """Retorna lista com (título, url) de todos os artigos"""
-        cursor = self.conn.execute('SELECT title, url FROM articles ORDER BY id')
+        cursor = self.conn.execute("SELECT title, url FROM articles ORDER BY id")
         return cursor.fetchall()
-    
+
     def close(self):
         self.conn.close()
-
-

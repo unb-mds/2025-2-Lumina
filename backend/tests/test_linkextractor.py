@@ -1,7 +1,10 @@
-import pytest
 from typing import Set
+
+import pytest
 from bs4 import BeautifulSoup
+
 from backend.app.models.linkextractor import BaseLinkExtractor
+
 
 # 1. Teste da Regra Abstrata
 def test_base_link_extractor_is_abstract():
@@ -15,7 +18,7 @@ def test_base_link_extractor_is_abstract():
     with pytest.raises(TypeError) as e_info:
         # Tentar instanciar a classe base deve falhar
         BaseLinkExtractor(allowed_domain="example.com")
-    
+
     # Verificamos se a mensagem de erro é a esperada
     assert "abstract methods" in str(e_info.value)
 
@@ -33,7 +36,6 @@ def test_concrete_extractor_implementation_works():
     # Precisamos criar uma classe "falsa" que implementa
     # os métodos abstratos, apenas para este teste.
     class DummyExtractor(BaseLinkExtractor):
-        
         # Implementação "falsa" (dummy) do método 1
         def extract(self, base_url: str, html_soup: BeautifulSoup) -> Set[str]:
             return {"http://test.com/link1"}
@@ -45,19 +47,20 @@ def test_concrete_extractor_implementation_works():
         # Implementação "falsa" (dummy) do método 3
         def clean_url(self, url: str) -> str:
             return url
+
     # --- Fim do Setup ---
 
     # --- Execução e Verificação ---
     try:
         # 1. Tenta instanciar a classe "concreta"
         extractor = DummyExtractor(allowed_domain="test.com")
-        
+
         # 2. Verifica se a instância foi criada
         assert isinstance(extractor, BaseLinkExtractor)
-        
+
         # 3. [O TESTE REAL] Verifica se o __init__ funcionou
         assert extractor.allowed_domain == "test.com"
-        
+
     except TypeError as e:
         # Se um TypeError for levantado, o teste falha,
         # pois nossa implementação "dummy" deveria ser válida.

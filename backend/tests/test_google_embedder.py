@@ -1,4 +1,5 @@
 import pytest
+
 from backend.app.ai.rag.google_embedder import GoogleEmbedder
 
 # Dimensão esperada dos vetores do modelo "models/embedding-001"
@@ -11,15 +12,15 @@ def mock_google_embeddings_client(mocker):
     mock_client = mocker.patch(
         "langchain_google_genai.GoogleGenerativeAIEmbeddings",
     ).return_value
-    
+
     mock_client.embed_query.return_value = [0.1] * EXPECTED_DIMENSION
-    
+
     # Configure the mock to return a number of embeddings equal to the input length
     def embed_documents_side_effect(texts):
         return [[0.1] * EXPECTED_DIMENSION for _ in texts]
-    
+
     mock_client.embed_documents.side_effect = embed_documents_side_effect
-    
+
     return mock_client
 
 
@@ -31,7 +32,9 @@ def embedder(mock_google_embeddings_client) -> GoogleEmbedder:
     return instance
 
 
-def test_embedder_inicializacao(embedder: GoogleEmbedder, mock_google_embeddings_client):
+def test_embedder_inicializacao(
+    embedder: GoogleEmbedder, mock_google_embeddings_client
+):
     """Testa se o embedder foi inicializado corretamente com o mock."""
     assert embedder is not None
     assert embedder.model_name == "models/gemini-embedding-001"
@@ -89,14 +92,16 @@ def test_embed_document_texto_vazio(embedder: GoogleEmbedder):
     assert len(vetor) == EXPECTED_DIMENSION
     embedder.client.embed_query.assert_called_once_with(texto_vazio)
 
+
 def test_embed_document_api_failure(embedder: GoogleEmbedder):
     """Testa o que acontece se a API falhar ao vetorizar um documento."""
     embedder.client.embed_query.side_effect = Exception("API Error")
-    embedder.client.embed_query.return_value = None # Reset return value
-    
+    embedder.client.embed_query.return_value = None  # Reset return value
+
     vetor = embedder.embed_document("texto qualquer")
-    
+
     assert vetor == []
+
 
 def test_embed_documents_api_failure_in_batch(embedder: GoogleEmbedder, mocker):
     """Testa o que acontece se a API falhar no meio de um lote."""

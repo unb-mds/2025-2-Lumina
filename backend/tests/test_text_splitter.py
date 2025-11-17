@@ -1,7 +1,8 @@
 import pytest
-from backend.app.models.article import Article
-from backend.app.ai.rag.text_splitter import TextSplitter
 from langchain_core.documents import Document
+
+from backend.app.ai.rag.text_splitter import TextSplitter
+from backend.app.models.article import Article
 
 # -- Fixtures (Ambiente de Teste) --
 
@@ -37,9 +38,7 @@ def sample_article():
 # -- Testes --
 
 
-def test_splitter_cria_chunks(
-    splitter_teste: TextSplitter, sample_article: Article
-):
+def test_splitter_cria_chunks(splitter_teste: TextSplitter, sample_article: Article):
     """
     Testa se o splitter divide um artigo em múltiplos chunks (Documents).
     Com chunk_size=100, o texto de ~273 chars deve ser dividido.
@@ -163,12 +162,14 @@ def test_splitter_overlap_funciona(splitter_teste: TextSplitter):
         f"não foi encontrado no final do chunk 1 ('{final_chunk_1}')"
     )
 
+
 # (No final do arquivo tests/test_text_splitter.py)
+
 
 def test_splitter_lida_com_excecao_do_langchain(
     splitter_teste: TextSplitter,
     sample_article: Article,
-    mocker  # O 'mocker' vem do pytest-mock que acabamos de instalar
+    mocker,  # O 'mocker' vem do pytest-mock que acabamos de instalar
 ):
     """
     Testa (Caminho 5) se o código lida corretamente com uma falha
@@ -182,8 +183,8 @@ def test_splitter_lida_com_excecao_do_langchain(
     # apenas levantar (raise) uma exceção genérica.
     mocker.patch.object(
         splitter_teste.splitter,  # O objeto onde o método está
-        "create_documents",       # O nome do método (como string)
-        side_effect=Exception("Erro Simulado da Biblioteca LangChain")
+        "create_documents",  # O nome do método (como string)
+        side_effect=Exception("Erro Simulado da Biblioteca LangChain"),
     )
 
     # 2. Chama a função

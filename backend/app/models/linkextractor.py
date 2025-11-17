@@ -1,6 +1,7 @@
 import logging
-from typing import Set
 from abc import ABC, abstractmethod
+from typing import Set
+
 from bs4 import BeautifulSoup
 
 # Configuração do logging

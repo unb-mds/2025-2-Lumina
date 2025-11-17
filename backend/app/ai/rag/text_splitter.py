@@ -1,8 +1,10 @@
 import logging
 from typing import List
-from backend.app.models.article import Article
-from langchain_text_splitters import RecursiveCharacterTextSplitter
+
 from langchain_core.documents import Document
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+
+from backend.app.models.article import Article
 
 logger = logging.getLogger(__name__)
 
@@ -29,10 +31,10 @@ class TextSplitter:
             is_separator_regex=False,
             separators=[
                 "\n\n",  # Prioriza quebra entre parágrafos
-                "\n",    # Quebra por linha
-                ".",     # Quebra por sentença
-                " ",     # Quebra por palavra
-                "",      # Força a quebra
+                "\n",  # Quebra por linha
+                ".",  # Quebra por sentença
+                " ",  # Quebra por palavra
+                "",  # Força a quebra
             ],
         )
         logger.info(
@@ -79,9 +81,7 @@ class TextSplitter:
             # 2. Pega uma lista de metadados (só o nosso `metadata`)
             # 3. Divide o texto e anexa os metadados correspondentes a cada chunk
             chunks = self.splitter.create_documents([article.content], [metadata])
-            logger.info(
-                f"Artigo ID {article.id} dividido em {len(chunks)} chunks."
-            )
+            logger.info(f"Artigo ID {article.id} dividido em {len(chunks)} chunks.")
             return chunks
         except Exception as e:
             logger.error(
