@@ -72,15 +72,8 @@ class ChatResponse(BaseModel):
 
 
 # --- Endpoints da API ---
-@app.post(
-    "/chat",
-    summary="Envia uma pergunta para o chat e obtém uma resposta com base em RAG.",
-    response_model=ChatResponse,
-)
-def handle_chat(
-    request: ChatRequest,
-    chat_service: ChatService = Depends(get_chat_service)
-):
+@app.post("/chat",summary="Envia uma pergunta para o chat e obtém uma resposta com base em RAG.",response_model=ChatResponse,)
+def handle_chat(request: ChatRequest,chat_service: ChatService = Depends(get_chat_service)):
     """
     Recebe uma pergunta do usuário, busca artigos relevantes no banco vetorial
     e usa um LLM para gerar uma resposta fundamentada nesses artigos.
@@ -111,11 +104,7 @@ def prompt_response(prompt: str):
         )
 
 
-@app.post(
-    "/article/add",
-    summary="Adiciona e processa um novo artigo a partir de uma URL.",
-    status_code=status.HTTP_201_CREATED,
-)
+@app.post("/article/add",summary="Adiciona e processa um novo artigo a partir de uma URL.",status_code=status.HTTP_201_CREATED,)
 def add_article(request: AddArticleRequest):
     """
     Recebe uma URL, faz scraping, processa e salva no banco vetorial.
