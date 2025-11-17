@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/ChatScreen.dart';
+import 'package:frontend/chat_screen.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:frontend/LandingPage.dart';
-import 'package:frontend/Settings.dart'; 
+import 'package:frontend/landing_page.dart';
+import 'package:frontend/settings.dart'; 
 import 'package:shared_preferences/shared_preferences.dart';
 
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 
 const Map<String, List<String>> _translations = {
@@ -14,7 +15,8 @@ const Map<String, List<String>> _translations = {
   'tile_tutorial': ['Tutorial', 'Tutorial'],
   'tile_terms': ['Termos de Serviço', 'Terms of Service'],
   'tile_reset_defaults': ['Restaurar Configurações', 'Reset Settings'], 
-  
+  'tile_about_us': ['Sobre Nós', 'About Us'],
+
   'subtitle_light': ['Claro', 'Light'],
   'subtitle_dark': ['Escuro', 'Dark'],
   'subtitle_system': ['Sistema', 'System'],
@@ -35,7 +37,13 @@ const Map<String, List<String>> _translations = {
       'Tem certeza de que deseja restaurar Tema, Idioma e Tamanho da Fonte para os valores de fábrica? O nome de usuário será mantido.', 
       'Are you sure you want to reset Theme, Language, and Font Size to factory defaults? The username will be preserved.'
   ],
-  
+  'dialog_about_title': ['Saindo do Aplicativo', 'Leaving the Application'],
+  'dialog_about_message': [
+      'Você será redirecionado para a página externa do projeto Lumina. Deseja continuar?', 
+      'You will be redirected to the external Lumina project page. Do you want to continue?'
+  ],
+  'button_redirect': ['CONTINUAR', 'CONTINUE'],
+
   'button_cancel': ['CANCELAR', 'CANCEL'],
   'button_save': ['SALVAR', 'SAVE'],
   'button_apply': ['APLICAR', 'APPLY'],
@@ -97,6 +105,50 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
     if (scale <= 1.0) return _t('subtitle_normal', lang);
     if (scale <= 1.2) return _t('subtitle_large', lang);
     return _t('subtitle_extralarge', lang);
+  }
+
+  void _launchUrl() async {
+    const url = 'https://unb-mds.github.io/2025-2-Lumina';
+    final uri = Uri.parse(url);
+    
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    } else {
+      debugPrint('Não foi possível abrir $url');
+    }
+  }
+
+void _openAboutUsDialog(BuildContext context) {
+    final lang = widget.currentLanguage;
+    final theme = Theme.of(context);
+    
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+          backgroundColor: theme.colorScheme.surface,
+          title: Text(_t('dialog_about_title', lang), textAlign: TextAlign.center), 
+          content: Text(
+            _t('dialog_about_message', lang),
+            textAlign: TextAlign.center,
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text(_t('button_cancel', lang)),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context); 
+                _launchUrl(); 
+              },
+              child: Text(_t('button_redirect', lang), style: TextStyle(color: theme.colorScheme.primary)),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   void _openResetConfirmationDialog(BuildContext context) {
@@ -189,7 +241,7 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
                     value: tempScale,
                     min: 0.8,
                     max: 1.4,
-                    divisions: 6,
+                    divisions: 4,
                     label: _getFontSizeLabel(tempScale),
                     onChanged: (double value) {
                       setStateSB(() {
@@ -485,10 +537,11 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
 
             _configTile(
               context: context,
-              icon: Icons.description_outlined,
-              color: Colors.blue,
-              title: _t('tile_terms', lang),
+              icon: Icons.info_outline,
+              color: Colors.teal,
+              title: _t('tile_about_us', lang),
               tileColor: tileColor,
+              onTap: () => _openAboutUsDialog(context), 
             ),
           ],
         ),
