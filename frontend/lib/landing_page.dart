@@ -136,9 +136,9 @@ class _LandingPageState extends State<LandingPage> {
 
 
                           final prefs = await SharedPreferences.getInstance();
-                          await prefs.setBool('hasSeenLanding', true); // Marca que o usuário viu a landing page
+                          await prefs.setBool('hasSeenLanding', true); 
 
-                          // Mudar de tela
+                          
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: Text('Bem-vindo(a), $nomeusuario!'),

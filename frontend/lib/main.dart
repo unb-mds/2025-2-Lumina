@@ -28,7 +28,7 @@ Future<void> main() async {
     apiBaseUrl = "http://10.0.2.2:8000"; 
   }
   
-// Verifica se o usuário já viu a landing page
+
   final prefs = await SharedPreferences.getInstance();
   final hasSeenLanding = prefs.getBool('hasSeenLanding') ?? false;
 
