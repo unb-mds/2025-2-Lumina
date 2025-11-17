@@ -2,8 +2,8 @@ import sqlite3
 
 import pytest
 
-from backend.app.db.articledb import ArticleDB
-from backend.app.models.article import Article
+from app.db.articledb import ArticleDB
+from app.models.article import Article
 
 
 @pytest.fixture

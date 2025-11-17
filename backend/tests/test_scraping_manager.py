@@ -3,21 +3,21 @@ from unittest.mock import MagicMock, patch
 import pytest
 from bs4 import BeautifulSoup
 
-from backend.app.models.article import Article
-from backend.app.services.scraping_manager import ScrapingError, ScrapingManager
+from app.models.article import Article
+from app.services.scraping_manager import ScrapingError, ScrapingManager
 
 
 @pytest.fixture
 def mock_articledb():
     """Fixture to mock ArticleDB."""
-    with patch("backend.app.services.scraping_manager.ArticleDB") as mock_db:
+    with patch("app.services.scraping_manager.ArticleDB") as mock_db:
         yield mock_db.return_value
 
 
 @pytest.fixture
 def mock_downloader():
     """Fixture to mock Downloader."""
-    with patch("backend.app.services.scraping_manager.Downloader") as mock_downloader:
+    with patch("app.services.scraping_manager.Downloader") as mock_downloader:
         yield mock_downloader.return_value
 
 

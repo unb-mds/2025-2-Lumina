@@ -1,6 +1,6 @@
-from backend.app.db.articledb import ArticleDB
-from backend.app.webcrawler.dowloader import Downloader
-from backend.app.webcrawler.G1.g1scraper import G1Scraper
+from app.db.articledb import ArticleDB
+from app.webcrawler.dowloader import Downloader
+from app.webcrawler.G1.g1scraper import G1Scraper
 
 
 class ScrapingError(Exception):

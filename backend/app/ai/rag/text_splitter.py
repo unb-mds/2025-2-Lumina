@@ -4,7 +4,8 @@ from typing import List
 from langchain_core.documents import Document
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
-from backend.app.models.article import Article
+
+from app.models.article import Article
 
 logger = logging.getLogger(__name__)
 

@@ -4,11 +4,11 @@ from typing import List, Optional
 
 import chromadb
 from chromadb.types import Collection
-from langchain.schema import Document
+from langchain_core.documents import Document
 
-from backend.app.ai.ai_models.EmbeddingPlatform import EmbeddingPlatform
-from backend.app.ai.rag.text_splitter import TextSplitter
-from backend.app.models.article import Article
+from app.ai.ai_models.EmbeddingPlatform import EmbeddingPlatform
+from app.ai.rag.text_splitter import TextSplitter
+from app.models.article import Article
 
 logger = logging.getLogger(__name__)
 

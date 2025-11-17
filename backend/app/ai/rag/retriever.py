@@ -1,11 +1,12 @@
 import asyncio
 from typing import List
 
-from langchain.schema import Document
-from langchain.schema.retriever import BaseRetriever
+
+from langchain_core.documents import Document
+from langchain_core.retrievers import BaseRetriever
 from pydantic import Field
 
-from backend.app.db.vectordb import VectorDB
+from app.db.vectordb import VectorDB
 
 
 class NewsRetriever(BaseRetriever):
