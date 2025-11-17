@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 
 class LandingPage extends StatefulWidget {
   final String? initialUsername;
@@ -127,11 +129,16 @@ class _LandingPageState extends State<LandingPage> {
                       ),
                     ),
                     GestureDetector(
-                      onTap: () {
+                      onTap: () async {
                         final nomeusuario = _nomeController.text.trim();
                         if (nomeusuario.isNotEmpty) {
                           widget.onUsernameSet?.call(nomeusuario);
 
+
+                          final prefs = await SharedPreferences.getInstance();
+                          await prefs.setBool('hasSeenLanding', true); // Marca que o usuário viu a landing page
+
+                          // Mudar de tela
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: Text('Bem-vindo(a), $nomeusuario!'),
@@ -164,7 +171,7 @@ class _LandingPageState extends State<LandingPage> {
                         ),
                         child: const Icon(
                           Icons.arrow_forward,
-                          color: Colors.white,
+                          color: Color.fromRGBO(255, 255, 255, 1),
                         ),
                       ),
                     ),
