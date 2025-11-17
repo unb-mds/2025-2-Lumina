@@ -36,7 +36,7 @@ def main():
 
     try:
         # 1. Inicializa as dependências
-        article_db = ArticleDB(db_path="backend/app/db/articles.db")
+        article_db = ArticleDB(db_path="app/db/articles.db")
 
         # Configura a plataforma de embedding e o divisor de texto
         embedding_platform = GoogleEmbedder(api_key=api_key)
@@ -50,6 +50,7 @@ def main():
 
         # 2. Busca artigos pendentes de vetorização
         pending_articles = article_db.get_articles_pending_vectorization()
+        pending_articles = pending_articles[:1000]  # Limita a 1000 artigos por execução (limite de 1000 por dia na conta gratuita)
 
         if not pending_articles:
             logging.info("Nenhum artigo pendente para vetorização.")
@@ -77,7 +78,7 @@ def main():
                     f"Falha ao vetorizar o artigo ID: {article.id}. O artigo será ignorado por enquanto."
                 )
 
-            time.sleep(3)  # Pausa para evitar sobrecarga na API
+            time.sleep(5)  # Pausa para evitar sobrecarga na API
 
     except Exception as e:
         logging.error(
