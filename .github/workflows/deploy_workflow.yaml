@@ -45,7 +45,14 @@ jobs:
 
             # Instalar/atualizar dependências usando o venv
             echo "📦 Instalando dependências..."
-            lumina-backend/backend/venv/bin/pip install -r requirements.txt --no-cache-dir
+            cd lumina-backend/backend || exit 1
+            
+            set +e
+            venv/bin/pip install -r requirements.txt --no-cache-dir
+            if [ $? -ne 0 ]; then
+              echo "⚠️ Falha ao atualizar dependências com pip. Continuando com as versões já instaladas..."
+            fi
+            set -e
 
             # Ajustar permissões
             echo "🔐 Ajustando permissões..."
