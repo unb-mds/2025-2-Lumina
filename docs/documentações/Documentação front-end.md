@@ -15,11 +15,11 @@ A tecnologia escolhida para o front-end do projeto é a framework **Flutter**, o
 
 ## 3. Descrição dos diretórios
 
-1. `lib/`
+- `lib/`
 Pasta responável por conter a parte principal da programação do aplicativo flutter, nela estão presentes todas as telas pelas quais o aplicativo passa, além da main.dart que é responsavel por sua vez pelo ponto de partida do aplicativo e como ele vai manejar as telas, persistências, Etc. 
 
-2. `android/`
+- `android/`
 Pasta responsável por interpretar, buildar e configurar o aplicativo para o sistema android, que foi o sistema operacional escolhido para distribuição do projeto. É uma pasta que necessita de poucas alterações, geralmente sendo de coisas especificas da plataforma e menores em relação ao desenvolvimendo total do projeto.
 
-3. `pubspec.yaml/`
+- `pubspec.yaml/`
 Arquivo responsável pelas dependências do projeto, ele é acessado quando o comando `flutter pub get` é utilizado, pegando todas as bibliotecas e as baixando para o projeto ser interpretado corretamente, além de mostrar os assets (.env,JSON,imgens, etc.) que o aplicativo deve empacotar e utilizar.
