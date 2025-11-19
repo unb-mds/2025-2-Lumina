@@ -12,3 +12,4 @@ venv.bak/
 .vscode/
 .DS_Store
 .coverage
+GEMINI.md

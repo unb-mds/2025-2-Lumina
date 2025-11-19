@@ -1,6 +1,8 @@
 import pytest
-from app.models.pagescraper import PageScraper
+
 from app.models.article import Article
+from app.models.pagescraper import PageScraper
+
 
 def test_pagescraper_is_abstract_and_cannot_be_instantiated():
     """
@@ -14,6 +16,7 @@ def test_pagescraper_is_abstract_and_cannot_be_instantiated():
     # Se não levantar o erro, o teste falha.
     with pytest.raises(TypeError):
         PageScraper()
+
 
 def test_pagescraper_implementation_can_be_instantiated():
     """

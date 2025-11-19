@@ -1,4 +1,5 @@
 import logging
+
 from bs4 import BeautifulSoup
 
 from app.models.article import Article
@@ -10,13 +11,11 @@ logger = logging.getLogger(__name__)
 
 
 class G1Scraper(PageScraper):
-
     SELECTORS = {
         "title": "content-head__title",
         "author": "content-publication-data__from",
         "body": "mc-article-body",
     }
-
 
     def _extract_body_text(self, container):
         """
@@ -77,5 +76,3 @@ class G1Scraper(PageScraper):
             url=url,
             content=elements_text["body"],
         )
-    
-

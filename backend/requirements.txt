@@ -1,58 +1,36 @@
-annotated-doc==0.0.3
-annotated-types==0.7.0
-anyio==4.11.0
-beautifulsoup4==4.14.2
-cachetools==6.2.1
-certifi==2025.10.5
-charset-normalizer==3.4.4
-click==8.3.0
-colorama==0.4.6
-coverage==7.11.3
-exceptiongroup==1.3.0
-fastapi==0.121.0
-filetype==1.2.0
-google-ai-generativelanguage==0.9.0
-google-api-core==2.28.1
-google-auth==2.42.1
-googleapis-common-protos==1.71.0
-grpcio==1.76.0
-grpcio-status==1.76.0
-h11==0.16.0
-httpcore==1.0.9
-httpx==0.28.1
-idna==3.11
-iniconfig==2.3.0
-jsonpatch==1.33
-jsonpointer==3.0.0
-langchain-core==1.0.3
-langchain-google-genai==3.0.0
-langchain-text-splitters==1.0.0
-langsmith==0.4.39
-orjson==3.11.4
-packaging==25.0
-pluggy==1.6.0
-proto-plus==1.26.1
-protobuf==6.33.0
-pyasn1==0.6.1
-pyasn1_modules==0.4.2
-pydantic==2.12.3
-pydantic_core==2.41.4
-Pygments==2.19.2
-pytest==8.4.2
-pytest-cov==7.0.0
-pytest-mock==3.15.1
-python-dotenv==1.2.1
-PyYAML==6.0.3
-requests==2.32.5
-requests-toolbelt==1.0.0
-rsa==4.9.1
-sniffio==1.3.1
-soupsieve==2.8
-starlette==0.49.3
-tenacity==9.1.2
-tomli==2.3.0
-typing-inspection==0.4.2
-typing_extensions==4.15.0
-urllib3==2.5.0
-uvicorn==0.38.0
-zstandard==0.25.0
+
+# --- Core Web Framework ---
+gunicorn>=21.2.0
+uvicorn[standard]>=0.24.0
+fastapi>=0.104.0
+
+# --- Banco de Dados ---
+sqlmodel>=0.0.14
+aiosqlite>=0.19.0
+chromadb>=0.4.3
+
+# --- Web Crawler () ---
+requests>=2.32.0
+beautifulsoup4>=4.12.0
+lxml>=5.1.0
+
+# --- AI / LangChain ---
+langchain
+langchain-google-genai>=0.0.5
+langchain-core
+langchain-text-splitters
+
+# --- Configuração ---
+python-dotenv>=1.0.0
+pydantic>=2.4.2
+
+# --- Desenvolvimento & Testes ---
+pytest>=8.4.0
+
+# --- Testes de implementação Spliter ---
+langchain-core
+langchain-text-splitters
+
+# --- Testes de implementação ---
+pytest>=8.4.0
+pytest_mock

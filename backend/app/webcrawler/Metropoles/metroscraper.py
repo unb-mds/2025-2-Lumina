@@ -1,8 +1,10 @@
 import logging
+from typing import Optional
+
 from bs4 import BeautifulSoup
+
 from app.models.article import Article
 from app.models.pagescraper import PageScraper
-from typing import List, Optional
 
 # Configuração do logging
 logger = logging.getLogger(__name__)
@@ -24,21 +26,27 @@ class MetroScraper(PageScraper):
         try:
             # Procura pela "chave de ouro" que você encontrou
             meta_tag = html_data.find("meta", property="article:section")
-            
+
             if meta_tag:
-                logger.debug("Meta tag 'article:section' encontrada. Esta é uma página de artigo.")
+                logger.debug(
+                    "Meta tag 'article:section' encontrada. Esta é uma página de artigo."
+                )
                 return True
             else:
-                logger.debug("Meta tag 'article:section' NÃO encontrada. Esta é uma página de seção.")
+                logger.debug(
+                    "Meta tag 'article:section' NÃO encontrada. Esta é uma página de seção."
+                )
                 return False
         except Exception as e:
-            logger.warning(f"Erro ao checar 'is_article_page': {e}. Assumindo que não é um artigo.")
+            logger.warning(
+                f"Erro ao checar 'is_article_page': {e}. Assumindo que não é um artigo."
+            )
             return False
 
     def _extract_title(self, html_data: BeautifulSoup) -> str:
         """Extrai o título e subtítulo, com fallbacks."""
         full_title = ""
-        
+
         # --- TENTATIVA 1: Layout Original (HeaderNoticiaWrapper) ---
         try:
             # Procura a div que você identificou nas primeiras imagens
@@ -57,7 +65,7 @@ class MetroScraper(PageScraper):
                         full_title = f"{full_title} - {subtitle_text}"
                     elif subtitle_text:
                         full_title = subtitle_text
-                
+
                 if full_title:
                     logger.debug("Título encontrado via HeaderNoticiaWrapper.")
                     return full_title
@@ -86,18 +94,18 @@ class MetroScraper(PageScraper):
                 # Otimização: remover o " | Metrópoles" no final
                 if "|" in full_title:
                     full_title = full_title.split("|")[0].strip()
-                
+
                 logger.debug("Título encontrado via tag <title>.")
                 return full_title
         except Exception as e:
             logger.warning(f"Erro ao tentar Tentativa 3 (<title>): {e}")
 
         logger.debug("Nenhuma tentativa de extração de título funcionou.")
-        return "" # Retorna vazio se tudo falhar
+        return ""  # Retorna vazio se tudo falhar
 
     def _extract_authors(self, html_data: BeautifulSoup) -> str:
         """Extrai um ou mais autores, com fallbacks."""
-        
+
         # --- TENTATIVA 1: Layout Original (HeaderNoticiaWrapper) ---
         try:
             author_container = html_data.find(
@@ -108,7 +116,9 @@ class MetroScraper(PageScraper):
                 if not author_tags:
                     author_text = author_container.get_text(strip=True)
                     if author_text:
-                        logger.debug("Autor encontrado via HeaderNoticiaWrapper (sem <a>).")
+                        logger.debug(
+                            "Autor encontrado via HeaderNoticiaWrapper (sem <a>)."
+                        )
                         return author_text
 
                 authors = [a.get_text(strip=True) for a in author_tags]
@@ -126,11 +136,18 @@ class MetroScraper(PageScraper):
                 return meta_author["content"].strip()
         except Exception as e:
             logger.warning(f"Erro ao tentar Autor (Tentativa 2): {e}")
-            
+
         # --- TENTATIVA 3: Classe "author" ou "autor" (Genérico) ---
         try:
             # Tenta encontrar algo com 'byline' ou 'author'
-            author_tag = html_data.find(class_=lambda c: c and ("author" in c.lower() or "byline" in c.lower() or "autor" in c.lower()))
+            author_tag = html_data.find(
+                class_=lambda c: c
+                and (
+                    "author" in c.lower()
+                    or "byline" in c.lower()
+                    or "autor" in c.lower()
+                )
+            )
             if author_tag:
                 author_text = author_tag.get_text(strip=True)
                 # Limpeza comum (ex: "Por Redação")
@@ -142,13 +159,13 @@ class MetroScraper(PageScraper):
             logger.warning(f"Erro ao tentar Autor (Tentativa 3): {e}")
 
         logger.debug("Nenhum autor encontrado.")
-        return "" # Retorna "" se não achar
+        return ""  # Retorna "" se não achar
 
     def _extract_body(self, html_data: BeautifulSoup) -> str:
         """Extrai o corpo da notícia, com fallbacks."""
-        
+
         body_container = None
-        
+
         # --- TENTATIVA 1: Layout Original (ConteudoNoticiaWrapper) ---
         try:
             body_container = html_data.find(
@@ -171,19 +188,30 @@ class MetroScraper(PageScraper):
                     logger.debug("Tentativa 2 (<article>) falhou.")
             except Exception as e:
                 logger.warning(f"Erro ao tentar Corpo (Tentativa 2): {e}")
-        
+
         # --- TENTATIVA 3: Classe "materia" ou "content" (Genérico) ---
         if not body_container:
             try:
                 # Procura por classes comuns de conteúdo de artigo
-                body_container = html_data.find("div", class_=lambda c: c and ("materia" in c.lower() or "article__body" in c.lower() or "content" in c.lower() or "conteudo" in c.lower()))
+                body_container = html_data.find(
+                    "div",
+                    class_=lambda c: c
+                    and (
+                        "materia" in c.lower()
+                        or "article__body" in c.lower()
+                        or "content" in c.lower()
+                        or "conteudo" in c.lower()
+                    ),
+                )
                 if body_container:
-                     logger.debug("Corpo encontrado via classe genérica 'materia'/'content'.")
+                    logger.debug(
+                        "Corpo encontrado via classe genérica 'materia'/'content'."
+                    )
                 else:
-                     logger.debug("Tentativa 3 (classe genérica) falhou.")
+                    logger.debug("Tentativa 3 (classe genérica) falhou.")
             except Exception as e:
                 logger.warning(f"Erro ao tentar Corpo (Tentativa 3): {e}")
-        
+
         # Se nenhuma tentativa encontrou um container, retorna ""
         if not body_container:
             logger.debug("Nenhum container de corpo encontrado.")
@@ -195,9 +223,11 @@ class MetroScraper(PageScraper):
             paragraphs = body_container.find_all("p")
             if not paragraphs:
                 logger.debug("Container do corpo encontrado, mas sem tags <p>.")
-                return body_container.get_text(strip=True) # Fallback
+                return body_container.get_text(strip=True)  # Fallback
 
-            content_blocks = [p.get_text(strip=True) for p in paragraphs if p.get_text(strip=True)]
+            content_blocks = [
+                p.get_text(strip=True) for p in paragraphs if p.get_text(strip=True)
+            ]
             return "\n\n".join(content_blocks)
 
         except Exception as e:
@@ -208,7 +238,7 @@ class MetroScraper(PageScraper):
         """
         Implementação do método abstrato para raspar um artigo do Metrópoles.
         """
-        
+
         # Extração dos componentes
         title = self._extract_title(html_data)
         author = self._extract_authors(html_data)
@@ -225,7 +255,7 @@ class MetroScraper(PageScraper):
 
         return Article(
             title=title,
-            author=author, # Pode ser "" se não encontrado
+            author=author,  # Pode ser "" se não encontrado
             url=url,
             content=content,
         )

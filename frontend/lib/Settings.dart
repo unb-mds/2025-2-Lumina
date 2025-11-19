@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-// Mapeamento de traduções (PT: índice 0, EN: índice 1)
+
 const Map<String, List<String>> _translations = {
-  // Títulos e Headers
   'config_title': ['Configurações', 'Settings'],
   'section_account': ['Conta', 'Account'],
   'section_general': ['Geral', 'General'],
   'section_help': ['Ajuda e Legal', 'Help and Legal'],
-  // Tiles
   'tile_user': ['Usuário', 'User'],
   'tile_theme': ['Tema', 'Theme'],
   'tile_language': ['Idioma', 'Language'],
@@ -15,8 +15,8 @@ const Map<String, List<String>> _translations = {
   'tile_tutorial': ['Tutorial', 'Tutorial'],
   'tile_terms': ['Termos de Serviço', 'Terms of Service'],
   'tile_reset_defaults': ['Restaurar Configurações', 'Reset Settings'], 
-  
-  // Subtítulos/Labels
+  'tile_about_us': ['Sobre Nós', 'About Us'],
+
   'subtitle_light': ['Claro', 'Light'],
   'subtitle_dark': ['Escuro', 'Dark'],
   'subtitle_system': ['Sistema', 'System'],
@@ -26,7 +26,7 @@ const Map<String, List<String>> _translations = {
   'subtitle_extralarge': ['Extra Grande', 'Extra Large'],
   'button_edit': ['EDITAR', 'EDIT'],
   'button_reset': ['RESTAURAR', 'RESET'],
-  // Diálogos
+
   'dialog_user_title': ['Alterar Usuário', 'Change User'],
   'dialog_user_hint': ['Novo nome de usuário', 'New username'],
   'dialog_font_title': ['Tamanho da Fonte', 'Font Size'],
@@ -37,20 +37,24 @@ const Map<String, List<String>> _translations = {
       'Tem certeza de que deseja restaurar Tema, Idioma e Tamanho da Fonte para os valores de fábrica? O nome de usuário será mantido.', 
       'Are you sure you want to reset Theme, Language, and Font Size to factory defaults? The username will be preserved.'
   ],
-  
+  'dialog_about_title': ['Saindo do Aplicativo', 'Leaving the Application'],
+  'dialog_about_message': [
+      'Você será redirecionado para a página externa do projeto Lumina. Deseja continuar?', 
+      'You will be redirected to the external Lumina project page. Do you want to continue?'
+  ],
+  'button_redirect': ['CONTINUAR', 'CONTINUE'],
+
   'button_cancel': ['CANCELAR', 'CANCEL'],
   'button_save': ['SALVAR', 'SAVE'],
   'button_apply': ['APLICAR', 'APPLY'],
 };
 
-// Função de tradução
 String _t(String key, String lang) {
   final langIndex = lang == 'portugues' ? 0 : 1; 
   final texts = _translations[key] ?? [key, key];
   return texts[langIndex.clamp(0, 1)]; 
 }
 
-// CORREÇÃO: Transformado em StatefulWidget
 class ConfiguracoesPage extends StatefulWidget {
   final ThemeMode currentThemeMode;
   final void Function(ThemeMode)? onThemeModeChanged;
@@ -66,6 +70,9 @@ class ConfiguracoesPage extends StatefulWidget {
 
   final VoidCallback? onResetSettings;
 
+  final VoidCallback? onResetTutorials;
+
+
   const ConfiguracoesPage({
     super.key,
     required this.currentThemeMode, 
@@ -77,20 +84,19 @@ class ConfiguracoesPage extends StatefulWidget {
     required this.currentUsername,
     this.onUsernameChanged,
     this.onResetSettings,
+    this.onResetTutorials,
   });
 
   @override
   State<ConfiguracoesPage> createState() => _ConfiguracoesPageState();
 }
 
-// O restante da lógica agora vive no State
 class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
   late String _localUsername; 
   
  @override
   void initState() {
     super.initState();
-    // 2. Inicializa com o valor passado pelo widget
     _localUsername = widget.currentUsername; 
   }
   String _getFontSizeLabel(double scale) {
@@ -99,6 +105,50 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
     if (scale <= 1.0) return _t('subtitle_normal', lang);
     if (scale <= 1.2) return _t('subtitle_large', lang);
     return _t('subtitle_extralarge', lang);
+  }
+
+  void _launchUrl() async {
+    const url = 'https://unb-mds.github.io/2025-2-Lumina';
+    final uri = Uri.parse(url);
+    
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    } else {
+      debugPrint('Não foi possível abrir $url');
+    }
+  }
+
+void _openAboutUsDialog(BuildContext context) {
+    final lang = widget.currentLanguage;
+    final theme = Theme.of(context);
+    
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+          backgroundColor: theme.colorScheme.surface,
+          title: Text(_t('dialog_about_title', lang), textAlign: TextAlign.center), 
+          content: Text(
+            _t('dialog_about_message', lang),
+            textAlign: TextAlign.center,
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text(_t('button_cancel', lang)),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context); 
+                _launchUrl(); 
+              },
+              child: Text(_t('button_redirect', lang), style: TextStyle(color: theme.colorScheme.primary)),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   void _openResetConfirmationDialog(BuildContext context) {
@@ -123,13 +173,10 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
             ),
             TextButton(
               onPressed: () {
-                // 1. Chama o callback que limpa apenas as preferências selecionadas
                 widget.onResetSettings?.call();
                 
-                // 2. Fecha o diálogo
                 Navigator.pop(context);
                 
-                // 3. Mostra uma SnackBar de sucesso
                 ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text(
@@ -194,7 +241,7 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
                     value: tempScale,
                     min: 0.8,
                     max: 1.4,
-                    divisions: 6,
+                    divisions: 4,
                     label: _getFontSizeLabel(tempScale),
                     onChanged: (double value) {
                       setStateSB(() {
@@ -224,7 +271,6 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
     );
   }
 
-  // DIÁLOGO PARA ATUALIZAR O NOME DE USUÁRIO
   void _openUsernameDialog(BuildContext context) {
     final TextEditingController usernameController = 
         TextEditingController(text: _localUsername);
@@ -248,7 +294,6 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
             onSubmitted: (value) {
               final newName = value.trim();
               if (newName.isNotEmpty) {
-                // CHAMA O CALLBACK E FORÇA O REBUILD DO CHATAPP
                 widget.onUsernameChanged?.call(newName);
                 Navigator.pop(context);
               }
@@ -263,13 +308,9 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
               onPressed: () {
                final newName = usernameController.text.trim();
                 if (newName.isNotEmpty) {
-                  // 3. ATUALIZAÇÃO CHAVE:
                   
-                  // 3a. Chama o callback para salvar no AppState e persistir
                   widget.onUsernameChanged?.call(newName); 
                   
-                  // 3b. Atualiza o estado local para forçar o rebuild do widget
-                  // Isso garante a atualização instantânea do subtítulo do tile
                   setState(() {
                     _localUsername = newName;
                   }); 
@@ -301,7 +342,7 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
       titlePadding: EdgeInsets.zero,
       title: Container(
         decoration: BoxDecoration(
-          color: theme.colorScheme.primary.withOpacity(0.1),
+          color: theme.colorScheme.primary.withValues(alpha:0.1),
           borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
         ),
         padding: const EdgeInsets.all(20),
@@ -352,7 +393,7 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
       titlePadding: EdgeInsets.zero,
       title: Container(
         decoration: BoxDecoration(
-          color: theme.colorScheme.primary.withOpacity(0.1),
+          color: theme.colorScheme.primary.withValues(alpha:0.1),
           borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
         ),
         padding: const EdgeInsets.all(20),
@@ -427,7 +468,6 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
               icon: Icons.person_outline,
               color: Colors.blueAccent,
               title: _t('tile_user', lang),
-              // Agora, ao ser um StatefulWidget, ele força o build
               subtitle: _localUsername, 
               tileColor: tileColor,
               actionButton: TextButton(
@@ -475,19 +515,33 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
             ),
 
             _buildSectionHeader(context, _t('section_help', lang)),
+            
+            
             _configTile(
               context: context,
               icon: Icons.book,
               color: theme.colorScheme.onSurface,
               title: _t('tile_tutorial', lang),
               tileColor: tileColor,
+              onTap: () async {
+                final prefs = await SharedPreferences.getInstance();
+                await prefs.setBool('hasSeenChatTutorial', false);
+                await prefs.setBool('hasSeenMenuTutorial', false); 
+                if (mounted) {
+                  Navigator.pop(context);
+                  Navigator.pushNamed(context, '/chat'); 
+                  }
+                },
             ),
+
+
             _configTile(
               context: context,
-              icon: Icons.description_outlined,
-              color: Colors.blue,
-              title: _t('tile_terms', lang),
+              icon: Icons.info_outline,
+              color: Colors.teal,
+              title: _t('tile_about_us', lang),
               tileColor: tileColor,
+              onTap: () => _openAboutUsDialog(context), 
             ),
           ],
         ),
@@ -531,7 +585,7 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
                       Text(
                         subtitle,
                         style: theme.textTheme.bodyMedium?.copyWith(
-                          color: theme.colorScheme.onSurface.withOpacity(0.6),
+                          color: theme.colorScheme.onSurface.withValues(alpha:0.6),
                         ),
                       ),
                   ],
@@ -540,7 +594,7 @@ class _ConfiguracoesPageState extends State<ConfiguracoesPage> {
             ),
             actionButton ?? Icon(
               Icons.arrow_forward_ios, 
-              color: theme.colorScheme.onSurface.withOpacity(0.6), 
+              color: theme.colorScheme.onSurface.withValues(alpha:0.6), 
               size: 18
             ),
           ],
