@@ -1,6 +1,7 @@
 from app.db.articledb import ArticleDB
 
-db = ArticleDB(db_path="backend/app/db/articles.db")
+db = ArticleDB()
+
 
     
 stats = db.get_stats()

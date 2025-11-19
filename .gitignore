@@ -13,3 +13,4 @@ venv.bak/
 .DS_Store
 .coverage
 GEMINI.md
+IssueTemplate.md
