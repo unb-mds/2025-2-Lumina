@@ -1,88 +1,144 @@
+import json
 import logging
+import os
+import time
 from queue import Queue
 
 from app.db.articledb import ArticleDB
 from app.webcrawler.Metropoles.metrolinkextractor import MetroLinkExtractor
-
-# Importa os componentes específicos do Metrópoles
 from app.webcrawler.Metropoles.metroscraper import MetroScraper
-
-# Importa os componentes genéricos (Downloader e Banco de Dados)
 from ..dowloader import Downloader
 
 logger = logging.getLogger(__name__)
 
-
 class WebCrawler:
-    """
-    Motor principal do WebCrawler para o portal Metrópoles.
-    Esta classe mantém o padrão estrutural do G1.
-    """
-
     def __init__(self):
-        # Componentes genéricos
         self.downloader = Downloader()
-        self.database = ArticleDB()
-
-        # Componentes específicos do Metrópoles
         self.scraper = MetroScraper()
         self.link_extractor = MetroLinkExtractor()
+        self.database = ArticleDB()
 
-        # Gerenciamento de fila e URLs visitadas
         self.Urls_to_visit = Queue()
         self.visited_urls = set()
 
-        # URL Semente (Seed) específica do Metrópoles
+        # --- PADRÃO G1: Persistência ---
+        self.state_file = "crawler_metro_state.json"
+
+        # URL Semente
         self.seed_url = "https://www.metropoles.com/"
         self.Urls_to_visit.put(self.seed_url)
 
-    def crawl(self, max_pages: int = 100) -> None:
-        """
-        Executa o processo de crawling.
-        """
+        # Tenta carregar progresso anterior
+        self.load_state()
 
-        logger.info(f"Iniciando crawl do Metrópoles. Max pages: {max_pages}")
+    # ============================================================
+    # Métodos de Persistência (IGUAL AO G1)
+    # ============================================================
+    def save_state(self):
+        """Salva as URLs visitadas e a fila de URLs restantes em JSON."""
+        try:
+            state_data = {
+                "visited_urls": list(self.visited_urls),
+                "urls_to_visit": list(self.Urls_to_visit.queue),
+            }
+            with open(self.state_file, "w", encoding="utf-8") as f:
+                json.dump(state_data, f, ensure_ascii=False, indent=2)
+            logger.info(
+                f"[STATE] Progresso salvo em '{self.state_file}' "
+                f"({len(self.visited_urls)} visitados, {self.Urls_to_visit.qsize()} na fila)."
+            )
+        except Exception as e:
+            logger.error(f"[STATE] Erro ao salvar progresso: {e}")
+
+    def load_state(self):
+        """Carrega o progresso anterior ou cria o arquivo de estado se não existir."""
+        try:
+            if not os.path.exists(self.state_file):
+                return
+
+            with open(self.state_file, "r", encoding="utf-8") as f:
+                state_data = json.load(f)
+                self.visited_urls = set(state_data.get("visited_urls", []))
+                
+                # Limpa a fila atual (seed) e carrega a salva
+                with self.Urls_to_visit.mutex:
+                    self.Urls_to_visit.queue.clear()
+                
+                for url in state_data.get("urls_to_visit", []):
+                    self.Urls_to_visit.put(url)
+
+            logger.info(
+                f"[STATE] Progresso carregado — "
+                f"{len(self.visited_urls)} visitados, {self.Urls_to_visit.qsize()} pendentes."
+            )
+
+        except Exception as e:
+            logger.error(f"[STATE] Erro ao carregar progresso: {e}")
+
+    # ============================================================
+    # Crawler Principal
+    # ============================================================
+    def crawl(self, max_pages: int = 100) -> None:
         pages_crawled = 0
+        skipped_visited = 0
+        skipped_not_article = 0
+        failed_downloads = 0
+
+        logger.info(f"[CRAWL] Iniciando Metrópoles com max_pages={max_pages}")
+        logger.info(f"[CRAWL] URLs na fila inicial: {self.Urls_to_visit.qsize()}")
 
         while not self.Urls_to_visit.empty() and pages_crawled < max_pages:
-            # 1. Pega a próxima URL da fila
             current_url = self.Urls_to_visit.get()
 
             if current_url in self.visited_urls:
-                logger.debug(f"URL já visitada, pulando: {current_url}")
+                skipped_visited += 1
                 continue
 
-            # 2. Baixa o conteúdo da página
-            logger.debug(f"Baixando: {current_url}")
+            # Delay para não ser bloqueado
+            time.sleep(0.5) 
+
             html_data = self.downloader.fetch(current_url)
+            if not html_data:
+                failed_downloads += 1
+                logger.warning(f"[CRAWL] Falha ao baixar: {current_url}")
+                self.visited_urls.add(current_url) # Marca como visitado para não tentar de novo logo
+                continue
 
+            # --- LÓGICA DE RASPAGEM ---
             if self.scraper.is_article_page(html_data):
-                try:
-                    logger.info(f"Artigo identificado, raspando: {current_url}")
-                    # ... (etc) ...
-                except Exception:
-                    logger.error(...)
+                article = self.scraper.scrape_article(current_url, html_data)
+                if article:
+                    logger.info(f"✅ Artigo extraído: {article.title}")
+                    self.database.save_article(article)
+                    pages_crawled += 1
+                else:
+                    logger.warning(f"[CRAWL] Falha ao extrair conteúdo: {current_url}")
             else:
-                logger.debug(
-                    f"Página é uma seção (sem 'article:section'), pulando raspagem: {current_url}"
-                )
+                skipped_not_article += 1
+                # logger.debug(f"Não é artigo: {current_url}")
 
-            # 3. Lógica de Scrape (Raspagem)
-            #    No Metrópoles, assumimos que URLs de ARTIGO NÃO terminam com '/'
-            #    e URLs de SEÇÃO (lista) TERMINAM com '/'
-
-            # 4. Lógica de Extração de Links (sempre executa)
+            # --- LÓGICA DE NOVOS LINKS ---
             found_links = self.link_extractor.extract(html_data)
-
+            links_added = 0
             for link in found_links:
-                if link not in self.visited_urls and self.Urls_to_visit.qsize() < (
-                    max_pages * 5
-                ):
-                    self.Urls_to_visit.put(link)
+                if link not in self.visited_urls:
+                    # Proteção para a fila não explodir
+                    if self.Urls_to_visit.qsize() < 5000:
+                        self.Urls_to_visit.put(link)
+                        links_added += 1
 
-            # 5. Finaliza a página atual
             self.visited_urls.add(current_url)
-            pages_crawled += 1
-            logger.info(f"Páginas visitadas: {pages_crawled}/{max_pages}")
 
-        logger.info(f"Crawl finalizado. Total de páginas visitadas: {pages_crawled}")
+            # --- SALVAMENTO PERIÓDICO (A CADA 20 SUCESSOS OU 50 TOTAIS) ---
+            total_ops = pages_crawled + skipped_not_article + skipped_visited
+            if pages_crawled > 0 and pages_crawled % 10 == 0:
+                 self.save_state()
+            elif total_ops % 50 == 0:
+                 self.save_state()
+
+        # Finalização
+        self.save_state()
+        logger.info("\n[CRAWL] ========== FINALIZADO ==========")
+        logger.info(f"[CRAWL] Artigos baixados: {pages_crawled}")
+        logger.info(f"[CRAWL] Total visitados: {len(self.visited_urls)}")
+        logger.info(f"[CRAWL] Fila restante: {self.Urls_to_visit.qsize()}")
