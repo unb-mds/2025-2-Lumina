@@ -65,7 +65,7 @@ def test_splitter_mantem_metadados_em_todos_chunks(
     assert len(chunks) > 0
     for chunk in chunks:
         assert chunk.metadata["article_id"] == 1
-        assert chunk.metadata["url"] == "https://example.com/noticia"
+        assert str(chunk.metadata["url"]) == "https://example.com/noticia"
         assert chunk.metadata["title"] == "Este é o Título"
 
 

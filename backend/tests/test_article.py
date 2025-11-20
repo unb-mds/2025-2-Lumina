@@ -1,25 +1,23 @@
 import pytest
-
 from app.models.article import Article
 
-# Dados de teste variados
 test_articles = [
     {
+        "url": "https://exemplo.com/python",
         "title": "Artigo sobre Python",
         "author": "Alice",
-        "url": "https://exemplo.com/python",
         "content": "Python é uma linguagem poderosa.",
     },
     {
+        "url": "https://exemplo.com/tech",
         "title": "Notícia de Tecnologia",
         "author": "Bob",
-        "url": "https://exemplo.com/tech",
         "content": "Novas tecnologias estão surgindo.",
     },
     {
+        "url": "https://exemplo.com/vazio",
         "title": "Artigo Vazio",
         "author": "Carol",
-        "url": "https://exemplo.com/vazio",
         "content": "",
     },
 ]
@@ -32,5 +30,5 @@ def test_article_creation(data):
 
     assert article.title == data["title"]
     assert article.author == data["author"]
-    assert article.url.startswith("https://")
-    assert isinstance(article.content, str)
+    assert str(article.url).startswith("https://")
+    assert article.content == data["content"]

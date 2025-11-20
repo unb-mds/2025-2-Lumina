@@ -34,7 +34,7 @@ class ScrapingManager:
         scraper = None
 
         for domain, scraper_class in self.SCRAPERS.items():
-            if domain in url:
+            if domain in url_str:
                 scraper = scraper_class()
                 break
         if not scraper:
