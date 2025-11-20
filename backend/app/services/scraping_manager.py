@@ -31,6 +31,9 @@ class ScrapingManager:
         - ValueError: Se a URL não pertence a uma fonte suportada.
         - ScrapingError: Se o conteúdo não puder ser extraído da página.
         """
+
+        url_str = str(url)
+
         scraper = None
 
         for domain, scraper_class in self.SCRAPERS.items():
