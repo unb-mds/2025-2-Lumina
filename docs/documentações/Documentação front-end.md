@@ -11,7 +11,7 @@ A tecnologia escolhida para o front-end do projeto é a framework **Flutter**, o
 
 ├── `lib`/Programação do front\
 ├── `android`/Integração do aplicativo para a plataforma\      
-└── `pubspec.yaml`/Arquivo dos requisitos do aplicativo\
+└── `pubspec.yaml`/Arquivo dos requisitos do aplicativo
 
 ## 3. Descrição dos diretórios
 
@@ -23,3 +23,6 @@ Pasta responsável por interpretar, buildar e configurar o aplicativo para o sis
 
 - `pubspec.yaml/`
 Arquivo responsável pelas dependências do projeto, ele é acessado quando o comando `flutter pub get` é utilizado, pegando todas as bibliotecas e as baixando para o projeto ser interpretado corretamente, além de mostrar os assets (.env,JSON,imgens, etc.) que o aplicativo deve empacotar e utilizar.
+
+## 4. Deploy
+O aplicativo sera lançado na playstore, para dispositivos android, tendo em mente a facil acessibilidade à dispositivos eletrônicos atualmente.
