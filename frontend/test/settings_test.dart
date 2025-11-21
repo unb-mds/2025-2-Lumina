@@ -196,6 +196,94 @@ void main() {
     });
   });
   });
+  group('Teste de Funcionalidade: Restaurar Configurações', () {
+  testWidgets('Deve abrir o diálogo de confirmação e chamar onResetSettings ao confirmar', (WidgetTester tester) async {
+    // 1. ARRANGE (Preparação)
+    bool resetCalled = false;
+    
+    // Renderiza o widget em um MaterialApp
+    await tester.pumpWidget(MaterialApp(
+      home: ConfiguracoesPage(
+        currentThemeMode: ThemeMode.dark, // Estado inicial não-padrão
+        currentLanguage: 'ingles',         // Estado inicial não-padrão
+        currentUsername: 'Teste User',
+        currentFontSizeScale: 1.2,
+        onResetSettings: () {
+          resetCalled = true; // Define a flag para verificar se foi chamado
+        },
+      ),
+    ));
+    
+    // 2. ACT (Ação)
+
+    // Passo A: Encontrar o ListTile e clicar
+    await tester.tap(find.text('Reset Settings'));
+    await tester.pumpAndSettle(); // Aguarda o diálogo abrir
+
+    // Verificação intermediária: O diálogo abriu?
+    expect(find.text('Confirm Reset'), findsOneWidget);
+
+    // Passo B: Encontrar e clicar no botão RESTAURAR
+    await tester.tap(find.text('RESET'));
+    // pumpAndSettle para fechar o diálogo e exibir a SnackBar
+    await tester.pumpAndSettle(); 
+
+    // 3. ASSERT (Verificação)
+
+    // Verifica se o diálogo fechou
+    expect(find.byType(AlertDialog), findsNothing);
+
+    // Verifica se o callback foi chamado
+    expect(resetCalled, isTrue);
+
+    // Verifica se a SnackBar de sucesso apareceu (em português)
+    expect(find.text('Theme, Language, and Font restored to default.'), findsOneWidget);
+    
+    // Opcional: Garante que a SnackBar desapareça (se o teste continuar)
+    await tester.pumpAndSettle(const Duration(seconds: 4)); 
+    expect(find.text('Theme, Language, and Font restored to default.'), findsNothing);
+  });
+
+  testWidgets('O botão CANCELAR deve fechar o diálogo e NÃO chamar onResetSettings', (WidgetTester tester) async {
+    // 1. ARRANGE
+    bool resetCalled = false;
+    
+    await tester.pumpWidget(MaterialApp(
+      home: ConfiguracoesPage(
+        currentThemeMode: ThemeMode.dark,
+        currentLanguage: 'ingles',
+        currentUsername: 'Teste User',
+        currentFontSizeScale: 1.2,
+        onResetSettings: () {
+          resetCalled = true; // Se for chamado, o teste falha.
+        },
+      ),
+    ));
+    
+    // 2. ACT
+    // Passo A: Abrir o diálogo
+    await tester.tap(find.text('Reset Settings'));
+    await tester.pumpAndSettle();
+
+    // Verificação intermediária: O diálogo abriu?
+    expect(find.text('Confirm Reset'), findsOneWidget);
+
+    // Passo B: Clicar no botão CANCELAR
+    await tester.tap(find.text('CANCEL'));
+    await tester.pumpAndSettle(); // Aguarda o diálogo fechar
+
+    // 3. ASSERT
+    
+    // Verifica se o diálogo fechou
+    expect(find.byType(AlertDialog), findsNothing);
+
+    // Verifica se o callback NÃO foi chamado
+    expect(resetCalled, isFalse);
+
+    // Verifica se nenhuma SnackBar foi exibida (não há texto de SnackBar)
+    expect(find.text('Theme, Language, and Font restored to default.'), findsNothing);
+  });
+});
   group('Teste de Interface: Nome de Usuário', () {
     testWidgets('Deve abrir o diálogo, alterar o nome de usuário e atualizar o estado', (WidgetTester tester) async {
       // 1. ARRANGE (Preparação)
