@@ -130,5 +130,70 @@ void main() {
       expect(callbackChamado, isFalse); // O valor não foi salvo
     });
   });
+  group('Teste de Interface: Tema', () {
+    testWidgets('Deve abrir diálogo e alterar o tema', (WidgetTester tester) async {
+      // 1. ARRANGE
+      ThemeMode? capturedMode; // Variável para capturar a escolha
+
+      await tester.pumpWidget(MaterialApp(
+        home: ConfiguracoesPage(
+          // Começamos com o tema do Sistema
+          currentThemeMode: ThemeMode.system, 
+          currentLanguage: 'portugues',
+          currentUsername: 'UsuarioTeste',
+          currentFontSizeScale: 1.0,
+          // Capturamos a mudança aqui
+          onThemeModeChanged: (newMode) {
+            capturedMode = newMode;
+          },
+        ),
+      ));
+
+      // 2. ACT (Mudar para Escuro)
+      // Toca no tile "Tema"
+      await tester.tap(find.text('Tema'));
+      await tester.pumpAndSettle(); // Aguarda o diálogo abrir
+
+     final botaoSistema = find.descendant(
+        of: find.byType(AlertDialog), 
+        matching: find.text('Sistema'),
+      );
+      
+      final botaoEscuro = find.descendant(
+        of: find.byType(AlertDialog), 
+        matching: find.text('Escuro'),
+      );
+      
+      final botaoClaro = find.descendant(
+        of: find.byType(AlertDialog), 
+        matching: find.text('Claro'),
+      );
+
+      // Verifica se as opções apareceram
+      expect(botaoSistema, findsOneWidget);
+      expect(botaoEscuro, findsOneWidget);
+      expect(botaoClaro, findsOneWidget);
+
+      // Toca na opção "Escuro"
+      await tester.tap(find.text('Escuro'));
+      await tester.pumpAndSettle(); // Aguarda o diálogo fechar
+
+      // 3. ASSERT (Verifica Escuro)
+      expect(capturedMode, ThemeMode.dark); // Callback foi chamado com Dark?
+      expect(find.byType(AlertDialog), findsNothing); // Diálogo fechou?
+
+      // 4. ACT (Mudar para Claro)
+      // Reabrimos o diálogo para testar outra opção
+      await tester.tap(find.text('Tema'));
+      await tester.pumpAndSettle();
+
+      // Toca na opção "Claro"
+      await tester.tap(find.text('Claro'));
+      await tester.pumpAndSettle();
+
+      // 5. ASSERT (Verifica Claro)
+      expect(capturedMode, ThemeMode.light);
+    });
+  });
   });
 }
