@@ -617,3 +617,6 @@ void _openAboutUsDialog(BuildContext context) {
     );
   }
 }
+@visibleForTesting
+String tForTest(String key, String language) {
+  return _t(key, language);}
