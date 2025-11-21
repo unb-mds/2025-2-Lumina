@@ -196,4 +196,96 @@ void main() {
     });
   });
   });
+  group('Teste de Interface: Nome de Usuário', () {
+    testWidgets('Deve abrir o diálogo, alterar o nome de usuário e atualizar o estado', (WidgetTester tester) async {
+      // 1. ARRANGE (Preparação)
+      const initialUsername = 'Visitante';
+      const newUsername = 'Lumina User';
+      String? capturedUsername;
+
+      await tester.pumpWidget(MaterialApp(
+        home: ConfiguracoesPage(
+          currentThemeMode: ThemeMode.system,
+          currentLanguage: 'portugues',
+          currentUsername: initialUsername,
+          currentFontSizeScale: 1.0,
+          onUsernameChanged: (name) {
+            capturedUsername = name;
+          },
+        ),
+      ));
+
+      // 2. ACT (Ação)
+
+      // Passo A: Encontrar o ListTile do Usuário e clicar no botão EDITAR
+      // O botão EDITAR é um TextButton dentro do _configTile do Usuário
+      await tester.tap(find.text('EDITAR'));
+      await tester.pumpAndSettle(); // Aguarda a animação do Diálogo abrir
+
+      // Verificação intermediária: O diálogo abriu?
+      expect(find.byType(AlertDialog), findsOneWidget);
+      expect(find.text('Alterar Usuário'), findsOneWidget);
+
+      // Passo B: Encontrar o TextField e digitar o novo nome
+      // O AlertDialog contém um TextField.
+      await tester.enterText(find.byType(TextField), newUsername);
+      await tester.pump(); // Reconstrói para atualizar o TextField
+
+      // Passo C: Clicar em SALVAR
+      await tester.tap(find.text('SALVAR'));
+      // Precisamos do pumpAndSettle para que a chamada do setState dentro do AlertDialog
+      // e o fechamento do diálogo ocorram
+      await tester.pumpAndSettle();
+
+      // 3. ASSERT (Verificação)
+
+      // Verifica se o diálogo fechou
+      expect(find.byType(AlertDialog), findsNothing);
+
+      // Verifica se a função callback foi chamada com o novo nome
+      expect(capturedUsername, newUsername);
+
+      // Verifica se o subtítulo no ConfiguracoesPage (que mostra o nome atual) foi atualizado
+      // O nome de usuário é o subtítulo do primeiro tile
+      expect(find.text(newUsername), findsOneWidget);
+      expect(find.text(initialUsername), findsNothing);
+    });
+
+    testWidgets('Botão CANCELAR não deve alterar o nome de usuário', (WidgetTester tester) async {
+      // 1. ARRANGE
+      const initialUsername = 'Visitante';
+      const newUsername = 'Novo Nome Ignorado';
+      bool callbackChamado = false;
+
+      await tester.pumpWidget(MaterialApp(
+        home: ConfiguracoesPage(
+          currentThemeMode: ThemeMode.system,
+          currentLanguage: 'portugues',
+          currentUsername: initialUsername,
+          currentFontSizeScale: 1.0,
+          onUsernameChanged: (val) {
+            callbackChamado = true; // Isso NÃO deve acontecer
+          },
+        ),
+      ));
+
+      // 2. ACT
+      await tester.tap(find.text('EDITAR'));
+      await tester.pumpAndSettle();
+
+      // Digita o novo nome
+      await tester.enterText(find.byType(TextField), newUsername);
+      await tester.pump();
+
+      // Clicamos em CANCELAR em vez de SALVAR
+      await tester.tap(find.text('CANCELAR'));
+      await tester.pumpAndSettle();
+
+      // 3. ASSERT
+      expect(find.byType(AlertDialog), findsNothing); // Diálogo fechou
+      expect(callbackChamado, isFalse); // O valor não foi salvo
+      expect(find.text(initialUsername), findsOneWidget); // O nome antigo continua sendo exibido
+      expect(find.text(newUsername), findsNothing); // O novo nome não é exibido
+    });
+  });
 }
