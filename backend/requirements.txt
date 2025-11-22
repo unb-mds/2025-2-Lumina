@@ -5,27 +5,28 @@ uvicorn[standard]>=0.24.0
 fastapi>=0.104.0
 
 # --- Banco de Dados ---
-sqlmodel>=0.0.14
-aiosqlite>=0.19.0
-chromadb>=0.4.3
+sqlmodel
+aiosqlite
+chromadb
 
 # --- Web Crawler () ---
-requests>=2.32.0
-beautifulsoup4>=4.12.0
-lxml>=5.1.0
+requests
+beautifulsoup4
+lxml
 
 # --- AI / LangChain ---
 langchain
-langchain-google-genai>=0.0.5
+langchain-google-genai
 langchain-core
 langchain-text-splitters
+ollama 
 
 # --- Configuração ---
-python-dotenv>=1.0.0
-pydantic>=2.4.2
+python-dotenv
+pydantic
 
 # --- Desenvolvimento & Testes ---
-pytest>=8.4.0
+pytest
 
 # --- Testes de implementação Spliter ---
 langchain-core
