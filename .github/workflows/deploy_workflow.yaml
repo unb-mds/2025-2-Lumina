@@ -10,11 +10,11 @@ jobs:
   deploy:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      
+
       - name: Deploy to Oracle Cloud Server
         uses: appleboy/ssh-action@v1.0.0
         with:
@@ -24,55 +24,66 @@ jobs:
           port: 22
           script: |
             echo "🚀 Iniciando deploy do Lumina Backend..."
-            
+
             # Criar diretório temporário
             TEMP_DIR=$(mktemp -d)
-            
+
             # Clonar repositório completo no temp
             echo "📥 Clonando repositório..."
             git clone --depth 1 https://github.com/${{ github.repository }}.git $TEMP_DIR
-            
+
             # Fazer backup do .env
-            cp /home/lumina-backend/backend/.env /home/lumina-backend/backend/.env.backup
-            
+            cp lumina-backend/backend/.env lumina-backend/backend/.env.backup
+
             # Copiar apenas a pasta backend
             echo "📦 Copiando arquivos do backend..."
-            rsync -av --exclude='.env' --exclude='venv' --exclude='__pycache__' $TEMP_DIR/backend/ /home/lumina-backend/backend/
-            
+            rsync -av --exclude='.env' --exclude='venv' --exclude='__pycache__' \
+              $TEMP_DIR/backend/ lumina-backend/backend/
+
             # Limpar temp
             rm -rf $TEMP_DIR
-            
+
             # Instalar/atualizar dependências usando o venv
             echo "📦 Instalando dependências..."
-            /home/lumina-backend/backend/venv/bin/pip install -r requirements.txt --no-cache-dir
+            cd lumina-backend/backend || exit 1
+            
+            set +e
+            venv/bin/pip install -r requirements.txt --no-cache-dir
+            if [ $? -ne 0 ]; then
+              echo "⚠️ Falha ao atualizar dependências com pip. Continuando com as versões já instaladas..."
+            fi
+            set -e
+            
+            cd .. 
+            cd .. 
             
             # Ajustar permissões
             echo "🔐 Ajustando permissões..."
-            sudo chown -R ubuntu:ubuntu /home/lumina-backend/backend
-            
+            sudo chown -R ubuntu:ubuntu lumina-backend/backend
+
             # Reiniciar o serviço systemd
             echo "🔄 Reiniciando serviço..."
             sudo systemctl restart luminabackend.service
-            
+
             # Aguardar o serviço inicializar
             sleep 5
-            
+
             # Verificar status do serviço
             echo "✅ Verificando status do serviço..."
             sudo systemctl status luminabackend.service --no-pager
-            
+
             # Testar o endpoint
             echo "🧪 Testando API..."
             curl -f http://localhost/ || exit 1
-            
+
             echo "✨ Deploy concluído com sucesso!"
-      
+
       - name: Notify deployment success
         if: success()
         run: |
           echo "✅ Deploy realizado com sucesso em http://152.67.59.120"
           echo "🕐 Horário: $(date)"
-      
+
       - name: Notify deployment failure
         if: failure()
         run: |
