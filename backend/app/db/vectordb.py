@@ -27,7 +27,7 @@ class VectorDB:
     def __init__(
         self,
         embedding_platform: EmbeddingPlatform,
-        text_splitter: TextSplitter,
+        text_splitter: TextSplitter = None,
         db_path: str = "app/db/chroma_db",
         collection_name: str = "lumina_articles",
     ):
@@ -122,7 +122,68 @@ class VectorDB:
                 f"Falha ao salvar chunks do artigo ID {article.id} no ChromaDB: {e}"
             )
             return None
+        
+    def vectorize_whole_article(self, article: Article) -> Optional[str]:
+        """
+        Vetoriza um artigo completo como um único vetor, sem dividir em chunks.
+        Utiliza o modelo local configurado (Ollama) na plataforma.
 
+        Args:
+            article (Article): O artigo a ser vetorizado.
+
+        Returns:
+            Optional[str]: O ID do artigo salvo, ou None se falhar.
+        """
+        if not article.id:
+            logger.error("Artigo sem ID não pode ser vetorizado.")
+            raise ValueError("Artigo precisa de um ID para ser vetorizado.")
+
+        # 1. Combina Título e Conteúdo para criar um contexto rico
+        # Garante que são strings para evitar erros de concatenação
+        title = str(article.title) if article.title else ""
+        content = str(article.content) if article.content else ""
+        full_text = f"{title}. {content}".strip()
+
+        if not full_text:
+            logger.warning(f"Artigo ID {article.id} não possui conteúdo textual. Abortando.")
+            return None
+
+        try:
+            # 2. Gera o embedding único para o texto completo
+            # Nota: O modelo local (Ollama) pode truncar o texto se ele exceder 
+            # o limite de tokens (ex: 4096 ou 8192 dependendo do modelo).
+            embedding = self.embedding_platform.embed_document(full_text)
+
+            if not embedding:
+                logger.error(f"Falha ao gerar embedding para o artigo completo ID {article.id}.")
+                return None
+
+            # 3. Prepara os metadados
+            # Removemos o conteúdo pesado dos metadados, mantendo apenas referências
+            metadata = {
+                "source": "whole_article",
+                "title": title,
+                "url": str(article.url) if hasattr(article, 'url') else "",
+                "article_id": str(article.id)
+            }
+
+            # 4. Salva no ChromaDB
+            # Usamos o próprio ID do artigo como ID do vetor
+            batch_id = str(article.id)
+            
+            self.collection.add(
+                documents=[full_text],
+                metadatas=[metadata],
+                ids=[batch_id],
+                embeddings=[embedding]
+            )
+
+            logger.info(f"Artigo completo (ID: {batch_id}) vetorizado e salvo com sucesso.")
+            return batch_id
+
+        except Exception as e:
+            logger.error(f"Erro ao processar artigo completo ID {article.id}: {e}")
+            return None
     def search(self, query: str, k: int = 5) -> List[Document]:
         """
         Busca por documentos similares a uma query no ChromaDB.

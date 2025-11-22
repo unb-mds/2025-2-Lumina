@@ -228,6 +228,22 @@ class ArticleDB:
         """Retorna lista com (título, url) de todos os artigos"""
         cursor = self.conn.execute("SELECT title, url FROM articles ORDER BY id")
         return cursor.fetchall()
+    
+    def reset_all_vectorization_status(self) -> int:
+        """
+        Reseta o status de vetorização de TODOS os artigos.
+        Útil se você mudou seu modelo de embeddings ou limpou seu banco vetorial.
+        """
+        cursor = self.conn.execute(
+            """
+            UPDATE articles
+            SET vectorized_at = NULL, 
+                vector_db_id = NULL
+            WHERE vectorized_at IS NOT NULL
+            """
+        )
+        self.conn.commit()
+        return cursor.rowcount
 
     def close(self):
         self.conn.close()

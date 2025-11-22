@@ -26,7 +26,7 @@ O projeto requer uma chave de API para interagir com o modelo Gemini. Você prec
 O conteúdo do seu arquivo `.env` deve seguir este formato:
 
 ```
-GEMINI_API_KEY="SUA_CHAVE_DE_API_DO_GEMINI_AQUI"
+GOOGLE_API_KEY="SUA_CHAVE_DE_API_DO_GEMINI_AQUI"
 ```
 
 * Substitua `"SUA_CHAVE_DE_API_DO_GEMINI_AQUI"` pela sua chave real.
