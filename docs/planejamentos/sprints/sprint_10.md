@@ -58,4 +58,4 @@ Sprint focada em um avanço massivo no desenvolvimento do back-end (scrapers, sp
 
 ### Ações de melhoria (Plano para Sprint 11)
 
-- **Pontualidade:** Focar em aprimorar a pontualidade da conclusão das tarefas.
+- **Pontualidade:** Focar em melhorar a pontualidade da conclusão das tarefas.
