@@ -6,13 +6,12 @@ from langchain_core.documents import Document
 from langchain_core.retrievers import BaseRetriever
 from pydantic import Field
 
-from app.db.vectordb import VectorDB
-
+from app.services.search_service import SearchService
 
 class NewsRetriever(BaseRetriever):
     """Custom retriever para buscar notícias semelhantes a um prompt."""
 
-    vectordb: VectorDB = Field(...)
+    Search_Manager = SearchService()
     search_k: int = 10  # quantidade de documentos retornados
 
     class Config:
@@ -20,4 +19,4 @@ class NewsRetriever(BaseRetriever):
 
     def _get_relevant_documents(self, query: str) -> List[Document]:
         """Busca notícias no vector store usando similaridade."""
-        return self.vectordb.search(query, k=self.search_k)
+        return self.Search_Manager.search(query, k=self.search_k)

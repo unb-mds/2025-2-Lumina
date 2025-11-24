@@ -47,14 +47,7 @@ def get_chat_service() -> ChatService:
     Cria e retorna uma instância singleton do ChatService,
     inicializando todas as suas dependências.
     """
-    embedding_platform = OllamaEmbeddings()
-
-    vector_db = VectorDB(
-        embedding_platform=embedding_platform,
-        db_path="app/db/chroma_db",
-    )
-
-    retriever = NewsRetriever(vectordb=vector_db, search_k=5)
+    retriever = NewsRetriever(search_k=10)
     llm = get_llm()
 
     return ChatService(retriever=retriever, llm=llm)

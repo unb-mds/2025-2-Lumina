@@ -184,40 +184,7 @@ class VectorDB:
         except Exception as e:
             logger.error(f"Erro ao processar artigo completo ID {article.id}: {e}")
             return None
-    def search(self, query: str, k: int = 10) -> List[Document]:
-        """
-        Busca por documentos similares a uma query no ChromaDB.
-
-        Args:
-            query (str): O texto da busca.
-            k (int): O número de documentos a serem retornados.
-
-        Returns:
-            List[Document]: Uma lista de documentos LangChain.
-        """
-        # 1. Vetoriza a query de busca
-        query_embedding = self.embedding_platform.embed_document(query)
-        if not query_embedding:
-            logger.warning(f"Não foi possível gerar embedding para a query: '{query}'")
-            return []
-
-        # 2. Executa a busca na coleção do ChromaDB
-        try:
-            results = self.collection.query(
-                query_embeddings=[query_embedding],
-                n_results=k,
-            )
-        except Exception as e:
-            logger.error(f"Falha ao executar a busca no ChromaDB: {e}")
-            return []
-
-        # 3. Converte os resultados para o formato de Documento LangChain
-        documents = []
-        if results and results["documents"]:
-            for doc_content, metadata in zip(results["documents"][0], results["metadatas"][0]):
-                documents.append(Document(page_content=doc_content, metadata=metadata))
-
-        return documents
+   
 
     def delete_article_by_url(self, url: str) -> int:
         """
