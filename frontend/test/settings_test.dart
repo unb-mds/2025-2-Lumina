@@ -1,7 +1,19 @@
 import 'package:flutter_test/flutter_test.dart';
-// Importe o arquivo que contém a função que você quer testar
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:frontend/Settings.dart'; 
 import 'package:flutter/material.dart';
+// Widget auxiliar para criar uma rota na pilha abaixo de ConfiguracoesPage
+class TestWrapper extends StatelessWidget {
+  const TestWrapper({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return  Scaffold(
+      appBar: AppBar(title: Text('Base Screen')),
+      body: Center(child: Text('Screen below Settings')),
+    );
+  }
+}
 
 void main() {
   
@@ -374,6 +386,88 @@ void main() {
       expect(callbackChamado, isFalse); // O valor não foi salvo
       expect(find.text(initialUsername), findsOneWidget); // O nome antigo continua sendo exibido
       expect(find.text(newUsername), findsNothing); // O novo nome não é exibido
+    });
+  });
+group('Teste de Funcionalidade: Resetar Tutorial', () {
+    // Inicializa o SharedPreferences mockado uma única vez
+    setUpAll(() async {
+      SharedPreferences.setMockInitialValues({}); 
+    });
+
+    testWidgets('Deve resetar as chaves de tutorial e navegar para /chat', (WidgetTester tester) async {
+      // 1. ARRANGE (Preparação)
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setBool('hasSeenChatTutorial', true);
+      await prefs.setBool('hasSeenMenuTutorial', true);
+
+      // Configuração de navegação robusta
+      await tester.pumpWidget(MaterialApp(
+        routes: {
+          '/chat': (context) => const Placeholder(key: Key('chatScreen')),
+          '/base': (context) => const TestWrapper(), 
+        },
+        home: Builder(
+          builder: (context) {
+            // Usa o postFrameCallback para construir a pilha de navegação: Stack: Base -> Settings
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              Navigator.of(context).pushReplacementNamed('/base');
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => ConfiguracoesPage(
+                    currentThemeMode: ThemeMode.system,
+                    currentLanguage: 'portugues',
+                    currentUsername: 'UsuarioTeste',
+                    currentFontSizeScale: 1.0,
+                  ),
+                  settings: const RouteSettings(name: '/settings'),
+                ),
+              );
+            });
+            return const SizedBox(); // Tela de transição
+          },
+        ),
+      ));
+
+      // 1.1 Completa a navegação para que ConfiguracoesPage esteja na tela
+      await tester.pump(); // Executa o postFrameCallback (inicia o push)
+      await tester.pumpAndSettle(); // Completa as transições
+      
+      // Verifica se a página de configurações está na tela
+      expect(find.byType(ConfiguracoesPage), findsOneWidget); 
+
+
+      // 2. ACT (Ação)
+
+      // 2.1 Encontra o Finder para o ícone de livro
+      final tutorialFinder = find.byIcon(Icons.book);
+      
+      // **CORREÇÃO CRUCIAL 1**: Garante que o widget esteja visível (rolando a tela se necessário)
+      await tester.ensureVisible(tutorialFinder);
+
+      // 2.2 Clica no tile de Tutorial
+      await tester.tap(tutorialFinder);
+
+      // **CORREÇÃO CRUCIAL 2**: Um pump resolve a chamada assíncrona do onTap (SharedPreferences e Navigator.pop)
+      await tester.pump(); 
+      
+      // 2.3 Completa a transição do Navigator (pop e pushNamed)
+      await tester.pumpAndSettle(); 
+
+
+      // 3. ASSERT (Verificação)
+
+      // A: Verifica se a ConfiguracoesPage foi removida
+      expect(find.byType(ConfiguracoesPage), findsNothing); 
+      
+      // B: Verifica se a navegação foi para a rota '/chat'
+      expect(find.byKey(const Key('chatScreen')), findsOneWidget); 
+      
+      // C: Verifica se as chaves no SharedPreferences foram resetadas
+      final newChatSeen = prefs.getBool('hasSeenChatTutorial');
+      final newMenuSeen = prefs.getBool('hasSeenMenuTutorial');
+      
+      expect(newChatSeen, isFalse);
+      expect(newMenuSeen, isFalse);
     });
   });
 }
