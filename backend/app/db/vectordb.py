@@ -1,9 +1,11 @@
 import logging
+import time
 import uuid
 from typing import List, Optional
 
 import chromadb
 from chromadb.types import Collection
+from google.api_core.exceptions import ResourceExhausted
 from langchain_core.documents import Document
 
 from app.ai.ai_models.EmbeddingPlatform import EmbeddingPlatform
@@ -125,8 +127,8 @@ class VectorDB:
         
     def vectorize_whole_article(self, article: Article) -> Optional[str]:
         """
-        Vetoriza um artigo completo como um único vetor, sem dividir em chunks.
-        Utiliza o modelo local configurado (Ollama) na plataforma.
+        Vetoriza um artigo completo como um único vetor, com lógica de retentativa
+        para rate limiting.
 
         Args:
             article (Article): O artigo a ser vetorizado.
@@ -138,8 +140,6 @@ class VectorDB:
             logger.error("Artigo sem ID não pode ser vetorizado.")
             raise ValueError("Artigo precisa de um ID para ser vetorizado.")
 
-        # 1. Combina Título e Conteúdo para criar um contexto rico
-        # Garante que são strings para evitar erros de concatenação
         title = str(article.title) if article.title else ""
         content = str(article.content) if article.content else ""
         full_text = f"{title}. {content}".strip()
@@ -148,18 +148,32 @@ class VectorDB:
             logger.warning(f"Artigo ID {article.id} não possui conteúdo textual. Abortando.")
             return None
 
-        try:
-            # 2. Gera o embedding único para o texto completo
-            # Nota: O modelo local (Ollama) pode truncar o texto se ele exceder 
-            # o limite de tokens (ex: 4096 ou 8192 dependendo do modelo).
-            embedding = self.embedding_platform.embed_document(full_text)
+        while True: # Loop de retentativa
+            try:
+                # 2. Tenta gerar o embedding para o texto completo
+                embedding = self.embedding_platform.embed_document(full_text)
 
-            if not embedding:
-                logger.error(f"Falha ao gerar embedding para o artigo completo ID {article.id}.")
+                if not embedding:
+                    logger.error(f"Falha ao gerar embedding para o artigo completo ID {article.id} (retornou vazio).")
+                    return None
+
+                # Se a chamada foi bem-sucedida, sai do loop
+                break 
+
+            except ResourceExhausted as e:
+                # Captura o erro específico de rate limit da API do Google
+                logger.warning(
+                    f"Rate limit atingido ao processar artigo ID {article.id}. "
+                    f"Aguardando 60 segundos para tentar novamente. Erro: {e}"
+                )
+                time.sleep(60)
+            except Exception as e:
+                # Captura outras exceções inesperadas e aborta para este artigo
+                logger.error(f"Erro inesperado ao gerar embedding para artigo ID {article.id}: {e}")
                 return None
 
+        try:
             # 3. Prepara os metadados
-            # Removemos o conteúdo pesado dos metadados, mantendo apenas referências
             metadata = {
                 "source": "whole_article",
                 "title": title,
@@ -168,7 +182,6 @@ class VectorDB:
             }
 
             # 4. Salva no ChromaDB
-            # Usamos o próprio ID do artigo como ID do vetor
             batch_id = str(article.id)
             
             self.collection.add(
@@ -182,42 +195,9 @@ class VectorDB:
             return batch_id
 
         except Exception as e:
-            logger.error(f"Erro ao processar artigo completo ID {article.id}: {e}")
+            logger.error(f"Erro ao salvar artigo completo ID {article.id} no ChromaDB: {e}")
             return None
-    def search(self, query: str, k: int = 5) -> List[Document]:
-        """
-        Busca por documentos similares a uma query no ChromaDB.
-
-        Args:
-            query (str): O texto da busca.
-            k (int): O número de documentos a serem retornados.
-
-        Returns:
-            List[Document]: Uma lista de documentos LangChain.
-        """
-        # 1. Vetoriza a query de busca
-        query_embedding = self.embedding_platform.embed_document(query)
-        if not query_embedding:
-            logger.warning(f"Não foi possível gerar embedding para a query: '{query}'")
-            return []
-
-        # 2. Executa a busca na coleção do ChromaDB
-        try:
-            results = self.collection.query(
-                query_embeddings=[query_embedding],
-                n_results=k,
-            )
-        except Exception as e:
-            logger.error(f"Falha ao executar a busca no ChromaDB: {e}")
-            return []
-
-        # 3. Converte os resultados para o formato de Documento LangChain
-        documents = []
-        if results and results["documents"]:
-            for doc_content, metadata in zip(results["documents"][0], results["metadatas"][0]):
-                documents.append(Document(page_content=doc_content, metadata=metadata))
-
-        return documents
+   
 
     def delete_article_by_url(self, url: str) -> int:
         """

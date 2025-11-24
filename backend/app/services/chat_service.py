@@ -3,6 +3,9 @@ from typing import List
 from langchain_core.documents import Document
 from app.ai.gemini import GeminiModel
 from app.ai.rag.retriever import NewsRetriever
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class ChatService:
@@ -29,6 +32,7 @@ class ChatService:
         # 1. Retrieval: Busca os documentos relevantes
         # Usando a versão síncrona por simplicidade, mas pode ser aget_relevant_documents
         relevant_docs = self.retriever._get_relevant_documents(query)
+        logger.info(f"Recuperados {len(relevant_docs)} documentos relevantes para a query.")
 
         # 2. Augmentation: Formata o prompt para o LLM
         context = self._format_docs_for_prompt(relevant_docs)
