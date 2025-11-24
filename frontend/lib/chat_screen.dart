@@ -205,6 +205,7 @@ Future<void> _closeMenuTutorial() async {
         _isSending = false;
       });
     }
+    _saveChat();
   }
 
   
