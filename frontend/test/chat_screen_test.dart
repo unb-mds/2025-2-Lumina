@@ -2,8 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:frontend/chat_screen.dart'; // Sua ChatScreen
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:frontend/main.dart';
+import 'package:http/http.dart' as http;
+import 'package:http/testing.dart';
+import 'dart:convert';
 void main() {
+  // Inicializa a variável global apiBaseUrl antes de todos os testes
+  setUpAll(() {
+    // Como ela é 'late final' no main.dart, precisamos setar um valor mock
+    // para evitar o erro "LateInitializationError"
+    try {
+      apiBaseUrl = "http://teste-api.com";
+    } catch (e) {
+      // Se já estiver inicializada, ignoramos
+    }
+  });
   // Configura o SharedPreferences para retornar que os tutoriais JÁ FORAM vistos
   setUp(() {
     SharedPreferences.setMockInitialValues({
@@ -141,5 +154,167 @@ void main() {
     final prefs = await SharedPreferences.getInstance();
     expect(prefs.getBool('hasSeenMenuTutorial'), isTrue, reason: 'O estado "hasSeenMenuTutorial" deve ser salvo como true.');
 
+  });
+  group('Testes de Fluxo de Conversa (Chat)', () {
+    
+    testWidgets('Deve enviar mensagem, exibir loading e mostrar resposta de sucesso da API', (WidgetTester tester) async {
+      // 1. ARRANGE (Preparação)
+      const userMessage = "Olá Lumina";
+      const botResponse = "Olá! Sou uma IA contra desinformação.";
+      
+      // Cria um MockClient que intercepta as chamadas HTTP
+      final mockHttp = MockClient((request) async {
+        // Verifica se a URL está correta (incluindo o encode)
+        if (request.url.toString().contains(Uri.encodeComponent(userMessage))) {
+          // Retorna sucesso (200) com o JSON esperado
+          return http.Response(
+            jsonEncode({'response': botResponse}), 
+            200,
+            headers: {'content-type': 'application/json; charset=utf-8'},
+          );
+        }
+        return http.Response("Not Found", 404);
+      });
+
+      await tester.pumpWidget(MaterialApp(
+        home: ChatScreen(
+          username: "Tester",
+          currentLanguage: 'portugues',
+          httpClient: mockHttp, // Injeta o mock aqui!
+        ),
+      ));
+      await tester.pumpAndSettle(); // Aguarda inicialização (initState)
+
+      // 2. ACT (Ação do Usuário)
+      
+      // Digita a mensagem
+      final textField = find.byType(TextField);
+      await tester.enterText(textField, userMessage);
+      
+      // Clica em enviar
+      final sendButton = find.byIcon(Icons.send);
+      await tester.tap(sendButton);
+      
+      // 3. ASSERT (Verificação Imediata - Mensagem do Usuário e Loading)
+      
+      // O flutter precisa reconstruir a tela para mostrar a mensagem do usuário
+      await tester.pump(); 
+
+      // Verifica se a mensagem do usuário apareceu na lista
+      expect(find.text(userMessage), findsOneWidget);
+      
+      // Verifica se o indicador de progresso está aparecendo (estado _isSending = true)
+      expect(find.byType(CircularProgressIndicator), findsOneWidget);
+      // O campo de texto deve estar desabilitado ou com hint diferente?
+      // No seu código: hintText muda para "Aguardando resposta..."
+      expect(find.text("Aguardando resposta..."), findsOneWidget);
+
+      // 4. ASSERT (Verificação Final - Resposta do Bot)
+      
+      // Aguarda a resposta do Future (simulado pelo MockClient)
+      await tester.pumpAndSettle();
+
+      // Verifica se o loading sumiu
+      expect(find.byType(CircularProgressIndicator), findsNothing);
+
+      // Verifica se a resposta do Mock apareceu na tela
+      expect(find.text(botResponse), findsOneWidget);
+    });
+
+    testWidgets('Deve exibir mensagem de erro quando a API retornar erro (ex: 500)', (WidgetTester tester) async {
+      // 1. ARRANGE
+      final mockHttp = MockClient((request) async {
+        return http.Response('Internal Server Error', 500);
+      });
+
+      await tester.pumpWidget(MaterialApp(
+        home: ChatScreen(
+          username: "Tester",
+          currentLanguage: 'portugues',
+          httpClient: mockHttp,
+        ),
+      ));
+      await tester.pumpAndSettle();
+
+      // 2. ACT
+      await tester.enterText(find.byType(TextField), "Teste Erro");
+      await tester.tap(find.byIcon(Icons.send));
+      await tester.pump(); // Atualiza UI (msg usuário)
+
+      // Aguarda o processamento assíncrono
+      await tester.pumpAndSettle();
+
+      // 3. ASSERT
+      // Verifica se a mensagem de erro específica do seu código apareceu
+      expect(find.text('Erro na API: Status Code 500'), findsOneWidget);
+    });
+
+    testWidgets('Deve exibir mensagem de erro de conexão quando ocorrer exceção', (WidgetTester tester) async {
+      // 1. ARRANGE
+      final mockHttp = MockClient((request) async {
+        throw Exception("Falha de conexão");
+      });
+
+      await tester.pumpWidget(MaterialApp(
+        home: ChatScreen(
+          username: "Tester",
+          currentLanguage: 'portugues',
+          httpClient: mockHttp,
+        ),
+      ));
+      await tester.pumpAndSettle();
+
+      // 2. ACT
+      await tester.enterText(find.byType(TextField), "Teste Conexão");
+      await tester.tap(find.byIcon(Icons.send));
+      await tester.pumpAndSettle(); 
+
+      // 3. ASSERT
+      // Verifica a mensagem do bloco catch(e)
+      // Nota: O texto contém a variável apiBaseUrl, então usamos find.textContaining ou construímos a string exata
+      final expectedErrorText = 'Erro de conexão: Verifique se o FastAPI está rodando em $apiBaseUrl.';
+      
+      // Use find.text() com a string exata para maior precisão
+      expect(find.text(expectedErrorText), findsOneWidget);
+    });
+
+  testWidgets('Não deve enviar mensagem se o campo estiver vazio ou apenas espaços', (WidgetTester tester) async {
+      // 1. ARRANGE
+      bool requestMade = false;
+      final mockHttp = MockClient((r) async {
+        requestMade = true;
+        return http.Response('OK', 200);
+      });
+
+      await tester.pumpWidget(MaterialApp(
+        home: ChatScreen(
+          username: "Tester",
+          currentLanguage: 'portugues',
+          httpClient: mockHttp,
+        ),
+      ));
+      await tester.pumpAndSettle();
+
+      const String textSpaces = '   '; 
+
+      // 2. ACT
+      await tester.enterText(find.byType(TextField), textSpaces);
+      await tester.tap(find.byIcon(Icons.send));
+      await tester.pumpAndSettle();
+
+      // 3. ASSERT
+      
+      // CORREÇÃO: Procuramos o texto APENAS dentro da ListView (onde ficam as mensagens)
+      // Isso ignora o TextField que ainda contém os espaços.
+      final messageInListFinder = find.descendant(
+        of: find.byType(ListView),
+        matching: find.text(textSpaces),
+      );
+
+      expect(messageInListFinder, findsNothing);
+      
+      // Verifica se a requisição HTTP NÃO foi feita
+      expect(requestMade, isFalse);
+    });
   });
 }
