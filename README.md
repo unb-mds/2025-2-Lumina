@@ -1,20 +1,62 @@
 # Lumina
-## 1. Objetivo
-Projeto desenvolvido para a disciplina de **Métodos e Desenvolvimentos de Software - 2025/2**
+
+### Combate às fake news com inteligência artificial conversacional.
+
 ---
-O objetivo do projeto é combater as fake news que vem em constante crescente, fazendo isso por meio de um chatbot para uma verificação de fatos e informação rápida, competindo com mecanismos de busca tradicionais e outras plataformas de checagem de notícias, com o diferencial de uma interface conversacional intuitiva.
 
-## 2. Tecnologias Utilizadas
-As seguintes tecnologias foram utilizadas nesse projeto:
-- Front-end: Flutter
-- Back-end: Python
-- APIs: Gemini API
-- Frameworks: Fast API
+## 📄 Sobre o Projeto
 
-## 3. Como Contribuir
-Para contribuir você pode acessar o arquivo [CONTRIBUTING.md](CONTRIBUTING.md)
+Projeto desenvolvido para a disciplina de **Métodos de Desenvolvimento de Software (MDS) - 2025/2** da **Universidade de Brasília (UnB)**.
 
-## 4. Autores
+O objetivo do Lumina é combater a desinformação crescente. Nossa solução é um chatbot inteligente que permite a verificação rápida de fatos e notícias. Diferente dos mecanismos de busca tradicionais, o Lumina oferece uma interface conversacional intuitiva, utilizando IA Generativa para analisar e sintetizar informações de fontes confiáveis em tempo real.
+
+## 🛠️ Tecnologias Utilizadas
+
+O ecossistema do Lumina é robusto e utiliza as seguintes tecnologias:
+
+* **📱 Frontend (App Mobile):** Flutter (Android/iOS).
+* **⚙️ Backend (API):** Python com FastAPI.
+* **🤖 Inteligência Artificial:** Google Gemini API via LangChain para RAG.
+* **🗄️ Banco de Dados:**
+    * **SQLite:** Para armazenamento relacional de artigos e metadados.
+    * **ChromaDB:** Banco de dados vetorial para busca semântica e embeddings.
+
+## 🏗️ Estrutura do Repositório
+
+O projeto adota uma arquitetura de monorepo, contendo frontend e backend no mesmo local.
+
+```
+Lumina/
+├── .github/                 # Configurações de CI/CD e Templates
+│   ├── workflows/           # Pipelines do GitHub Actions
+│   └── ...
+│
+├── backend/                 # API, IA e Lógica de Servidor
+│   ├── app/                 # Código fonte Python
+│   ├── tests/               # Testes automatizados (Pytest)
+│   └── main.py              # Ponto de entrada do servidor
+│
+├── frontend/                # Aplicativo Mobile (Flutter)
+│   ├── lib/                 # Código fonte Dart
+│   ├── android              #Integração do aplicativo para a plataforma   
+│   └── pubspec.yaml         # Dependências do Flutter
+│
+├── docs/                    # Documentação do Projeto
+│   ├── documentações/       # Documentos técnicos
+│   ├── estudos/             # Pesquisas e provas de conceito
+│   └── planejamentos/       # Gestão do projeto (Atas, Sprints)
+│
+├── .gitignore               # Arquivos ignorados pelo Git
+├── CONTRIBUTING.md          # Guia para contribuir
+├── LICENSE                  # Licença MIT
+├── README.md                # Visão geral do projeto
+└── pytest.ini               # Configuração de testes
+```
+
+## 🤝 Como Contribuir
+Ficamos felizes com o interesse em contribuir! Para detalhes sobre como submeter Pull Requests, padrões de código e nossa política de conduta, leia nosso guia:[CONTRIBUTING.md](CONTRIBUTING.md)
+
+## 👥 Autores
 O projeto é desenvolvido pelas seguintes pessoas
 
 |Nome|Função|Github|
@@ -27,46 +69,8 @@ O projeto é desenvolvido pelas seguintes pessoas
 |Tiago Geovane da Silva Sousa|Arquitetura/DevOps|[TiagoUNB](https://github.com/TiagoUNB)|
 ------------
 
-# 5. Links importantes
+# 🔗 Links importantes
 - Nosso [Git Pages](https://unb-mds.github.io/2025-2-Lumina)
 
 - Nosso [Figma](https://www.figma.com/design/WAbCYuadSmQjoSXwQu2FZa/Squad-07--MDS?node-id=1-3188&t=jXbDeQuQQlIQOL1h-0)
 
-## 6. Estrutura do Projeto
-
-### Backend
-
-A estrutura de pastas do backend foi organizada para separar as responsabilidades e facilitar a manutenção.
-
-```
-backend/
-├── app/
-│   ├── ai/
-│   │   ├── ai_models/
-│   │   ├── rag/
-│   │   └── system_prompts/
-│   ├── db/
-│   ├── models/
-│   ├── services/
-│   └── webcrawler/
-│       ├── G1/
-│       └── Metropoles/
-├── tests/
-```
-
-### Módulos Principais
-
-*   **`main.py`**: Ponto de entrada do servidor FastAPI. Responsável por orquestrar as rotas da API que expõem as funcionalidades do sistema, como a busca e sumarização de notícias.
-
-*   **`run_crawler.py`**: Script dedicado para iniciar o processo de rastreamento e scraping de notícias. Ele ativa os crawlers específicos para cada fonte de notícia.
-
-*   **`app/webcrawler/`**: Módulo central para a coleta de dados. Contém a lógica para rastrear sites de notícias e extrair links para artigos. É projetado de forma extensível para suportar novas fontes.
-    *   **`G1/`** e **`Metropoles/`**: Subdiretórios que contêm a implementação específica para cada portal, incluindo a extração de links e o scraping do conteúdo.
-
-*   **`app/models/`**: Define as estruturas de dados do projeto, como o modelo `Article`, que representa um artigo de notícia com seus atributos (título, conteúdo, data, etc.).
-
-*   **`app/db/`**: Camada de persistência de dados. Gerencia a conexão com o banco de dados SQLite (`articles.db`) e o banco de vetores (`ChromaDB`), sendo responsável por armazenar e consultar os artigos e seus embeddings.
-
-*   **`app/ai/`**: Módulo de inteligência artificial. Integra-se com o Google Gemini para realizar tarefas de processamento de linguagem natural, como a sumarização de textos, utilizando a técnica de RAG (Retrieval-Augmented Generation).
-
-*   **`tests/`**: Contém os testes automatizados do projeto, garantindo a qualidade e o correto funcionamento dos componentes.
