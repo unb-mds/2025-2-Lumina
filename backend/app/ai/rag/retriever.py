@@ -13,7 +13,7 @@ class NewsRetriever(BaseRetriever):
     """Custom retriever para buscar notícias semelhantes a um prompt."""
 
     vectordb: VectorDB = Field(...)
-    search_k: int = 5  # quantidade de documentos retornados
+    search_k: int = 10  # quantidade de documentos retornados
 
     class Config:
         arbitrary_types_allowed = True

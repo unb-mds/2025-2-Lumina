@@ -3,9 +3,8 @@ from functools import lru_cache
 from typing import List, Optional
 
 from app.ai.gemini import GeminiModel
-from app.ai.rag.google_embedder import GoogleEmbedder
+from app.ai.rag.ollama_embedder import OllamaEmbeddings
 from app.ai.rag.retriever import NewsRetriever
-from app.ai.rag.text_splitter import TextSplitter
 from app.db.vectordb import VectorDB
 from app.services.chat_service import ChatService
 from app.services.scraping_manager import ScrapingError, ScrapingManager
@@ -48,12 +47,10 @@ def get_chat_service() -> ChatService:
     Cria e retorna uma instância singleton do ChatService,
     inicializando todas as suas dependências.
     """
-    embedding_platform = GoogleEmbedder(api_key=GOOGLE_API_KEY)
-    text_splitter = TextSplitter(chunk_size=1000, chunk_overlap=200)
+    embedding_platform = OllamaEmbeddings()
 
     vector_db = VectorDB(
         embedding_platform=embedding_platform,
-        text_splitter=text_splitter,
         db_path="app/db/chroma_db",
     )
 

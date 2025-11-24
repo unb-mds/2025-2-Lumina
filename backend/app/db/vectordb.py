@@ -184,7 +184,7 @@ class VectorDB:
         except Exception as e:
             logger.error(f"Erro ao processar artigo completo ID {article.id}: {e}")
             return None
-    def search(self, query: str, k: int = 5) -> List[Document]:
+    def search(self, query: str, k: int = 10) -> List[Document]:
         """
         Busca por documentos similares a uma query no ChromaDB.
 

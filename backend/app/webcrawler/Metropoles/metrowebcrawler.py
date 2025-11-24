@@ -18,8 +18,8 @@ class MetropolesCrawler:
     def __init__(self):
         self.downloader = Downloader()
         self.scraper = MetroScraper()
-        self.link_extractor = MetroLinkExtractor()
-        self.database = ArticleDB()
+        self.link_extractor = MetroLinkExtractor("backend/app/db/articles.d")
+        self.database = ArticleDB(db_path=r"C:\Users\Tiago\2025-2-Lumina\backend\app\db\metroarticles.db")
 
         self.Urls_to_visit = Queue()
         self.visited_urls = set()
@@ -31,12 +31,11 @@ class MetropolesCrawler:
         # O Metrópoles usa estrutura do tipo: metropoles.com/brasil/titulo
         self.categorias_permitidas = [
             "brasil",
-            "politica",
-            "economia",
             "mundo",
             "distrito-federal",
-            "tecnologia",
+            "ciencia",
             "saude",
+            "negocios",
         ]
 
         # Adiciona as seeds iniciais
