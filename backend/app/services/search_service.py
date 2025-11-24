@@ -1,29 +1,41 @@
 import logging
-import uuid
-from typing import List, Optional
+import os
+from typing import List
 
 import chromadb
 from chromadb.types import Collection
+from dotenv import load_dotenv
 from langchain_core.documents import Document
 
-from app.ai.ai_models.EmbeddingPlatform import EmbeddingPlatform
-from app.ai.rag.text_splitter import TextSplitter
+from app.ai.rag.google_embedder import GoogleEmbedder
 from app.models.article import Article
 
 logger = logging.getLogger(__name__)
 
+load_dotenv()
+
+
 class SearchService:
     def __init__(self):
-        db_path: str = "app/db/chroma_db"
+        # Carrega a chave de API do Google
+        api_key = os.getenv("GOOGLE_API_KEY")
+        if not api_key:
+            raise ValueError("A variável de ambiente GOOGLE_API_KEY não foi definida.")
+
+        # Inicializa a plataforma de embedding com o Google
+        self.embedding_platform = GoogleEmbedder(api_key=api_key)
+
+        # Configura o cliente do banco de dados vetorial
+        db_path: str = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "db", "chroma_db")
         collection_name: str = "lumina_articles"
         self.client = chromadb.PersistentClient(path=db_path)
-
         self.collection: Collection = self.client.get_or_create_collection(
-                name=collection_name,
-            )
+            name=collection_name
+        )
+
         logger.info(
-                f"Cliente ChromaDB conectado em '{db_path}' e coleção "
-                f"'{collection_name}' pronta.")
+            f"Cliente ChromaDB conectado em '{db_path}' e coleção '{collection_name}' pronta."
+        )
         
     def search(self, query: str, k: int = 10) -> List[Document]:
         """
