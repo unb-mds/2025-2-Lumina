@@ -16,7 +16,6 @@ class TestWrapper extends StatelessWidget {
 }
 
 void main() {
-  
   // O group() é opcional, mas ajuda a organizar testes relacionados
   group('Testes de Tradução (tForTest)', () {
     
@@ -470,4 +469,5 @@ group('Teste de Funcionalidade: Resetar Tutorial', () {
       expect(newMenuSeen, isFalse);
     });
   });
+
 }
