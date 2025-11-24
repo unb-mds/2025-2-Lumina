@@ -390,6 +390,7 @@ Widget _buildBalloonWithArrow(String text, {ArrowDirection direction = ArrowDire
        
       if (_showChatTutorial)
       GestureDetector(
+        key: const Key('chatTutorialOverlay'),
         onTap: _closeChatTutorial,
         child: Container(
           color: Colors.black.withValues(alpha: 0.6),
