@@ -19,8 +19,9 @@ class ChatMessage {
 class ChatScreen extends StatefulWidget {
   final String? username;
   final String currentLanguage;
+  final http.Client? httpClient;
 
-  const ChatScreen({super.key, this.username,required this.currentLanguage});
+  const ChatScreen({super.key, this.username,required this.currentLanguage,this.httpClient,});
 
   @override
   State<ChatScreen> createState() => _ChatScreenState();
@@ -116,17 +117,17 @@ Future<void> _closeMenuTutorial() async {
   void _handleSubmitted(String text) {
     if (text.trim().isEmpty || _isSending) return;
 
-    
+    _textController.clear();
     ChatMessage userMessage = ChatMessage(
-      text: text.trim(),
+      text: text,
       isUser: true,
       timestamp: DateTime.now(),
     );
 
     setState(() {
-      _messages.insert(0, userMessage);
-      _textController.clear();
       _isSending = true; 
+      _messages.insert(0, userMessage);
+      
     });
 
     
@@ -141,7 +142,8 @@ Future<void> _closeMenuTutorial() async {
     final url = Uri.parse('$apiBaseUrl/prompt/$encodedPrompt'); 
 
     try {
-      final response = await http.get(url);
+      final client = widget.httpClient ?? http.Client();
+      final response = await client.get(url);
 
       if (response.statusCode == 200) {
         
@@ -161,16 +163,18 @@ Future<void> _closeMenuTutorial() async {
 
       } else {
         
-        _addErrorMessage('Erro na API: Status Code ${response.statusCode}');
+       _addErrorMessage('Erro na API: Status Code ${response.statusCode}');
       }
     } catch (e) {
       
       _addErrorMessage('Erro de conexão: Verifique se o FastAPI está rodando em $apiBaseUrl.');
     } finally {
       
-      setState(() {
-        _isSending = false;
-      });
+      if (mounted) { // Boa prática verificar mounted antes de setState em async
+        setState(() {
+          _isSending = false;
+        });
+        }
     }
   }
 
@@ -390,6 +394,7 @@ Widget _buildBalloonWithArrow(String text, {ArrowDirection direction = ArrowDire
        
       if (_showChatTutorial)
       GestureDetector(
+        key: const Key('chatTutorialOverlay'),
         onTap: _closeChatTutorial,
         child: Container(
           color: Colors.black.withValues(alpha: 0.6),

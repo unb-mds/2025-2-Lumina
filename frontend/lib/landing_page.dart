@@ -115,6 +115,7 @@ class _LandingPageState extends State<LandingPage> {
                   children: [
                     Expanded(
                       child: TextField(
+                        key: const Key('usernameField'),
                         controller: _nomeController,
                         style: const TextStyle(color: Colors.black),
                         decoration: const InputDecoration(
