@@ -24,7 +24,9 @@ def main():
     try:
         # Caminho relativo para o banco de dados de artigos
         article_db_path = os.path.join(project_root, "app", "db", "articles.db")
+        metroarticle_db_path = os.path.join(project_root, "app", "db", "metroarticles.db")
         article_db = ArticleDB(db_path=article_db_path)
+        metroarticle_db = ArticleDB(db_path=metroarticle_db_path)
 
         stats = article_db.get_stats()
 
@@ -32,6 +34,13 @@ def main():
         print(f"Total de artigos: {stats['total']}")
         print(f"Artigos pendentes de vetorização: {stats['pending_vectorization']}")
         print(f"Artigos vetorizados: {stats['vectorized']}")
+        print("------------------------------------------\n")
+
+        print("\n--- Status do Banco de Dados de Artigos Metrópoles ---")
+        metro_stats = metroarticle_db.get_stats()
+        print(f"Total de artigos: {metro_stats['total']}")
+        print(f"Artigos pendentes de vetorização: {metro_stats['pending_vectorization']}")
+        print(f"Artigos vetorizados: {metro_stats['vectorized']}")
         print("------------------------------------------\n")
 
     except Exception as e:

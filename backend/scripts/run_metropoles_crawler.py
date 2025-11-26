@@ -1,9 +1,10 @@
 import sys
 import logging
 
-# Adiciona o diretório atual ao path para encontrar os módulos 'app'
+
+
 import os
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from app.webcrawler.Metropoles.metrowebcrawler import MetropolesCrawler
 
@@ -13,7 +14,7 @@ def main():
         crawler = MetropolesCrawler()
         
         # Defina aqui quantos artigos quer baixar nesta execução
-        crawler.crawl(max_pages=5000)
+        crawler.crawl(max_pages=5500)
 
         print("WebCrawler finalizado com sucesso.")
     except KeyboardInterrupt:
