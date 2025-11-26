@@ -18,14 +18,14 @@ class MetropolesCrawler:
     def __init__(self):
         self.downloader = Downloader()
         self.scraper = MetroScraper()
-        self.link_extractor = MetroLinkExtractor("backend/app/db/articles.d")
-        self.database = ArticleDB(db_path=r"C:\Users\Tiago\2025-2-Lumina\backend\app\db\metroarticles.db")
+        self.link_extractor = MetroLinkExtractor("www.metropoles.com")
+        self.database = ArticleDB(db_path=r"/home/tiago/Projects/2025-2-Lumina/backend/app/db/metroarticles.db")
 
         self.Urls_to_visit = Queue()
         self.visited_urls = set()
 
         # Caminho do arquivo de persistência (separado do G1 para não conflitar)
-        self.state_file = "metropoles_crawler_state.json"
+        self.state_file = "crawler_metro_state.json"
 
         # Categorias permitidas (Seeds e Filtros)
         # O Metrópoles usa estrutura do tipo: metropoles.com/brasil/titulo
@@ -47,6 +47,11 @@ class MetropolesCrawler:
 
         # Tenta carregar progresso anterior
         self.load_state()
+
+        # Permite revisitar as seeds para buscar novos artigos
+        seeds_to_retry = [base_url] + [f"{base_url}/{cat}" for cat in self.categorias_permitidas]
+        for seed in seeds_to_retry:
+            self.visited_urls.discard(seed)
 
     # ============================================================
     # Persistência de progresso (Igual ao G1)
@@ -92,6 +97,7 @@ class MetropolesCrawler:
     # Crawler principal
     # ============================================================
     def crawl(self, max_pages: int = 100) -> None:
+        
         pages_crawled = 0
         skipped_visited = 0
         failed_downloads = 0

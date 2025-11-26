@@ -1,11 +1,13 @@
 {
   "visited_urls": [
-    "https://www.metropoles.com/distrito-federal",
-    "https://www.metropoles.com",
     "https://www.metropoles.com/mundo",
+    "https://www.metropoles.com",
     "https://www.metropoles.com/politica",
     "https://www.metropoles.com/brasil",
-    "https://www.metropoles.com/saude"
+    "https://www.metropoles.com/negocios",
+    "https://www.metropoles.com/saude",
+    "https://www.metropoles.com/ciencia",
+    "https://www.metropoles.com/distrito-federal"
   ],
   "urls_to_visit": []
 }

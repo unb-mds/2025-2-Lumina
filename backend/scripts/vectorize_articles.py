@@ -43,9 +43,6 @@ def main():
         vector_db = VectorDB(db_path=vector_db_path, embedding_platform=embedder)
 
         pending_articles = article_db.get_articles_pending_vectorization()
-
-        ARTICLES_TO_PROCESS = 1000 # Número máximo de artigos a processar por execução
-        pending_articles = pending_articles[:ARTICLES_TO_PROCESS]
         
         if not pending_articles:
                 logging.info("Nenhum artigo pendente para vetorização.")
@@ -53,34 +50,15 @@ def main():
 
         logging.info(f"Encontrados {len(pending_articles)} artigos para vetorizar.")
 
-        # --- Lógica de Rate Limiting (Apenas RPM proativo) ---
-        RPM_LIMIT = 99  # Requisições por Minuto
-        request_count = 0
-        start_time = time.time()
-
         for article in pending_articles:
-            # Verifica se o limite de RPM foi atingido
-            if request_count >= RPM_LIMIT:
-                elapsed_time = time.time() - start_time
-                if elapsed_time < 60:
-                    sleep_time = 60 - elapsed_time
-                    logging.info(f"Limite de RPM atingido. Aguardando {sleep_time:.2f} segundos...")
-                    time.sleep(sleep_time)
-                
-                # Reseta o contador para o novo minuto
-                request_count = 0
-                start_time = time.time()
-
             logging.info(f"Processando artigo ID: {article.id} - Título: {article.title}")
             
             # A lógica de retentativa para TPM e outros erros está dentro deste método
             batch_id = vector_db.vectorize_whole_article(article=article)
             
-            # Incrementa o contador de requisições após a chamada
             if batch_id:
-                request_count += 1
                 article_db.mark_as_vectorized(article.id, batch_id)
-                logging.info(f"Artigo ID: {article.id} marcado como vetorizado. RPM atual: {request_count}")
+                logging.info(f"Artigo ID: {article.id} marcado como vetorizado.")
             else:
                 logging.error(f"Falha ao vetorizar o artigo ID: {article.id}. O artigo será ignorado por enquanto.")
 
