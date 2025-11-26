@@ -11,7 +11,8 @@ from langchain_core.documents import Document
 from app.ai.ai_models.EmbeddingPlatform import EmbeddingPlatform
 from app.ai.rag.text_splitter import TextSplitter
 from app.models.article import Article
-
+import os
+# Configura o logger
 logger = logging.getLogger(__name__)
 
 
@@ -30,7 +31,7 @@ class VectorDB:
         self,
         embedding_platform: EmbeddingPlatform,
         text_splitter: TextSplitter = None,
-        db_path: str = "app/db/chroma_db",
+        db_directory_name: str = "chromadb",
         collection_name: str = "lumina_articles",
     ):
         """
@@ -44,7 +45,15 @@ class VectorDB:
                            banco de dados vetorial.
             collection_name (str): O nome da coleção onde os vetores dos
                                    artigos serão armazenados.
+
         """
+        
+        if db_directory_name == ":memory:":
+            self.db_path = ":memory:"
+        else:
+            current_dir = os.path.dirname(os.path.abspath(__file__))
+            db_path = os.path.join(current_dir, db_directory_name)
+        
         self.embedding_platform = embedding_platform
         self.splitter = text_splitter
         try:

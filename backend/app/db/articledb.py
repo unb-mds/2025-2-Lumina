@@ -2,6 +2,7 @@ import sqlite3
 import logging
 from datetime import datetime
 from typing import Optional, List, Dict, Any
+import os
 
 from ..models.article import Article  # Isto agora é o seu modelo Pydantic
 
@@ -10,8 +11,15 @@ logger = logging.getLogger(__name__)
 
 
 class ArticleDB:
-    def __init__(self, db_path: str = "app/db/articles.db"):
-        self.conn = sqlite3.connect(db_path)
+    def __init__(self, db_name: str = "articles.db"):
+        if db_name == ":memory:":
+            self.db_path = ":memory:"
+        else:
+            # Construct default path relative to the current file (articledb.py)
+            current_dir = os.path.dirname(os.path.abspath(__file__))
+            self.db_path = os.path.join(current_dir, db_name)
+            
+        self.conn = sqlite3.connect(self.db_path)
         self.create_table()
 
     def create_table(self):

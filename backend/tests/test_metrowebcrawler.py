@@ -29,7 +29,7 @@ class TestMetropolesCrawler:
     def test_initialization_seeds(self, crawler):
         assert not crawler.Urls_to_visit.empty()
         urls_in_queue = list(crawler.Urls_to_visit.queue)
-        assert any("politica" in url for url in urls_in_queue)
+        assert any("brasil" in url for url in urls_in_queue)
 
     def test_save_state(self, crawler, mocker):
         crawler.visited_urls.add("http://visited.com")
@@ -59,24 +59,18 @@ class TestMetropolesCrawler:
         assert "http://pending.com" in queue_list
 
     def test_load_state_exception(self, crawler, mocker):
-        """
-        NOVO: Simula erro ao carregar o estado (ex: JSON inválido ou erro de disco).
-        Cobre as linhas 89-90.
-        """
         mocker.patch("os.path.exists", return_value=True)
-        # Força erro no json.load ou open
         mocker.patch("builtins.open", side_effect=Exception("Arquivo corrompido"))
-        
-        crawler.load_state() # Não deve quebrar, deve apenas logar o erro
+        crawler.load_state() 
 
     def test_save_state_exception(self, crawler, mocker):
         mocker.patch("builtins.open", side_effect=Exception("Disk full"))
-        crawler.save_state() # Não deve quebrar
+        crawler.save_state() 
 
     # --- Testes do Loop Principal (Crawl) ---
 
     def test_crawl_skip_visited(self, crawler):
-        url = "http://metropoles.com/politica/artigo-velho"
+        url = "http://metropoles.com/brasil/artigo-velho"
         crawler.visited_urls.add(url)
         crawler.Urls_to_visit.queue.clear()
         crawler.Urls_to_visit.put(url)
@@ -85,10 +79,10 @@ class TestMetropolesCrawler:
         crawler.downloader.fetch.assert_not_called()
 
     def test_crawl_download_fail(self, crawler):
-        url = "http://metropoles.com/politica/artigo-quebrado"
+        url = "http://metropoles.com/brasil/artigo-quebrado"
         crawler.Urls_to_visit.queue.clear()
         crawler.Urls_to_visit.put(url)
-        crawler.downloader.fetch.return_value = None # Simula falha
+        crawler.downloader.fetch.return_value = None 
 
         crawler.crawl(max_pages=1)
 
@@ -96,41 +90,41 @@ class TestMetropolesCrawler:
         assert url not in crawler.visited_urls
 
     def test_crawl_scrape_fail(self, crawler):
-        """
-        NOVO: Simula falha no scraper (retorna None mesmo sendo página de artigo).
-        Cobre a linha 132 (else do if article).
-        """
-        url = "http://metropoles.com/politica/artigo-bugado"
+        url = "http://metropoles.com/brasil/artigo-bugado"
         crawler.Urls_to_visit.queue.clear()
         crawler.Urls_to_visit.put(url)
 
         crawler.downloader.fetch.return_value = "<html></html>"
         crawler.scraper.is_article_page.return_value = True
-        
-        # O Scraper falha em extrair os dados
         crawler.scraper.scrape_article.return_value = None
 
         crawler.crawl(max_pages=1)
 
-        # Não salva nada
         crawler.database.save_article.assert_not_called()
-        # Mas deve ter visitado
         assert url in crawler.visited_urls
 
     def test_crawl_not_article_page(self, crawler):
-        url = "http://metropoles.com/politica/"
+        url = "http://metropoles.com/brasil/"
+        new_url = "http://metropoles.com/brasil/novo"
+        
         crawler.Urls_to_visit.queue.clear()
         crawler.Urls_to_visit.put(url)
 
+        # Configura os Mocks
         crawler.downloader.fetch.return_value = "<html></html>"
         crawler.scraper.is_article_page.return_value = False
-        crawler.link_extractor.extract.return_value = {"http://metropoles.com/politica/novo"}
+        crawler.link_extractor.extract.return_value = {new_url}
 
+        # Executa o crawler
         crawler.crawl(max_pages=1)
 
+        # Verificações
         crawler.database.save_article.assert_not_called()
         crawler.link_extractor.extract.assert_called()
-        assert "http://metropoles.com/politica/novo" in crawler.visited_urls
+        
+        # CORREÇÃO: O crawler processou o novo link porque a meta (max_pages) não foi atingida.
+        # Então o link saiu da fila e foi para visited_urls.
+        assert new_url in crawler.visited_urls
 
     def test_crawl_article_wrong_category(self, crawler):
         url = "http://metropoles.com/entretenimento/bbb/fofoca"
@@ -144,7 +138,7 @@ class TestMetropolesCrawler:
         crawler.database.save_article.assert_not_called()
 
     def test_crawl_success_save_article(self, crawler):
-        url = "http://metropoles.com/politica/noticia-boa"
+        url = "http://metropoles.com/brasil/noticia-boa"
         crawler.Urls_to_visit.queue.clear()
         crawler.Urls_to_visit.put(url)
 
@@ -166,7 +160,7 @@ class TestMetropolesCrawler:
         
         crawler.Urls_to_visit.queue.clear()
         for i in range(25):
-            crawler.Urls_to_visit.put(f"http://metropoles.com/politica/{i}")
+            crawler.Urls_to_visit.put(f"http://metropoles.com/brasil/{i}")
 
         crawler.downloader.fetch.return_value = "<html></html>"
         crawler.scraper.is_article_page.return_value = False

@@ -19,7 +19,7 @@ class MetropolesCrawler:
         self.downloader = Downloader()
         self.scraper = MetroScraper()
         self.link_extractor = MetroLinkExtractor("www.metropoles.com")
-        self.database = ArticleDB(db_path=r"/home/tiago/Projects/2025-2-Lumina/backend/app/db/metroarticles.db")
+        self.database = ArticleDB(db_name="metroarticles.db")
 
         self.Urls_to_visit = Queue()
         self.visited_urls = set()
