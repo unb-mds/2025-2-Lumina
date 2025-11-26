@@ -35,12 +35,8 @@ def main():
         EMBEDDING_MODEL = "models/gemini-embedding-001"
         embedder = GoogleEmbedder(api_key=google_api_key, model_name=EMBEDDING_MODEL)
         
-        # Caminhos relativos para os bancos de dados
-        article_db_path = os.path.join(project_root, "app", "db", "articles.db")
-        vector_db_path = os.path.join(project_root, "app", "db", "chroma_db")
-
-        article_db = ArticleDB(db_path=article_db_path)
-        vector_db = VectorDB(db_path=vector_db_path, embedding_platform=embedder)
+        article_db = ArticleDB(db_name="articles.db")
+        vector_db = VectorDB(embedding_platform=embedder, db_directory_name="chroma_db")
 
         pending_articles = article_db.get_articles_pending_vectorization()
         

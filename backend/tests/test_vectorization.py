@@ -1,4 +1,5 @@
 import uuid
+import os
 from unittest.mock import patch
 
 import pytest
@@ -112,10 +113,16 @@ def test_vectordb_init_success(
 ):
     """Tests successful initialization of VectorDB."""
     vectordb = VectorDB(
-        embedding_platform=mock_google_embedder, text_splitter=mock_text_splitter
+        embedding_platform=mock_google_embedder,
+        text_splitter=mock_text_splitter,
+        db_directory_name="chroma_db"
     )
 
-    mock_chroma_client.assert_called_once_with(path="app/db/chroma_db")
+    # Check if PersistentClient was called with a path ending in 'chroma_db'
+    args, kwargs = mock_chroma_client.call_args
+    assert "path" in kwargs
+    assert kwargs["path"].endswith("chroma_db")
+
     mock_chroma_client.return_value.get_or_create_collection.assert_called_once_with(
         name="lumina_articles"
     )
@@ -132,7 +139,9 @@ def test_vectordb_init_failure_chroma(mock_google_embedder, mock_text_splitter, 
     )
     with pytest.raises(Exception, match="ChromaDB connection error"):
         VectorDB(
-            embedding_platform=mock_google_embedder, text_splitter=mock_text_splitter
+            embedding_platform=mock_google_embedder,
+            text_splitter=mock_text_splitter,
+            db_directory_name="chroma_db"
         )
 
 
@@ -141,7 +150,9 @@ def test_vectorize_article_success(
 ):
     """Tests successful vectorization of an article."""
     vectordb = VectorDB(
-        embedding_platform=mock_google_embedder, text_splitter=mock_text_splitter
+        embedding_platform=mock_google_embedder,
+        text_splitter=mock_text_splitter,
+        db_directory_name="chroma_db"
     )
     vectordb.collection = mock_chroma_collection
 
@@ -171,7 +182,9 @@ def test_vectorize_article_no_content(
 ):
     """Tests vectorization of an article with no content."""
     vectordb = VectorDB(
-        embedding_platform=mock_google_embedder, text_splitter=mock_text_splitter
+        embedding_platform=mock_google_embedder,
+        text_splitter=mock_text_splitter,
+        db_directory_name="chroma_db"
     )
     vectordb.collection = mock_chroma_collection
     mock_text_splitter.split_article.return_value = []
@@ -189,7 +202,9 @@ def test_vectorize_article_no_id(
 ):
     """Tests vectorization of an article with no ID (should raise ValueError)."""
     vectordb = VectorDB(
-        embedding_platform=mock_google_embedder, text_splitter=mock_text_splitter
+        embedding_platform=mock_google_embedder,
+        text_splitter=mock_text_splitter,
+        db_directory_name="chroma_db"
     )
     vectordb.collection = mock_chroma_collection
 
@@ -208,7 +223,9 @@ def test_vectorize_article_embedding_failure(
 ):
     """Tests failure during embedding generation."""
     vectordb = VectorDB(
-        embedding_platform=mock_google_embedder, text_splitter=mock_text_splitter
+        embedding_platform=mock_google_embedder,
+        text_splitter=mock_text_splitter,
+        db_directory_name="chroma_db"
     )
     vectordb.collection = mock_chroma_collection
     mock_google_embedder.client.embed_documents.return_value = []
@@ -228,7 +245,9 @@ def test_vectorize_article_chroma_add_failure(
 ):
     """Tests failure during chromadb.add operation."""
     vectordb = VectorDB(
-        embedding_platform=mock_google_embedder, text_splitter=mock_text_splitter
+        embedding_platform=mock_google_embedder,
+        text_splitter=mock_text_splitter,
+        db_directory_name="chroma_db"
     )
     vectordb.collection = mock_chroma_collection
     mock_chroma_collection.add.side_effect = Exception("ChromaDB add error")
@@ -248,7 +267,9 @@ def test_delete_article_by_url(
 ):
     """Tests deleting an article by URL."""
     vectordb = VectorDB(
-        embedding_platform=mock_google_embedder, text_splitter=mock_text_splitter
+        embedding_platform=mock_google_embedder,
+        text_splitter=mock_text_splitter,
+        db_directory_name="chroma_db"
     )
     vectordb.collection = mock_chroma_collection
     url_to_delete = "http://example.com/to-delete"

@@ -7,11 +7,8 @@ from app.models.article import Article
 
 @pytest.fixture
 def db():
-    """
-    Cria uma instância do banco em memória para cada teste.
-    O banco é destruído automaticamente ao fim do teste.
-    """
-    database = ArticleDB(db_path=":memory:")
+    """Fixture que cria um banco em memória para cada teste."""
+    database = ArticleDB(db_name=":memory:")
     yield database
     database.close()
 

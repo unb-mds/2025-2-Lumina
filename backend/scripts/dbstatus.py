@@ -23,10 +23,8 @@ def main():
     article_db = None
     try:
         # Caminho relativo para o banco de dados de artigos
-        article_db_path = os.path.join(project_root, "app", "db", "articles.db")
-        metroarticle_db_path = os.path.join(project_root, "app", "db", "metroarticles.db")
-        article_db = ArticleDB(db_path=article_db_path)
-        metroarticle_db = ArticleDB(db_path=metroarticle_db_path)
+        article_db = ArticleDB(db_name="articles.db")
+        metroarticle_db = ArticleDB(db_name="metroarticles.db")
 
         stats = article_db.get_stats()
 
