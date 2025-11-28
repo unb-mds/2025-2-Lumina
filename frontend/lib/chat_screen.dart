@@ -291,6 +291,39 @@ Future<void> _closeMenuTutorial() async {
   }
 
 
+  void _deleteChat(String chatIdToDelete) async {
+    if (!_hiveReady) return;
+    
+    List chatIds = chatBox.get("chat_ids", defaultValue: []);
+    
+    // deleta da lista de ids
+    chatIds.removeWhere((c) => c["id"] == chatIdToDelete);
+    await chatBox.put("chat_ids", chatIds);
+    
+    // deleta as mensagens
+    await chatBox.delete(chatIdToDelete);
+    
+    // se o usuário está no chat que foi deletado, fecha o menu e cria um novo chat
+    if (currentChatId == chatIdToDelete) {
+      Navigator.pop(context); 
+      
+      setState(() {
+        currentChatId = DateTime.now().millisecondsSinceEpoch.toString();
+        _messages.clear();
+        _messages.add(_initialMessage());
+        _saveChat();
+        
+        chatIds.add({
+          "id": currentChatId,
+          "title": "Nova conversa",
+          "updatedAt": DateTime.now().toIso8601String(),
+        });
+        chatBox.put("chat_ids", chatIds);
+      });
+    }
+}
+
+
 
   
   Widget _buildMessage(ChatMessage message) {
@@ -598,14 +631,23 @@ Widget _buildBalloonWithArrow(String text, {ArrowDirection direction = ArrowDire
                       return ListTile(
                         leading: const Icon(Icons.chat_bubble_outline),
                         title: Text(title),
+                        
+                        trailing: IconButton(
+                          icon: const Icon(Icons.delete, color: Colors.black),
+                          onPressed: () async {
+                            _deleteChat(chatId);
+                          },
+                        ),
+                        
                         onTap: () {
                           setState(() {
                             currentChatId = chatId;
                             _loadCurrentChat();
-                            });
-                            Navigator.pop(context);
+                          });
+                          Navigator.pop(context);
                         },
                       );
+
                     },
                   ),
                 );
