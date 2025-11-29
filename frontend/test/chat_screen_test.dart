@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:frontend/chat_screen.dart'; // Sua ChatScreen
+import 'package:frontend/chat_screen.dart'; 
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:frontend/main.dart';
 import 'package:http/http.dart' as http;
@@ -164,6 +164,7 @@ void main() {
       
       // Cria um MockClient que intercepta as chamadas HTTP
       final mockHttp = MockClient((request) async {
+        await Future.delayed(const Duration(milliseconds: 50));
         // Verifica se a URL está correta (incluindo o encode)
         if (request.url.toString().contains(Uri.encodeComponent(userMessage))) {
           // Retorna sucesso (200) com o JSON esperado
@@ -199,7 +200,7 @@ void main() {
       
       // O flutter precisa reconstruir a tela para mostrar a mensagem do usuário
       await tester.pump(); 
-
+      await tester.pump(); 
       // Verifica se a mensagem do usuário apareceu na lista
       expect(find.text(userMessage), findsOneWidget);
       
