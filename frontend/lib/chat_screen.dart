@@ -3,6 +3,9 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:frontend/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+
 
 class ChatMessage {
   final String text;
@@ -44,22 +47,32 @@ class _ChatScreenState extends State<ChatScreen> {
   bool _showChatTutorial = false;
   bool _showMenuTutorial = false;
 
+  bool _hiveReady = false;
+
+  late Box chatBox;
+  String currentChatId = "default_chat";
+
 
   @override
   void initState() {
     super.initState();
+     _openHive();
      _currentDisplayedUsername = widget.username ?? "Visitante";
     
-    _messages.add(
-      ChatMessage(
-        text: "Olá $_currentDisplayedUsername! Sou Lumina, sua agente de IA para o combate à desinformação, como posso te ajudar hoje?",
-        isUser: false,
-        timestamp: DateTime.now(),
-      ),
-    );
     _checkTutorialStatus();
   }
 
+
+  Future<void> _openHive() async {
+    await Hive.initFlutter();
+    chatBox = await Hive.openBox('chat_history');
+
+    if (!chatBox.containsKey("chat_ids")) {
+      await chatBox.put("chat_ids", []);
+    }
+    setState(() =>_hiveReady = true);
+    _loadCurrentChat();
+  }
 
 Future<void> _checkTutorialStatus() async {
   final prefs = await SharedPreferences.getInstance();
@@ -130,8 +143,28 @@ Future<void> _closeMenuTutorial() async {
       
     });
 
+    // Atualiza título da conversa com base na primeira mensagem
+    List chatIds = chatBox.get("chat_ids", defaultValue: []);
+    
+    for (var chat in chatIds) {
+      if (chat["id"] == currentChatId) {
+        if (chat["title"] == "Nova conversa") {
+          String clean = text.trim();
+          chat["title"] = clean.length > 25 ? clean.substring(0, 25) + "..." : clean;
+        }
+      }
+    }
+    chatBox.put("chat_ids", chatIds);
+    // Atualiza data da última modificação
+    for (var chat in chatIds) {
+      if (chat["id"] == currentChatId) {
+        chat["updatedAt"] = DateTime.now().toIso8601String();
+      }
+    }
+    chatBox.put("chat_ids", chatIds);
     
     _fetchGeminiResponse(userMessage.text);
+    _saveChat();
   }
 
  
@@ -176,6 +209,7 @@ Future<void> _closeMenuTutorial() async {
         });
         }
     }
+    _saveChat();
   }
 
   
@@ -189,6 +223,110 @@ Future<void> _closeMenuTutorial() async {
           _messages.insert(0, errorMessage);
      });
   }
+  
+  ChatMessage _initialMessage() {
+    return ChatMessage(
+      text: "Olá $_currentDisplayedUsername! Sou Lumina, sua agente de IA para o combate à desinformação, como posso te ajudar hoje?",
+      isUser: false,
+      timestamp: DateTime.now(),
+      );
+  }
+
+  void _loadCurrentChat() {
+    if (!_hiveReady) return;
+
+    final data = chatBox.get(currentChatId);
+    if (data == null) {
+      // Criar a conversa inicial no Hive
+      _messages.clear();
+      _messages.add(_initialMessage());
+      _saveChat();
+      
+      List chatIds = chatBox.get("chat_ids", defaultValue: []);
+      bool exists = chatIds.any((c) => c["id"] == currentChatId);
+      
+      if (!exists) {
+        chatIds.add({
+          "id": currentChatId,
+          "title": "Nova conversa",
+          "updatedAt": DateTime.now().toIso8601String(),
+        });
+        chatBox.put("chat_ids", chatIds);
+      }
+      setState(() {});
+      return;
+    }
+    if (data != null) {
+      List chatIds = chatBox.get("chat_ids", defaultValue: []);
+      for (var chat in chatIds) {
+        if (chat["id"] == currentChatId && chat["title"] == null) {
+          chat["title"] = "Conversa antiga";
+        }
+      }
+      chatBox.put("chat_ids", chatIds);
+
+      setState(() {
+        _messages.clear();
+        for (var item in data) {
+          _messages.add(
+            ChatMessage(
+              text: item["text"],
+              isUser: item["isUser"],
+              timestamp: DateTime.parse(item["timestamp"]),
+            ),
+          );
+        }
+      });
+    }
+  }
+
+  void _saveChat() {
+    if (!_hiveReady) return;
+
+    final data = _messages.map((msg) {
+      return {
+        "text": msg.text,
+        "isUser": msg.isUser,
+        "timestamp": msg.timestamp.toIso8601String(),
+      };
+  }).toList();
+
+  chatBox.put(currentChatId, data);
+  }
+
+
+  void _deleteChat(String chatIdToDelete) async {
+    if (!_hiveReady) return;
+    
+    List chatIds = chatBox.get("chat_ids", defaultValue: []);
+    
+    // deleta da lista de ids
+    chatIds.removeWhere((c) => c["id"] == chatIdToDelete);
+    await chatBox.put("chat_ids", chatIds);
+    
+    // deleta as mensagens
+    await chatBox.delete(chatIdToDelete);
+    
+    // se o usuário está no chat que foi deletado, fecha o menu e cria um novo chat
+    if (currentChatId == chatIdToDelete) {
+      Navigator.pop(context); 
+      
+      setState(() {
+        currentChatId = DateTime.now().millisecondsSinceEpoch.toString();
+        _messages.clear();
+        _messages.add(_initialMessage());
+        _saveChat();
+        
+        chatIds.add({
+          "id": currentChatId,
+          "title": "Nova conversa",
+          "updatedAt": DateTime.now().toIso8601String(),
+        });
+        chatBox.put("chat_ids", chatIds);
+      });
+    }
+}
+
 
 
   
@@ -351,6 +489,9 @@ Widget _buildBalloonWithArrow(String text, {ArrowDirection direction = ArrowDire
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    if (!_hiveReady){
+      return const Center(child: CircularProgressIndicator());
+    }
     return Scaffold(
       key: _scaffoldKey,
   onDrawerChanged: (isOpened) async {
@@ -446,6 +587,78 @@ Widget _buildBalloonWithArrow(String text, {ArrowDirection direction = ArrowDire
                 ),
               ),
             ),
+
+            ListTile(
+              leading: const Icon(Icons.add),
+              title: Text("Nova conversa"),
+              onTap: () {
+                setState(() {
+                  currentChatId = DateTime.now().millisecondsSinceEpoch.toString();
+                  _messages.clear();
+                  _messages.add(_initialMessage());
+                  _saveChat();
+                  List chatIds = chatBox.get("chat_ids", defaultValue: []);
+                  chatIds.add({
+                    "id": currentChatId,
+                    "title": "Nova conversa",
+                    "updatedAt": DateTime.now().toIso8601String(),});
+                  chatBox.put("chat_ids", chatIds);
+                  });
+                Navigator.pop(context);
+              },
+            ),
+
+            ValueListenableBuilder(
+              valueListenable: chatBox.listenable(),
+              builder: (context, box, _) {
+                List chatIds = List.from(box.get("chat_ids", defaultValue: []));
+                
+                // ordena as conversas de mais recente para a mais antiga
+                chatIds.sort((a, b) {
+                  DateTime da = DateTime.parse(a["updatedAt"]);
+                  DateTime db = DateTime.parse(b["updatedAt"]);
+                  return db.compareTo(da); // mais recente primeiro
+                });
+                
+                if (chatIds.isEmpty) {
+                  return const Padding(
+                    padding: EdgeInsets.all(16),
+                    child: Text("Nenhuma conversa salva"),);
+                }
+                
+                return SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.55,
+                  child: ListView.builder(
+                    itemCount: chatIds.length,
+                    itemBuilder: (context, index) {
+                      String chatId = chatIds[index]["id"];
+                      String title = chatIds[index]["title"];
+                      return ListTile(
+                        leading: const Icon(Icons.chat_bubble_outline),
+                        title: Text(title),
+                        
+                        trailing: IconButton(
+                          icon: const Icon(Icons.delete, color: Colors.black),
+                          onPressed: () async {
+                            _deleteChat(chatId);
+                          },
+                        ),
+                        
+                        onTap: () {
+                          setState(() {
+                            currentChatId = chatId;
+                            _loadCurrentChat();
+                          });
+                          Navigator.pop(context);
+                        },
+                      );
+
+                    },
+                  ),
+                );
+              },
+            ),
+
             
             
             const Expanded(child: SizedBox()),
@@ -488,7 +701,7 @@ Widget _buildBalloonWithArrow(String text, {ArrowDirection direction = ArrowDire
                   ),
               ),
               Positioned(
-                top: 200,
+                top: 300,
                 left: 100,
                 child: _buildBalloonWithArrow(
                     _t("Aqui ficam salvas as suas conversas anteriores","Your previous conversations are saved here"),
