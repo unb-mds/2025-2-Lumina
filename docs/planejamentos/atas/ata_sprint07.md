@@ -36,13 +36,12 @@ Sincronizar o status das atividades da semana (Review), identificar pontos de me
 ---
 
 ### ➡️ Ações / Próximos Passos:
-*Esta é a lista de tarefas definidas para a próxima Sprint, já com os pares definidos.*
 
-- `[Tiago]`: **[Chore]** Configurar o pipeline de CI (Integração Contínua) com GitHub Actions.
-- `[Arthur]`: **[Feature]** Desenvolver o *scraper* (processo de extração de dados) para o portal G1.
-- `[Átila]`: **[Feature]** Desenvolver o *scraper* (processo de extração de dados) para o portal Metrópoles.
-- `[Nathan, João]`: **[Feature]** Implementar a página de perfil de usuário (permitindo mudar o nome) e atualizar o texto introdutório da aplicação. *(Tarefa em par)*
-- `[Cecília]`: **[Study]** Pesquisar e documentar as melhores práticas para testes unitários e testes automatizados aplicáveis ao projeto Lumina.
-- `[Tiago, Cecília]`: **[Fix]** Corrigir o processo de *embedding* (vetorização) dos artigos para otimizar a busca. *(Tarefa em par)*
-- `[Arthur, Nathan]`: **[Feature]** Implementar a funcionalidade de salvar o texto completo dos artigos extraídos no banco de dados. *(Tarefa em par)*
-- `[Todos]`: **[Study]** Estudar os conceitos da metodologia XP, com foco principal em Programação em Par e Desenvolvimento Orientado a Testes (TDD).
+* `[Tiago]`: Configurar o pipeline de CI (Integração Contínua) com GitHub Actions.
+* `[Arthur]`: Desenvolver o *scraper* (processo de extração de dados) para o portal G1.
+* `[Átila]`: Desenvolver o *scraper* (processo de extração de dados) para o portal Metrópoles.
+* `[Nathan, João]`: Implementar a página de perfil de usuário (permitindo mudar o nome) e atualizar o texto introdutório da aplicação. *(Tarefa em par)*
+* `[Cecília]`: Pesquisar e documentar as melhores práticas para testes unitários e testes automatizados aplicáveis ao projeto Lumina.
+* `[Tiago, Cecília]`: Corrigir o processo de *embedding* (vetorização) dos artigos para otimizar a busca. *(Tarefa em par)*
+* `[Arthur, Nathan]`: Implementar a funcionalidade de salvar o texto completo dos artigos extraídos no banco de dados. *(Tarefa em par)*
+* `[Todos]`: Estudar os conceitos da metodologia XP, com foco principal em Programação em Par e Desenvolvimento Orientado a Testes (TDD).
