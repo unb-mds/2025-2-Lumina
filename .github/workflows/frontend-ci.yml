@@ -33,7 +33,8 @@ jobs:
       run: flutter pub get
 
     - name: Criar arquivo .env temporário para testes
-      env: API_BASE_URL:${{ secrets.API_BASE_URL}}
+      env: 
+        API_BASE_URL: ${{ secrets.API_BASE_URL}}
       run: echo "API_BASE_URL=$API_BASE_URL" >> .env
 
     - name:  Rodar Testes
