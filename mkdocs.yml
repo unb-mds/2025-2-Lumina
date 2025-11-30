@@ -98,8 +98,8 @@ theme:
     features:
       - navigation.footer
 
-    logo: assets/logo.png
-    favicon: assets/logo.png
+    logo: assets/logo.jpg
+    favicon: assets/logo.jpg
 
 extra_css:
   - stylesheets/extra.css

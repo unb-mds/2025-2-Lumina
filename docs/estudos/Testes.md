@@ -27,7 +27,9 @@ Existem três tipos principais de testes que podem ser aplicados a um projeto:
 Uma organização mínima para o projeto seria:
 
 * `app/models/article.py`: classe `Article`.
+
 * `tests/test_article.py`: testes unitários do `Article`.
+
 * `pytest.ini`: configuração do pytest.
 
 Exemplo de arquivo `pytest.ini`:
@@ -41,6 +43,7 @@ python_files = test_*.py
 
 ---
 
+
 ## 4. Instalação das dependências
 
 Para instalar pytest e o plugin de cobertura, execute:
@@ -50,6 +53,7 @@ python -m pip install pytest pytest-cov
 ```
 
 ---
+
 
 ## 5. Criando testes unitários para Article
 
@@ -88,10 +92,13 @@ python -m pytest -v --cov=app.models.article --cov-report=term-missing
 ```
 
 * `-v` mostra detalhes dos testes.
+
 * `--cov` calcula a cobertura.
+
 * `--cov-report=term-missing` mostra as linhas do código que não foram testadas.
 
 ---
+
 
 ## 7. Automatizando os testes com GitHub Actions
 
@@ -121,7 +128,9 @@ Dessa forma, todos os testes são executados automaticamente e qualquer erro ou 
 ## 8. Resumo prático
 
 1. Escreva testes unitários usando pytest e dados fictícios.
-2. Use `@pytest.mark.parametrize` para testar múltiplos casos de forma automática.
-3. Meça a cobertura de código com pytest-cov.
-4. Configure CI/CD com GitHub Actions para automatizar os testes em cada push.
 
+2. Use `@pytest.mark.parametrize` para testar múltiplos casos de forma automática.
+
+3. Meça a cobertura de código com pytest-cov.
+
+4. Configure CI/CD com GitHub Actions para automatizar os testes em cada push.

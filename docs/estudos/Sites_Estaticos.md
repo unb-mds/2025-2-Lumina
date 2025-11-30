@@ -12,6 +12,7 @@ Hugo é uma ferramenta que converte arquivos de texto simples, como Markdown, em
 
 Hugo é ideal para sites que precisam ser leves, como sites de documentação, e que tenham uma estrutura base estática.
 
+
 ### 2.1. Como Instalar o Hugo (Windows)
 
 A instalação do Hugo no Windows é simples. Basta abrir o CMD e digitar `winget install Hugo.Hugo.Extended`. Durante a instalação, você precisará concordar com os termos e, em seguida, reiniciar o PowerShell.
@@ -36,10 +37,12 @@ O Hugo utiliza a linguagem Markdown, que se assemelha ao HTML. A sintaxe básica
     ## Subtítulo
     ### Sub-subtítulo
     ```
+
 * **Ênfase (Negrito e Itálico):** Use asteriscos (`*`) ou underscores (`_`) para dar ênfase.
     ```markdown
     Este texto é **negrito** e este é *itálico*.
     ```
+
 * **Listas:** Use `*` ou `-` para listas não ordenadas, e números para listas ordenadas.
     ```markdown
     * Item 1
@@ -49,14 +52,17 @@ O Hugo utiliza a linguagem Markdown, que se assemelha ao HTML. A sintaxe básica
     1. Primeiro item
     2. Segundo item
     ```
+
 * **Links:** Use colchetes para o texto e parênteses para a URL.
     ```markdown
     Este é um [link para o Google](https://www.google.com).
     ```
+
 * **Imagens:** Similar aos links, mas com um ponto de exclamação (`!`) no início.
     ```markdown
     ![Texto alternativo para a imagem](caminho/para/imagem.jpg)
     ```
+
 
 ## 5. Publicando um Site com Hugo no GitHub Pages
 
@@ -65,14 +71,21 @@ Gerar arquivos estáticos com Hugo é muito simples; basta digitar o comando `hu
 Para publicá-lo no GitHub Pages, siga estes passos:
 
 1.  Crie um novo repositório no GitHub.
+
 2.  Configure o Git na sua pasta `public`:
+
     * Inicialize o repositório Git localmente: `git init`.
+
     * Adicione todos os arquivos gerados ao controle de versão: `git add .`.
+
     * Faça o primeiro commit: `git commit -m "Primeira publicação do site com Hugo"`.
+
     * Conecte o repositório local ao seu repositório do GitHub: `git remote add origin https://github.com/seu-nome-de-usuario/seu-nome-de-usuario.github.io.git`.
+
     * Publique os arquivos do seu repositório local para o GitHub: `git push -u origin main`.
 
 Após a conclusão, os arquivos deverão estar disponíveis em seu repositório no GitHub.
+
 
 ## 6. Considerações Finais
 
@@ -80,7 +93,9 @@ A experiência de criar um site estático com Hugo é simples e intuitiva. A fer
 
 O processo de "deploy" (publicação) é muito simples, bastando apenas o comando `hugo`. Embora a ferramenta seja menos estilizada e não ofereça uma estrutura com orientação a objetos como o Flask, ela é extremamente funcional para o que se propõe.
 
+
 ## 7. Referências
 
 * [Guia de Início Rápido do Hugo](https://gohugo.io/getting-started/quick-start/)
+
 * [Product Manager: o que faz, quanto ganha e como se destacar - Alura](https://www.alura.com.br/artigos/product-manager-o-que-faz-quanto-ganha-como-se-destacar)

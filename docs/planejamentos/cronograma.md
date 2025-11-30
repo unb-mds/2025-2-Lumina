@@ -11,11 +11,15 @@ Este documento detalha o planejamento das 15 Sprints do projeto, desde a concep�
 O projeto tem duração prevista de cerca de 3 meses, com entregas semanais.
 
 * **Início:** 27/08/2025 (Sprint 00)
+
 * **Fim:** 05/12/2025 (Sprint 14 - Previsão)
+
 * **Release 1 (MVP):** Sprint 05 (Concluída em 05/10/2025)
+
 * **Release 2 (Versão Final):** Sprint 14
 
 ---
+
 
 ## 🚀 Detalhamento das Sprints
 
@@ -46,23 +50,35 @@ O projeto **Lumina** visa proporcionar uma solução ágil e confiável para o c
 ### 🛠️ Tecnologias Utilizadas:
 
 * **Backend:** Python 3.10+ (FastAPI)
+
 * **Frontend:** Flutter (Dart)
+
 * **Inteligência Artificial:** Google Gemini API, LangChain
+
 * **Banco de Dados:** SQLite (Relacional), ChromaDB (Vetorial)
+
 * **DevOps:** GitHub Actions
+
 * **Design:** Figma
+
 
 ### 📝 Notas:
 
 * A **Sprint 05** marcou a entrega da Release 1, focada na viabilidade técnica e estruturação do MVP.
+
 * A **Sprint 14** marcará a entrega do Produto Final, com foco na qualidade de software, cobertura de testes e documentação completa.
 
 ---
 
+
 ## 👥 Equipe do Projeto
 
 * **SCRUM Master:** Cecília Costa
+
 * **Product Owner:** Arthur Luiz
+
 * **FrontEnd:** João Pedro e Nathan Pontes
+
 * **BackEnd:** Arthur Luiz, Átila Sobral e Tiago Geovane
+
 * **Arquitetura:** Tiago Geovane
