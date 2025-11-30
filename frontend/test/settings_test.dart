@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:frontend/settings.dart'; 
+import 'package:frontend/Settings.dart'; 
 import 'package:flutter/material.dart';
 // Widget auxiliar para criar uma rota na pilha abaixo de ConfiguracoesPage
 class TestWrapper extends StatelessWidget {

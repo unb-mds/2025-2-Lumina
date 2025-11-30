@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:frontend/landing_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:mockito/mockito.dart';
-import 'package:frontend/settings.dart';
+import 'package:frontend/Settings.dart';
 class MockSharedPreferences extends Mock implements SharedPreferences {}
 
 class ChatScreenMock extends StatelessWidget {
