@@ -31,7 +31,6 @@ Sincronizar o status das atividades da semana (Review), identificar pontos de me
 ---
 
 ### ➡️ Ações / Próximos Passos:
-*Esta é a lista de tarefas definidas para a próxima Sprint, já com os pares definidos.*
 
 - `[Nathan]`: Pesquisar como tratar dados de persistência do histórico dos chats no frontend.
 - `[Nathan]`: Pesquisar sobre teste unitário no flutter.
