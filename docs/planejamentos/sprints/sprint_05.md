@@ -1,0 +1,60 @@
+# Relatório da Sprint — Projeto Lumina
+
+## 1. Informações Gerais
+
+- **Sprint:** 05
+- **Duração:** 29/09/2025 a 05/10/2025
+- **Product Owner:** Arthur Luiz Silva Guedes
+- **Scrum Master:** Cecília Costa Rebelo Cunha
+- **Time de Desenvolvimento:** Átila Sobral de Oliveira, João Pedro Ferreira Gomes, Nathan Pontes Romão, Tiago Geovane da Silva Sousa
+
+## 2. Objetivos da Sprint
+
+Sprint focada em aplicar os feedbacks da Release 1, iniciar a implementação do back-end de coleta de dados e otimizar a base de código do front-end.
+
+- Desenvolver a funcionalidade inicial do back-end para coletar dados a partir de uma URL.
+- Refatorar o código do front-end, focando na otimização para Android e na melhoria da qualidade do código.
+- Ajustar os artefatos do projeto (documento de requisitos e protótipo de alta fidelidade) com base no feedback recebido.
+
+## 3. Backlog da Sprint
+
+| Item | Tarefa                                                       | Responsável(eis) | Status                        |
+| :--- | :----------------------------------------------------------- | :--------------- | :---------------------------- |
+| 1    | (Backend) Desenvolver função de coleta de dados via URL      | Tiago            | Parcialmente Concluído (80%)  |
+| 2    | (Doc) Refatorar o documento de requisitos                    | Arthur           | Concluído                     |
+| 3    | (Frontend) Refatorar o código para Android e melhorar comentários | Nathan           | Concluído                     |
+| 4    | (Protótipo) Ajustar o protótipo de alta fidelidade           | João Pedro       | Concluído                     |
+
+## 4. Entregas (Review)
+
+- **Backend (Tiago):** Foi entregue 80% da função de coleta de dados a partir de uma URL. A funcionalidade principal já está operacional.
+- **Documento de Requisitos (Arthur):** O documento foi refatorado para se alinhar com o escopo e o feedback definidos na apresentação da Release 1.
+- **Front-end (Nathan):** O código do front-end foi otimizado, removendo dependências desnecessárias para focar na plataforma Android. A qualidade dos comentários no código foi aprimorada, tornando-o mais limpo e explicativo.
+- **Protótipo de Alta Fidelidade (João):** O protótipo foi ajustado para incorporar todas as alterações solicitadas durante a apresentação da Release 1.
+
+## 5. Métricas da Sprint
+
+- **Velocity (story points concluídos):** Não foram utilizados Story Points.
+- **Burn-down Chart:** Gráfico não disponível.
+- **Qtd. de tarefas concluídas / planejadas:** 3 / 4 (Considerando a tarefa de backend como não totalmente concluída).
+
+## 6. Retrospectiva
+
+### O que funcionou bem
+
+- A equipe foi muito eficaz em aplicar os feedbacks da Release 1, ajustando rapidamente o protótipo e a documentação.
+- O progresso no back-end, atingindo 80% de uma funcionalidade complexa, foi um grande avanço.
+- A refatoração do front-end demonstrou um bom foco em qualidade técnica e otimização.
+
+### O que pode melhorar
+
+- O planejamento de tarefas complexas (como o web crawler) pode ser quebrado em partes menores para garantir a entrega de 100% ao final da sprint.
+- A comunicação sobre dúvidas técnicas (ex: implementação para iOS) deve ser incentivada para que decisões sejam tomadas mais rapidamente.
+
+### Ações de melhoria (Plano para Sprint 06)
+
+- **Continuar o Backend:** Finalizar a lógica do web crawler.
+- **Avançar no Frontend:** Implementar os sliders de menu e continuar o desenvolvimento da tela principal.
+- **Prototipar Novas Áreas:** Iniciar o protótipo da tela de administração.
+- **Pesquisar Novas Features:** Estudar a implementação de transcrição de áudio para texto.
+- **Incentivar a Colaboração:** Promover o conhecimento compartilhado entre as diferentes áreas do projeto.
