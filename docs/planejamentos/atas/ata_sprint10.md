@@ -13,7 +13,7 @@
 ---
 
 ### 🎯 Objetivo(s) da Reunião:
-Sincronizar as atividades, planejar as proximas tarefas e identificar pontos que precisam de mais atenção para o andamento do trabalho
+Sincronizar as atividades, planejar as proximas tarefas e identificar pontos que precisam de mais atenção para o andamento do trabalho.
 
 ---
 
@@ -33,13 +33,14 @@ Sincronizar as atividades, planejar as proximas tarefas e identificar pontos que
 ---
 
 ### ➡️ Ações / Próximos Passos:
-- `[Atila e Arthur]`: criar um endpoint na api para retornar,deletar, artigos do banco de dados (CRUD)
-- `[Tiago]`: colocar um  artigos do banco de dados (CRUD)
-- `[Tiago]`: criar banco de dados vetorial 
-- `[Atila e Arthur]`:planejar como fazer a vetorização dos artigos  
-- `[Nathan]`: testes unitarios pro front 
-- `[Joao]`: fazer a pagina de introdução ser de visualização unica 
-- `[Nathan]`: Refinar o frontend 
-- `[Nathan e Joao]`: Hospedar na playstore 
-- `[Cecilia]`: continuar testes unitarios pro backend 
+- `[Atila e Arthur]`: criar um endpoint na api para retornar,deletar, artigos do banco de dados (CRUD).
+- `[Tiago]`: colocar um  artigos do banco de dados (CRUD).
+- `[Tiago]`: criar banco de dados vetorial.
+- `[Atila e Arthur]`:planejar como fazer a vetorização dos artigos.  
+- `[Nathan]`: testes unitarios pro front. 
+- `[Joao]`: fazer a pagina de introdução ser de visualização unica. 
+- `[Nathan]`: Refinar o frontend. 
+- `[Nathan e Joao]`: Hospedar na playstore. 
+- `[Cecilia]`: continuar testes unitarios pro backend.
 - `[Cecilia e grupo do back]`: Planejar e Aprimorar a documentação. 
+
