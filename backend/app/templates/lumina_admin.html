@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="lumina-admin-panel">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <h2>Sistema de Administração de Conteúdo</h2>
+        <a href="{{ url_for('admin_logout') }}" class="btn cancel" style="padding: 5px 15px; font-size: 0.9rem;">Sair</a>
+    </div>
+
+    <p class="welcome-text">Bem-vindo, {{ usuario_nome }}. Aqui você pode administrar os artigos e jornais exibidos no sistema Lumina.</p>
+
+    <form class="search-form" method="GET" action="{{ url_for('admin_dashboard') }}">
+        <input type="text" name="search" placeholder="Buscar por título ou fonte..." value="{{ search_term if search_term else '' }}">
+        <button type="submit" class="btn">Buscar</button>
+        {% if search_term %}
+        <a href="{{ url_for('admin_dashboard') }}" class="btn cancel">Limpar Busca</a>
+        {% endif %}
+    </form>
+
+    <div class="add-article-section">
+        <h3>Adicionar Novo Artigo por Link</h3>
+        <form class="formulario" method="POST" action="{{ url_for('admin_add_article') }}">
+            <label for="link_artigo">Link do Artigo Original:</label>
+            <input type="url" id="link_artigo" name="link_artigo" placeholder="Ex: https://g1.globo.com/..." required>
+            <button type="submit" class="btn btn-add-source">
+                <span class="emoji">➕</span> Adicionar Fonte ao Banco de Dados
+            </button>
+        </form>
+    </div>
+
+    <h3>Lista de Artigos Armazenados (Total: {{ artigos|length }})</h3>
+    
+    <div class="table-container">
+        <table class="artigos-table">
+            <thead>
+                <tr>
+                    <th style="width: 5%;">ID</th>
+                    <th style="width: 35%;">Matéria</th>
+                    <th style="width: 35%;">Link Original / Fonte</th>
+                    <th style="width: 15%;">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for artigo in artigos %}
+                <tr>
+                    <td>{{ artigo.id }}</td>
+                    <td class="article-title">{{ artigo.title }}</td>
+                    <td class="article-link-source">
+                        <a href="{{ artigo.url }}" target="_blank" class="link-original">{{ artigo.url }}</a>
+                        <br>
+                        <span class="source-text" style="color: #666; font-size: 0.9em;">
+                            <strong>[{{ artigo.source_label }}]</strong> - (Fonte: {{ artigo.author }})
+                        </span>
+                    </td>
+                    <td class="actions-cell">
+                        <a href="/admin/article/delete/{{ artigo.source_db }}/{{ artigo.id }}" 
+                           class="btn-delete-article" 
+                           onclick="return confirm('Tem certeza que deseja remover o artigo: {{ artigo.title }}?')"
+                           title="Excluir Matéria">
+                           <span class="emoji">❌</span> Excluir
+                        </a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="4" style="text-align: center; padding: 20px;">
+                        Nenhum artigo encontrado no banco de dados. <br>
+                        <small>Execute o crawler ou adicione um link acima.</small>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</div>
+{% endblock %}  

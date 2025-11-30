@@ -189,7 +189,7 @@ def test_update_article_success(client, mock_article, mocker):
     payload = {"title": "Novo Título", "author": "Novo Autor"}
     
     # Criamos uma cópia do mock e aplicamos a mudança
-    updated_article = mock_article.copy(update=payload)
+    updated_article = mock_article.model_copy(update=payload)
 
     mock_db = MagicMock()
     mock_db.update_article.return_value = updated_article

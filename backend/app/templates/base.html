@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+
+  <meta charset="UTF-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Lumina Admin Page</title>
+
+  <link rel="stylesheet" href="/static/css/style.css">
+
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <header>
+
+    <div class="header-content-lumina">
+
+        <a href="/admin/dashboard"><h1>📰 Lumina Admin Page</h1></a>
+
+    </div>
+
+  </header>
+
+
+
+  <main>
+
+    <div class="container">
+
+     
+
+      {% block content %}
+
+      {% endblock %}
+
+    </div>
+
+  </main>
+
+
+
+  <footer>
+
+    <p>&copy; {{ now.year }} Projeto Lumina. Todos os direitos reservados.</p>
+
+  </footer>
+
+  <script src="/static/js/script.js"></script>
+
+</body>
+
+</html>

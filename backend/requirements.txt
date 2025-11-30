@@ -1,15 +1,16 @@
-
 # --- Core Web Framework ---
 gunicorn>=21.2.0
 uvicorn[standard]>=0.24.0
 fastapi>=0.104.0
+jinja2
+python-multipart
 
 # --- Banco de Dados ---
 sqlmodel
 aiosqlite
 chromadb
 
-# --- Web Crawler () ---
+# --- Web Crawler ---
 requests
 beautifulsoup4
 lxml
@@ -26,12 +27,6 @@ python-dotenv
 pydantic
 
 # --- Desenvolvimento & Testes ---
-pytest
-
-# --- Testes de implementação Spliter ---
-langchain-core
-langchain-text-splitters
-
-# --- Testes de implementação ---
 pytest>=8.4.0
-pytest_mock
+pytest-mock
+httpx

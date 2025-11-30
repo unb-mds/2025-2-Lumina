@@ -11,33 +11,47 @@ from app.services.scraping_manager import ScrapingError, ScrapingManager
 
 # --- NOVAS IMPORTAÇÕES PARA O CRUD ---
 from app.db.articledb import ArticleDB
-from app.models.article import Article  # Importa o *novo* modelo Pydantic
+from app.models.article import Article  # Importa o modelo Pydantic
 
 from dotenv import load_dotenv
 from fastapi import Depends, FastAPI, HTTPException, status
 from fastapi.responses import JSONResponse
+from fastapi.staticfiles import StaticFiles # Necessário para o CSS/JS do Admin
 from pydantic import BaseModel, HttpUrl
+
+# Importa o roteador de administração
+from app.routers.admin import router as admin_router
 
 load_dotenv()
 
 # --- Configuração de API e Modelos ---
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 if not GOOGLE_API_KEY:
-    raise ValueError("A variável de ambiente GOOGLE_API_KEY não foi definida.")
+    # Apenas um aviso no log para não impedir que o servidor suba
+    print("AVISO: A variável de ambiente GOOGLE_API_KEY não foi definida. IA não funcionará.")
 
 
 # --- Inicialização da Aplicação FastAPI ---
 app = FastAPI(
     title="Lumina API",
-    description="API para processamento e sumarização de notícias.",
+    description="API para processamento, sumarização de notícias e gerenciamento de conteúdo.",
     version="1.0.0",
 )
+
+# --- Configuração de Arquivos Estáticos e Admin (NECESSÁRIO PARA O SITE FUNCIONAR) ---
+# Monta a pasta static para servir CSS e JS
+app.mount("/static", StaticFiles(directory="app/static"), name="static")
+
+# Inclui as rotas do painel administrativo
+app.include_router(admin_router)
 
 
 # --- Factories Singleton com Cache ---
 @lru_cache
 def get_llm() -> GeminiModel:
     """Instância única do modelo LLM."""
+    if not GOOGLE_API_KEY:
+        raise ValueError("A variável de ambiente GOOGLE_API_KEY é obrigatória para usar o LLM.")
     return GeminiModel(api_key=GOOGLE_API_KEY)
 
 
@@ -96,10 +110,10 @@ def handle_chat(
         response = chat_service.generate_response(request.query)
         return ChatResponse(response=response)
 
-    except Exception:
+    except Exception as e:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="Erro inesperado ao gerar a resposta.",
+            detail=f"Erro inesperado ao gerar a resposta: {str(e)}",
         )
 
 
@@ -108,13 +122,13 @@ def prompt_response(prompt: str):
     """
     Endpoint simples para enviar prompts diretos ao modelo (sem RAG).
     """
-    llm = get_llm()
     try:
+        llm = get_llm()
         return {"response": llm.chat(prompt)}
-    except Exception:
+    except Exception as e:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="Erro ao processar o prompt.",
+            detail=f"Erro ao processar o prompt: {str(e)}",
         )
 
 # --- Endpoints CRUD de Artigos ---
@@ -129,8 +143,6 @@ def add_article(request: AddArticleRequest):
     """
     (CREATE) Recebe uma URL, faz scraping, processa e salva no banco.
     """
-    # NOTA: Assume-se que o ScrapingManager agora está
-    # usando o PageScraper corrigido (com o Downloader).
     manager = ScrapingManager()
 
     try:
@@ -167,11 +179,11 @@ def add_article(request: AddArticleRequest):
             detail=f"Falha ao processar o artigo: {e}",
         )
 
-    except Exception:
+    except Exception as e:
         # Erro inesperado
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="Erro inesperado ao adicionar o artigo.",
+            detail=f"Erro inesperado ao adicionar o artigo: {str(e)}",
         )
 
 
@@ -185,6 +197,7 @@ def get_all_articles():
     """
     (READ-All) Retorna todos os artigos salvos no banco de dados SQL.
     """
+    
     db = ArticleDB()
     try:
         articles = db.get_all_articles()
@@ -304,4 +317,4 @@ def delete_article(article_id: int):
 # --- Endpoint Raiz ---
 @app.get("/")
 def root():
-    return {"message": "The API is working!"}
+    return {"message": "The API is working!", "admin_access": "/admin"}

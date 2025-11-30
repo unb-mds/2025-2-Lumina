@@ -1,0 +1,607 @@
+/* Estilos Gerais */
+
+body {
+
+  font-family: Sans-serif;
+
+  background-color: #fef7f0;
+
+  color: #444;
+
+  margin: 0;
+
+  padding: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  min-height: 100vh;
+
+}
+
+
+
+main {
+
+  display: flex;
+
+  justify-content: center;
+
+  flex-grow: 1;
+
+  padding: 20px;
+
+}
+
+
+
+header {
+
+  background-color: #454545;
+
+  color: #fff;
+
+  padding: 10px;
+
+  text-align: center;
+
+}
+
+
+
+
+
+h2 {
+
+  color: #454545;
+
+}
+
+
+
+table {
+
+  width: 100%;
+
+  border-collapse: collapse;
+
+  background-color: #fff;
+
+  border: 2px solid #ccc;
+
+  border-radius: 8px;
+
+  overflow: hidden;
+
+}
+
+
+
+th, td {
+
+    padding: 10px;
+
+    text-align: left;
+
+    border-bottom: 1px solid #e0e0e0;
+
+}
+
+
+
+tr:hover {
+
+    background-color: #f5f5f5;
+
+}
+
+
+
+.header-content-lumina {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  flex-wrap: wrap;
+
+}
+
+
+
+header h1 {
+
+    margin: 0;
+
+    font-size: 2rem;
+
+    flex: none;
+
+    text-align: center;
+
+    font-weight: 700;
+
+    font-family: 'Fredoka', sans-serif;
+
+}
+
+
+
+header a {
+
+  text-decoration: none;
+
+  color: white;
+
+  font-weight: bold;
+
+  font-weight: 400;
+
+  font-size: 1.2rem;
+
+}
+
+
+
+.container {
+
+  max-width: 960px;
+
+  width: 100%;
+
+  padding: 20px;
+
+  box-sizing: border-box;
+
+
+
+  margin: 20px auto;
+
+  background-color: #fff;
+
+  border-radius: 8px;
+
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+
+}
+
+
+
+.formulario {
+
+  background-color: #f8f8f8;
+
+  padding: 20px;
+
+  border-radius: 12px;
+
+  max-width: 500px;
+
+  margin: 0 auto;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 12px;
+
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+
+}
+
+
+
+.formulario input {
+
+  padding: 8px;
+
+  border: 2px solid #ccc;
+
+  border-radius: 8px;
+
+  font-size: 16px;
+
+}
+
+
+
+.btn {
+
+  display: inline-block;
+
+  padding: 8px 15px;
+
+  background-color: #454545;
+
+  color: white;
+
+  border-radius: 10px;
+
+  text-decoration: none;
+
+  font-weight: bold;
+
+  margin-bottom: 10px;
+
+  border: 0px;
+
+  transition: all 0.3s ease;
+
+}
+
+
+
+.btn:hover {
+
+  background-color: #5a5a5a;
+
+  transform: translateY(-1px);
+
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+
+}
+
+
+
+.btn.cancel {
+
+    background-color: #525252;
+
+    margin-left: 0px;
+
+}
+
+
+
+.btn.cancel:hover {
+
+  background-color: #616161;
+
+}
+
+
+
+footer {
+
+    background-color: #e0e0e0;
+
+    color: #666;
+
+    text-align: center;
+
+    padding: 15px 0;
+
+    font-size: 0.9em;
+
+    border-top: 1px solid #ccc;
+
+}
+
+
+
+/* Melhorias nos formulários */
+
+.formulario input:focus {
+
+    outline: none;
+
+    border-color: #454545;
+
+    box-shadow: 0 0 5px rgba(69, 69, 69, 0.3);
+
+}
+
+
+
+.formulario select {
+
+    padding: 8px;
+
+    border: 2px solid #ccc;
+
+    border-radius: 8px;
+
+    font-size: 16px;
+
+    background-color: white;
+
+}
+
+
+
+.formulario select:focus {
+
+    outline: none;
+
+    border-color: #454545;
+
+    box-shadow: 0 0 5px rgba(69, 69, 69, 0.3);
+
+}
+
+
+
+.add-article-section {
+
+    background-color: #f0fff0;
+
+    padding: 20px;
+
+    border-radius: 12px;
+
+    margin-bottom: 30px;
+
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+
+}
+
+
+
+.add-article-section h3 {
+
+    color: #28a745;
+
+    margin-top: 0;
+
+    margin-bottom: 15px;
+
+}
+
+
+
+.formulario input[type="url"] {
+
+    width: 100%;
+
+    margin-bottom: 15px;
+
+    box-sizing: border-box;
+
+}
+
+
+
+.btn-add-source {
+
+    background-color: #28a745;
+
+}
+
+
+
+.btn-add-source:hover {
+
+    background-color: #218838;
+
+}
+
+
+
+.search-form {
+
+    display: flex;
+
+    gap: 10px;
+
+    margin-bottom: 30px;
+
+    padding: 15px;
+
+    border: 1px solid #e0e0e0;
+
+    border-radius: 8px;
+
+    background-color: #fff;
+
+    box-shadow: 0 0 5px rgba(0,0,0,0.05);
+
+}
+
+
+
+.search-form input[type="text"] {
+
+    flex-grow: 1;
+
+    padding: 10px;
+
+    border: 2px solid #ccc;
+
+    border-radius: 8px;
+
+    font-size: 16px;
+
+    box-sizing: border-box;
+
+}
+
+
+
+.search-form input[type="text"]:focus {
+
+    outline: none;
+
+    border-color: #454545;
+
+    box-shadow: 0 0 5px rgba(69, 69, 69, 0.3);
+
+}
+
+
+
+.btn-delete-article {
+
+    color: #dc3545;
+
+    padding: 5px;
+
+    border-radius: 0;
+
+    font-size: 0.8em;
+
+    display: inline-flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    background: none;
+
+    border: none;
+
+}
+
+
+
+.btn-delete-article:hover {
+
+    color: #c82333;
+
+    transform: none;
+
+    box-shadow: none;
+
+    background-color: transparent;
+
+}
+
+
+
+.btn-delete-article .emoji {
+
+    font-size: 1.2em;
+
+    line-height: 1;
+
+}
+
+.hero, .about-us, .features, .developers {
+
+    display: none;
+
+}
+
+.login-container {
+
+  max-width: 400px;
+
+  margin: 50px auto;
+
+  padding: 30px;
+
+  background-color: #fefefe;
+
+  border-radius: 12px;
+
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+
+  text-align: center;
+
+}
+
+
+
+.login-container h2 {
+
+  color: #454545;
+
+  margin-bottom: 25px;
+
+  font-size: 1.8em;
+
+}
+
+
+
+.login-form input[type="password"] {
+
+  width: calc(100% - 28px); /* Ajuste fino para padding */
+
+  padding: 12px;
+
+  margin-bottom: 20px;
+
+  border: 2px solid #ccc;
+
+  border-radius: 8px;
+
+  font-size: 1em;
+
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+}
+
+
+
+.login-form input[type="password"]:focus {
+
+  border-color: #454545;
+
+  box-shadow: 0 0 8px rgba(69, 69, 69, 0.2);
+
+  outline: none;
+
+}
+
+
+
+.login-form button {
+
+  width: 100%;
+
+  padding: 12px;
+
+  background-color: #454545;
+
+  color: white;
+
+  border: none;
+
+  border-radius: 8px;
+
+  font-size: 1.1em;
+
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition: background-color 0.3s ease, transform 0.2s ease;
+
+}
+
+
+
+.login-form button:hover {
+
+  background-color: #5a5a5a;
+
+  transform: translateY(-2px);
+
+}
+
+
+
+.error-message {
+
+  color: #dc3545;
+
+  background-color: #f8d7da;
+
+  border: 1px solid #f5c6cb;
+
+  padding: 10px;
+
+  border-radius: 8px;
+
+  margin-top: 20px;
+
+  font-weight: bold;
+
+}

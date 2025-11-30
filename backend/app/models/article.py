@@ -20,6 +20,9 @@ class Article(BaseModel):
     vectorized_at: Optional[datetime] = Field(default=None)
     vector_db_id: Optional[str] = Field(default=None)
     
-    class Config:
-        # Permite que o Pydantic funcione bem com objetos de banco de dados
-        orm_mode = True
+    # --- Campo Para o Admin Unificado ---
+    source_db: Optional[str] = Field(default=None)    # Ex: "articles.db"
+    source_label: Optional[str] = Field(default=None) # Ex: "G1"
+
+    # Configuração para Pydantic V2
+    model_config = ConfigDict(from_attributes=True)
