@@ -42,7 +42,6 @@ Alinhar as últimas entregas do projeto, revisar o progresso técnico individual
 ---
 
 ### ➡️ Ações / Próximos Passos (Planejamento Sprint 13):
-*Use `[x]` para marcar o que for concluído.*
 
 **Documentação e Repositório:**
 * `[Cecília]`: Melhorar e estruturar o README principal do projeto.

@@ -31,14 +31,13 @@ Sincronizar o status das atividades da semana (Review), identificar pontos de me
 ---
 
 ### ➡️ Ações / Próximos Passos:
-*Esta é a lista de tarefas definidas para a próxima Sprint, já com os pares definidos.*
 
 - `[Nathan]`: Pesquisar como tratar dados de persistência do histórico dos chats no frontend.
 - `[Nathan]`: Pesquisar sobre teste unitário no flutter.
 - `[João]`: Implementar o tutorial no app.
 - `[Cecília]`: Continuar o desenvolvenvimento dos testes unitarios.
 - `[Tiago]`: Pesquisar como realizar o *CronJob* de rodar o webcrawler e implementá-lo.
-- `[Arthur, Átila]`: Analisar e implementar o webcrawler do Metrópoles. *(Tarefa em par)*
-- `[Arthur, Átila]`: Implementar o Splitter. *(Tarefa em par)*
-- `[Arthur, Átila]`: Implementar o Embedder. *(Tarefa em par)*
+- `[Arthur, Átila]`: Analisar e implementar o webcrawler do Metrópoles. 
+- `[Arthur, Átila]`: Implementar o Splitter. 
+- `[Arthur, Átila]`: Implementar o Embedder. 
 - `[Tiago]`: Implementar o Banco de dados Vetorial.

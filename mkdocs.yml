@@ -12,8 +12,8 @@ nav:
       - Requisitos: requisitos/Requisitos.md
       - Story Map: requisitos/StoryMap.md
   - Estudos:
-      - Arquitetura de sistemas: estudos/ArquiteturaDeSistemas.md
-      - Boas práticas de documentação: estudos/BoasPraticasDeDocumentacao.md
+      - Arquitetura de sistemas: estudos/Arquitetura_de_Sistemas.md
+      - Boas práticas de documentação: estudos/Boas_Praticas_de_Documentacao.md
       - Definição de produto: estudos/Definição_de_Produto.md
       - Arquitetura de agentes de IA: estudos/Estudo sobre Arquitetura de Agentes de IA.md
       - Como hospedar um app na Play Store: estudos/Estudo sobre como hospedar um app na Play Store.md
