@@ -22,7 +22,7 @@ def test_admin_login_success():
     response = client.post(
         "/admin/login", 
         data={"password": ADMIN_PASSWORD},
-        follow_redirects=False # Não segue o redirect para verificarmos o status 302
+        follow_redirects=False 
     )
     assert response.status_code == 302
     assert "/admin/dashboard" in response.headers["location"]
@@ -40,7 +40,6 @@ def test_admin_login_failure():
 def test_admin_logout():
     """Testa se o logout remove o cookie."""
     client.post("/admin/login", data={"password": ADMIN_PASSWORD})
-    
     response = client.get("/admin/logout", follow_redirects=False)
     assert response.status_code == 302
     assert "/admin" in response.headers["location"]
@@ -55,18 +54,26 @@ def test_dashboard_access_denied_without_cookie():
     assert "/admin" in response.headers["location"]
 
 @patch("app.routers.admin.ArticleDB")
-def test_dashboard_content_render(MockArticleDB):
+def test_dashboard_content_and_stats(MockArticleDB):
     """
-    Acessa o dashboard logado e verifica se os dados do banco 
-    estão sendo exibidos na tela HTML.
+    Testa se o dashboard exibe:
+    1. A lista de artigos.
+    2. Os Cards de Estatística (KPIs).
     """
     # Configura o Mock do Banco
     mock_instance = MockArticleDB.return_value
     
-    # Simula dois artigos retornados pelo get_all_articles
-    mock_instance.get_all_articles.return_value = [
-        MagicMock(id=1, title="Notícia Fake G1", url="http://g1.com/1", author="G1 Bot"),
-        MagicMock(id=2, title="Notícia Fake Metro", url="http://metro.com/2", author="Metro Bot")
+    # O admin.py chama o banco duas vezes (uma para G1, outra para Metrópoles)
+    # Vamos simular que o primeiro banco retorna 2 artigos e o segundo retorna 1
+    # Total esperado: 3
+    mock_instance.get_all_articles.side_effect = [
+        [
+            MagicMock(id=1, title="Notícia G1 A", url="http://g1.com/1", author="Bot G1"),
+            MagicMock(id=2, title="Notícia G1 B", url="http://g1.com/2", author="Bot G1")
+        ],
+        [
+            MagicMock(id=3, title="Notícia Metro", url="http://metro.com/3", author="Bot Metro")
+        ]
     ]
     
     # Loga manualmente
@@ -75,12 +82,23 @@ def test_dashboard_content_render(MockArticleDB):
     # Faz a requisição
     response = client.get("/admin/dashboard")
 
-    # Asserções
+    # Asserções de Status
     assert response.status_code == 200
-    assert "Notícia Fake G1" in response.text
-    assert "Notícia Fake Metro" in response.text
-    # Como o dashboard chama o banco duas vezes (uma pra cada DB), verificamos se foi chamado
-    assert mock_instance.get_all_articles.call_count >= 1
+    
+    # Asserções de Conteúdo (Tabela)
+    assert "Notícia G1 A" in response.text
+    assert "Notícia Metro" in response.text
+    
+    # Asserções dos Novos Cards (Visual Check)
+    assert "Total de Artigos" in response.text
+    assert "Fonte: G1" in response.text
+    assert "Fonte: Metrópoles" in response.text
+    
+    # Verifica se os números dos cards estão corretos (2 do G1 + 1 do Metro = 3 Total)
+    # O HTML deve conter os números soltos dentro das tags <p>
+    assert ">3</p>" in response.text # Total
+    assert ">2</p>" in response.text # G1
+    assert ">1</p>" in response.text # Metro
 
 # --- Testes de Ações (Adicionar/Remover) ---
 
@@ -108,12 +126,13 @@ def test_admin_delete_article_flow(MockDB):
     
     client.cookies.set("admin_logged_in", "true")
 
-    # --- CORREÇÃO AQUI: Usar a nova rota com source_db ---
     # Simulamos deletar do banco 'articles.db' o ID 50
     response = client.get(
         "/admin/article/delete/articles.db/50", 
         follow_redirects=False
     )
 
-    assert response.status_code == 302 # Deve redirecionar para atualizar a página
+    assert response.status_code == 302 # Deve redirecionar
+    # Verifica se instanciou o banco com o nome certo e chamou delete
+    MockDB.assert_called_with(db_name="articles.db")
     mock_instance.delete_article.assert_called_with(50)

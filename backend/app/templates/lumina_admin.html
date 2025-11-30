@@ -2,12 +2,39 @@
 
 {% block content %}
 <div class="lumina-admin-panel">
+    
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
         <h2>Sistema de Administração de Conteúdo</h2>
         <a href="{{ url_for('admin_logout') }}" class="btn cancel" style="padding: 5px 15px; font-size: 0.9rem;">Sair</a>
     </div>
 
-    <p class="welcome-text">Bem-vindo, {{ usuario_nome }}. Aqui você pode administrar os artigos e jornais exibidos no sistema Lumina.</p>
+    <p class="welcome-text">Bem-vindo, {{ usuario_nome }}. Aqui está o resumo do sistema:</p>
+
+    <div class="stats-container">
+        <div class="stat-card card-total">
+            <div class="stat-icon">📚</div>
+            <div class="stat-info">
+                <h4>Total de Artigos</h4>
+                <p>{{ stats.total }}</p>
+            </div>
+        </div>
+
+        <div class="stat-card card-g1">
+            <div class="stat-icon">🔴</div>
+            <div class="stat-info">
+                <h4>Fonte: G1</h4>
+                <p>{{ stats.g1 }}</p>
+            </div>
+        </div>
+
+        <div class="stat-card card-metro">
+            <div class="stat-icon">🔵</div>
+            <div class="stat-info">
+                <h4>Fonte: Metrópoles</h4>
+                <p>{{ stats.metro }}</p>
+            </div>
+        </div>
+    </div>
 
     <form class="search-form" method="GET" action="{{ url_for('admin_dashboard') }}">
         <input type="text" name="search" placeholder="Buscar por título ou fonte..." value="{{ search_term if search_term else '' }}">
@@ -28,8 +55,6 @@
         </form>
     </div>
 
-<h3>Lista de Artigos Armazenados (Total: {{ artigos|length }})</h3>
-    
     <div class="table-wrapper">
         <table class="artigos-table">
             <thead>
@@ -74,11 +99,13 @@
                 <tr>
                     <td colspan="4" style="text-align: center; padding: 40px;">
                         <span style="font-size: 2em;">📭</span><br>
-                        Nenhum artigo encontrado nos bancos de dados.<br>
-                        <small style="color: #666;">Execute o crawler ou adicione um link acima.</small>
+                        Nenhum artigo encontrado com esse filtro.<br>
                     </td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
+
+</div>
+{% endblock %}

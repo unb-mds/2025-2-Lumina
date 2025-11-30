@@ -30,3 +30,6 @@ pydantic
 pytest>=8.4.0
 pytest-mock
 httpx
+
+# --- Testes E2E (150 MB) ---
+pytest-playwright
