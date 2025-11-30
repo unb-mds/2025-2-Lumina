@@ -23,22 +23,35 @@ nav:
       - Sites estáticos: estudos/Estudo_SitesEstaticos.md
       - RAG e aplicações: estudos/EstudoRAG_e _Aplicações.md
       - Flutter e Dart: estudos/Flutter e Dart.md
+      - Análise de Métricas Ágeis no GitHub: estudos/Ferramentas_Desempenho.md
       - Git e GitHub: estudos/Git_e_GitHub.md
       - GitHub Insights: estudos/GitHubInsights.md
       - Métricas de OpenSource: estudos/MetricasdeOpenSouce.md
+      - Persistência de dados em Flutter: estudos/Persistencia de dados (flutter).md
       - Requisitos: estudos/Requisitos.md
+      - Testes: estudos/Estudo_Testes.md
+      - Teste unitário em Flutter: estudos/Teste unitário em flutter.md
       - Tecnologias Backend: estudos/Tecnologias_Backend.md
       - Tecnologias Frontend: estudos/Tecnologias_Frontend.md
   - Planejamento:
-      - Sprints:
+       - Sprints:
           - Sprint 00: planejamentos/sprints/sprint_00.md
           - Sprint 01: planejamentos/sprints/sprint_01.md
           - Sprint 02: planejamentos/sprints/sprint_02.md
-  - Atas:
-        - Ata Sprint 00: planejamentos/atas/ata_Sprint00.md
-        - Ata Sprint 01: planejamentos/atas/ata_Sprint01.md
-        - Ata Sprint 02: planejamentos/atas/ata_Sprint02.md
-        - Ata Sprint 03: planejamentos/atas/ata_Sprint03.md
+       - Atas:
+          - Ata Sprint 00: planejamentos/atas/ata_sprint00.md
+          - Ata Sprint 01: planejamentos/atas/ata_sprint01.md
+          - Ata Sprint 02: planejamentos/atas/ata_sprint02.md
+          - Ata Sprint 03: planejamentos/atas/ata_sprint03.md
+          - Ata Sprint 04: planejamentos/atas/ata_sprint04.md
+          - Ata Sprint 05: planejamentos/atas/ata_sprint05.md
+          - Ata Sprint 06: planejamentos/atas/ata_sprint06.md
+          - Ata Sprint 07: planejamentos/atas/ata_sprint07.md
+          - Ata Sprint 08: planejamentos/atas/ata_sprint08.md
+          - Ata Sprint 09: planejamentos/atas/ata_sprint09.md
+          - Ata Sprint 10: planejamentos/atas/ata_sprint10.md
+          - Ata Sprint 11: planejamentos/atas/ata_sprint11.md
+          - Ata Sprint 12: planejamentos/atas/ata_sprint12.md
 
 site_url: https://mydomain.org/mysite
 

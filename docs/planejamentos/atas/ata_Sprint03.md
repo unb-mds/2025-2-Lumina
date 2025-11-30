@@ -1,4 +1,4 @@
-### **Ata de Reunião - Squad 07 (Sprint 03)**
+### **Ata de Reunião - [Nome do Projeto ou Squad]**
 
 **Data:** `22/09/2025`
 

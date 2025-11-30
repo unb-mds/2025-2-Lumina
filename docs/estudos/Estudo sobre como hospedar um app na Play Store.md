@@ -77,9 +77,9 @@ Após configurar tudo, a Google fará uma análise do aplicativo para garantir q
 
 ### Referências
 
-[Create and set up your app - Play Console Help](https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://support.google.com/googleplay/android-developer/answer/9859152%3Fhl%3Den&ved=2ahUKEwi1w7be3tiPAxVjILkGHfZCEeoQFnoECCMQAQ&usg=AOvVaw15kvOz88ux_SvKYA3y7oTy)
+Create and set up your app - Play Console Help - https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://support.google.com/googleplay/android-developer/answer/9859152%3Fhl%3Den&ved=2ahUKEwi1w7be3tiPAxVjILkGHfZCEeoQFnoECCMQAQ&usg=AOvVaw15kvOz88ux_SvKYA3y7oTy
 
-[What's the difference between AABs and APKs](https://developer.android.com/guide/app-bundle/faq?hl=pt-br#:~:text=Unity%2C%20and%20Unreal.-,What's%20the%20difference%20between%20AABs%20and%20APKs?,can%20be%20installed%20on%20devices.)
+What's the difference between AABs and APKs? - https://developer.android.com/guide/app-bundle/faq?hl=pt-br#:~:text=Unity%2C%20and%20Unreal.-,What's%20the%20difference%20between%20AABs%20and%20APKs?,can%20be%20installed%20on%20devices.
 
 
-[Publish your app | Android Studio](https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://developer.android.com/studio/publish&ved=2ahUKEwi1w7be3tiPAxVjILkGHfZCEeoQFnoECF8QAQ&usg=AOvVaw0QvZbEygpJ_BkJ4Mxu7_8l)
+Publish your app | Android Studio - https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://developer.android.com/studio/publish&ved=2ahUKEwi1w7be3tiPAxVjILkGHfZCEeoQFnoECF8QAQ&usg=AOvVaw0QvZbEygpJ_BkJ4Mxu7_8l

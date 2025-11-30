@@ -1,4 +1,4 @@
-### **Ata de Reunião - Squad 07 (Sprint 01)**
+### **Ata de Reunião - Squad 07**
 
 **Data:** `08/09/2025`
 
