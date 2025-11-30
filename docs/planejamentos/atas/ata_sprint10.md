@@ -13,12 +13,13 @@
 ---
 
 ### 🎯 Objetivo(s) da Reunião:
- Sincronizar as atividades, planejar as proximas tarefas e identificar pontos que precisam de mais atenção para o andamento do trabalho
+Sincronizar as atividades, planejar as proximas tarefas e identificar pontos que precisam de mais atenção para o andamento do trabalho
+
 ---
 
 ### 📝 Pautas e Definições:
 
-* **Pauta 1: Review**
+**Pauta 1: Review**
  * **Definição**:Apresentado o progresso das tarefas por cada membro da equipe:
     * **Atila e arthur**: Implementaram o Webcrawler do Metropole. Implementaram o embedder e o splitter.
     * **Cecilia**: Começou a configuração dos testes unitários para o backend	
