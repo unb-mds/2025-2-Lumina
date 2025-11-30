@@ -14,3 +14,7 @@
 ## Componentes
 
 ![Diagrama de Componentes](diagrama-de-componentes.png)
+
+## Classes
+
+![Diagrama de Classes](diagrama-de-classes.png)
