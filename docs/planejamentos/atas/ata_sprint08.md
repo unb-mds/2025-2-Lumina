@@ -35,10 +35,10 @@ Sincronizar o status das atividades da semana (Review), identificar pontos de me
 
 ### ➡️ Ações / Próximos Passos:
 
-- Trabalhar no spider para puxar os links pro scraper [Atila e Arthur e Tiago]
-- Refatorar o codigo dos scrapers para adotar o padrao do código [Atila e Arthur]
-- Criar persistencia nas opçoes de configuração do usuario no frontend localmente [Nathan e Joao]
-- Criar testes unitarios para o backend [Cecilia]
-- Pesquisar como tratar dados de persistencia do historico dos chats no frontend [Nathan e Joao]
-- Criar/Organizar um banco de dados para receber os dados minerados do webcrawler [Tiago]
-- Pesquisar sobre testes unitários no frontend E2E [Nathan e Joao]
+* `[Atila e Arthur e Tiago]`: Trabalhar no spider para puxar os links pro scraper
+* `[Atila e Arthur]`Refatorar o codigo dos scrapers para adotar o padrao do código 
+* `[Nathan e Joao]`Criar persistencia nas opçoes de configuração do usuario no frontend localmente 
+* `[Cecilia]`Criar testes unitarios para o backend 
+* `[Nathan e Joao]`Pesquisar como tratar dados de persistencia do historico dos chats no frontend 
+* `[Tiago]`Criar/Organizar um banco de dados para receber os dados minerados do webcrawler 
+* `[Nathan e Joao]`Pesquisar sobre testes unitários no frontend E2E 
