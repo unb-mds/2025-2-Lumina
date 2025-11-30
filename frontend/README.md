@@ -42,7 +42,7 @@ Certifique-se de que os seguintes requisitos estão instalados no seu sistema:
 ├── `test`/ Pasta para os testes do front    
 └── `pubspec.yaml`/Arquivo dos requisitos do aplicativo
 
-## 3. Descrição dos diretórios
+## :card_file_box: Descrição dos diretórios
 
 - `lib/`
 Pasta responável por conter a parte principal da programação do aplicativo flutter, nela estão presentes todas as telas pelas quais o aplicativo passa, além da main.dart que é responsavel por sua vez pelo ponto de partida do aplicativo e como ele vai manejar as telas, persistências, Etc. 
@@ -54,4 +54,5 @@ Pasta responsável por interpretar, buildar e configurar o aplicativo para o sis
 Pasta relacionada aos testes unitários automatizados do frontend, garantindo a qualidade e o funcionamento dos componentes.
 
 - `pubspec.yaml/`
+
 Arquivo responsável pelas dependências do projeto, ele é acessado quando o comando ```flutter pub get``` é utilizado, pegando todas as bibliotecas e as baixando para o projeto ser interpretado corretamente, além de mostrar os assets (.env,JSON,imgens, etc.) que o aplicativo deve empacotar e utilizar.
