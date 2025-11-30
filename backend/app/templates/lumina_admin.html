@@ -28,16 +28,16 @@
         </form>
     </div>
 
-    <h3>Lista de Artigos Armazenados (Total: {{ artigos|length }})</h3>
+<h3>Lista de Artigos Armazenados (Total: {{ artigos|length }})</h3>
     
-    <div class="table-container">
+    <div class="table-wrapper">
         <table class="artigos-table">
             <thead>
                 <tr>
                     <th style="width: 5%;">ID</th>
-                    <th style="width: 35%;">Matéria</th>
+                    <th style="width: 45%;">Matéria</th>
                     <th style="width: 35%;">Link Original / Fonte</th>
-                    <th style="width: 15%;">Ações</th>
+                    <th style="width: 15%; text-align: center;">Ações</th>
                 </tr>
             </thead>
             <tbody>
@@ -46,32 +46,39 @@
                     <td>{{ artigo.id }}</td>
                     <td class="article-title">{{ artigo.title }}</td>
                     <td class="article-link-source">
-                        <a href="{{ artigo.url }}" target="_blank" class="link-original">{{ artigo.url }}</a>
-                        <br>
-                        <span class="source-text" style="color: #666; font-size: 0.9em;">
-                            <strong>[{{ artigo.source_label }}]</strong> - (Fonte: {{ artigo.author }})
-                        </span>
+                        {% if 'G1' in artigo.source_label %}
+                            <span class="badge badge-g1">G1</span>
+                        {% elif 'Metrópoles' in artigo.source_label %}
+                            <span class="badge badge-metro">Metrópoles</span>
+                        {% else %}
+                            <span class="badge badge-default">{{ artigo.source_label }}</span>
+                        {% endif %}
+
+                        <a href="{{ artigo.url }}" target="_blank" class="link-original" style="font-size: 0.9em;">
+                            Abrir Link Original 🔗
+                        </a>
+                        <div style="font-size: 0.85em; color: #888; margin-top: 4px;">
+                            {{ artigo.author }}
+                        </div>
                     </td>
-                    <td class="actions-cell">
+                    <td class="actions-cell" style="text-align: center;">
                         <a href="/admin/article/delete/{{ artigo.source_db }}/{{ artigo.id }}" 
                            class="btn-delete-article" 
                            onclick="return confirm('Tem certeza que deseja remover o artigo: {{ artigo.title }}?')"
                            title="Excluir Matéria">
-                           <span class="emoji">❌</span> Excluir
+                           <span class="emoji">🗑️</span>
                         </a>
                     </td>
                 </tr>
                 {% else %}
                 <tr>
-                    <td colspan="4" style="text-align: center; padding: 20px;">
-                        Nenhum artigo encontrado no banco de dados. <br>
-                        <small>Execute o crawler ou adicione um link acima.</small>
+                    <td colspan="4" style="text-align: center; padding: 40px;">
+                        <span style="font-size: 2em;">📭</span><br>
+                        Nenhum artigo encontrado nos bancos de dados.<br>
+                        <small style="color: #666;">Execute o crawler ou adicione um link acima.</small>
                     </td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
-
-</div>
-{% endblock %}  

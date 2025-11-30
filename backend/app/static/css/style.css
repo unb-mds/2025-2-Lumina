@@ -605,3 +605,58 @@ footer {
   font-weight: bold;
 
 }
+
+/* --- Tabela com Scroll Interno (Novo) --- */
+
+.table-wrapper {
+    /* Define uma altura máxima para a tabela. 
+       Se passar disso, a barra de rolagem aparece DENTRO dessa caixa. */
+    max-height: 600px; 
+    overflow-y: auto;  /* Habilita o scroll vertical */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    background-color: #fff;
+}
+
+/* Removemos a borda da tabela antiga para usar a do wrapper */
+.table-wrapper table {
+    border: none;
+    border-radius: 0;
+    margin: 0;
+}
+
+/* O Cabeçalho (TH) fica fixo no topo enquanto se rola */
+.table-wrapper th {
+    position: sticky;
+    top: 0;
+    background-color: #454545; /* Mesma cor do header para cobrir o conteúdo */
+    color: white;
+    z-index: 10; /* Garante que fique acima das linhas */
+    box-shadow: 0 2px 2px rgba(0,0,0,0.1);
+}
+
+/* --- Badges (Etiquetas de Fonte) --- */
+.badge {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 0.75em;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-right: 5px;
+}
+
+.badge-g1 {
+    background-color: #c4170c; /* Vermelho G1 */
+}
+
+.badge-metro {
+    background-color: #007bff; /* Azul Metrópoles */
+}
+
+.badge-default {
+    background-color: #6c757d; /* Cinza genérico */
+}

@@ -14,3 +14,4 @@ venv.bak/
 .coverage
 GEMINI.md
 IssueTemplate.md
+*.sqlite3
