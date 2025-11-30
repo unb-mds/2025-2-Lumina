@@ -9,6 +9,7 @@ import 'package:frontend/settings.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+
 void main() {
   late Directory tempDir;
 
@@ -142,6 +143,64 @@ void main() {
 
       final newContext = tester.element(find.byType(ConfiguracoesPage));
       expect(MediaQuery.of(newContext).textScaler, const TextScaler.linear(1.4));
+    });
+    testWidgets('Deve atualizar o Nome de Usuário e salvar no SharedPreferences', (WidgetTester tester) async {
+      await tester.pumpWidget(const ChatApp(showLanding: false));
+      await waitForChatScreenLoad(tester);
+
+      // 1. Navega para a tela de configurações
+      final BuildContext context = tester.element(find.byType(ChatScreen));
+      Navigator.of(context).pushNamed('/settings');
+      await tester.pumpAndSettle();
+
+      // 2. Chama o callback de atualização do username
+      const String novoUsername = 'Novo Usuário Teste';
+      final settingsPage = tester.widget<ConfiguracoesPage>(find.byType(ConfiguracoesPage));
+      
+      // Assumindo que ConfiguracoesPage tem um onUsernameChanged
+      settingsPage.onUsernameChanged!(novoUsername); 
+      await tester.pumpAndSettle();
+
+      // 3. Verifica a persistência no SharedPreferences
+      final prefs = await SharedPreferences.getInstance();
+      expect(prefs.getString('username'), novoUsername);
+
+      // 4. Verifica se o estado do ChatApp foi atualizado (volta e verifica a ChatScreen)
+      Navigator.of(context).pop(); // Volta para a ChatScreen
+      await tester.pumpAndSettle();
+
+      final chatScreen = tester.widget<ChatScreen>(find.byType(ChatScreen));
+      expect(chatScreen.username, novoUsername);
+    });
+    testWidgets('Deve atualizar o Idioma e salvar no SharedPreferences', (WidgetTester tester) async {
+      await tester.pumpWidget(const ChatApp(showLanding: false));
+      await waitForChatScreenLoad(tester);
+
+      // 1. Navega para a tela de configurações
+      final BuildContext context = tester.element(find.byType(ChatScreen));
+      Navigator.of(context).pushNamed('/settings');
+      await tester.pumpAndSettle();
+
+      // 2. Chama o callback de atualização do idioma
+      const String novoIdioma = 'espanhol';
+      final settingsPage = tester.widget<ConfiguracoesPage>(find.byType(ConfiguracoesPage));
+      
+      // Assumindo que ConfiguracoesPage tem um onLanguageChanged
+      settingsPage.onLanguageChanged!(novoIdioma); 
+      await tester.pumpAndSettle();
+
+      // 3. Verifica a persistência no SharedPreferences
+      final prefs = await SharedPreferences.getInstance();
+      expect(prefs.getString('language_string'), novoIdioma);
+
+      // 4. Verifica se o estado do ChatApp foi atualizado (volta e verifica, se o idioma for exposto)
+      // Se a main.dart atualiza algum estado global ou específico (como 'language_string' no seu código), 
+      // essa verificação seria aqui. Por exemplo, se a ChatScreen tivesse uma propriedade 'currentLanguage'.
+      // Como não temos essa propriedade no seu teste, focamos na persistência por enquanto.
+
+      // Exemplo de verificação de estado atualizado (se o ChatApp expuser o idioma):
+      // final chatApp = tester.widget<ChatApp>(find.byType(ChatApp));
+      // expect(chatApp.currentLanguage, novoIdioma);
     });
 
     testWidgets('Deve resetar configurações para o padrão ao chamar _resetSelectSettings', (WidgetTester tester) async {
