@@ -1,7 +1,8 @@
 # Relatório de Definição do Produto: Detector de Fake News
 
-## 1. Fundação do Produto: Proposta de Valor e MVP
 ---
+
+## 1. Fundação do Produto: Proposta de Valor e MVP
 
 ### Proposta de Valor
 
@@ -28,12 +29,13 @@ A lista de funcionalidades básicas para o MVP inclui:
 
 ]O foco do MVP é criar um site agradável, mesmo que as funcionalidades completas de API e IA para busca ainda não estejam implementadas.
 
-## 2. Personas
 ---
+
+## 2. Personas
 
 O público-alvo são usuários da internet que frequentemente se deparam com notícias falsas ou informações conflitantes. Isso inclui pessoas de todos os públicos que têm contato com redes sociais. O público não abrange a faixa infantojuvenil. O principal público-alvo seriam pessoas entre 18 e 70 anos que se beneficiariam de saber se uma informação é falsa ou não.
 
-## 3. Histórias do Usuário
 ---
 
+## 3. Histórias do Usuário
 Como uma pessoa que se depara com informações incertas nas redes sociais, eu quero um método simples de verificar a veracidade do que consumo na internet. Dessa forma, posso me informar melhor e evitar a disseminação de desinformação.

@@ -15,22 +15,22 @@ nav:
       - Arquitetura de sistemas: estudos/Arquitetura_de_Sistemas.md
       - Boas práticas de documentação: estudos/Boas_Praticas_de_Documentacao.md
       - Definição de produto: estudos/Definição_de_Produto.md
-      - Arquitetura de agentes de IA: estudos/Estudo sobre Arquitetura de Agentes de IA.md
-      - Como hospedar um app na Play Store: estudos/Estudo sobre como hospedar um app na Play Store.md
-      - APIs e WebCrawlers: estudos/Estudo_APIsEWebCrawlers.md
-      - Docker: estudos/Estudo_Docker.md
-      - Figma: estudos/Estudo_Figma.md
-      - Sites estáticos: estudos/Estudo_SitesEstaticos.md
-      - RAG e aplicações: estudos/EstudoRAG_e _Aplicações.md
-      - Flutter e Dart: estudos/Flutter e Dart.md
-      - Análise de Métricas Ágeis no GitHub: estudos/Ferramentas_Desempenho.md
+      - Arquitetura de agentes de IA: estudos/Arquitetura_de_Agentes_de_IA.md
+      - Como hospedar um app na Play Store: estudos/Como_Hospedar_um_App_na_PlayStore.md
+      - APIs e WebCrawlers: estudos/APIs_e_WebCrawlers.md
+      - Docker: estudos/Docker.md
+      - Figma: estudos/Figma.md
+      - Sites estáticos: estudos/Sites_Estaticos.md
+      - RAG e aplicações: estudos/RAG_e_Aplicações.md
+      - Flutter e Dart: estudos/Flutter_e_Dart.md
+      - Análise de Métricas Ágeis no GitHub: estudos/Ferramentas_de_Desempenho.md
       - Git e GitHub: estudos/Git_e_GitHub.md
-      - GitHub Insights: estudos/GitHubInsights.md
-      - Métricas de OpenSource: estudos/MetricasdeOpenSouce.md
-      - Persistência de dados em Flutter: estudos/Persistencia de dados (flutter).md
+      - GitHub Insights: estudos/GitHub_Insights.md
+      - Métricas de OpenSource: estudos/Metricas_de_OpenSouce.md
+      - Persistência de dados em Flutter: estudos/Persistencia_de_dados(flutter).md
       - Requisitos: estudos/Requisitos.md
-      - Testes: estudos/Estudo_Testes.md
-      - Teste unitário em Flutter: estudos/Teste unitário em flutter.md
+      - Testes: estudos/Testes.md
+      - Teste unitário em Flutter: estudos/Teste_Unitário_em_flutter.md
       - Tecnologias Backend: estudos/Tecnologias_Backend.md
       - Tecnologias Frontend: estudos/Tecnologias_Frontend.md
   - Planejamento:
