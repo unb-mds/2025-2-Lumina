@@ -90,7 +90,7 @@ Antes de começar, você vai precisar ter instalado em sua máquina:
 
 1. Navegue até a pasta do backend:
     ```bash
-    cd Oncomap/backend
+    cd /backend
     ```
 
 2. Crie um ambiente virtual para isolar as dependências:
@@ -161,5 +161,6 @@ O projeto é desenvolvido pelas seguintes pessoas
 
 - Nosso [Figma](https://www.figma.com/design/WAbCYuadSmQjoSXwQu2FZa/Squad-07--MDS?node-id=1-3188&t=jXbDeQuQQlIQOL1h-0)
   
+
 
 
