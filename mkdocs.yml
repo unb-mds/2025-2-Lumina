@@ -34,6 +34,8 @@ nav:
       - Tecnologias Backend: estudos/Tecnologias_Backend.md
       - Tecnologias Frontend: estudos/Tecnologias_Frontend.md
   - Planejamento:
+       - Cronograma do Projeto: planejamentos/cronograma.md
+       - Backlog de Produto: planejamentos/backlog.md
        - Sprints:
           - Sprint 00: planejamentos/sprints/sprint_00.md
           - Sprint 01: planejamentos/sprints/sprint_01.md
