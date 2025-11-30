@@ -6,11 +6,11 @@ repo_name: 'Lumina'
 nav:
   - Início: index.md
   - Arquitetura:
-      - Arquitetura: documentações/diagramas/arquitetura.md
-      - Diagramas: documentações/diagramas/diagramas.md
+      - Arquitetura: arquitetura/diagramas/arquitetura.md
+      - Diagramas: arquitetura/diagramas/diagramas.md
   - Levantamento de Requisitos:
-      - Requisitos: documentações/Requisitos.md
-      - Story Map: documentações/StoryMap.md
+      - Requisitos: requisitos/Requisitos.md
+      - Story Map: requisitos/StoryMap.md
   - Estudos:
       - Arquitetura de sistemas: estudos/ArquiteturaDeSistemas.md
       - Boas práticas de documentação: estudos/BoasPraticasDeDocumentacao.md
