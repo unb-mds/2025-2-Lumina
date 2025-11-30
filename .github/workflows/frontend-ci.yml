@@ -32,6 +32,10 @@ jobs:
     - name:  Instalar Dependências do Projeto
       run: flutter pub get
 
+    - name: Criar arquivo .env temporário para testes
+      env: API_BASE_URL:${{ secrets.API_BASE}}
+      run: echo "API_BASE_URL=$API_BASE" >> .env
+
     - name:  Rodar Testes
       
       run: flutter test --coverage
