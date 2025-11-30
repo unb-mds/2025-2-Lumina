@@ -1,4 +1,4 @@
-### **Ata de Reunião - [Nome do Projeto ou Squad]**
+### **Ata de Reunião - Projeto Lumina**
 
 **Data:** `22/09/2025`
 
