@@ -10,7 +10,7 @@ A tecnologia escolhida para o front-end do projeto é a framework **Flutter**, o
 ## 2. Estrutura do frontend
 
 ├── `lib`/Programação do front\
-├── `android`/Integração do aplicativo para a plataforma\
+├── `android`/Integração do aplicativo para a plataforma<br>
 ├── `test`/ Pasta para os testes do front    
 └── `pubspec.yaml`/Arquivo dos requisitos do aplicativo
 

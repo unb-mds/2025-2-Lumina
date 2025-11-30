@@ -33,7 +33,7 @@
 ## 2. Estrutura do Frontend
 
 ├── `lib`/Programação do front\
-├── `android`/Integração do aplicativo para a plataforma\ 
+├── `android`/Integração do aplicativo para a plataforma<br>
 ├── `test`/ Pasta para os testes do front    
 └── `pubspec.yaml`/Arquivo dos requisitos do aplicativo
 
