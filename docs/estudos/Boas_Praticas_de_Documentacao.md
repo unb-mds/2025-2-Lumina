@@ -1,5 +1,7 @@
 # Estudo: Boas Práticas de Documentação de Software
 
+---
+
 ## 1. O que é documentação de software?
 
 A documentação de software se refere a todo o material textual que os profissionais de engenharia, testes, produtos e outros usam para realizar seu trabalho. No entanto, isso vai além de simples instruções: é uma descrição precisa de um sistema de software, que atua como referência e fonte de evidências nos processos de desenvolvimento e uso do produto.
@@ -15,6 +17,8 @@ Além disso, seu valor está em:
 * Minimizar erros e retrabalho, que geram altos custos.
 
 Para isso, é fundamental definir o tipo de documentação necessária de acordo com as características do projeto e o perfil de quem consultará os documentos.
+
+---
 
 ## 2. Quais são os tipos de documentação de software?
 
@@ -55,6 +59,8 @@ Inclui:
 * **Análise de mercado e estratégias de marketing:** pesquisas sobre necessidades de clientes e tendências.
 * **Casos de sucesso e estudos de caso:** exemplos reais de uso do software com resultados positivos.
 
+---
+
 ## 3. Quais são as melhores práticas para documentação de software?
 
 * **Comentários objetivos:** claros, focados no porquê da ação.
@@ -62,6 +68,8 @@ Inclui:
 * **Padronização de estilo:** consistência em toda a documentação.
 * **Atualizações e testes frequentes:** revisar após mudanças significativas no código.
 * **Automação de documentação:** uso de ferramentas como Swagger (APIs) ou Doxygen (C++).
+
+---
 
 ## 4. Perspectivas sobre Documentação
 
@@ -86,6 +94,8 @@ A abordagem moderna trata a documentação como parte do código, com regras, es
 ### 4.5. Conhecer o público
 
 É fundamental identificar o público-alvo e escrever focando na clareza para ele.
+
+---
 
 ## 5. Referências
 

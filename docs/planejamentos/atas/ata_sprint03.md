@@ -1,4 +1,4 @@
-### **Ata de Reunião - [Nome do Projeto ou Squad]**
+### **Ata de Reunião - Projeto Lumina**
 
 **Data:** `22/09/2025`
 
@@ -14,6 +14,7 @@
 
 ### 🎯 Objetivo(s) da Reunião:
 Revisar o que foi feito durante a semana, discutir mudanças e determinar o que será feito na próxima sprint.
+
 ---
 
 ### 📝 Pautas e Definições:
@@ -33,7 +34,6 @@ Revisar o que foi feito durante a semana, discutir mudanças e determinar o que 
 ---
 
 ### ➡️ Ações / Próximos Passos:
-*Use `[x]` para marcar o que for concluído.*
 
 * `[João]`: Trabalhar no protótipo de alta fidelidade.
 * `[Cecília, Arthur e Tiago]`: Atualizar o Figma.

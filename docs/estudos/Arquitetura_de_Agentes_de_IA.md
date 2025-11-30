@@ -1,5 +1,7 @@
 # Estudo: Arquitetura e Implementação de Agentes de IA
 
+---
+
 ## 1. O que é um Agente de IA e seus principais padrões de arquitetura
 
 Um agente de IA é um sistema que percebe um ambiente, decide (planeja) e atua para atingir objetivos. No contexto de aplicações web, é um software que recebe entradas (URL, texto, prompt), usa modelos/algoritmos e ferramentas externas (buscas, DBs) e devolve ações/decisões (resposta, veredito, execução de tarefas).
@@ -32,6 +34,8 @@ Um agente de IA é um sistema que percebe um ambiente, decide (planeja) e atua p
 
 RAG é uma arquitetura de IA que aprimora os LLMs ao permitir que eles acessem e utilizem informações de fontes de dados externas para gerar respostas mais precisas e contextualmente ricas. Em vez de depender apenas do seu conhecimento de treinamento, um sistema RAG primeiro recupera dados relevantes de bancos de dados, documentos e da web e depois os usa para melhorar a geração de texto, garantindo que as respostas sejam mais atualizadas.
 
+---
+
 ## 2. Principais frameworks e bibliotecas para construir agentes
 
 ### 2.1. LangChain
@@ -55,6 +59,8 @@ LlamaIndex é um framework de código aberto que conecta modelos de LLMs com os 
 * **Propósito:** Camada de ingestão e indexação de dados para agentes/assistentes (document parsing, RAG).
 * **Pontos fortes:** Facilita construir "knowledge bases" sobre documentos, integra com vector DBs e agentes. Útil para extrair evidências de fontes de dados baseadas em texto.
 
+---
+
 ## 3. Intenção de um Web Crawler com um Agente de IA
 
 ### 3.1. O que é um Web Crawler
@@ -68,6 +74,8 @@ Um web crawler é um programa que navega automaticamente pela web, visitando lin
 3.  O crawler retorna os dados para o agente.
 4.  O agente interpreta o conteúdo (NLP, embeddings, classificação).
 5.  O agente decide a resposta final e comunica ao usuário.
+
+---
 
 ## 4. Proposta de aplicação de um agente no projeto
 
@@ -93,6 +101,8 @@ Permitir que um usuário submeta uma URL/texto e receba um relatório de verific
 * **Extração:** Extrair claims/entidades/datas do texto submetido.
 * **Comparação:** Para cada claim, recuperar evidências e checar correspondência (factualidade/tempo/contexto).
 * **Sintetizar:** Gerar laudo com: veredito, evidências (links + trechos de artigos) e índice de confiança.
+
+---
 
 ## 5. Referências
 

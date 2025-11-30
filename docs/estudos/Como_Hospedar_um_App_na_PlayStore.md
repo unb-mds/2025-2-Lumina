@@ -1,11 +1,16 @@
 # Estudo sobre como hospedar um app na Play Store
 Este estudo tem como objetivo criar um guia e esclarecer as exigências para a publicação de um app na Play Store.
 
-### 1. Criar uma conta de desenvolvedor do Google Play
+---
+
+## 1. Criar uma conta de desenvolvedor do Google Play
 Para publicar um aplicativo é necessário uma conta de desenvolvedor.
  * Google Play Console: O Google Play Console é a plataforma web que o Google oferece para desenvolvedores publicarem, gerenciarem e acompanharem o desempenho de seus aplicativos. Para criar uma conta de desenvolvedor é necessário preencher os dados do desenvolvedor e de pagar uma **taxa de registro**.
  * Taxa de registro: A Google cobra uma taxa única de US$ 25 para registrar uma conta de desenvolvedor. Após pagar essa taxa, é possível publicar um número ilimitado de apps sem nenhuma cobrança. A única outra cobrança que o Google aplica é a taxa de serviço (de 15% a 30%) sobre a receita gerada por vendas de produtos ou serviços digitais dentro do aplicativo, caso os tenha. Se o aplicativo for totalmente gratuito e não tiver compras internas, não haverá mais nenhuma cobrança por parte do Google.
-### 2. Preparação do aplicativo
+
+---
+
+## 2. Preparação do aplicativo
 Antes de enviar o app, ele precisa estar pronto para o lançamento. Isto é a preparação de arquivos de compilação e da chave de assinatura.
 #### AAB e APK
 Ambos, APK e AAB, são formatos de arquivo usados para empacotar aplicativos Android, mas eles funcionam de maneiras fundamentalmente diferentes, especialmente em como o aplicativo é entregue aos usuários.
@@ -41,11 +46,9 @@ O Google Play Console oferece uma ferramenta chamada "Assinatura de apps pelo Go
  * Quando você envia uma nova versão do seu app, a Google a assina com a sua chave antes de publicá-la.
 Isso evita o risco de perder a chave. Se a chave privada for perdida, não será possível atualizar o aplicativo, e a única solução seria publicar um novo aplicativo (com outro nome de pacote), o que faria com que todos os usuários perdessem o acesso às atualizações. Por isso, a assinatura de apps pelo Google é a opção mais segura.
 
+--- 
 
-
-
- 
-#### 3. Preparação da ficha do aplicativo
+## 3. Preparação da ficha do aplicativo
 A ficha do app é como uma vitrine na Google Play Store e é necessário preencher os seguintes dados:
  * Título do aplicativo.
  * Descrição: Um resumo sobre as funcionalidades do app.
@@ -53,7 +56,9 @@ A ficha do app é como uma vitrine na Google Play Store e é necessário preench
  * Imagens e vídeos da interface do app.
  * Tipo e categoria, por exemplo: "Ferramentas", "Educação".
 
-#### 4. Política de privacidade 
+---
+
+## 4. Política de privacidade 
 Para cumprir as políticas do Google Play, o aplicativo deve seguir as seguintes diretrizes:
 1. Ter uma Política de Privacidade:
 * **URL obrigatória:** Um link válido e ativo para uma política de privacidade na página do app no Google Play Console.
@@ -63,19 +68,17 @@ Para cumprir as políticas do Google Play, o aplicativo deve seguir as seguintes
 * **Divulgação clara:** Se o app coleta dados pessoais ou confidenciais, deve avisar o usuário de forma clara e visível.
 * **Consentimento explícito:** O usuário deve dar um consentimento ativo e claro para a coleta de dados.
 
+---
 
-
-
-
-
-#### 5. Análise e lançamento
+## 5. Análise e lançamento
 Após configurar tudo, a Google fará uma análise do aplicativo para garantir que ele cumpre as Políticas do Google Play.
  * Envie para análise: Quando lançar o app ele será enviado para análise.
  * Aguarde a aprovação: O processo de análise pode levar de algumas horas a vários dias. A Google verifica se o app não contém malware, violações de direitos autorais ou qualquer outro tipo de conteúdo proibido.
  * Publicação: Quando o app for aprovado, ele será publicado na Google Play Store e ficará disponível para os usuários baixarem.
 
+---
 
-### Referências
+## Referências
 
 Create and set up your app - Play Console Help - https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://support.google.com/googleplay/android-developer/answer/9859152%3Fhl%3Den&ved=2ahUKEwi1w7be3tiPAxVjILkGHfZCEeoQFnoECCMQAQ&usg=AOvVaw15kvOz88ux_SvKYA3y7oTy
 

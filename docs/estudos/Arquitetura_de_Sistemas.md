@@ -1,5 +1,7 @@
 # Estudo: Guia Essencial de Arquitetura de Sistemas
 
+---
+
 ## 1. O que é Arquitetura de Software?
 
 Arquitetura de software define a estrutura de um sistema: seus componentes, como eles interagem e as regras que governam sua evolução.
@@ -9,6 +11,8 @@ Mais do que um diagrama, é o entendimento compartilhado sobre as decisões de d
 Uma boa arquitetura acelera o desenvolvimento e reduz custos a longo prazo, sendo crucial para o sucesso do negócio.
 
 O arquiteto de software guia essas decisões importantes, garantindo que o sistema atenda a requisitos de escalabilidade, segurança e desempenho.
+
+---
 
 ## 2. Princípios Fundamentais
 
@@ -46,6 +50,8 @@ A Lei de Conway afirma que a arquitetura do software espelha a estrutura de comu
 * A solução é a **"Manobra Inversa de Conway"**: moldar a equipe para produzir a arquitetura desejada.
 * **Exemplo:** Times pequenos e autônomos criam microsserviços.
 
+---
+
 ## 3. Estilos Arquiteturais
 
 ### 3.1. Monolito
@@ -68,6 +74,8 @@ A Lei de Conway afirma que a arquitetura do software espelha a estrutura de comu
 * Comunicação assíncrona através de eventos.
 * Promove desacoplamento máximo, escalabilidade e resiliência.
 
+---
+
 ## 4. Tabela Comparativa de Estilos
 
 | Característica  | Monolito                     | SOA                                | Microsserviços                          | EDA                           |
@@ -78,6 +86,8 @@ A Lei de Conway afirma que a arquitetura do software espelha a estrutura de comu
 | **Consistência** | Forte (ACID)                 | Forte (dentro do serviço)          | Eventual (entre serviços)               | Eventual por natureza         |
 | **Escalabilidade**| Unidade inteira              | Limitada pelo ESB                  | Granular e horizontal                   | Altamente elástica            |
 | **Complexidade** | Baixa no início, alta em escala | Alta (governança, ESB)             | Alta (operacional)                      | Alta (fluxo de dados)         |
+
+---
 
 ## 5. Elementos da Arquitetura de Sistemas
 
@@ -117,6 +127,8 @@ Protocolos estabelecem as regras e formatos para troca de dados entre componente
 
 Padrões de design são soluções reutilizáveis para problemas comuns no desenvolvimento de software, ajudando a garantir robustez e facilidade de manutenção.
 
+---
+
 ## 6. Padrões para Sistemas Distribuídos
 
 Adotar microsserviços exige resolver desafios de comunicação, descoberta e consistência de dados.
@@ -146,6 +158,8 @@ Adotar microsserviços exige resolver desafios de comunicação, descoberta e co
     * Usa transações locais + compensações em caso de falha.
     * Garante consistência eventual.
 
+---
+
 ## 7. A Prática da Arquitetura
 
 ### 7.1. Architecture Decision Records (ADRs)
@@ -168,11 +182,15 @@ Capacidade de entender o estado do sistema a partir de dados externos.
 * Novas funcionalidades são criadas como microsserviços.
 * Tráfego é gradualmente redirecionado até desativar o legado.
 
+---
+
 ## 8. Estudos de Caso
 
 * **Netflix:** Usou microsserviços para alcançar escalabilidade e disponibilidade massivas em streaming, aceitando alta complexidade operacional.
 * **Uber:** Adotou microsserviços para lidar com escala organizacional e acelerar a inovação.
 * **Spotify:** Focou primeiro na cultura organizacional (Squads, Tribes), moldando naturalmente uma arquitetura ágil.
+
+---
 
 ## 9. Análise da Arquitetura de Sistemas da Netflix
 
@@ -248,6 +266,8 @@ Cada serviço é independente, escalável e atualizável.
 * **Maior overhead de comunicação:** APIs internas e mensageria aumentam a complexidade.
 * **Dependência de cloud:** custos e configuração de auto-scaling e balanceamento.
 
+---
+
 ## 10. Conclusão
 
 Arquitetura de software é um processo contínuo de tomada de decisão. Exige:
@@ -255,6 +275,8 @@ Arquitetura de software é um processo contínuo de tomada de decisão. Exige:
 * Gerenciar trade-offs.
 * Ser guiado por atributos de qualidade.
 * Entender que a estrutura da equipe molda o sistema.
+
+---
 
 ## 11. Referências
 
