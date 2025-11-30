@@ -31,8 +31,9 @@ Sincronizar o status das atividades da semana (Review), identificar pontos de me
 * **Pauta 2: Retrospectiva Semanal**
     * **Definição:** O time realizou a cerimônia de retrospectiva, discutindo os pontos positivos da semana, os desafios encontrados e definindo ações de melhoria para o próximo ciclo de trabalho.
 
+---
+
 ### ➡️ Ações / Próximos Passos:
-*Esta é a lista de tarefas definidas para a próxima Sprint, já com os pares definidos.*
 
 - Trabalhar no spider para puxar os links pro scraper [Atila e Arthur e Tiago]
 - Refatorar o codigo dos scrapers para adotar o padrao do código [Atila e Arthur]
