@@ -22,12 +22,12 @@ Preparar funcionalidades de alto impacto para o aplicativo.
 **Pauta 1: Retrospectiva Semanal Geral**
 
 * **Definição:** Foi apresentado o status das atividades de cada membro:
-    * **Tiago - 80% da função de coleta de dados a partir de uma URL foi feita e está funcionando.
-    * **Arthur - Refatorou o documento de requisitos para entrar no escopo apontado na release 1.
-    * **Nathan - Refatorou o codigo do front end, deixou apenas o necessario para rodar em android.
-    * **Joao - Ajustou o protótipo de alta fidelidade de acordo com as alterações pedidas dentro da release 1.
-    * **Cecília - Realizou sua Issue.
-    * **Átila - Realizou sua issue.
+    * **Tiago** - 80% da função de coleta de dados a partir de uma URL foi feita e está funcionando.
+    * **Arthur** - Refatorou o documento de requisitos para entrar no escopo apontado na release 1.
+    * **Nathan** - Refatorou o codigo do front end, deixou apenas o necessario para rodar em android.
+    * **Joao** - Ajustou o protótipo de alta fidelidade de acordo com as alterações pedidas dentro da release 1.
+    * **Cecília** - Realizou sua Issue.
+    * **Átila** - Realizou sua issue.
 
 **Pauta 2: Retrospectiva Semanal**
 * **Definição:** O time realizou a cerimônia de retrospectiva, discutindo os pontos positivos da semana e os desafios encontrados (principalmente com a integração do admin e configurações de CI), definindo as ações de melhoria focadas em documentação e Q.A. para o próximo ciclo.
