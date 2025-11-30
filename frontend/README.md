@@ -1,4 +1,9 @@
-## 1 .Configurações do ambiente
+# 📋 Requisitos Prévios
+Certifique-se de que os seguintes requisitos estão instalados no seu sistema:
+- flutter SDK: Versão 3.35.4 ou superior
+
+
+## 🛠️ Configurações do ambiente
 ### Para rodar o Aplicativo é necessario dos seguintes requerimentos
 
 
@@ -30,7 +35,7 @@
         ```` 
 ---
 
-## 2. Estrutura do Frontend
+## 🏗️ Estrutura do Frontend
 
 ├── `lib`/Programação do front\
 ├── `android`/Integração do aplicativo para a plataforma<br>
