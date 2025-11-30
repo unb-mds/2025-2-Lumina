@@ -18,25 +18,28 @@ Preparar funcionalidades de alto impacto para o aplicativo.
 ---
 
 ### 📝 Pautas e Definições:
-(Liste os principais assuntos discutidos e o que foi decidido sobre cada um)
 
-* Pauta 1: Retrospectiva Semanal Geral
-* Tiago - 80% da função de coleta de dados a partir de uma URL foi feita e está funcionando
-* Arthur - Refatorou o documento de requisitos para entrar no escopo apontado na release 1
-* Nathan - Refatorou o codigo do front end, deixou apenas o necessario para rodar em android.
- Duvida sobre se adiciona uma aspa sobre como implementar para ios.
- Melhorou qualidade do comentário no código, deixando-o limpo e explicativo
-* Joao - Ajustou o protótipo de alta fidelidade de acordo com as alterações pedidas dentro da release 1
-* Cecília - Realizou sua Issue
-* Átila - Realizou sua issue
+**Pauta 1: Retrospectiva Semanal Geral**
 
-### ➡ Ações / Próximos Passos:
+* **Definição:** Foi apresentado o status das atividades de cada membro:
+    * **Tiago - 80% da função de coleta de dados a partir de uma URL foi feita e está funcionando.
+    * **Arthur - Refatorou o documento de requisitos para entrar no escopo apontado na release 1.
+    * **Nathan - Refatorou o codigo do front end, deixou apenas o necessario para rodar em android.
+    * **Joao - Ajustou o protótipo de alta fidelidade de acordo com as alterações pedidas dentro da release 1.
+    * **Cecília - Realizou sua Issue.
+    * **Átila - Realizou sua issue.
 
-Issues
-Arthur - (Pag.Admin) Prótipo do Admin web.
-Tiago - (Backend) Começar a lógica do webcrawler e obter novos links para serem scrapados.
-João - (Frontend) Implementar o slider do menu historico e slider menu configuração.
-Nathan - (Frontend) Auxiliar nos sliders e continuar no dev da tela principal.
-Cecília - (Estudo) Pesquisar a implementação da trancrisção de audio em texto (speech to text) e ver como ser feita a implementação.
-Átila - (Dev) Ajudar no desenvolvimento de alguma área que esteja precisando.
-Todos - (Sugestão) Se inteirar as diferentes áreas
+**Pauta 2: Retrospectiva Semanal**
+* **Definição:** O time realizou a cerimônia de retrospectiva, discutindo os pontos positivos da semana e os desafios encontrados (principalmente com a integração do admin e configurações de CI), definindo as ações de melhoria focadas em documentação e Q.A. para o próximo ciclo.
+
+---
+
+
+### ➡️ Ações / Próximos Passos:]
+
+* `[Arthur]`: Prótipo do Admin web.
+* `[Tiago]`: Começar a lógica do webcrawler e obter novos links para serem scrapados.
+* `[João]`: Implementar o slider do menu historico e slider menu configuração.
+* `[Nathan]`: Auxiliar nos sliders e continuar no dev da tela principal.
+* `[Cecília]`: Pesquisar a implementação da trancrisção de audio em texto (speech to text) e ver como ser feita a implementação.
+* `[Átila]`: Ajudar no desenvolvimento de alguma área que esteja precisando.
