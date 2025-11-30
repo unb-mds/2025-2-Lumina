@@ -16,17 +16,18 @@ Future<void> main() async {
   
   WidgetsFlutterBinding.ensureInitialized(); 
 
-  
+    String envFileToLoad = ".env";
+    
   try {
-    await dotenv.load(fileName: ".env");
-   
-    apiBaseUrl = dotenv.env['API_BASE_URL']!;
-    debugPrint("URL da API carregada: $apiBaseUrl");
-  } catch (e) {
-   
-    debugPrint("ERRO: Não foi possível carregar o arquivo .env ou a chave API_BASE_URL está faltando. Usando fallback.");
-    apiBaseUrl = "http://10.0.2.2:8000"; 
-  }
+   envFileToLoad = ".env.ci";
+        await dotenv.load(fileName: envFileToLoad);
+        apiBaseUrl = dotenv.env['API_BASE_URL']!;
+        debugPrint("URL da API carregada via CI/Fallback: $apiBaseUrl");
+    } catch (e2) {
+      debugPrint("ERRO: Nenhum arquivo .env encontrado. Usando fallback.");
+      apiBaseUrl = "http://10.0.2.2:8000"; 
+    }
+  
   
 
   final prefs = await SharedPreferences.getInstance();
