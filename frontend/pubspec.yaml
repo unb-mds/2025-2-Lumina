@@ -15,6 +15,7 @@ dependencies:
   url_launcher: ^6.3.2
   hive: ^2.2.3
   hive_flutter: ^1.1.0
+  flutter_launcher_icons: ^0.14.4
   
   
 dev_dependencies:
@@ -27,3 +28,6 @@ flutter:
   uses-material-design: true
   assets:
   - .env
+flutter_launcher_icons:
+  image_path: "assets/icon/icone_app.png"
+  android: true
