@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:frontend/chat_screen.dart'; // Sua ChatScreen
+import 'package:frontend/chat_screen.dart'; 
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:frontend/main.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/testing.dart';
 import 'dart:convert';
+import 'package:flutter/services.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'dart:io';
 void main() {
+  late Directory tempDir;
   // Inicializa a variável global apiBaseUrl antes de todos os testes
-  setUpAll(() {
+  setUpAll(() async {
     // Como ela é 'late final' no main.dart, precisamos setar um valor mock
     // para evitar o erro "LateInitializationError"
     try {
@@ -16,7 +20,24 @@ void main() {
     } catch (e) {
       // Se já estiver inicializada, ignoramos
     }
+    tempDir = await Directory.systemTemp.createTemp('hive_test_dir');
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(
+      const MethodChannel('plugins.flutter.io/path_provider'),
+      (MethodCall methodCall) async {
+        // Retorna o caminho do diretório temporário criado
+        return tempDir.path;
+      },
+    );
+    // 3. Inicializa o Hive e Prepara o Box
+    await Hive.initFlutter(); 
+    
+    // Abre o box
+    final box = await Hive.openBox('chat_history');
+    await box.clear();
+    await box.put('chat_ids', []);
   });
+
+  
   // Configura o SharedPreferences para retornar que os tutoriais JÁ FORAM vistos
   setUp(() {
     SharedPreferences.setMockInitialValues({
@@ -33,6 +54,7 @@ void main() {
       ),
     );
   }
+ 
 
   testWidgets('ChatScreen deve exibir a mensagem de boas-vindas inicial', (WidgetTester tester) async {
     // 1. Arrange (Preparação)
@@ -129,6 +151,7 @@ void main() {
     // 4. Act (Ação): Abre o Drawer
     final menuButton = find.byIcon(Icons.menu);
     await tester.tap(menuButton);
+    await tester.pump();
     await tester.pumpAndSettle(); // Espera o Drawer abrir
 
     // 5. Assert (Verificação com o Drawer Aberto)
@@ -164,6 +187,7 @@ void main() {
       
       // Cria um MockClient que intercepta as chamadas HTTP
       final mockHttp = MockClient((request) async {
+        await Future.delayed(const Duration(milliseconds: 50));
         // Verifica se a URL está correta (incluindo o encode)
         if (request.url.toString().contains(Uri.encodeComponent(userMessage))) {
           // Retorna sucesso (200) com o JSON esperado
@@ -199,7 +223,7 @@ void main() {
       
       // O flutter precisa reconstruir a tela para mostrar a mensagem do usuário
       await tester.pump(); 
-
+      await tester.pump(); 
       // Verifica se a mensagem do usuário apareceu na lista
       expect(find.text(userMessage), findsOneWidget);
       

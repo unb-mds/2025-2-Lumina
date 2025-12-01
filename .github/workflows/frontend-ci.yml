@@ -1,0 +1,42 @@
+name: CI Flutter - Testes do Frontend
+
+on:
+  push:
+    paths:
+      - 'frontend/**'
+      - '.github/workflows/frontend-ci.yml'
+  pull_request:
+    
+    branches: [ "main", "master", "develop" ]
+    paths:
+      - 'frontend/**'
+
+jobs:
+  run_flutter_tests:
+    name: Rodar Testes de Widget e Unidade
+    runs-on: ubuntu-latest 
+    defaults:
+      run:
+        working-directory: ./frontend
+
+    steps:
+    - name:  Checkout do Código
+      uses: actions/checkout@v4
+
+    - name:  Configurar o Ambiente Flutter
+      
+      uses: subosito/flutter-action@v2
+      with:
+        channel: 'stable'
+
+    - name:  Instalar Dependências do Projeto
+      run: flutter pub get
+
+    - name: Criar arquivo .env temporário para testes
+      env: 
+        API_BASE_URL: ${{ secrets.API_BASE_URL}}
+      run: echo "API_BASE_URL=$API_BASE_URL" >> .env
+
+    - name:  Rodar Testes
+      
+      run: flutter test --coverage

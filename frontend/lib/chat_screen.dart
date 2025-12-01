@@ -3,7 +3,6 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:frontend/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 
@@ -51,7 +50,14 @@ class _ChatScreenState extends State<ChatScreen> {
 
   late Box chatBox;
   String currentChatId = "default_chat";
+  http.Client? _internalClient;
 
+  @override
+  void dispose() {
+    _textController.dispose();
+    _internalClient?.close();
+    super.dispose();
+  }
 
   @override
   void initState() {
@@ -175,7 +181,7 @@ Future<void> _closeMenuTutorial() async {
     final url = Uri.parse('$apiBaseUrl/prompt/$encodedPrompt'); 
 
     try {
-      final client = widget.httpClient ?? http.Client();
+      final client = widget.httpClient ?? (_internalClient ??= http.Client());
       final response = await client.get(url);
 
       if (response.statusCode == 200) {
@@ -626,8 +632,7 @@ Widget _buildBalloonWithArrow(String text, {ArrowDirection direction = ArrowDire
                     child: Text("Nenhuma conversa salva"),);
                 }
                 
-                return SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.55,
+                return Expanded(
                   child: ListView.builder(
                     itemCount: chatIds.length,
                     itemBuilder: (context, index) {
@@ -661,7 +666,7 @@ Widget _buildBalloonWithArrow(String text, {ArrowDirection direction = ArrowDire
 
             
             
-            const Expanded(child: SizedBox()),
+            
 
             
             Padding(

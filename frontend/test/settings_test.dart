@@ -469,5 +469,186 @@ group('Teste de Funcionalidade: Resetar Tutorial', () {
       expect(newMenuSeen, isFalse);
     });
   });
+  group('Teste de Interface: Idioma', () {
+  testWidgets('Deve abrir o diálogo e alterar o idioma para Inglês', (WidgetTester tester) async {
+    // 1. ARRANGE (Preparação)
+    String? capturedLanguage; // Variável para capturar a escolha
+    const initialLanguage = 'portugues';
+    
+    // Renderiza o widget com o idioma inicial
+    await tester.pumpWidget(MaterialApp(
+      home: ConfiguracoesPage(
+        currentThemeMode: ThemeMode.system, 
+        currentLanguage: initialLanguage,
+        currentUsername: 'UsuarioTeste',
+        currentFontSizeScale: 1.0,
+        // Capturamos a mudança aqui
+        onLanguageChanged: (newLang) {
+          capturedLanguage = newLang;
+        },
+      ),
+    ));
+    
+    // Verifica se os textos iniciais estão em português
+    expect(find.text('Configurações'), findsOneWidget); 
+    expect(find.text('Idioma'), findsOneWidget); 
+    expect(find.text('Português (Brasil)'), findsOneWidget);
+
+    // 2. ACT (Mudar para Inglês)
+    
+    // Passo A: Toca no tile "Idioma"
+    await tester.tap(find.text('Idioma'));
+    await tester.pumpAndSettle(); // Aguarda o diálogo abrir
+
+    // Verificação intermediária: O diálogo abriu com o título em português?
+    expect(find.text('Selecione o Idioma'), findsOneWidget);
+
+    // Passo B: Toca na opção "English"
+    // Usamos o texto 'English' que é o label no _buildLanguageDialog
+    await tester.tap(find.text('English'));
+    await tester.pumpAndSettle(); // Aguarda o diálogo fechar
+
+    // 3. ASSERT (Verificação)
+    
+    // Verifica se o callback foi chamado com 'ingles'
+    expect(capturedLanguage, 'ingles'); 
+    
+    // Verifica se o diálogo fechou
+    expect(find.byType(AlertDialog), findsNothing); 
+    
+    // 4. ASSERT (Verificação de Atualização de UI)
+    
+    // O widget Configurações foi reconstruído, mas o MaterialApp não.
+    // O widget ConfiguracoesPage agora usa o novo idioma ('ingles').
+    
+    // Reconstruímos o widget para refletir a mudança no `currentLanguage`
+    await tester.pumpWidget(MaterialApp(
+      home: ConfiguracoesPage(
+        currentThemeMode: ThemeMode.system, 
+        // Simula a mudança de estado para o novo idioma
+        currentLanguage: capturedLanguage!, 
+        currentUsername: 'UsuarioTeste',
+        currentFontSizeScale: 1.0,
+        onLanguageChanged: (newLang) {
+          capturedLanguage = newLang;
+        },
+      ),
+    ));
+
+    // Verifica se os textos foram atualizados para inglês
+    expect(find.text('Settings'), findsOneWidget); // Título do AppBar
+    expect(find.text('Language'), findsOneWidget); // Título do tile
+    expect(find.text('English'), findsOneWidget); // Subtítulo do tile
+    
+    // Verifica se os textos antigos sumiram
+    expect(find.text('Configurações'), findsNothing);
+    expect(find.text('Idioma'), findsNothing);
+    expect(find.text('Português (Brasil)'), findsNothing);
+  });
+
+  testWidgets('Deve abrir o diálogo e o botão CANCELAR deve manter o idioma', (WidgetTester tester) async {
+    // 1. ARRANGE
+    bool callbackChamado = false;
+    const initialLanguage = 'portugues';
+    
+    await tester.pumpWidget(MaterialApp(
+      home: ConfiguracoesPage(
+        currentThemeMode: ThemeMode.system, 
+        currentLanguage: initialLanguage,
+        currentUsername: 'UsuarioTeste',
+        currentFontSizeScale: 1.0,
+        onLanguageChanged: (newLang) {
+          callbackChamado = true; // Não deve ser chamado
+        },
+      ),
+    ));
+    
+    // 2. ACT
+    // Abre o diálogo
+    await tester.tap(find.text('Idioma'));
+    await tester.pumpAndSettle(); 
+
+    // O diálogo de idioma não tem botão de cancelar, mas sim um gesto de fora do diálogo
+    // simularemos um pop sem seleção para garantir que nada foi alterado.
+    
+    // Toca na opção English, mas sem o Navigator.pop dentro do onChanged
+    // (A implementação atual do _buildLanguageDialog faz o pop imediato, vamos 
+    // garantir que o onChanged só seja chamado se houver uma interação que o force)
+
+    // Apenas verificar se o diálogo está presente e fechá-lo via back/escape.
+    expect(find.text('Selecione o Idioma'), findsOneWidget);
+    
+    // Fecha o diálogo simulando um pop (como apertar o botão de voltar)
+    Navigator.of(tester.element(find.byType(AlertDialog))).pop();
+    await tester.pumpAndSettle(); 
+
+    // 3. ASSERT
+    
+    expect(find.byType(AlertDialog), findsNothing); // Diálogo fechou
+    expect(callbackChamado, isFalse); // Callback não foi chamado
+    
+    // Verifica se o idioma ainda está em português
+    expect(find.text('Configurações'), findsOneWidget); 
+    expect(find.text('Português (Brasil)'), findsOneWidget); 
+  });
+});
+group('Teste de Interface: Sobre Nós', () {
+  testWidgets('Deve abrir um diálogo ou tela "Sobre Nós" ao tocar no tile', (WidgetTester tester) async {
+    // 1. ARRANGE (Preparação)
+    const currentLanguage = 'portugues';
+    
+    // Renderiza o widget ConfiguracoesPage
+    await tester.pumpWidget(MaterialApp(
+      home: ConfiguracoesPage(
+        currentThemeMode: ThemeMode.system, 
+        currentLanguage: currentLanguage,
+        currentUsername: 'UsuarioTeste',
+        currentFontSizeScale: 1.0,
+        // Mock callbacks (não são usados neste teste, mas são obrigatórios)
+        onLanguageChanged: (_) {},
+        onThemeModeChanged: (_) {},
+        onFontSizeScaleChanged: (_) {},
+        onUsernameChanged: (_) {},
+        onResetSettings: () {},
+        onResetTutorials: () {},
+      ),
+    ));
+    
+    // Encontra o texto "Sobre Nós" usando a função de tradução (tForTest) para maior robustez
+    // 'tile_about_us' em 'portugues' é 'Sobre Nós'
+    final aboutUsText = tForTest('tile_about_us', currentLanguage);
+    final aboutUsFinder = find.text(aboutUsText);
+    
+    // Verificação inicial: o tile "Sobre Nós" deve existir na tela
+    expect(aboutUsFinder, findsOneWidget);
+
+    // 2. ACT (Ação)
+    
+    // Rola a tela (se necessário, pois o tile pode estar fora da área de visualização)
+    await tester.ensureVisible(aboutUsFinder);
+    
+    // Toca no tile
+    await tester.tap(aboutUsFinder);
+    
+    // Aguarda a transição/diálogo abrir
+    await tester.pumpAndSettle(); 
+
+    // 3. ASSERT (Verificação)
+    
+    
+    expect(find.byType(AlertDialog), findsOneWidget, 
+        reason: 'Esperado que um AlertDialog (ou AboutDialog) seja exibido.'); 
+    
+    // Opcional: Fechar o diálogo para finalizar o teste
+    // Simula um clique fora do diálogo para descartá-lo
+    // Tentar clicar no ponto superior esquerdo da tela, fora do diálogo centralizado
+    await tester.tapAt(Offset(10, 10)); 
+    await tester.pumpAndSettle();
+    
+    // Verifica se o diálogo desapareceu
+    expect(find.byType(AlertDialog), findsNothing, 
+        reason: 'O AlertDialog deve ter sido fechado após o tap fora.');
+  });
+});
 
 }
