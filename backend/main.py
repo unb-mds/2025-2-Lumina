@@ -16,14 +16,19 @@ from app.models.article import Article  # Importa o *novo* modelo Pydantic
 from dotenv import load_dotenv
 from fastapi import Depends, FastAPI, HTTPException, status
 from fastapi.responses import JSONResponse
+from fastapi.staticfiles import StaticFiles # Necessário para arquivos estáticos
 from pydantic import BaseModel, HttpUrl
+
+# Importa o roteador de administração
+from app.routers.admin import router as admin_router
 
 load_dotenv()
 
 # --- Configuração de API e Modelos ---
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 if not GOOGLE_API_KEY:
-    raise ValueError("A variável de ambiente GOOGLE_API_KEY não foi definida.")
+    # Apenas um aviso no log para não impedir que o servidor suba
+    print("AVISO: A variável de ambiente GOOGLE_API_KEY não foi definida.")
 
 
 # --- Inicialização da Aplicação FastAPI ---
@@ -33,6 +38,10 @@ app = FastAPI(
     version="1.0.0",
 )
 
+# --- IMPORTANTE: Configuração do Admin e CSS ---
+app.mount("/static", StaticFiles(directory="app/static"), name="static")
+app.include_router(admin_router)
+# -----------------------------------------------
 
 # --- Factories Singleton com Cache ---
 @lru_cache

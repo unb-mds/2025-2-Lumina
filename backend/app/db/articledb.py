@@ -19,7 +19,10 @@ class ArticleDB:
             current_dir = os.path.dirname(os.path.abspath(__file__))
             self.db_path = os.path.join(current_dir, db_name)
             
-        self.conn = sqlite3.connect(self.db_path)
+
+        # --- Adicionado check_same_thread=False para compatibilidade com FastAPI ---
+
+        self.conn = sqlite3.connect(self.db_path, check_same_thread=False)
         self.create_table()
 
     def create_table(self):
