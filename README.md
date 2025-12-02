@@ -141,6 +141,26 @@ Antes de começar, você vai precisar ter instalado em sua máquina:
     flutter run
     ```
 
+## 📦 Como baixar o aplicativo
+
+Para baixar nosso aplicativo, basta acessar esse link do [Google Drive](https://drive.google.com/file/d/1yYDSYekn5QneN7ksI1ih1_U25albmIi7/view?usp=sharing) e seguir este passo a passo:
+
+1. Baixe o arquivo **Lumina.apk** no seu dispositivo celular presente no link
+
+2. Procure pelo apk baixado nos seus arquivos (geralmente na pasta downloads)
+
+3. Clique no arquivo **Lumina.apk** e instale o aplicativo
+
+**obs.**: Caso necessário, lembre-se de permitir a instalação de apps desconhecidos no seu dispositivo
+
+## 📱 Demonstração do aplicativo
+
+Abaixo está uma pequena demonstração do aplicativo funcionando
+
+<img src="docs/img/LuminaReadME.gif" alt="Lumina" width="400">
+
+
+
 ## 🤝 Como Contribuir
 Ficamos felizes com o interesse em contribuir! Para detalhes sobre como submeter Pull Requests, padrões de código e nossa política de conduta, leia nosso guia:[CONTRIBUTING.md](CONTRIBUTING.md)
 
