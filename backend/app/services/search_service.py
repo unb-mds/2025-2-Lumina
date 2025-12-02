@@ -37,7 +37,7 @@ class SearchService:
             f"Cliente ChromaDB conectado em '{db_path}' e coleção '{collection_name}' pronta."
         )
         
-    def search(self, query: str, k: int = 10) -> List[Document]:
+    def search(self, query: str, k: int = 5) -> List[Document]:
         """
         Busca por documentos similares a uma query no ChromaDB.
 
