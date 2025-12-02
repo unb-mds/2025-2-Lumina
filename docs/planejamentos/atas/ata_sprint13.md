@@ -20,25 +20,25 @@ Planejamento estratégico para a Release 2 e finalização do projeto.
 
 ### 📝 Pautas e Definições:
 
-* **Pauta 1: Review** 
-* **Arthur:** Subiu para o repositorio a página admin e começou a atualizar a documentação do back end.
-* **Atila:** Fez novamente o deploy do gitpages e atualizou algumas pastas.
-* **Cecilia:** Documentação do readme e finalizou o código de conduta.
-* **Nathan:** Alterou a logo no aplicativo, terminou os testes do frontend (36 testes 90% de cobertura), não testou arquivos externos e chatscreen. Realizou o pagamento do deploy na playstore (esperando a confirmação do pagamento). Termo de Conficialidade do usuario
-* **João:** Terminou o historico e finalizou a exclusão de chats do historico
-* **Tiago:** Implementou diversas novas funcionalidades.
+**Pauta 1: Review** 
+  * **Arthur:** Subiu para o repositorio a página admin e começou a atualizar a documentação do back end.
+  * **Atila:** Fez novamente o deploy do gitpages e atualizou algumas pastas.
+  * **Cecilia:** Documentação do readme e finalizou o código de conduta.
+  * **Nathan:** Alterou a logo no aplicativo, terminou os testes do frontend (36 testes 90% de cobertura), não testou arquivos externos e chatscreen. Realizou o pagamento do deploy na playstore (esperando a confirmação do pagamento).                     Termo de Conficialidade do usuario
+  * **João:** Terminou o historico e finalizou a exclusão de chats do historico
+  * **Tiago:** Implementou diversas novas funcionalidades.
 
-* **Pauta 2: GitPages e atualização dele**
-* Discução em grupo sobre o que deve ser feito e como iremos fazer para atualizar o gitpages.
+**Pauta 2: GitPages e atualização dele**
+  * Discução em grupo sobre o que deve ser feito e como iremos fazer para atualizar o gitpages.
 
-* **Pauta 3: Release 2**
+**Pauta 3: Release 2**
 * Organização de como iremos realizar a apresentação final, Arthur se responsabilizou a fazer os slides e preparar a apresentação. Cecília e Tiago ficarão responsaveis para realizar a apresentação.
 
-* **Pauta 3: Release 2**
+**Pauta 3: Release 2**
 
-* **Pauta 4: Considerações durante reunião**
-* Aulão do Átila sobre como atualizar o MKDocs com dicas e como fazer funcionar.
-* Reunião focada para a aprensentação marcada as 20:30 no dia 02/12/25.
+**Pauta 4: Considerações durante reunião**
+  * Aulão do Átila sobre como atualizar o MKDocs com dicas e como fazer funcionar.
+  * Reunião focada para a aprensentação marcada as 20:30 no dia 02/12/25.
 
 ---
 
