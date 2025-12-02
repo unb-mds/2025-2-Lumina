@@ -24,7 +24,7 @@ Planejamento estratégico para a Release 2 e finalização do projeto.
 * **Arthur:** Subiu para o repositorio a página admin e começou a atualizar a documentação do back end.
 * **Atila:** Fez novamente o deploy do gitpages e atualizou algumas pastas.
 * **Cecilia:** Documentação do readme e finalizou o código de conduta.
-* **Nathan:* Alterou a logo no aplicativo, terminou os testes do frontend (36 testes 90% de cobertura), não testou arquivos externos e chatscreen. Realizou o pagamento do deploy na playstore (esperando a confirmação do pagamento). Termo de Conficialidade do usuario
+* **Nathan:** Alterou a logo no aplicativo, terminou os testes do frontend (36 testes 90% de cobertura), não testou arquivos externos e chatscreen. Realizou o pagamento do deploy na playstore (esperando a confirmação do pagamento). Termo de Conficialidade do usuario
 * **João:** Terminou o historico e finalizou a exclusão de chats do historico
 * **Tiago:** Implementou diversas novas funcionalidades.
 
