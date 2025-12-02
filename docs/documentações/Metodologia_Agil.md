@@ -6,7 +6,7 @@ O projeto Lumina adota uma metodologia ágil híbrida, combinando a estrutura de
 
 ## Scrum: Gestão e Processo
 
-O Scrum é utilizado como o *framework* principal para o planejamento e organização das tarefas. O desenvolvimento é dividido em ciclos curtos, permitindo *feedback* rápido e adaptação contínua às mudanças de requisitos.
+O Scrum é utilizado como o *framework* principal para o planejamento e organização das tarefas do grupo. O desenvolvimento é dividido em ciclos curtos, permitindo *feedback* rápido e adaptação contínua às mudanças de requisitos.
 
 * **Sprints Semanais:** O projeto opera em ciclos de trabalho (Sprints) com duração de **uma semana**. Essa periodicidade curta favorece a entrega contínua de valor e permite correções de rota ágeis.
 * **Artefatos:**
