@@ -11,12 +11,10 @@ nav:
   - Levantamento de Requisitos:
       - Requisitos: requisitos/Requisitos.md
       - Story Map: requisitos/StoryMap.md
-  - Organização:
-      - Front-end: organização/frontend.md
-      - Back-end: organização/backend.md
-      - Protótipo de baixa fidelidade: organização/Prototipo-de-baixa-fidelidade.png
-      - Código de conduta: organização/CODE_OF_CONDUCT.md
-      - Guia de contribuição: organização/CONTRIBUTING.md
+  - Documentação:
+      - Front-end: documentação/frontend.md
+      - Back-end: documentação/backend.md
+      - Protótipo de baixa fidelidade: documentação/Prototipo-de-baixa-fidelidade.png
   - Estudos:
       - Arquitetura de sistemas: estudos/Arquitetura_de_Sistemas.md
       - Boas práticas de documentação: estudos/Boas_Praticas_de_Documentacao.md
