@@ -156,7 +156,7 @@ Para baixar nosso aplicativo, basta acessar esse link do [Google Drive](https://
 
 Abaixo está uma pequena demonstração do aplicativo funcionando
 
-![Lumina](docs/img/LuminaReadME.gif)
+<img src="docs/img/LuminaReadME.gif" alt="Lumina" width="400">
 
 
 
