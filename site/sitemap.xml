@@ -2,134 +2,242 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://mydomain.org/mysite/</loc>
-         <lastmod>2025-10-12</lastmod>
+         <lastmod>2025-12-01</lastmod>
     </url>
     <url>
-         <loc>https://mydomain.org/mysite/documenta%C3%A7%C3%B5es/Requisitos/</loc>
-         <lastmod>2025-10-12</lastmod>
+         <loc>https://mydomain.org/mysite/arquitetura/diagramas/arquitetura/</loc>
+         <lastmod>2025-12-01</lastmod>
     </url>
     <url>
-         <loc>https://mydomain.org/mysite/documenta%C3%A7%C3%B5es/StoryMap/</loc>
-         <lastmod>2025-10-12</lastmod>
+         <loc>https://mydomain.org/mysite/arquitetura/diagramas/diagramas/</loc>
+         <lastmod>2025-12-01</lastmod>
     </url>
     <url>
-         <loc>https://mydomain.org/mysite/documenta%C3%A7%C3%B5es/documenta%C3%A7%C3%A3o-back-end/</loc>
-         <lastmod>2025-10-12</lastmod>
+         <loc>https://mydomain.org/mysite/estudos/APIs_e_WebCrawlers/</loc>
+         <lastmod>2025-12-01</lastmod>
     </url>
     <url>
-         <loc>https://mydomain.org/mysite/documenta%C3%A7%C3%B5es/documenta%C3%A7%C3%A3o-front-end/</loc>
-         <lastmod>2025-10-12</lastmod>
+         <loc>https://mydomain.org/mysite/estudos/Arquitetura_de_Agentes_de_IA/</loc>
+         <lastmod>2025-12-01</lastmod>
     </url>
     <url>
-         <loc>https://mydomain.org/mysite/documenta%C3%A7%C3%B5es/diagramas/arquitetura/</loc>
-         <lastmod>2025-10-12</lastmod>
+         <loc>https://mydomain.org/mysite/estudos/Arquitetura_de_Sistemas/</loc>
+         <lastmod>2025-12-01</lastmod>
     </url>
     <url>
-         <loc>https://mydomain.org/mysite/documenta%C3%A7%C3%B5es/diagramas/diagramas/</loc>
-         <lastmod>2025-10-12</lastmod>
+         <loc>https://mydomain.org/mysite/estudos/Boas_Praticas_de_Documentacao/</loc>
+         <lastmod>2025-12-01</lastmod>
     </url>
     <url>
-         <loc>https://mydomain.org/mysite/estudos/ArquiteturaDeSistemas/</loc>
-         <lastmod>2025-10-12</lastmod>
-    </url>
-    <url>
-         <loc>https://mydomain.org/mysite/estudos/BoasPraticasDeDocumentacao/</loc>
-         <lastmod>2025-10-12</lastmod>
+         <loc>https://mydomain.org/mysite/estudos/Como_Hospedar_um_App_na_PlayStore/</loc>
+         <lastmod>2025-12-01</lastmod>
     </url>
     <url>
          <loc>https://mydomain.org/mysite/estudos/Defini%C3%A7%C3%A3o_de_Produto/</loc>
-         <lastmod>2025-10-12</lastmod>
+         <lastmod>2025-12-01</lastmod>
     </url>
     <url>
-         <loc>https://mydomain.org/mysite/estudos/Estudo%20sobre%20Arquitetura%20de%20Agentes%20de%20IA/</loc>
-         <lastmod>2025-10-12</lastmod>
+         <loc>https://mydomain.org/mysite/estudos/Docker/</loc>
+         <lastmod>2025-12-01</lastmod>
     </url>
     <url>
-         <loc>https://mydomain.org/mysite/estudos/Estudo%20sobre%20como%20hospedar%20um%20app%20na%20Play%20Store/</loc>
-         <lastmod>2025-10-12</lastmod>
+         <loc>https://mydomain.org/mysite/estudos/Ferramentas_de_Desempenho/</loc>
+         <lastmod>2025-12-01</lastmod>
     </url>
     <url>
-         <loc>https://mydomain.org/mysite/estudos/EstudoRAG_e%20_Aplica%C3%A7%C3%B5es/</loc>
-         <lastmod>2025-10-12</lastmod>
+         <loc>https://mydomain.org/mysite/estudos/Figma/</loc>
+         <lastmod>2025-12-01</lastmod>
     </url>
     <url>
-         <loc>https://mydomain.org/mysite/estudos/Estudo_APIsEWebCrawlers/</loc>
-         <lastmod>2025-10-12</lastmod>
+         <loc>https://mydomain.org/mysite/estudos/Flutter_e_Dart/</loc>
+         <lastmod>2025-12-01</lastmod>
     </url>
     <url>
-         <loc>https://mydomain.org/mysite/estudos/Estudo_Docker/</loc>
-         <lastmod>2025-10-12</lastmod>
-    </url>
-    <url>
-         <loc>https://mydomain.org/mysite/estudos/Estudo_Figma/</loc>
-         <lastmod>2025-10-12</lastmod>
-    </url>
-    <url>
-         <loc>https://mydomain.org/mysite/estudos/Estudo_SitesEstaticos/</loc>
-         <lastmod>2025-10-12</lastmod>
-    </url>
-    <url>
-         <loc>https://mydomain.org/mysite/estudos/Flutter%20e%20Dart/</loc>
-         <lastmod>2025-10-12</lastmod>
-    </url>
-    <url>
-         <loc>https://mydomain.org/mysite/estudos/GitHubInsights/</loc>
-         <lastmod>2025-10-12</lastmod>
+         <loc>https://mydomain.org/mysite/estudos/GitHub_Insights/</loc>
+         <lastmod>2025-12-01</lastmod>
     </url>
     <url>
          <loc>https://mydomain.org/mysite/estudos/Git_e_GitHub/</loc>
-         <lastmod>2025-10-12</lastmod>
+         <lastmod>2025-12-01</lastmod>
     </url>
     <url>
-         <loc>https://mydomain.org/mysite/estudos/MetricasdeOpenSouce/</loc>
-         <lastmod>2025-10-12</lastmod>
+         <loc>https://mydomain.org/mysite/estudos/Metricas_de_OpenSouce/</loc>
+         <lastmod>2025-12-01</lastmod>
+    </url>
+    <url>
+         <loc>https://mydomain.org/mysite/estudos/Persistencia_de_dados%28flutter%29/</loc>
+         <lastmod>2025-12-01</lastmod>
+    </url>
+    <url>
+         <loc>https://mydomain.org/mysite/estudos/RAG_e_Aplica%C3%A7%C3%B5es/</loc>
+         <lastmod>2025-12-01</lastmod>
     </url>
     <url>
          <loc>https://mydomain.org/mysite/estudos/Requisitos/</loc>
-         <lastmod>2025-10-12</lastmod>
+         <lastmod>2025-12-01</lastmod>
+    </url>
+    <url>
+         <loc>https://mydomain.org/mysite/estudos/Sites_Estaticos/</loc>
+         <lastmod>2025-12-01</lastmod>
     </url>
     <url>
          <loc>https://mydomain.org/mysite/estudos/Tecnologias_Backend/</loc>
-         <lastmod>2025-10-12</lastmod>
+         <lastmod>2025-12-01</lastmod>
     </url>
     <url>
          <loc>https://mydomain.org/mysite/estudos/Tecnologias_Frontend/</loc>
-         <lastmod>2025-10-12</lastmod>
+         <lastmod>2025-12-01</lastmod>
     </url>
     <url>
-         <loc>https://mydomain.org/mysite/planejamentos/atas/ata_Sprint00/</loc>
-         <lastmod>2025-10-12</lastmod>
+         <loc>https://mydomain.org/mysite/estudos/Teste_Unit%C3%A1rio_em_flutter/</loc>
+         <lastmod>2025-12-01</lastmod>
     </url>
     <url>
-         <loc>https://mydomain.org/mysite/planejamentos/atas/ata_Sprint01/</loc>
-         <lastmod>2025-10-12</lastmod>
+         <loc>https://mydomain.org/mysite/estudos/Testes/</loc>
+         <lastmod>2025-12-01</lastmod>
     </url>
     <url>
-         <loc>https://mydomain.org/mysite/planejamentos/atas/ata_Sprint02/</loc>
-         <lastmod>2025-10-12</lastmod>
+         <loc>https://mydomain.org/mysite/organiza%C3%A7%C3%A3o/CODE_OF_CONDUCT/</loc>
+         <lastmod>2025-12-01</lastmod>
     </url>
     <url>
-         <loc>https://mydomain.org/mysite/planejamentos/atas/ata_Sprint03/</loc>
-         <lastmod>2025-10-12</lastmod>
+         <loc>https://mydomain.org/mysite/organiza%C3%A7%C3%A3o/CONTRIBUTING/</loc>
+         <lastmod>2025-12-01</lastmod>
+    </url>
+    <url>
+         <loc>https://mydomain.org/mysite/organiza%C3%A7%C3%A3o/backend/</loc>
+         <lastmod>2025-12-01</lastmod>
+    </url>
+    <url>
+         <loc>https://mydomain.org/mysite/organiza%C3%A7%C3%A3o/frontend/</loc>
+         <lastmod>2025-12-01</lastmod>
+    </url>
+    <url>
+         <loc>https://mydomain.org/mysite/planejamentos/backlog/</loc>
+         <lastmod>2025-12-01</lastmod>
+    </url>
+    <url>
+         <loc>https://mydomain.org/mysite/planejamentos/cronograma/</loc>
+         <lastmod>2025-12-01</lastmod>
+    </url>
+    <url>
+         <loc>https://mydomain.org/mysite/planejamentos/atas/ata_sprint00/</loc>
+         <lastmod>2025-12-01</lastmod>
+    </url>
+    <url>
+         <loc>https://mydomain.org/mysite/planejamentos/atas/ata_sprint01/</loc>
+         <lastmod>2025-12-01</lastmod>
+    </url>
+    <url>
+         <loc>https://mydomain.org/mysite/planejamentos/atas/ata_sprint02/</loc>
+         <lastmod>2025-12-01</lastmod>
+    </url>
+    <url>
+         <loc>https://mydomain.org/mysite/planejamentos/atas/ata_sprint03/</loc>
+         <lastmod>2025-12-01</lastmod>
+    </url>
+    <url>
+         <loc>https://mydomain.org/mysite/planejamentos/atas/ata_sprint04/</loc>
+         <lastmod>2025-12-01</lastmod>
+    </url>
+    <url>
+         <loc>https://mydomain.org/mysite/planejamentos/atas/ata_sprint05/</loc>
+         <lastmod>2025-12-01</lastmod>
+    </url>
+    <url>
+         <loc>https://mydomain.org/mysite/planejamentos/atas/ata_sprint06/</loc>
+         <lastmod>2025-12-01</lastmod>
+    </url>
+    <url>
+         <loc>https://mydomain.org/mysite/planejamentos/atas/ata_sprint07/</loc>
+         <lastmod>2025-12-01</lastmod>
+    </url>
+    <url>
+         <loc>https://mydomain.org/mysite/planejamentos/atas/ata_sprint08/</loc>
+         <lastmod>2025-12-01</lastmod>
+    </url>
+    <url>
+         <loc>https://mydomain.org/mysite/planejamentos/atas/ata_sprint09/</loc>
+         <lastmod>2025-12-01</lastmod>
+    </url>
+    <url>
+         <loc>https://mydomain.org/mysite/planejamentos/atas/ata_sprint10/</loc>
+         <lastmod>2025-12-01</lastmod>
+    </url>
+    <url>
+         <loc>https://mydomain.org/mysite/planejamentos/atas/ata_sprint11/</loc>
+         <lastmod>2025-12-01</lastmod>
+    </url>
+    <url>
+         <loc>https://mydomain.org/mysite/planejamentos/atas/ata_sprint12/</loc>
+         <lastmod>2025-12-01</lastmod>
     </url>
     <url>
          <loc>https://mydomain.org/mysite/planejamentos/atas/modelo_ata/</loc>
-         <lastmod>2025-10-12</lastmod>
+         <lastmod>2025-12-01</lastmod>
     </url>
     <url>
          <loc>https://mydomain.org/mysite/planejamentos/sprints/sprint_00/</loc>
-         <lastmod>2025-10-12</lastmod>
+         <lastmod>2025-12-01</lastmod>
     </url>
     <url>
          <loc>https://mydomain.org/mysite/planejamentos/sprints/sprint_01/</loc>
-         <lastmod>2025-10-12</lastmod>
+         <lastmod>2025-12-01</lastmod>
     </url>
     <url>
          <loc>https://mydomain.org/mysite/planejamentos/sprints/sprint_02/</loc>
-         <lastmod>2025-10-12</lastmod>
+         <lastmod>2025-12-01</lastmod>
+    </url>
+    <url>
+         <loc>https://mydomain.org/mysite/planejamentos/sprints/sprint_03/</loc>
+         <lastmod>2025-12-01</lastmod>
+    </url>
+    <url>
+         <loc>https://mydomain.org/mysite/planejamentos/sprints/sprint_04/</loc>
+         <lastmod>2025-12-01</lastmod>
+    </url>
+    <url>
+         <loc>https://mydomain.org/mysite/planejamentos/sprints/sprint_05/</loc>
+         <lastmod>2025-12-01</lastmod>
+    </url>
+    <url>
+         <loc>https://mydomain.org/mysite/planejamentos/sprints/sprint_06/</loc>
+         <lastmod>2025-12-01</lastmod>
+    </url>
+    <url>
+         <loc>https://mydomain.org/mysite/planejamentos/sprints/sprint_07/</loc>
+         <lastmod>2025-12-01</lastmod>
+    </url>
+    <url>
+         <loc>https://mydomain.org/mysite/planejamentos/sprints/sprint_08/</loc>
+         <lastmod>2025-12-01</lastmod>
+    </url>
+    <url>
+         <loc>https://mydomain.org/mysite/planejamentos/sprints/sprint_09/</loc>
+         <lastmod>2025-12-01</lastmod>
+    </url>
+    <url>
+         <loc>https://mydomain.org/mysite/planejamentos/sprints/sprint_10/</loc>
+         <lastmod>2025-12-01</lastmod>
+    </url>
+    <url>
+         <loc>https://mydomain.org/mysite/planejamentos/sprints/sprint_11/</loc>
+         <lastmod>2025-12-01</lastmod>
+    </url>
+    <url>
+         <loc>https://mydomain.org/mysite/planejamentos/sprints/sprint_12/</loc>
+         <lastmod>2025-12-01</lastmod>
     </url>
     <url>
          <loc>https://mydomain.org/mysite/planejamentos/sprints/template_sprint/</loc>
-         <lastmod>2025-10-12</lastmod>
+         <lastmod>2025-12-01</lastmod>
+    </url>
+    <url>
+         <loc>https://mydomain.org/mysite/requisitos/Requisitos/</loc>
+         <lastmod>2025-12-01</lastmod>
+    </url>
+    <url>
+         <loc>https://mydomain.org/mysite/requisitos/StoryMap/</loc>
+         <lastmod>2025-12-01</lastmod>
     </url>
 </urlset>
