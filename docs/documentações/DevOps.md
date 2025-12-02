@@ -49,13 +49,13 @@ Este fluxo garante a estabilidade da interface e funcionalidades do aplicativo m
 graph TD
     A[Desenvolvedor abre Pull Request] --> B{Verificação de Caminho}
     
-    B -- "Alteração em backend/**" --> C[Job: Backend CI]
+    B -- "Alteração em backend" --> C[Job: Backend CI]
     C --> C1[Setup Python 3.10]
     C1 --> C2[Instalação de Dependências]
     C2 --> C3[Execução: Pytest + Coverage]
     C3 --> D{Status}
 
-    B -- "Alteração em frontend/**" --> E[Job: Frontend CI]
+    B -- "Alteração em frontend" --> E[Job: Frontend CI]
     E --> E1[Setup Flutter Stable]
     E1 --> E2[Flutter Pub Get]
     E2 --> E3[Execução: Flutter Test]

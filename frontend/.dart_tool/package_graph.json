@@ -10,6 +10,7 @@
         "flutter",
         "flutter_dotenv",
         "flutter_launcher_icons",
+        "flutter_markdown_plus",
         "hive",
         "hive_flutter",
         "http",
@@ -61,6 +62,16 @@
         "stream_channel",
         "test_api",
         "vector_math"
+      ]
+    },
+    {
+      "name": "flutter_markdown_plus",
+      "version": "1.0.5",
+      "dependencies": [
+        "flutter",
+        "markdown",
+        "meta",
+        "path"
       ]
     },
     {
@@ -307,6 +318,14 @@
       "dependencies": [
         "clock",
         "collection"
+      ]
+    },
+    {
+      "name": "markdown",
+      "version": "7.3.0",
+      "dependencies": [
+        "args",
+        "meta"
       ]
     },
     {
