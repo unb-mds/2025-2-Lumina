@@ -39,7 +39,7 @@ class ChatService:
 
         # Este é o prompt que será enviado para o GeminiModel.chat()
         # Ele combina a pergunta do usuário com o contexto dos artigos.
-        final_prompt = f"Com base nos artigos abaixo, responda à seguinte pergunta.\n\n--- Artigos ---\n{context}\n\n--- Pergunta ---\n{query}"
+        final_prompt = f"Com base nos artigos abaixo, responda à seguinte pergunta. Mantenha a resposta resumida em até 200 palavras \n\n--- Artigos ---\n{context}\n\n--- Pergunta ---\n{query}"
 
         # 3. Generation: Chama o LLM para gerar a resposta
         response = self.llm.chat(final_prompt)
