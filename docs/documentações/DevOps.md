@@ -4,9 +4,12 @@ A estratégia de *DevOps* do projeto Lumina foi desenhada para suportar a arquit
 
 A automação é dividida em dois pilares fundamentais: a **Integração Contínua (CI)**, focada na validação imediata do código, e a **Entrega/Deploy Contínuo (CD)**, focada na atualização do ambiente de produção.
 
+---
+
 ## Pipeline de Integração Contínua (CI)
 
 Para otimizar o consumo de recursos e o tempo de *feedback*, os fluxos de trabalho de CI foram configurados com gatilhos condicionais (*path filters*). Isso significa que as rotinas de teste do Backend são executadas apenas quando há alterações no diretório correspondente, e o mesmo princípio se aplica ao Frontend.
+
 
 ### Fluxo de Verificação do Backend
 Este fluxo assegura a integridade da lógica de negócios e das integrações de IA.
@@ -38,6 +41,8 @@ Este fluxo garante a estabilidade da interface e funcionalidades do aplicativo m
 
     3.  **Validação:** Execução de testes de unidade e testes de *widget* com geração de relatórios de cobertura (`flutter test --coverage`).
 
+---
+
 ### Diagrama do Processo de CI
 
 ```mermaid
@@ -59,6 +64,7 @@ graph TD
     D -- Sucesso --> F[Check Verde no GitHub]
     D -- Falha --> G[Bloqueio do Merge]
 ```
+---
 
 ## Estratégia de Deploy e Entrega Contínua (CD)
 
@@ -91,6 +97,8 @@ No entanto, enfrentaram-se obstáculos significativos relacionados aos **prazos 
 * **Processo:** A partir da versão estável na branch `main`, são gerados os artefatos binários (`.apk`) do Android via GitHub Actions.
 
 * **Distribuição:** Esses arquivos são disponibilizados diretamente aos *stakeholders* e à equipe, permitindo a instalação e validação imediata em dispositivos físicos sem depender da aprovação assíncrona da loja.
+
+---
 
 ### Diagrama do Fluxo de Deploy
 
