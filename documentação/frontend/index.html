@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://mydomain.org/mysite/organiza%C3%A7%C3%A3o/CONTRIBUTING/">
+        <link rel="canonical" href="https://mydomain.org/mysite/documenta%C3%A7%C3%A3o/frontend/">
       
       
-        <link rel="prev" href="../CODE_OF_CONDUCT/">
+        <link rel="prev" href="../../requisitos/StoryMap/">
       
       
-        <link rel="next" href="../../estudos/Arquitetura_de_Sistemas/">
+        <link rel="next" href="../backend/">
       
       
         
@@ -25,7 +25,7 @@
     
     
       
-        <title>Guia de contribuição - Lumina</title>
+        <title>Front-end - Lumina</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#guia-de-contribuicao-lumina" class="md-skip">
+        <a href="#documentacao-tecnologia-frontend" class="md-skip">
           Skip to content
         </a>
       
@@ -113,7 +113,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Guia de contribuição
+              Front-end
             
           </span>
         </div>
@@ -535,7 +535,7 @@
   <span class="md-ellipsis">
     
   
-    Organização
+    Documentação
   
 
     
@@ -551,7 +551,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Organização
+    Documentação
   
 
           </label>
@@ -561,10 +561,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../frontend/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Front-end
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -580,6 +607,70 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-escolha-da-tecnologia" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Escolha da tecnologia
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-estrutura-do-frontend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Estrutura do frontend
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-descricao-dos-diretorios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Descrição dos diretórios
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-deploy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Deploy
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -636,192 +727,6 @@
   
 
       </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../CODE_OF_CONDUCT/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Código de conduta
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-    
-  
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Guia de contribuição
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Guia de contribuição
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#como-contribuir" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        🚀 Como Contribuir
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="🚀 Como Contribuir">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-encontre-ou-crie-uma-issue" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Encontre ou Crie uma Issue
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-faca-um-fork-e-clone-o-repositorio" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Faça um Fork e Clone o Repositório
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-crie-uma-branch" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Crie uma Branch
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-faca-commits-semanticos" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. Faça Commits Semânticos
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#5-envie-suas-alteracoes-push" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5. Envie suas alterações (Push)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#6-abra-um-pull-requestpr" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6. Abra um Pull Request(PR)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -2451,85 +2356,46 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#como-contribuir" class="md-nav__link">
+  <a href="#1-escolha-da-tecnologia" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🚀 Como Contribuir
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="🚀 Como Contribuir">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-encontre-ou-crie-uma-issue" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Encontre ou Crie uma Issue
+        1. Escolha da tecnologia
       
     </span>
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#2-faca-um-fork-e-clone-o-repositorio" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#2-estrutura-do-frontend" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Faça um Fork e Clone o Repositório
+        2. Estrutura do frontend
       
     </span>
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#3-crie-uma-branch" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#3-descricao-dos-diretorios" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Crie uma Branch
+        3. Descrição dos diretórios
       
     </span>
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#4-faca-commits-semanticos" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#4-deploy" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Faça Commits Semânticos
+        4. Deploy
       
     </span>
   </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#5-envie-suas-alteracoes-push" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5. Envie suas alterações (Push)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#6-abra-um-pull-requestpr" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6. Abra um Pull Request(PR)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -2553,78 +2419,30 @@
   
 
 
-<h1 id="guia-de-contribuicao-lumina">Guia de Contribuição - Lumina 💡<a class="headerlink" href="#guia-de-contribuicao-lumina" title="Permanent link">&para;</a></h1>
-<p>Obrigado pelo interesse em contribuir com o <strong>Lumina</strong>! 🎉</p>
-<p>Este documento contém as diretrizes para garantir que sua contribuição seja processada de forma rápida e eficiente. Por favor, leia com atenção antes de começar.</p>
-<hr />
-<h2 id="como-contribuir">🚀 Como Contribuir<a class="headerlink" href="#como-contribuir" title="Permanent link">&para;</a></h2>
-<p>Para contribuir com o projeto, siga o fluxo de trabalho abaixo:</p>
-<h3 id="1-encontre-ou-crie-uma-issue">1. Encontre ou Crie uma Issue<a class="headerlink" href="#1-encontre-ou-crie-uma-issue" title="Permanent link">&para;</a></h3>
-<p>Antes de escrever qualquer código:</p>
-<ul>
-<li>Verifique as <strong>Issues Abertas</strong> para ver se alguém já está trabalhando no problema ou funcionalidade.</li>
-<li>Se for algo novo, crie uma <strong>Issue</strong> descrevendo o problema ou a sugestão de melhoria. Aguarde a aprovação ou discussão da equipe antes de começar.</li>
-</ul>
-<h3 id="2-faca-um-fork-e-clone-o-repositorio">2. Faça um Fork e Clone o Repositório<a class="headerlink" href="#2-faca-um-fork-e-clone-o-repositorio" title="Permanent link">&para;</a></h3>
-<ol>
-<li>Faça um <strong>Fork</strong> deste repositório para a sua conta.</li>
-<li>Clone o repositório para sua máquina local:</li>
-</ol>
-<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span><span class="o">[</span>https://github.com/SEU_USUARIO/2025-2-Lumina.git<span class="o">](</span>https://github.com/SEU_USUARIO/2025-2-Lumina.git<span class="o">)</span>
-<span class="nb">cd</span><span class="w"> </span><span class="m">2025</span>-2-Lumina
-</code></pre></div>
-<h3 id="3-crie-uma-branch">3. Crie uma Branch<a class="headerlink" href="#3-crie-uma-branch" title="Permanent link">&para;</a></h3>
-<p>Crie uma branch específica para a sua contribuição. Use nomes descritivos e siga o padrão:</p>
+<h1 id="documentacao-tecnologia-frontend">Documentação: Tecnologia frontend<a class="headerlink" href="#documentacao-tecnologia-frontend" title="Permanent link">&para;</a></h1>
+<h2 id="1-escolha-da-tecnologia">1. Escolha da tecnologia<a class="headerlink" href="#1-escolha-da-tecnologia" title="Permanent link">&para;</a></h2>
+<p>A tecnologia escolhida para o front-end do projeto é a framework <strong>Flutter</strong>, o que garante uma ótima experiência tanto visual quanto interativa para o usuário, além de garantir a compatibilidade com múltiplas plataformas.</p>
+<h2 id="2-estrutura-do-frontend">2. Estrutura do frontend<a class="headerlink" href="#2-estrutura-do-frontend" title="Permanent link">&para;</a></h2>
+<p>├── <code>lib</code>/Programação do front\
+├── <code>android</code>/Integração do aplicativo para a plataforma   <br />
+└── <code>pubspec.yaml</code>/Arquivo dos requisitos do aplicativo</p>
+<h2 id="3-descricao-dos-diretorios">3. Descrição dos diretórios<a class="headerlink" href="#3-descricao-dos-diretorios" title="Permanent link">&para;</a></h2>
 <ul>
 <li>
-<p><code>feat/nome-da-funcionalidade</code> (para novas funcionalidades)</p>
+<p><code>lib/</code>
+Pasta responável por conter a parte principal da programação do aplicativo flutter, nela estão presentes todas as telas pelas quais o aplicativo passa, além da main.dart que é responsavel por sua vez pelo ponto de partida do aplicativo e como ele vai manejar as telas, persistências, Etc. </p>
 </li>
 <li>
-<p><code>fix/nome-da-correcao</code> (para correção de bugs)</p>
+<p><code>android/</code>
+Pasta responsável por interpretar, buildar e configurar o aplicativo para o sistema android, que foi o sistema operacional escolhido para distribuição do projeto. É uma pasta que necessita de poucas alterações, geralmente sendo de coisas especificas da plataforma e menores em relação ao desenvolvimendo total do projeto.</p>
 </li>
 <li>
-<p><code>docs/nome-da-mudanca</code> (para documentação)</p>
-</li>
-<li>
-<p><code>chore/nome-da-tarefa</code> (para manutenção ou configurações)</p>
+<p><code>pubspec.yaml/</code>
+Arquivo responsável pelas dependências do projeto, ele é acessado quando o comando <code>flutter pub get</code> é utilizado, pegando todas as bibliotecas e as baixando para o projeto ser interpretado corretamente, além de mostrar os assets (.env,JSON,imgens, etc.) que o aplicativo deve empacotar e utilizar.</p>
 </li>
 </ul>
-<p>Exemplo:</p>
-<div class="highlight"><pre><span></span><code>git<span class="w"> </span>checkout<span class="w"> </span>-b<span class="w"> </span>feat/adicionar-login
-</code></pre></div>
-<h3 id="4-faca-commits-semanticos">4. Faça Commits Semânticos<a class="headerlink" href="#4-faca-commits-semanticos" title="Permanent link">&para;</a></h3>
-<p>Use mensagens de commit claras e padronizadas (em inglês ou português, conforme a decisão da equipe, mas mantenha a consistência).
-Exemplos:</p>
-<ul>
-<li>
-<p><code>feat: Adiciona endpoint de login</code></p>
-</li>
-<li>
-<p><code>fix: Corrige erro no crawler do G1</code></p>
-</li>
-<li>
-<p><code>docs: Atualiza instruções no README</code></p>
-</li>
-</ul>
-<h3 id="5-envie-suas-alteracoes-push">5. Envie suas alterações (Push)<a class="headerlink" href="#5-envie-suas-alteracoes-push" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>nome-da-sua-branch
-</code></pre></div>
-<h3 id="6-abra-um-pull-requestpr">6. Abra um Pull Request(PR)<a class="headerlink" href="#6-abra-um-pull-requestpr" title="Permanent link">&para;</a></h3>
-<ol>
-<li>
-<p>Vá até o repositório original no GitHub.</p>
-</li>
-<li>
-<p>Clique em <strong>Compare &amp; pull request</strong>.</p>
-</li>
-<li>
-<p>Preencha o template do PR com detalhes sobre o que foi feito.</p>
-</li>
-<li>
-<p>Aguarde a revisão da equipe. Fique atento aos comentários!</p>
-</li>
-</ol>
-<p>Boas contribuições! 🚀</p>
+<h2 id="4-deploy">4. Deploy<a class="headerlink" href="#4-deploy" title="Permanent link">&para;</a></h2>
+<p>O aplicativo sera lançado na <strong>playstore</strong>, para dispositivos <strong>android</strong>, tendo em mente a facil acessibilidade à dispositivos eletrônicos atualmente.</p>
 
 
 
@@ -2654,7 +2472,7 @@ Exemplos:</p>
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../CODE_OF_CONDUCT/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Código de conduta">
+          <a href="../../requisitos/StoryMap/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Story Map">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -2664,20 +2482,20 @@ Exemplos:</p>
                 Previous
               </span>
               <div class="md-ellipsis">
-                Código de conduta
+                Story Map
               </div>
             </div>
           </a>
         
         
           
-          <a href="../../estudos/Arquitetura_de_Sistemas/" class="md-footer__link md-footer__link--next" aria-label="Next: Arquitetura de sistemas">
+          <a href="../backend/" class="md-footer__link md-footer__link--next" aria-label="Next: Back-end">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Arquitetura de sistemas
+                Back-end
               </div>
             </div>
             <div class="md-footer__button md-icon">
