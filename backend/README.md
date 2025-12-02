@@ -8,7 +8,7 @@ Certifique-se de que os seguintes requisitos estão instalados no seu sistema:
 
 1. **Python**: Versão 3.10 ou superior.
 2. **pip**: O gerenciador de pacotes do Python, que geralmente é instalado junto com o Python.
-3. **Navegadores(Opcional)**: Para rodar os testes de interface (E2E): eles são relativamente pesados, por isso foram colocados no gitignore. Portanto, será necessário instalar os binários do Playwright (instruções abaixo).
+3. **Navegadores (Opcional)**: Para rodar os testes de interface (E2E): eles são relativamente pesados, por isso foram colocados no gitignore. Portanto, será necessário instalar os binários do Playwright (instruções abaixo).
 
 ---
 
@@ -181,4 +181,6 @@ backend/
 
 *   **`app/ai/`**: Módulo de inteligência artificial. Integra-se com o Google Gemini para realizar tarefas de processamento de linguagem natural, como a sumarização de textos, utilizando a técnica de RAG (Retrieval-Augmented Generation).
 
-*   **`tests/`**: Contém os testes automatizados do projeto, garantindo a qualidade e o correto funcionamento dos componentes.
+*   **`tests/`**: Contém os testes automatizados do projeto. 
+*   **Testes Unitários(`pytest`)**: Testam a lógica interna de banco, scrapers e API.
+*   **Testes E2E(`tests/e2e/`)**: Usam Playwright para testar a interface visual do Admin (login, cliques, exibição) simulando um navegador real.
