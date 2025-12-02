@@ -34,8 +34,8 @@ O projeto tem duração prevista de cerca de 3 meses, com entregas semanais.
 | **Sprint 10** | **Infraestrutura RAG:** Crawler do Metrópoles, Banco Vetorial (ChromaDB), persistência de chat e implementação do Splitter/Embedder. | 10/11/2025 | 16/11/2025 | ✅ Concluído |
 | **Sprint 11** | **Integração RAG:** Endpoints de API para RAG, Retriever customizado, Landing Page e refinamento do Frontend. | 17/11/2025 | 23/11/2025 | ✅ Concluído |
 | **Sprint 12** | **Qualidade e Estabilização:** Correção de CI/CD, testes automatizados, documentação de arquitetura e modelo de embedding local. | 24/11/2025 | 30/11/2025 | ✅ Concluído |
-| **Sprint 13** | **Polimento Final:** Testes de aceitação, refinamento da interface do usuário e otimização da IA. | 01/12/2025 | 07/12/2025 | 📅 Planejado |
-| **Sprint 14** | **Entrega Final (Release 2):** Empacotamento do produto, documentação final e abertura do código. | 08/12/2025 | 14/12/2025 | 📅 Planejado |
+| **Sprint 13** | **Polimento Final:** Testes de aceitação, refinamento da interface do usuário e otimização da IA. | 01/12/2025 | 07/12/2025 | ✅ Concluído |
+| **Sprint 14** | **Entrega Final (Release 2):** Empacotamento do produto, documentação final e abertura do código. | 08/12/2025 | 14/12/2025 | ✅ Concluído |
 
 ---
 
