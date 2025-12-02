@@ -50,9 +50,10 @@ Lumina/
 │   ├── workflows/           # Pipelines do GitHub Actions
 │   └── ...
 │
-├── backend/                 # API, IA e Lógica de Servidor
-│   ├── app/                 # Código fonte Python
-│   ├── tests/               # Testes automatizados (Pytest)
+├── backend/                 # API, IA, Admin e Lógica de Servidor
+│   ├── app/                 # Código fonte Python (API e WebCrawlers)
+│   ├── tests/               # Testes automatizados (Pytest e E2E)
+│   ├── scripts/             # Scripts auxiliares de manutenção
 │   └── main.py              # Ponto de entrada do servidor
 │
 ├── frontend/                # Aplicativo Mobile (Flutter)
