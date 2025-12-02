@@ -9,21 +9,21 @@ from app.services.scraping_manager import ScrapingError, ScrapingManager
 
 @pytest.fixture
 def mock_articledb():
-    """Fixture to mock ArticleDB."""
+    """Fixture para criar um mock do ArticleDB."""
     with patch("app.services.scraping_manager.ArticleDB") as mock_db:
         yield mock_db.return_value
 
 
 @pytest.fixture
 def mock_downloader():
-    """Fixture to mock Downloader."""
+    """Fixture para criar um mock do Downloader."""
     with patch("app.services.scraping_manager.Downloader") as mock_downloader:
         yield mock_downloader.return_value
 
 
 @pytest.fixture
 def sample_article():
-    """Fixture to provide a sample article."""
+    """Fixture que fornece um objeto Article de exemplo para os testes."""
     return Article(
         id=1,
         title="Test Title",
@@ -35,7 +35,7 @@ def sample_article():
 
 @pytest.fixture
 def mock_html():
-    """Fixture to provide a mock HTML content."""
+    """Fixture que fornece um conteúdo HTML simulado (BeautifulSoup)."""
     html = """
     <html>
         <body>
@@ -56,8 +56,16 @@ def test_scrape_and_save_new_article(
     sample_article: Article,
     mock_html: BeautifulSoup,
 ):
-    """Test scraping and saving a new article."""
-    mock_articledb.get_article_by_url.return_value = None
+    """
+    Testa o fluxo completo de scraping e salvamento de um novo artigo.
+    
+    Verifica se o gerenciador:
+    1. Confirma que o artigo não existe no banco.
+    2. Baixa o HTML da URL.
+    3. Executa o scraper específico.
+    4. Salva o artigo no banco.
+    """
+    # Configuração: O artigo não existe no banco, e o download retorna o HTML mockado    mock_articledb.get_article_by_url.return_value = None
     mock_downloader.fetch.return_value = mock_html
 
     mock_scraper = MagicMock()
@@ -83,7 +91,11 @@ def test_scrape_and_save_new_article(
 def test_scrape_and_save_existing_article(
     mock_articledb: MagicMock, mock_downloader: MagicMock, sample_article: Article
 ):
-    """Test scraping an existing article."""
+    """
+    Testa o comportamento quando o artigo já existe no banco de dados.
+    Deve retornar o ID existente e não realizar novo download ou scraping.
+    """
+    # Configuração: O banco já retorna um artigo existente
     mock_articledb.get_article_by_url.return_value = sample_article
 
     manager = ScrapingManager()
@@ -100,7 +112,7 @@ def test_scrape_and_save_existing_article(
 
 
 def test_scrape_and_save_unsupported_url(mock_articledb: MagicMock):
-    """Test scraping an unsupported URL."""
+    """Testa a tentativa de scraping com uma URL de domínio não suportado."""
     manager = ScrapingManager()
     manager.db = mock_articledb
     with pytest.raises(ValueError, match="Fonte de URL não suportada."):
@@ -113,7 +125,7 @@ def test_scrape_and_save_scraper_fails(
     sample_article: Article,
     mock_html: BeautifulSoup,
 ):
-    """Test scraping when the scraper fails."""
+    """Testa o cenário onde o scraper específico falha ao extrair dados (retorna None)."""
     mock_articledb.get_article_by_url.return_value = None
     mock_downloader.fetch.return_value = mock_html
 
@@ -137,7 +149,7 @@ def test_scrape_and_save_db_fails(
     sample_article: Article,
     mock_html: BeautifulSoup,
 ):
-    """Test scraping when saving to the database fails."""
+    """Testa o cenário de falha ao salvar o artigo no banco de dados."""
     mock_articledb.get_article_by_url.return_value = None
     mock_downloader.fetch.return_value = mock_html
 

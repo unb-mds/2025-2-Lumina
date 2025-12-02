@@ -8,14 +8,14 @@ EXPECTED_DIMENSION = 768
 
 @pytest.fixture
 def mock_google_embeddings_client(mocker):
-    """Mocks the GoogleGenerativeAIEmbeddings client from LangChain."""
+    """Simula o cliente GoogleGenerativeAIEmbeddings do LangChain."""
     mock_client = mocker.patch(
         "langchain_google_genai.GoogleGenerativeAIEmbeddings",
     ).return_value
 
     mock_client.embed_query.return_value = [0.1] * EXPECTED_DIMENSION
 
-    # Configure the mock to return a number of embeddings equal to the input length
+    # Configura o mock para retornar um número de embeddings igual ao tamanho da entrada
     def embed_documents_side_effect(texts):
         return [[0.1] * EXPECTED_DIMENSION for _ in texts]
 
@@ -26,7 +26,7 @@ def mock_google_embeddings_client(mocker):
 
 @pytest.fixture
 def embedder(mock_google_embeddings_client) -> GoogleEmbedder:
-    """Fixture que inicializa o Embedder com um cliente mockado."""
+    """Inicializa o Embedder usando o cliente simulado."""
     instance = GoogleEmbedder(api_key="fake-key")
     instance.client = mock_google_embeddings_client
     return instance
@@ -66,7 +66,7 @@ def test_embed_documents_small_batch(embedder: GoogleEmbedder, mocker):
     assert len(vetores) == len(textos)
     assert len(vetores[0]) == EXPECTED_DIMENSION
     embedder.client.embed_documents.assert_called_once_with(textos)
-    # The GoogleEmbedder itself does not implement throttling, so time.sleep should not be called.
+    # O GoogleEmbedder não implementa limitação de taxa nativa, então não deve pausar
     mock_sleep.assert_not_called()
 
 

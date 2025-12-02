@@ -10,20 +10,23 @@ from app.ai.rag.text_splitter import TextSplitter
 from app.db.vectordb import VectorDB
 from app.models.article import Article
 
-# --- Fixtures ---
-
+# --- Fixtures (Configuração de Dependências) ---
 
 @pytest.fixture
 def mock_google_embedder(mocker):
-    """Provides a GoogleEmbedder instance with its internal client fully mocked."""
-    # Mock the client inside the GoogleEmbedder
+    """
+    Fixture que fornece uma instância do GoogleEmbedder com o cliente interno mockado.
+    Isso evita chamadas reais à API do Google Generative AI.
+    """
+    # Mock do cliente interno dentro do GoogleEmbedder
     mock_client = mocker.patch(
         "langchain_google_genai.GoogleGenerativeAIEmbeddings",
     ).return_value
 
+    # Simula o retorno de vetores (embeddings) para dois chunks
     mock_client.embed_documents.return_value = [[0.1] * 768, [0.2] * 768]
 
-    # Create a real embedder but replace its client with our mock
+    # Cria a instância real mas substitui o cliente pelo mock
     embedder = GoogleEmbedder(api_key="fake_api_key")
     embedder.client = mock_client
     return embedder
@@ -31,7 +34,10 @@ def mock_google_embedder(mocker):
 
 @pytest.fixture
 def mock_text_splitter(mocker):
-    """Mocks the TextSplitter to control chunking behavior."""
+    """
+    Fixture que mocka o TextSplitter para controlar como o texto é dividido.
+    Retorna dois chunks fixos para facilitar a validação.
+    """
     mock_splitter = mocker.MagicMock(spec=TextSplitter)
     mock_splitter.split_article.return_value = [
         Document(
@@ -56,22 +62,25 @@ def mock_text_splitter(mocker):
 
 @pytest.fixture
 def mock_chroma_collection(mocker):
-    """Mocks the ChromaDB collection object."""
+    """Fixture que mocka o objeto de coleção (Collection) do ChromaDB."""
     return mocker.MagicMock()
 
 
 @pytest.fixture
 def mock_chroma_client(mocker, mock_chroma_collection):
-    """Mocks the ChromaDB PersistentClient and its get_or_create_collection method."""
+    """
+    Fixture que mocka o PersistentClient do ChromaDB.
+    Garante que 'get_or_create_collection' retorne o mock da coleção acima.
+    """
     with patch("chromadb.PersistentClient") as MockClient:
         mock_instance = MockClient.return_value
         mock_instance.get_or_create_collection.return_value = mock_chroma_collection
-        yield MockClient  # Yield the class mock itself
+        yield MockClient  # Retorna a classe mockada para verificações de instanciação
 
 
 @pytest.fixture
 def sample_article():
-    """Provides a sample Article object for testing."""
+    """Fixture que fornece um objeto Article válido com conteúdo."""
     return Article(
         id=1,
         title="Sample Article Title",
@@ -83,7 +92,7 @@ def sample_article():
 
 @pytest.fixture
 def article_no_content():
-    """Provides an Article object with no content."""
+    """Fixture que fornece um objeto Article vazio (sem conteúdo)."""
     return Article(
         id=2,
         title="No Content Article",
@@ -95,7 +104,7 @@ def article_no_content():
 
 @pytest.fixture
 def article_no_id():
-    """Provides an Article object with no ID."""
+    """Fixture que fornece um objeto Article sem ID (Inválido para vetorização)."""
     return Article(
         id=None,
         title="No ID Article",
@@ -105,27 +114,34 @@ def article_no_id():
     )
 
 
-# --- Tests ---
-
+# --- Testes de Inicialização ---
 
 def test_vectordb_init_success(
     mock_google_embedder, mock_text_splitter, mock_chroma_client
 ):
-    """Tests successful initialization of VectorDB."""
+    """
+    Testa a inicialização bem-sucedida do VectorDB.
+    Verifica se o cliente ChromaDB é instanciado no diretório correto e a coleção é criada.
+    """
+    # Execução
     vectordb = VectorDB(
         embedding_platform=mock_google_embedder,
         text_splitter=mock_text_splitter,
         db_directory_name="chroma_db"
     )
 
-    # Check if PersistentClient was called with a path ending in 'chroma_db'
+    # Verificação
+    # Checa se PersistentClient foi chamado com um caminho terminando em 'chroma_db'
     args, kwargs = mock_chroma_client.call_args
     assert "path" in kwargs
     assert kwargs["path"].endswith("chroma_db")
 
+    # Verifica se a coleção correta foi acessada/criada
     mock_chroma_client.return_value.get_or_create_collection.assert_called_once_with(
         name="lumina_articles"
     )
+    
+    # Verifica a injeção de dependências
     assert vectordb.embedding_platform == mock_google_embedder
     assert vectordb.splitter == mock_text_splitter
     assert vectordb.client is not None
@@ -133,10 +149,13 @@ def test_vectordb_init_success(
 
 
 def test_vectordb_init_failure_chroma(mock_google_embedder, mock_text_splitter, mocker):
-    """Tests VectorDB initialization failure if ChromaDB client raises an exception."""
+    """Testa a falha na inicialização quando o cliente ChromaDB lança uma exceção."""
+    # Configuração: Simula erro de conexão no Chroma
     mocker.patch(
         "chromadb.PersistentClient", side_effect=Exception("ChromaDB connection error")
     )
+    
+    # Execução e Verificação
     with pytest.raises(Exception, match="ChromaDB connection error"):
         VectorDB(
             embedding_platform=mock_google_embedder,
@@ -145,10 +164,20 @@ def test_vectordb_init_failure_chroma(mock_google_embedder, mock_text_splitter, 
         )
 
 
+# --- Testes de Vetorização (Core Logic) ---
+
 def test_vectorize_article_success(
     mock_google_embedder, mock_text_splitter, mock_chroma_collection, sample_article
 ):
-    """Tests successful vectorization of an article."""
+    """
+    Testa o fluxo feliz de vetorização de um artigo.
+    
+    Etapas verificadas:
+    1. O artigo é dividido em chunks (TextSplitter).
+    2. Os chunks são convertidos em vetores (GoogleEmbedder).
+    3. Dados e vetores são salvos na coleção (ChromaDB).
+    """
+    # Configuração
     vectordb = VectorDB(
         embedding_platform=mock_google_embedder,
         text_splitter=mock_text_splitter,
@@ -156,23 +185,32 @@ def test_vectorize_article_success(
     )
     vectordb.collection = mock_chroma_collection
 
+    # Execução
+    # Mockamos o UUID para garantir que o ID do batch seja previsível no teste
     with patch(
         "uuid.uuid4", return_value=uuid.UUID("12345678-1234-5678-1234-567812345678")
     ):
         batch_id = vectordb.vectorize_article(sample_article)
 
+        # Verificação
         assert batch_id == "12345678-1234-5678-1234-567812345678"
+        
+        # 1. Verifica split
         mock_text_splitter.split_article.assert_called_once_with(sample_article)
+        
+        # 2. Verifica embedding
         mock_google_embedder.client.embed_documents.assert_called_once_with(
             ["chunk 1", "chunk 2"]
         )
+        
+        # 3. Verifica salvamento no Chroma com metadados e IDs corretos
         mock_chroma_collection.add.assert_called_once_with(
             documents=["chunk 1", "chunk 2"],
             metadatas=[
                 {"article_id": 1, "url": "http://example.com/1", "title": "Title 1"},
                 {"article_id": 1, "url": "http://example.com/1", "title": "Title 1"},
             ],
-            ids=["1_0", "1_1"],
+            ids=["1_0", "1_1"], # IDs compostos: {article_id}_{index}
             embeddings=[[0.1] * 768, [0.2] * 768],
         )
 
@@ -180,19 +218,27 @@ def test_vectorize_article_success(
 def test_vectorize_article_no_content(
     mock_google_embedder, mock_text_splitter, mock_chroma_collection, article_no_content
 ):
-    """Tests vectorization of an article with no content."""
+    """
+    Testa a vetorização de um artigo sem conteúdo.
+    Deve retornar None e não chamar o embedder nem o banco.
+    """
+    # Configuração
     vectordb = VectorDB(
         embedding_platform=mock_google_embedder,
         text_splitter=mock_text_splitter,
         db_directory_name="chroma_db"
     )
     vectordb.collection = mock_chroma_collection
+    # O splitter retorna lista vazia pois não há conteúdo
     mock_text_splitter.split_article.return_value = []
 
+    # Execução
     batch_id = vectordb.vectorize_article(article_no_content)
 
+    # Verificação
     assert batch_id is None
     mock_text_splitter.split_article.assert_called_once_with(article_no_content)
+    # Garante que processos caros não foram executados
     mock_google_embedder.client.embed_documents.assert_not_called()
     mock_chroma_collection.add.assert_not_called()
 
@@ -200,7 +246,10 @@ def test_vectorize_article_no_content(
 def test_vectorize_article_no_id(
     mock_google_embedder, mock_text_splitter, mock_chroma_collection, article_no_id
 ):
-    """Tests vectorization of an article with no ID (should raise ValueError)."""
+    """
+    Testa a validação de artigo sem ID.
+    Deve lançar ValueError, pois o ID é necessário para metadados e controle.
+    """
     vectordb = VectorDB(
         embedding_platform=mock_google_embedder,
         text_splitter=mock_text_splitter,
@@ -208,11 +257,13 @@ def test_vectorize_article_no_id(
     )
     vectordb.collection = mock_chroma_collection
 
+    # Execução e Verificação
     with pytest.raises(
         ValueError, match="Artigo precisa de um ID para ser vetorizado."
     ):
         vectordb.vectorize_article(article_no_id)
 
+    # Garante que nada foi processado
     mock_text_splitter.split_article.assert_not_called()
     mock_google_embedder.client.embed_documents.assert_not_called()
     mock_chroma_collection.add.assert_not_called()
@@ -221,39 +272,56 @@ def test_vectorize_article_no_id(
 def test_vectorize_article_embedding_failure(
     mock_google_embedder, mock_text_splitter, mock_chroma_collection, sample_article
 ):
-    """Tests failure during embedding generation."""
+    """
+    Testa o comportamento quando a geração de embeddings falha (retorna vazio).
+    O processo deve ser abortado e nada deve ser salvo no banco.
+    """
+    # Configuração
     vectordb = VectorDB(
         embedding_platform=mock_google_embedder,
         text_splitter=mock_text_splitter,
         db_directory_name="chroma_db"
     )
     vectordb.collection = mock_chroma_collection
+    
+    # Simula falha silenciosa ou retorno vazio da API de embedding
     mock_google_embedder.client.embed_documents.return_value = []
 
+    # Execução
     batch_id = vectordb.vectorize_article(sample_article)
 
+    # Verificação
     assert batch_id is None
     mock_text_splitter.split_article.assert_called_once_with(sample_article)
     mock_google_embedder.client.embed_documents.assert_called_once_with(
         ["chunk 1", "chunk 2"]
     )
+    # Não deve salvar no banco se não temos vetores
     mock_chroma_collection.add.assert_not_called()
 
 
 def test_vectorize_article_chroma_add_failure(
     mock_google_embedder, mock_text_splitter, mock_chroma_collection, sample_article
 ):
-    """Tests failure during chromadb.add operation."""
+    """
+    Testa o tratamento de exceção durante a adição ao ChromaDB.
+    Deve capturar a exceção, logar (implícito) e retornar None.
+    """
+    # Configuração
     vectordb = VectorDB(
         embedding_platform=mock_google_embedder,
         text_splitter=mock_text_splitter,
         db_directory_name="chroma_db"
     )
     vectordb.collection = mock_chroma_collection
+    
+    # Simula erro crítico ao tentar adicionar ao banco
     mock_chroma_collection.add.side_effect = Exception("ChromaDB add error")
 
+    # Execução
     batch_id = vectordb.vectorize_article(sample_article)
 
+    # Verificação
     assert batch_id is None
     mock_text_splitter.split_article.assert_called_once_with(sample_article)
     mock_google_embedder.client.embed_documents.assert_called_once_with(
@@ -262,10 +330,13 @@ def test_vectorize_article_chroma_add_failure(
     mock_chroma_collection.add.assert_called_once()
 
 
+# --- Testes de Remoção ---
+
 def test_delete_article_by_url(
     mock_google_embedder, mock_text_splitter, mock_chroma_collection
 ):
-    """Tests deleting an article by URL."""
+    """Testa a funcionalidade de deletar vetores de um artigo baseado na URL."""
+    # Configuração
     vectordb = VectorDB(
         embedding_platform=mock_google_embedder,
         text_splitter=mock_text_splitter,
@@ -274,6 +345,8 @@ def test_delete_article_by_url(
     vectordb.collection = mock_chroma_collection
     url_to_delete = "http://example.com/to-delete"
 
+    # Execução
     vectordb.delete_article_by_url(url_to_delete)
 
+    # Verificação
     mock_chroma_collection.delete.assert_called_once_with(where={"url": url_to_delete})
