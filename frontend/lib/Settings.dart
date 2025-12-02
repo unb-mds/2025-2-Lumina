@@ -241,7 +241,7 @@ void _openAboutUsDialog(BuildContext context) {
                     value: tempScale,
                     min: 0.8,
                     max: 1.4,
-                    divisions: 4,
+                    divisions: 3,
                     label: _getFontSizeLabel(tempScale),
                     onChanged: (double value) {
                       setStateSB(() {

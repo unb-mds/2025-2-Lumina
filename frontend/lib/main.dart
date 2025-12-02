@@ -138,7 +138,7 @@ class _ChatAppState extends State<ChatApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Gemini Chatbot',
+      title: 'Lumina',
       debugShowCheckedModeBanner: false,
       themeMode: _currentThemeMode, 
       
