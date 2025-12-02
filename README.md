@@ -25,7 +25,7 @@ Aqui você acompanha a saúde atual do projeto:
 
 | Tipo | Status |
 |------|--------|
-| **Integração Contínua (CI)** | ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/unb-mds/2025-2-Lumina/main.yml?style=for-the-badge&label=Build%20%26%20Test) |
+| **Integração Contínua (CI)** | ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/unb-mds/2025-2-Lumina/backend-ci.yml?style=for-the-badge&label=Build%20%26%20Test) |
 | **Testes Backend** | ![Tests](https://img.shields.io/badge/Pytest-Passing-success?style=for-the-badge&logo=pytest) |
 | **Testes Frontend** | ![Tests](https://img.shields.io/badge/Flutter%20Test-Passing-success?style=for-the-badge&logo=flutter) |
 
@@ -161,6 +161,7 @@ O projeto é desenvolvido pelas seguintes pessoas
 
 - Nosso [Figma](https://www.figma.com/design/WAbCYuadSmQjoSXwQu2FZa/Squad-07--MDS?node-id=1-3188&t=jXbDeQuQQlIQOL1h-0)
   
+
 
 
 
