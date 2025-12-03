@@ -186,20 +186,28 @@ void main() {
       const botResponse = "Olá! Sou uma IA contra desinformação.";
       
       // Cria um MockClient que intercepta as chamadas HTTP
-      final mockHttp = MockClient((request) async {
+     final mockHttp = MockClient((request) async {
         await Future.delayed(const Duration(milliseconds: 50));
-        // Verifica se a URL está correta (incluindo o encode)
-        if (request.url.toString().contains(Uri.encodeComponent(userMessage))) {
-          // Retorna sucesso (200) com o JSON esperado
-          return http.Response(
-            jsonEncode({'response': botResponse}), 
-            200,
-            headers: {'content-type': 'application/json; charset=utf-8'},
-          );
+        
+        // --- NOVO BLOCO DE VERIFICAÇÃO CORRIGIDO ---
+        // 1. Verifica se o MÉTODO é POST e se o PATH é /chat
+        if (request.method == 'POST' && request.url.path == '/chat') {
+          
+          // Opcional: Verifica se o CORPO da requisição (JSON) contém a query correta
+          final body = json.decode(utf8.decode(request.bodyBytes));
+          if (body['query'] == userMessage) {
+            
+            // Retorna sucesso (200) com o JSON esperado
+            return http.Response(
+              jsonEncode({'response': botResponse}), 
+              200,
+              headers: {'content-type': 'application/json; charset=utf-8'},
+            );
+          }
         }
-        return http.Response("Not Found", 404);
+        // Se a requisição não for o POST esperado, retorna 404
+        return http.Response("Mock Error: Unexpected Request", 404);
       });
-
       await tester.pumpWidget(MaterialApp(
         home: ChatScreen(
           username: "Tester",

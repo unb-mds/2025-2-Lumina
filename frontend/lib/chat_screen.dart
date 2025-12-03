@@ -4,6 +4,8 @@ import 'dart:convert';
 import 'package:frontend/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_markdown_plus/flutter_markdown_plus.dart';
 
 
 class ChatMessage {
@@ -149,7 +151,7 @@ Future<void> _closeMenuTutorial() async {
       
     });
 
-    // Atualiza título da conversa com base na primeira mensagem
+   
     List chatIds = chatBox.get("chat_ids", defaultValue: []);
     
     for (var chat in chatIds) {
@@ -161,7 +163,7 @@ Future<void> _closeMenuTutorial() async {
       }
     }
     chatBox.put("chat_ids", chatIds);
-    // Atualiza data da última modificação
+    
     for (var chat in chatIds) {
       if (chat["id"] == currentChatId) {
         chat["updatedAt"] = DateTime.now().toIso8601String();
@@ -176,13 +178,21 @@ Future<void> _closeMenuTutorial() async {
  
   Future<void> _fetchGeminiResponse(String prompt) async {
    
-    final encodedPrompt = Uri.encodeComponent(prompt);
+    final requestBody = json.encode({
+      'query': prompt,
+    });
     
-    final url = Uri.parse('$apiBaseUrl/prompt/$encodedPrompt'); 
+    final url = Uri.parse('$apiBaseUrl/chat'); 
 
     try {
       final client = widget.httpClient ?? (_internalClient ??= http.Client());
-      final response = await client.get(url);
+      final response = await client.post(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: requestBody, 
+      );
 
       if (response.statusCode == 200) {
         
@@ -209,7 +219,7 @@ Future<void> _closeMenuTutorial() async {
       _addErrorMessage('Erro de conexão: Verifique se o FastAPI está rodando em $apiBaseUrl.');
     } finally {
       
-      if (mounted) { // Boa prática verificar mounted antes de setState em async
+      if (mounted) {
         setState(() {
           _isSending = false;
         });
@@ -243,7 +253,7 @@ Future<void> _closeMenuTutorial() async {
 
     final data = chatBox.get(currentChatId);
     if (data == null) {
-      // Criar a conversa inicial no Hive
+      
       _messages.clear();
       _messages.add(_initialMessage());
       _saveChat();
@@ -306,14 +316,14 @@ Future<void> _closeMenuTutorial() async {
     
     List chatIds = chatBox.get("chat_ids", defaultValue: []);
     
-    // deleta da lista de ids
+    
     chatIds.removeWhere((c) => c["id"] == chatIdToDelete);
     await chatBox.put("chat_ids", chatIds);
     
-    // deleta as mensagens
+   
     await chatBox.delete(chatIdToDelete);
     
-    // se o usuário está no chat que foi deletado, fecha o menu e cria um novo chat
+    
     if (currentChatId == chatIdToDelete) {
       Navigator.pop(context); 
       
@@ -376,11 +386,21 @@ Future<void> _closeMenuTutorial() async {
                 ],
               ),
               padding: const EdgeInsets.all(12.0),
-              child: Text(
-                message.text,
-                style: TextStyle(fontSize: 16.0,color: textColor,),
-                
-              ),
+              child: MarkdownBody( 
+                  data: message.text, 
+                  softLineBreak: true,
+                    styleSheet: MarkdownStyleSheet(
+                        p: TextStyle(
+                          fontSize: 16.0,
+                          color: textColor,
+                       ),
+                    strong: TextStyle(
+                       fontSize: 16.0,
+                        color: textColor,
+                        fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
             ),
           ),
           
@@ -498,7 +518,13 @@ Widget _buildBalloonWithArrow(String text, {ArrowDirection direction = ArrowDire
     if (!_hiveReady){
       return const Center(child: CircularProgressIndicator());
     }
-    return Scaffold(
+    return PopScope(
+      canPop: false, 
+      onPopInvoked: (didPop) {
+        if (didPop) return;
+        SystemNavigator.pop();
+      },
+    child: Scaffold(
       key: _scaffoldKey,
   onDrawerChanged: (isOpened) async {
     if (isOpened) {
@@ -619,11 +645,10 @@ Widget _buildBalloonWithArrow(String text, {ArrowDirection direction = ArrowDire
               builder: (context, box, _) {
                 List chatIds = List.from(box.get("chat_ids", defaultValue: []));
                 
-                // ordena as conversas de mais recente para a mais antiga
                 chatIds.sort((a, b) {
                   DateTime da = DateTime.parse(a["updatedAt"]);
                   DateTime db = DateTime.parse(b["updatedAt"]);
-                  return db.compareTo(da); // mais recente primeiro
+                  return db.compareTo(da); 
                 });
                 
                 if (chatIds.isEmpty) {
@@ -643,7 +668,7 @@ Widget _buildBalloonWithArrow(String text, {ArrowDirection direction = ArrowDire
                         title: Text(title),
                         
                         trailing: IconButton(
-                          icon: const Icon(Icons.delete, color: Colors.black),
+                          icon: const Icon(Icons.delete, color: Colors.red),
                           onPressed: () async {
                             _deleteChat(chatId);
                           },
@@ -719,7 +744,7 @@ Widget _buildBalloonWithArrow(String text, {ArrowDirection direction = ArrowDire
       ),
   ],
 ),
-
+    ),
     );
   }
 }

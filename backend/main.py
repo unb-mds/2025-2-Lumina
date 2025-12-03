@@ -56,7 +56,7 @@ def get_chat_service() -> ChatService:
     Cria e retorna uma instância singleton do ChatService,
     inicializando todas as suas dependências.
     """
-    retriever = NewsRetriever(search_k=10)
+    retriever = NewsRetriever(search_k=5)
     llm = get_llm()
 
     return ChatService(retriever=retriever, llm=llm)

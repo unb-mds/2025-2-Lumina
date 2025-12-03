@@ -10,7 +10,7 @@ class NewsRetriever(BaseRetriever):
     """Custom retriever para buscar notícias semelhantes a um prompt."""
 
     Search_Manager: ClassVar[SearchService] = SearchService()
-    search_k: int = 10  # quantidade de documentos retornados
+    search_k: int = 5  # quantidade de documentos retornados
 
     def _get_relevant_documents(self, query: str) -> List[Document]:
         """Busca notícias no vector store usando similaridade."""
