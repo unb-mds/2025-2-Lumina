@@ -195,8 +195,6 @@ O projeto é desenvolvido pelas seguintes pessoas
 
 # 🔗 Saiba mais
 
-- [GitHub Pages](https://unb-mds.github.io/2025-2-Lumina)
-
 - [Figma](https://www.figma.com/design/WAbCYuadSmQjoSXwQu2FZa/Squad-07--MDS?node-id=1-3188&t=jXbDeQuQQlIQOL1h-0)
   
 
