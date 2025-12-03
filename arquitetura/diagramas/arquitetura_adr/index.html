@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://mydomain.org/mysite/planejamentos/sprints/sprint_11/">
+        <link rel="canonical" href="https://mydomain.org/mysite/arquitetura/diagramas/arquitetura_adr/">
       
       
-        <link rel="prev" href="../sprint_10/">
+        <link rel="prev" href="../arquitetura/">
       
       
-        <link rel="next" href="../sprint_12/">
+        <link rel="next" href="../diagramas/">
       
       
         
@@ -25,7 +25,7 @@
     
     
       
-        <title>Sprint 11 - Lumina</title>
+        <title>Decisões Arquiteturais (ADRs) - Lumina</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#relatorio-da-sprint-projeto-lumina" class="md-skip">
+        <a href="#adr-001-estrategia-de-implantacao-banco-de-dados-acoplado" class="md-skip">
           Skip to content
         </a>
       
@@ -113,7 +113,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Sprint 11
+              Decisões Arquiteturais (ADRs)
             
           </span>
         </div>
@@ -292,18 +292,20 @@
       
   
   
+    
   
   
+  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
           <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
@@ -324,7 +326,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -342,7 +344,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../arquitetura/diagramas/arquitetura/" class="md-nav__link">
+      <a href="../arquitetura/" class="md-nav__link">
         
   
   
@@ -367,10 +369,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../../arquitetura/diagramas/arquitetura_adr/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Decisões Arquiteturais (ADRs)
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -386,6 +415,87 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#contexto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contexto
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decisao" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Decisão
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#consequencias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Consequências
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Consequências">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#positivas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Positivas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#negativas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Negativas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -398,7 +508,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../arquitetura/diagramas/diagramas/" class="md-nav__link">
+      <a href="../diagramas/" class="md-nav__link">
         
   
   
@@ -1404,20 +1514,18 @@
       
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
         
           
           <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
@@ -1438,7 +1546,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_6">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1456,7 +1564,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../cronograma/" class="md-nav__link">
+      <a href="../../../planejamentos/cronograma/" class="md-nav__link">
         
   
   
@@ -1484,7 +1592,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../backlog/" class="md-nav__link">
+      <a href="../../../planejamentos/backlog/" class="md-nav__link">
         
   
   
@@ -1509,20 +1617,18 @@
                 
   
   
-    
   
   
-  
     
     
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_3" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_3" >
         
           
           <label class="md-nav__link" for="__nav_6_3" id="__nav_6_3_label" tabindex="0">
@@ -1543,7 +1649,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_3_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_6_3">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1561,7 +1667,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../sprint_00/" class="md-nav__link">
+      <a href="../../../planejamentos/sprints/sprint_00/" class="md-nav__link">
         
   
   
@@ -1589,7 +1695,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../sprint_01/" class="md-nav__link">
+      <a href="../../../planejamentos/sprints/sprint_01/" class="md-nav__link">
         
   
   
@@ -1617,7 +1723,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../sprint_02/" class="md-nav__link">
+      <a href="../../../planejamentos/sprints/sprint_02/" class="md-nav__link">
         
   
   
@@ -1645,7 +1751,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../sprint_03/" class="md-nav__link">
+      <a href="../../../planejamentos/sprints/sprint_03/" class="md-nav__link">
         
   
   
@@ -1673,7 +1779,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../sprint_04/" class="md-nav__link">
+      <a href="../../../planejamentos/sprints/sprint_04/" class="md-nav__link">
         
   
   
@@ -1701,7 +1807,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../sprint_05/" class="md-nav__link">
+      <a href="../../../planejamentos/sprints/sprint_05/" class="md-nav__link">
         
   
   
@@ -1729,7 +1835,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../sprint_06/" class="md-nav__link">
+      <a href="../../../planejamentos/sprints/sprint_06/" class="md-nav__link">
         
   
   
@@ -1757,7 +1863,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../sprint_07/" class="md-nav__link">
+      <a href="../../../planejamentos/sprints/sprint_07/" class="md-nav__link">
         
   
   
@@ -1785,7 +1891,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../sprint_08/" class="md-nav__link">
+      <a href="../../../planejamentos/sprints/sprint_08/" class="md-nav__link">
         
   
   
@@ -1813,7 +1919,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../sprint_09/" class="md-nav__link">
+      <a href="../../../planejamentos/sprints/sprint_09/" class="md-nav__link">
         
   
   
@@ -1841,7 +1947,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../sprint_10/" class="md-nav__link">
+      <a href="../../../planejamentos/sprints/sprint_10/" class="md-nav__link">
         
   
   
@@ -1866,37 +1972,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Sprint 11
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../../planejamentos/sprints/sprint_11/" class="md-nav__link">
         
   
   
@@ -1912,131 +1991,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#1-informacoes-gerais" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Informações Gerais
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2-objetivos-da-sprint" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Objetivos da Sprint
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-backlog-da-sprint" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Backlog da Sprint
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-entregas-review" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. Entregas (Review)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5-metricas-da-sprint" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5. Métricas da Sprint
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6-retrospectiva" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6. Retrospectiva
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="6. Retrospectiva">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#o-que-funcionou-bem" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        O que funcionou bem
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#o-que-pode-melhorar" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        O que pode melhorar
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#acoes-de-melhoria-plano-para-sprint-12" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Ações de melhoria (Plano para Sprint 12)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -2049,7 +2003,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../sprint_12/" class="md-nav__link">
+      <a href="../../../planejamentos/sprints/sprint_12/" class="md-nav__link">
         
   
   
@@ -2132,7 +2086,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../atas/ata_sprint00/" class="md-nav__link">
+      <a href="../../../planejamentos/atas/ata_sprint00/" class="md-nav__link">
         
   
   
@@ -2160,7 +2114,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../atas/ata_sprint01/" class="md-nav__link">
+      <a href="../../../planejamentos/atas/ata_sprint01/" class="md-nav__link">
         
   
   
@@ -2188,7 +2142,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../atas/ata_sprint02/" class="md-nav__link">
+      <a href="../../../planejamentos/atas/ata_sprint02/" class="md-nav__link">
         
   
   
@@ -2216,7 +2170,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../atas/ata_sprint03/" class="md-nav__link">
+      <a href="../../../planejamentos/atas/ata_sprint03/" class="md-nav__link">
         
   
   
@@ -2244,7 +2198,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../atas/ata_sprint04/" class="md-nav__link">
+      <a href="../../../planejamentos/atas/ata_sprint04/" class="md-nav__link">
         
   
   
@@ -2272,7 +2226,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../atas/ata_sprint05/" class="md-nav__link">
+      <a href="../../../planejamentos/atas/ata_sprint05/" class="md-nav__link">
         
   
   
@@ -2300,7 +2254,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../atas/ata_sprint06/" class="md-nav__link">
+      <a href="../../../planejamentos/atas/ata_sprint06/" class="md-nav__link">
         
   
   
@@ -2328,7 +2282,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../atas/ata_sprint07/" class="md-nav__link">
+      <a href="../../../planejamentos/atas/ata_sprint07/" class="md-nav__link">
         
   
   
@@ -2356,7 +2310,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../atas/ata_sprint08/" class="md-nav__link">
+      <a href="../../../planejamentos/atas/ata_sprint08/" class="md-nav__link">
         
   
   
@@ -2384,7 +2338,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../atas/ata_sprint09/" class="md-nav__link">
+      <a href="../../../planejamentos/atas/ata_sprint09/" class="md-nav__link">
         
   
   
@@ -2412,7 +2366,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../atas/ata_sprint10/" class="md-nav__link">
+      <a href="../../../planejamentos/atas/ata_sprint10/" class="md-nav__link">
         
   
   
@@ -2440,7 +2394,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../atas/ata_sprint11/" class="md-nav__link">
+      <a href="../../../planejamentos/atas/ata_sprint11/" class="md-nav__link">
         
   
   
@@ -2468,7 +2422,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../atas/ata_sprint12/" class="md-nav__link">
+      <a href="../../../planejamentos/atas/ata_sprint12/" class="md-nav__link">
         
   
   
@@ -2531,10 +2485,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-informacoes-gerais" class="md-nav__link">
+  <a href="#contexto" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Informações Gerais
+        Contexto
       
     </span>
   </a>
@@ -2542,10 +2496,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-objetivos-da-sprint" class="md-nav__link">
+  <a href="#decisao" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Objetivos da Sprint
+        Decisão
       
     </span>
   </a>
@@ -2553,55 +2507,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-backlog-da-sprint" class="md-nav__link">
+  <a href="#consequencias" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Backlog da Sprint
+        Consequências
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-entregas-review" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. Entregas (Review)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5-metricas-da-sprint" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5. Métricas da Sprint
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6-retrospectiva" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6. Retrospectiva
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="6. Retrospectiva">
+    <nav class="md-nav" aria-label="Consequências">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#o-que-funcionou-bem" class="md-nav__link">
+  <a href="#positivas" class="md-nav__link">
     <span class="md-ellipsis">
       
-        O que funcionou bem
+        Positivas
       
     </span>
   </a>
@@ -2609,21 +2530,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#o-que-pode-melhorar" class="md-nav__link">
+  <a href="#negativas" class="md-nav__link">
     <span class="md-ellipsis">
       
-        O que pode melhorar
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#acoes-de-melhoria-plano-para-sprint-12" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Ações de melhoria (Plano para Sprint 12)
+        Negativas
       
     </span>
   </a>
@@ -2655,141 +2565,72 @@
   
 
 
-<h1 id="relatorio-da-sprint-projeto-lumina">Relatório da Sprint — Projeto Lumina<a class="headerlink" href="#relatorio-da-sprint-projeto-lumina" title="Permanent link">&para;</a></h1>
-<h2 id="1-informacoes-gerais">1. Informações Gerais<a class="headerlink" href="#1-informacoes-gerais" title="Permanent link">&para;</a></h2>
+<h1 id="adr-001-estrategia-de-implantacao-banco-de-dados-acoplado">ADR 001: Estratégia de Implantação (Banco de Dados Acoplado)<a class="headerlink" href="#adr-001-estrategia-de-implantacao-banco-de-dados-acoplado" title="Permanent link">&para;</a></h1>
 <ul>
-<li>
-<p><strong>Sprint:</strong> 11</p>
-</li>
-<li>
-<p><strong>Duração:</strong> 10/11/2025 a 16/11/2025</p>
-</li>
-<li>
-<p><strong>Product Owner:</strong> Arthur Luiz Silva Guedes</p>
-</li>
-<li>
-<p><strong>Scrum Master:</strong> Cecília Costa Rebelo Cunha</p>
-</li>
-<li>
-<p><strong>Time de Desenvolvimento:</strong> Átila Sobral de Oliveira, João Pedro Ferreira Gomes, Nathan Pontes Romão, Tiago Geovane da Silva Sousa</p>
-</li>
+<li><strong>Status:</strong> Aceito</li>
+<li><strong>Projeto:</strong> Lumina</li>
 </ul>
-<h2 id="2-objetivos-da-sprint">2. Objetivos da Sprint<a class="headerlink" href="#2-objetivos-da-sprint" title="Permanent link">&para;</a></h2>
-<p>Sprint focada no desenvolvimento robusto do back-end (endpoints e banco vetorial), refinamento da experiência do usuário no front-end e melhoria contínua na cobertura de testes.</p>
+<h2 id="contexto">Contexto<a class="headerlink" href="#contexto" title="Permanent link">&para;</a></h2>
+<p>Estamos desenvolvendo uma aplicação que utiliza RAG (Retrieval-Augmented Generation). No estágio atual do projeto, a prioridade é a velocidade de desenvolvimento ("Time to Market"), simplicidade operacional e redução de custos de infraestrutura.</p>
+<p>Precisamos decidir a topologia da infraestrutura: se teremos servidores de banco de dados dedicados (ex: RDS, instâncias separadas na nuvem) ou se manteremos os dados acoplados à instância da API (FastAPI).</p>
+<h2 id="decisao">Decisão<a class="headerlink" href="#decisao" title="Permanent link">&para;</a></h2>
+<p>Decidimos <strong>hospedar o banco de dados relacional e o armazenamento vetorial na mesma instância (servidor) que gerencia a API</strong>.</p>
+<p>A arquitetura será monolítica no sentido de implantação, onde o armazenamento reside no mesmo sistema de arquivos do processo da aplicação.</p>
+<h2 id="consequencias">Consequências<a class="headerlink" href="#consequencias" title="Permanent link">&para;</a></h2>
+<h3 id="positivas">Positivas<a class="headerlink" href="#positivas" title="Permanent link">&para;</a></h3>
 <ul>
-<li>
-<p>Implementar endpoints CRUD para interação com o banco de dados.</p>
-</li>
-<li>
-<p>Estruturar e criar o banco de dados vetorial.</p>
-</li>
-<li>
-<p>Refinar o código e a interface do front-end, incluindo ajustes na Landing Page.</p>
-</li>
-<li>
-<p>Continuar a expansão da suíte de testes unitários.</p>
-</li>
+<li><strong>Simplificação de DevOps:</strong> Não há necessidade de gerenciar redes complexas (VPCs), regras de firewall entre serviços ou orquestração de containers múltiplos. O deploy é atômico.</li>
+<li><strong>Latência Zero:</strong> A comunicação entre a API e o banco de dados ocorre via I/O de disco ou memória local, eliminando latência de rede.</li>
+<li><strong>Custo Reduzido:</strong> Apenas uma máquina/container é necessária para rodar toda a stack.</li>
 </ul>
-<h2 id="3-backlog-da-sprint">3. Backlog da Sprint<a class="headerlink" href="#3-backlog-da-sprint" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">Item</th>
-<th style="text-align: left;">Tarefa</th>
-<th style="text-align: left;">Responsável(eis)</th>
-<th style="text-align: left;">Status</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;">1</td>
-<td style="text-align: left;">Implementar endpoints para o banco de dados (CRUD)</td>
-<td style="text-align: left;">Átila, Arthur</td>
-<td style="text-align: left;">Concluído</td>
-</tr>
-<tr>
-<td style="text-align: left;">2</td>
-<td style="text-align: left;">Criar o banco de dados vetorial</td>
-<td style="text-align: left;">Tiago</td>
-<td style="text-align: left;">Concluído</td>
-</tr>
-<tr>
-<td style="text-align: left;">3</td>
-<td style="text-align: left;">Refinar o código do frontend</td>
-<td style="text-align: left;">Nathan</td>
-<td style="text-align: left;">Concluído</td>
-</tr>
-<tr>
-<td style="text-align: left;">4</td>
-<td style="text-align: left;">Ajustar Landing Page para visualização única (Single View)</td>
-<td style="text-align: left;">João Pedro</td>
-<td style="text-align: left;">Concluído</td>
-</tr>
-<tr>
-<td style="text-align: left;">5</td>
-<td style="text-align: left;">Continuar a implementação dos testes unitários</td>
-<td style="text-align: left;">Cecília</td>
-<td style="text-align: left;">Concluído</td>
-</tr>
-</tbody>
-</table>
-<h2 id="4-entregas-review">4. Entregas (Review)<a class="headerlink" href="#4-entregas-review" title="Permanent link">&para;</a></h2>
+<h3 id="negativas">Negativas<a class="headerlink" href="#negativas" title="Permanent link">&para;</a></h3>
 <ul>
-<li>
-<p><strong>Back-end:</strong> Átila e Arthur finalizaram a implementação dos endpoints CRUD, permitindo a manipulação de dados. Tiago entregou a criação do banco de dados vetorial, essencial para as funcionalidades de IA.</p>
-</li>
-<li>
-<p><strong>Front-end:</strong> Nathan realizou um refinamento geral no código da interface. João Pedro ajustou a Landing Page para funcionar com visualização única, melhorando a navegação.</p>
-</li>
-<li>
-<p><strong>Qualidade:</strong> Cecília deu continuidade ao trabalho de testes unitários, garantindo maior confiabilidade ao código.</p>
-</li>
+<li><strong>Escalonamento Horizontal:</strong> Adicionar mais servidores de API torna-se complexo, pois o estado (dados) está acoplado a uma única máquina.</li>
+<li><strong>Ponto Único de Falha:</strong> Se o servidor cair ou o disco corromper, tanto a API quanto os dados ficam inacessíveis.</li>
 </ul>
-<h2 id="5-metricas-da-sprint">5. Métricas da Sprint<a class="headerlink" href="#5-metricas-da-sprint" title="Permanent link">&para;</a></h2>
+<hr />
+<h1 id="adr-002-armazenamento-de-artigos-com-sqlite">ADR 002: Armazenamento de Artigos com SQLite<a class="headerlink" href="#adr-002-armazenamento-de-artigos-com-sqlite" title="Permanent link">&para;</a></h1>
 <ul>
-<li>
-<p><strong>Velocity (story points concluídos):</strong> Não foram utilizados Story Points.</p>
-</li>
-<li>
-<p><strong>Burn-down Chart:</strong> Gráfico não disponível.</p>
-</li>
-<li>
-<p><strong>Qtd. de tarefas concluídas / planejadas:</strong> 5 / 5</p>
-</li>
+<li><strong>Status:</strong> Aceito</li>
+<li><strong>Relacionado a:</strong> [ADR 001: Estratégia de Implantação]</li>
 </ul>
-<h2 id="6-retrospectiva">6. Retrospectiva<a class="headerlink" href="#6-retrospectiva" title="Permanent link">&para;</a></h2>
-<h3 id="o-que-funcionou-bem">O que funcionou bem<a class="headerlink" href="#o-que-funcionou-bem" title="Permanent link">&para;</a></h3>
+<h2 id="contexto_1">Contexto<a class="headerlink" href="#contexto_1" title="Permanent link">&para;</a></h2>
+<p>Precisamos de um armazenamento persistente e confiável para os textos brutos dos artigos que serão processados pelo sistema. O volume de dados esperado é compatível com armazenamento em disco local e não requer, neste momento, concorrência massiva de escrita distribuída. Precisamos de uma solução que se alinhe com a decisão de manter a infraestrutura simples.</p>
+<h2 id="decisao_1">Decisão<a class="headerlink" href="#decisao_1" title="Permanent link">&para;</a></h2>
+<p>Utilizaremos <strong>SQLite</strong> como banco de dados relacional para salvar o conteúdo textual e metadados dos artigos.</p>
+<h2 id="consequencias_1">Consequências<a class="headerlink" href="#consequencias_1" title="Permanent link">&para;</a></h2>
+<h3 id="positivas_1">Positivas<a class="headerlink" href="#positivas_1" title="Permanent link">&para;</a></h3>
 <ul>
-<li>
-<p><strong>Desenvolvimento do Backend:</strong> A equipe destacou o progresso significativo nas funcionalidades do servidor e banco de dados.</p>
-</li>
-<li>
-<p><strong>Qualidade:</strong> Houve uma "Melhoria nos testes do backend".</p>
-</li>
-<li>
-<p><strong>Front-end:</strong> O "Refinamento do código do frontend" foi um ponto positivo.</p>
-</li>
-<li>
-<p><strong>Equipe (Kudos):</strong> A equipe demonstrou qualidades importantes: Tiago (Confiável), Nathan (Meticuloso), Cecília (Estratégica), Átila (Dinâmico), Arthur (Resolutivo) e João (Persistente).</p>
-</li>
+<li><strong>Serverless:</strong> Configuração zero; o banco de dados é apenas um arquivo (<code>.db</code>) no disco.</li>
+<li><strong>Portabilidade:</strong> Backups e migrações são feitos copiando um único arquivo.</li>
+<li><strong>Performance de Leitura:</strong> Excelente velocidade para recuperar o texto completo de um artigo após a busca vetorial identificar os IDs relevantes.</li>
 </ul>
-<h3 id="o-que-pode-melhorar">O que pode melhorar<a class="headerlink" href="#o-que-pode-melhorar" title="Permanent link">&para;</a></h3>
+<h3 id="negativas_1">Negativas<a class="headerlink" href="#negativas_1" title="Permanent link">&para;</a></h3>
 <ul>
-<li>
-<p><strong>Pontualidade:</strong> Foi identificada a necessidade de melhorar a "Pontualidade nas entregas".</p>
-</li>
-<li>
-<p><strong>Comunicação:</strong> O time sentiu necessidade de "Discutir mais em equipe".</p>
-</li>
+<li><strong>Concorrência de Escrita:</strong> O SQLite trava o arquivo durante a escrita (database locking). Embora o modo WAL (Write-Ahead Logging) mitigue isso, ele exige cuidado ao ser usado com servidores assíncronos (FastAPI) para evitar gargalos de I/O bloqueante.</li>
+<li><strong>Tipagem:</strong> A tipagem dinâmica exige validação rigorosa na camada de aplicação (via Pydantic ou SQLAlchemy).</li>
 </ul>
-<h3 id="acoes-de-melhoria-plano-para-sprint-12">Ações de melhoria (Plano para Sprint 12)<a class="headerlink" href="#acoes-de-melhoria-plano-para-sprint-12" title="Permanent link">&para;</a></h3>
+<hr />
+<h1 id="adr-003-motor-de-busca-vetorial-com-chromadb">ADR 003: Motor de Busca Vetorial com ChromaDB<a class="headerlink" href="#adr-003-motor-de-busca-vetorial-com-chromadb" title="Permanent link">&para;</a></h1>
 <ul>
-<li>
-<p><strong>Comunicação:</strong> "Melhorar a comunicação em equipe" para alinhar melhor as decisões.</p>
-</li>
-<li>
-<p><strong>Gestão de Tempo:</strong> Focar em "Melhorar a pontualidade das entregas" para evitar atrasos no cronograma.</p>
-</li>
+<li><strong>Status:</strong> Aceito</li>
+<li><strong>Relacionado a:</strong> [ADR 001: Estratégia de Implantação]</li>
+</ul>
+<h2 id="contexto_2">Contexto<a class="headerlink" href="#contexto_2" title="Permanent link">&para;</a></h2>
+<p>Para implementar a funcionalidade de RAG, precisamos armazenar os <em>embeddings</em> (representações vetoriais) gerados a partir dos artigos e realizar buscas por similaridade semântica. O sistema precisa interagir eficientemente com o ecossistema Python de Inteligência Artificial.</p>
+<h2 id="decisao_2">Decisão<a class="headerlink" href="#decisao_2" title="Permanent link">&para;</a></h2>
+<p>Utilizaremos o <strong>ChromaDB</strong> rodando em modo persistente local para o armazenamento e recuperação de vetores.</p>
+<h2 id="consequencias_2">Consequências<a class="headerlink" href="#consequencias_2" title="Permanent link">&para;</a></h2>
+<h3 id="positivas_2">Positivas<a class="headerlink" href="#positivas_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Alinhamento Arquitetural:</strong> O ChromaDB funciona nativamente em modo persistente local (usando DuckDB/Parquet internamente), alinhado com a nossa estratégia de "banco de dados junto da API".</li>
+<li><strong>Developer Experience (DX):</strong> API simples e integração nativa com as principais bibliotecas de IA (LangChain, LlamaIndex).</li>
+<li><strong>Busca Híbrida:</strong> Permite filtrar resultados por metadados antes ou depois da busca vetorial.</li>
+</ul>
+<h3 id="negativas_2">Negativas<a class="headerlink" href="#negativas_2" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Consumo de Memória:</strong> O carregamento de índices vetoriais (HNSW) consome memória RAM da instância da API. À medida que o número de vetores cresce, pode ser necessário aumentar a RAM do servidor.</li>
+<li><strong>Migração Futura:</strong> Caso o projeto escale para milhões de vetores, a migração para uma instância Cliente-Servidor do Chroma será necessária.</li>
 </ul>
 
 
@@ -2820,7 +2661,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../sprint_10/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Sprint 10">
+          <a href="../arquitetura/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Arquitetura">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -2830,20 +2671,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                Sprint 10
+                Arquitetura
               </div>
             </div>
           </a>
         
         
           
-          <a href="../sprint_12/" class="md-footer__link md-footer__link--next" aria-label="Next: Sprint 12">
+          <a href="../diagramas/" class="md-footer__link md-footer__link--next" aria-label="Next: Diagramas">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Sprint 12
+                Diagramas
               </div>
             </div>
             <div class="md-footer__button md-icon">
