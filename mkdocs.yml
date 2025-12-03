@@ -7,6 +7,7 @@ nav:
   - Início: index.md
   - Arquitetura:
       - Arquitetura: arquitetura/diagramas/arquitetura.md
+      - Decisões Arquiteturais (ADRs): arquitetura/diagramas/arquitetura_adr.md
       - Diagramas: arquitetura/diagramas/diagramas.md
   - Levantamento de Requisitos:
       - Requisitos: requisitos/Requisitos.md
@@ -14,6 +15,9 @@ nav:
   - Documentação:
       - Front-end: documentação/frontend.md
       - Back-end: documentação/backend.md
+      - DevOps: documentação/DevOps.md
+      - Metodologia Ágil: documentação/Metodologia_Agil.md
+      - Testes e Qualidade: documentação/Testes_e_Qualidade
       - Protótipo de baixa fidelidade: documentação/Prototipo-de-baixa-fidelidade.png
   - Estudos:
       - Arquitetura de sistemas: estudos/Arquitetura_de_Sistemas.md
