@@ -177,10 +177,10 @@ O projeto é desenvolvido pelas seguintes pessoas
 |Tiago Geovane da Silva Sousa|Arquitetura/DevOps|[TiagoUNB](https://github.com/TiagoUNB)|
 ------------
 
-# 🔗 Links importantes
-- Nosso [Git Pages](https://unb-mds.github.io/2025-2-Lumina)
+# 🔗 Saiba mais
+- [GitHub Pages](https://unb-mds.github.io/2025-2-Lumina)
 
-- Nosso [Figma](https://www.figma.com/design/WAbCYuadSmQjoSXwQu2FZa/Squad-07--MDS?node-id=1-3188&t=jXbDeQuQQlIQOL1h-0)
+- [Figma](https://www.figma.com/design/WAbCYuadSmQjoSXwQu2FZa/Squad-07--MDS?node-id=1-3188&t=jXbDeQuQQlIQOL1h-0)
   
 
 
