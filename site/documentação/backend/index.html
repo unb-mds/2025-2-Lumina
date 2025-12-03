@@ -14,7 +14,7 @@
         <link rel="prev" href="../frontend/">
       
       
-        <link rel="next" href="../Prototipo-de-baixa-fidelidade.png">
+        <link rel="next" href="../DevOps/">
       
       
         
@@ -370,6 +370,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../arquitetura/diagramas/arquitetura_adr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Decisões Arquiteturais (ADRs)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../arquitetura/diagramas/diagramas/" class="md-nav__link">
         
   
@@ -598,6 +626,8 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
@@ -640,6 +670,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -648,10 +680,43 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#documentacao-tecnologia-back-end" class="md-nav__link">
+  <a href="#1-escolha-da-tecnologia" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Documentação: tecnologia back-end
+        1. Escolha da tecnologia
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-estrutura-do-backend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Estrutura do Backend
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-descricao-dos-diretorios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Descrição dos diretórios
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-deploy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Deploy
       
     </span>
   </a>
@@ -662,6 +727,90 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DevOps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DevOps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Metodologia_Agil/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Metodologia Ágil
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../documentação/Testes_e_Qualidade" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Testes e Qualidade
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -2309,6 +2458,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -2317,10 +2468,43 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#documentacao-tecnologia-back-end" class="md-nav__link">
+  <a href="#1-escolha-da-tecnologia" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Documentação: tecnologia back-end
+        1. Escolha da tecnologia
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-estrutura-do-backend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Estrutura do Backend
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-descricao-dos-diretorios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Descrição dos diretórios
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-deploy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Deploy
       
     </span>
   </a>
@@ -2347,10 +2531,45 @@
   
 
 
-  <h1>Back-end</h1>
-
-<h2 id="documentacao-tecnologia-back-end">Documentação: tecnologia back-end<a class="headerlink" href="#documentacao-tecnologia-back-end" title="Permanent link">&para;</a></h2>
-<p>A tecnologia back-end escolhida para o projeto é a linguagem de programação <strong>Python</strong>, o que garante interação com maior facilidade à uma vasta quantidade de APIs e tecnologias de inteligência artificial necessárias para o projeto, acelerando o desenvolvimento e facilitando a arquitetura.</p>
+<h1 id="documentacao-tecnologia-back-end">Documentação: Tecnologia Back-End<a class="headerlink" href="#documentacao-tecnologia-back-end" title="Permanent link">&para;</a></h1>
+<h2 id="1-escolha-da-tecnologia">1. Escolha da tecnologia<a class="headerlink" href="#1-escolha-da-tecnologia" title="Permanent link">&para;</a></h2>
+<p>A tecnologia back-end escolhida para o projeto é a linguagem de programação Python, utilizando o framework FastAPI.</p>
+<p>Essa escolha se justifica pela alta performance do FastAPI (baseado em Starlette e Pydantic), pela facilidade de criação de APIs assíncronas e pela vasta disponibilidade de bibliotecas para Inteligência Artificial (LangChain, Google Generative AI) e Web Scraping (BeautifulSoup, Requests), que são o coração do projeto Lumina.</p>
+<h2 id="2-estrutura-do-backend">2. Estrutura do Backend<a class="headerlink" href="#2-estrutura-do-backend" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>backend/
+├── app/                  # Código fonte principal
+│   ├── ai/               # Módulos de Inteligência Artificial
+│   ├── db/               # Camada de Banco de Dados
+│   ├── models/           # Modelos de Dados (Schemas)
+│   ├── routers/          # Definição de Rotas da API
+│   ├── services/         # Regras de Negócio
+│   ├── static/           # Arquivos Estáticos (CSS/JS)
+│   ├── templates/        # Templates HTML (Jinja2)
+│   └── webcrawler/       # Robôs de Coleta de Dados
+├── scripts/              # Scripts de Execução e Manutenção
+├── tests/                # Testes Automatizados (Unitários e E2E)
+├── main.py               # Ponto de Entrada da Aplicação
+└── requirements.txt      # Lista de Dependências
+</code></pre></div>
+<h2 id="3-descricao-dos-diretorios">3. Descrição dos diretórios<a class="headerlink" href="#3-descricao-dos-diretorios" title="Permanent link">&para;</a></h2>
+<ul>
+<li><code>app</code>/
+Pasta responsável por conter toda a lógica da aplicação. É o núcleo do sistema, dividindo-se em sub-módulos para garantir a separação de responsabilidades.</li>
+<li><code>app/webcrawler</code>/
+Pasta responsável pelos robôs de coleta de dados. Aqui residem as implementações específicas para cada portal de notícias (G1, Metrópoles), incluindo extratores de links e analisadores de HTML (scrapers).</li>
+<li><code>app/ai</code>/
+Módulo dedicado à integração com Inteligência Artificial. Contém a configuração do modelo Gemini e a lógica de RAG (Retrieval-Augmented Generation) para gerar respostas contextualizadas.</li>
+<li><code>app/db</code>/
+Camada de persistência. Gerencia as conexões com os bancos de dados relacionais (SQLite) para armazenamento de artigos brutos e com o banco vetorial (ChromaDB) para busca semântica.</li>
+<li><code>app/routers/ e app/templates</code>/
+Responsáveis pela interface web administrativa. routers define os endpoints (URLs) e templates contém os arquivos HTML renderizados pelo Jinja2 para o Painel Admin.</li>
+<li><code>tests</code>/
+Pasta relacionada aos testes automatizados. O projeto utiliza Pytest para testes unitários de backend e Playwright para testes End-to-End (E2E) da interface administrativa, garantindo a robustez do sistema.</li>
+<li><code>requirements.txt</code>
+Arquivo responsável pelas dependências do projeto. Ele lista todas as bibliotecas Python necessárias (FastAPI, Uvicorn, LangChain, etc.) para que o ambiente possa ser replicado em qualquer máquina com o comando pip install -r requirements.txt.</li>
+</ul>
+<h2 id="4-deploy">4. Deploy<a class="headerlink" href="#4-deploy" title="Permanent link">&para;</a></h2>
+<p>A aplicação backend é construída para ser containerizável (Docker) e pode ser implantada em qualquer serviço de nuvem que suporte Python/FastAPI (AWS, Google Cloud Run, Heroku ou DigitalOcean). Atualmente, o servidor de produção está acessível no IP 152.67.59.120.</p>
 
 
 
@@ -2397,13 +2616,13 @@
         
         
           
-          <a href="../Prototipo-de-baixa-fidelidade.png" class="md-footer__link md-footer__link--next" aria-label="Next: Protótipo de baixa fidelidade">
+          <a href="../DevOps/" class="md-footer__link md-footer__link--next" aria-label="Next: DevOps">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Protótipo de baixa fidelidade
+                DevOps
               </div>
             </div>
             <div class="md-footer__button md-icon">

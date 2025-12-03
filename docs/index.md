@@ -1,15 +1,17 @@
-<div align="center">
-
 # Lumina
+
 ### Combate às fake news com inteligência artificial conversacional.
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/unb-mds/2025-2-Lumina?style=for-the-badge)
+
 ![GitHub language count](https://img.shields.io/github/languages/count/unb-mds/2025-2-Lumina?style=for-the-badge)
+
 ![GitHub forks](https://img.shields.io/github/forks/unb-mds/2025-2-Lumina?style=for-the-badge)
+
 ![Bitbucket open issues](https://img.shields.io/github/issues/unb-mds/2025-2-Lumina?style=for-the-badge)
+
 ![GitHub license](https://img.shields.io/github/license/unb-mds/2025-2-Lumina?style=for-the-badge)
 
-</div>
 
 ---
 
@@ -18,6 +20,7 @@
 Projeto desenvolvido para a disciplina de **Métodos de Desenvolvimento de Software (MDS) - 2025/2** da **Universidade de Brasília (UnB)**.
 
 O objetivo do Lumina é combater a desinformação crescente. Nossa solução é um chatbot inteligente que permite a verificação rápida de fatos e notícias. Diferente dos mecanismos de busca tradicionais, o Lumina oferece uma interface conversacional intuitiva, utilizando IA Generativa para analisar e sintetizar informações de fontes confiáveis em tempo real.
+
 
 ## 🚦 Status de Qualidade e Testes
 
@@ -29,6 +32,7 @@ Aqui você acompanha a saúde atual do projeto:
 | **Testes Backend** | ![Tests](https://img.shields.io/badge/Pytest-Passing-success?style=for-the-badge&logo=pytest) |
 | **Testes Frontend** | ![Tests](https://img.shields.io/badge/Flutter%20Test-Passing-success?style=for-the-badge&logo=flutter) |
 
+
 ## 🛠️ Tecnologias Utilizadas
 
 O ecossistema do Lumina é composto pelas seguintes tecnologias:
@@ -39,6 +43,7 @@ O ecossistema do Lumina é composto pelas seguintes tecnologias:
 | **Backend (API)** | ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white) ![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi) |
 | **Banco de Dados** | ![SQLite](https://img.shields.io/badge/SQLite-07405E?style=for-the-badge&logo=sqlite&logoColor=white) ![ChromaDB](https://img.shields.io/badge/ChromaDB-FF6F00?style=for-the-badge&logo=database&logoColor=white) |
 | **DevOps & Testes** | ![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white) |
+
 
 ## 🏗️ Estrutura do Repositório
 
@@ -73,6 +78,7 @@ Lumina/
 └── pytest.ini               # Configuração de testes
 ```
 
+
 ## 🚀 Como Executar
 
 Siga os passos abaixo para configurar o ambiente de desenvolvimento na sua máquina.
@@ -80,10 +86,15 @@ Siga os passos abaixo para configurar o ambiente de desenvolvimento na sua máqu
 ### 📋 Pré-requisitos
 
 Antes de começar, você vai precisar ter instalado em sua máquina:
+
 * **Git** (instalado e configurado).
+
 * **Python 3.10+** instalado.
+
 * **Flutter SDK** instalado e configurado.
+
 * Uma chave de API do **Google Gemini** (obtenha no [Google AI Studio](https://aistudio.google.com/)).
+
 
 ---
 
@@ -123,6 +134,7 @@ Antes de começar, você vai precisar ter instalado em sua máquina:
     fastapi dev main.py
     ```
 
+
 ### 2. 📱 Frontend (App Mobile)
 
 1. Em outro terminal, acesse a pasta do frontend:
@@ -153,18 +165,22 @@ Para baixar nosso aplicativo, basta acessar esse link do [Google Drive](https://
 
 **obs.**: Caso necessário, lembre-se de permitir a instalação de apps desconhecidos no seu dispositivo
 
+
 ## 📱 Demonstração do aplicativo
 
 Abaixo está uma pequena demonstração do aplicativo funcionando
 
-<img src="docs/img/LuminaReadME.gif" alt="Lumina" width="400">
+<img src="img/LuminaReadME.gif" alt="Lumina" width="400">
 
 
 
 ## 🤝 Como Contribuir
-Ficamos felizes com o interesse em contribuir! Para detalhes sobre como submeter Pull Requests, padrões de código e nossa política de conduta, leia nosso guia:[CONTRIBUTING.md](CONTRIBUTING.md)
+
+Ficamos felizes com o interesse em contribuir! Para detalhes sobre como submeter Pull Requests, padrões de código e nossa política de conduta, leia nosso guia:[CONTRIBUTING.md](https://github.com/unb-mds/2025-2-Lumina/blob/main/CONTRIBUTING.md)
+
 
 ## 👥 Autores
+
 O projeto é desenvolvido pelas seguintes pessoas
 
 |Nome|Função|Github|
@@ -177,7 +193,8 @@ O projeto é desenvolvido pelas seguintes pessoas
 |Tiago Geovane da Silva Sousa|Arquitetura/DevOps|[TiagoUNB](https://github.com/TiagoUNB)|
 ------------
 
-# 🔗 Links importantes
+# 🔗 Saiba mais
+
 - [GitHub Pages](https://unb-mds.github.io/2025-2-Lumina)
 
 - [Figma](https://www.figma.com/design/WAbCYuadSmQjoSXwQu2FZa/Squad-07--MDS?node-id=1-3188&t=jXbDeQuQQlIQOL1h-0)

@@ -370,6 +370,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../arquitetura/diagramas/arquitetura_adr/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Decisões Arquiteturais (ADRs)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../arquitetura/diagramas/diagramas/" class="md-nav__link">
         
   
@@ -691,6 +719,90 @@
     
   
     Back-end
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DevOps/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DevOps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Metodologia_Agil/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Metodologia Ágil
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../documentação/Testes_e_Qualidade" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Testes e Qualidade
   
 
     
@@ -2424,7 +2536,8 @@
 <p>A tecnologia escolhida para o front-end do projeto é a framework <strong>Flutter</strong>, o que garante uma ótima experiência tanto visual quanto interativa para o usuário, além de garantir a compatibilidade com múltiplas plataformas.</p>
 <h2 id="2-estrutura-do-frontend">2. Estrutura do frontend<a class="headerlink" href="#2-estrutura-do-frontend" title="Permanent link">&para;</a></h2>
 <p>├── <code>lib</code>/Programação do front\
-├── <code>android</code>/Integração do aplicativo para a plataforma   <br />
+├── <code>android</code>/Integração do aplicativo para a plataforma<br>
+├── <code>test</code>/ Pasta para os testes do front  <br />
 └── <code>pubspec.yaml</code>/Arquivo dos requisitos do aplicativo</p>
 <h2 id="3-descricao-dos-diretorios">3. Descrição dos diretórios<a class="headerlink" href="#3-descricao-dos-diretorios" title="Permanent link">&para;</a></h2>
 <ul>
@@ -2435,6 +2548,10 @@ Pasta responável por conter a parte principal da programação do aplicativo fl
 <li>
 <p><code>android/</code>
 Pasta responsável por interpretar, buildar e configurar o aplicativo para o sistema android, que foi o sistema operacional escolhido para distribuição do projeto. É uma pasta que necessita de poucas alterações, geralmente sendo de coisas especificas da plataforma e menores em relação ao desenvolvimendo total do projeto.</p>
+</li>
+<li>
+<p><code>test/</code>
+Pasta relacionada aos testes unitários automatizados do frontend, garantindo a qualidade e o funcionamento dos componentes.</p>
 </li>
 <li>
 <p><code>pubspec.yaml/</code>
